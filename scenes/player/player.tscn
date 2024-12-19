@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://colfn2h16sy1u"]
+
+[ext_resource type="Texture2D" uid="uid://b2phenkurvvky" path="res://visual_assets/character/The_Knight_Idle.webp" id="1_b5v1k"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_c623h"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6v243"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b5v1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_b5v1k")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u08bn"]
+radius = 29.0
+height = 144.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_c623h")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_6v243")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_u08bn")

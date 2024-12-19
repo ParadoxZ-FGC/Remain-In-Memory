@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://mgefkek60rmx"]
+
+[ext_resource type="Script" path="res://mob/mob.gd" id="1_c2o0r"]
+[ext_resource type="Texture2D" uid="uid://dvs3xajcwbex2" path="res://visual_assets/character/The_Hollow_Knight_Idle.webp" id="2_ces8a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vldki"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ces8a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ces8a")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Mob" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_c2o0r")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -6.28319
+sprite_frames = SubResource("SpriteFrames_vldki")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(50, 35)
+rotation = -6.28319
+scale = Vector2(1, 1)
+polygon = PackedVector2Array(5.00001, -4.99998, 50, 25, 40, 85, 60, 25, 15, -20, 50, -50, 70, -20, 110, -45, 130, -130, 90, -55, 90, -155, 60, -65, 15, -80, -40, -45, -80, 5.00002, -230, 90, -30, 2.28882e-05, -65, 5.00002, -25, -35, -10, -20, -15, 20, -65, 80, -10, 30)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
