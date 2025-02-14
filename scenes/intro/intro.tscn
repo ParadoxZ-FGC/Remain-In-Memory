@@ -30,6 +30,8 @@ autoplay = true
 
 [node name="Player" parent="." instance=ExtResource("4_yd18o")]
 position = Vector2(129, 938)
+script = null
 
 [node name="Mob" parent="." instance=ExtResource("3_n0pe5")]
 position = Vector2(1585, 717)
+script = null
