@@ -10,7 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Passion Project"
+config/name="Remain in Memory"
+config/name_localized={
+"la": "Manere Memoria"
+}
+config/version="0.1"
+run/main_scene="res://scenes/prologue/tutorial-one/tutorial-one.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://mgefkek60rmx"]
 
-[ext_resource type="Script" path="res://mob/mob.gd" id="1_c2o0r"]
-[ext_resource type="Texture2D" uid="uid://dvs3xajcwbex2" path="res://visual_assets/character/The_Hollow_Knight_Idle.webp" id="2_ces8a"]
+[ext_resource type="Script" path="res://scenes/mob/mob.gd" id="1_c2o0r"]
+[ext_resource type="Texture2D" uid="uid://dvs3xajcwbex2" path="res://assets/visual/character/The_Hollow_Knight_Idle.webp" id="2_ces8a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vldki"]
 animations = [{

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0idldrfge7b8"]
 
-[ext_resource type="Texture2D" uid="uid://d2yjvd577agao" path="res://visual_assets/bg/fire-emblem-three-houses-logo.jpg" id="1_40lg2"]
+[ext_resource type="Texture2D" uid="uid://d2yjvd577agao" path="res://assets/visual/bg/fire-emblem-three-houses-logo.jpg" id="1_40lg2"]
 
 [node name="Menu" type="Node2D"]
 
