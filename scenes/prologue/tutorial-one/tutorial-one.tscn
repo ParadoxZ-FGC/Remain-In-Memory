@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c836gbrc44pj2"]
+
+[ext_resource type="Script" path="res://scenes/prologue/tutorial-one/tutorial-one.gd" id="1_n3noj"]
+[ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/mob/mob.tscn" id="2_5td3o"]
+[ext_resource type="Texture2D" uid="uid://x114q56yckhu" path="res://assets/visual/bg/gb1clip.jpg" id="3_5s1i8"]
+[ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="4_opabc"]
+[ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="5_qpapv"]
+
+[node name="Tutorial One" type="Node"]
+script = ExtResource("1_n3noj")
+mob_scene = ExtResource("2_5td3o")
+
+[node name="Gb1Clip" type="Sprite2D" parent="."]
+position = Vector2(961, 538)
+texture = ExtResource("3_5s1i8")
+
+[node name="Ground" type="StaticBody2D" parent="Gb1Clip"]
+position = Vector2(-961, -538)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Gb1Clip/Ground"]
+position = Vector2(961, 538)
+polygon = PackedVector2Array(-961, 510, -193, 510, 687, 302, 959, 302, 959, 542, -961, 542)
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_opabc")
+volume_db = -10.0
+autoplay = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("5_qpapv")]
+position = Vector2(129, 938)
+script = null
+
+[node name="Mob" parent="." instance=ExtResource("2_5td3o")]
+position = Vector2(1585, 717)
+script = null

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2yjvd577agao"
-path="res://.godot/imported/fire-emblem-three-houses-logo.jpg-e8273b820c43e707445083659ff785ee.ctex"
+uid="uid://x114q56yckhu"
+path="res://.godot/imported/gb1clip.jpg-1c95880c4245e53854ea2989d441b1ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://visual_assets/bg/fire-emblem-three-houses-logo.jpg"
-dest_files=["res://.godot/imported/fire-emblem-three-houses-logo.jpg-e8273b820c43e707445083659ff785ee.ctex"]
+source_file="res://assets/visual/bg/gb1clip.jpg"
+dest_files=["res://.godot/imported/gb1clip.jpg-1c95880c4245e53854ea2989d441b1ca.ctex"]
 
 [params]
 
