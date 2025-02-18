@@ -1,3 +1,7 @@
+find . -size +100M | cat >> .gitignore
+
 # Godot 4+ specific ignores
 .godot/
-/android/
+/android/ 
+
+
