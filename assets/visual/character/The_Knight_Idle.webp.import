@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x114q56yckhu"
-path="res://.godot/imported/gb1clip.jpg-637e5f1aba783c567bdf42f4dc42e352.ctex"
+uid="uid://b2phenkurvvky"
+path="res://.godot/imported/The_Knight_Idle.webp-3ad8005558d58d6281bb682f8e46664b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://visual_assets/bg/gb1clip.jpg"
-dest_files=["res://.godot/imported/gb1clip.jpg-637e5f1aba783c567bdf42f4dc42e352.ctex"]
+source_file="res://assets/visual/character/The_Knight_Idle.webp"
+dest_files=["res://.godot/imported/The_Knight_Idle.webp-3ad8005558d58d6281bb682f8e46664b.ctex"]
 
 [params]
 
