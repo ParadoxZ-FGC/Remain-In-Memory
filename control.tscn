@@ -1,0 +1,157 @@
+[gd_scene load_steps=10 format=3 uid="uid://0to1knjxdpei"]
+
+[ext_resource type="Script" path="res://control.gd" id="1_26n3w"]
+[ext_resource type="Shader" path="res://pausemenu.gdshader" id="1_hc674"]
+[ext_resource type="Script" path="res://settings.gd" id="3_p3x45"]
+[ext_resource type="Script" path="res://pause_screen.gd" id="3_trkev"]
+[ext_resource type="Script" path="res://sound.gd" id="5_ex2rw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ujrv"]
+shader = ExtResource("1_hc674")
+shader_parameter/lod = 0.0
+
+[sub_resource type="Animation" id="Animation_3otyf"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_mb16b"]
+resource_name = "pause"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rmgc3"]
+_data = {
+"RESET": SubResource("Animation_3otyf"),
+"pause": SubResource("Animation_mb16b")
+}
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_26n3w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_8ujrv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseScreen" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -405.5
+offset_top = -286.0
+offset_right = 405.5
+offset_bottom = 286.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_trkev")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Resume" type="Button" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Exit" type="Button" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Settings" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 765.0
+offset_top = 326.0
+offset_right = 1127.0
+offset_bottom = 434.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_p3x45")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Master Label" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="Master" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Sound"
+max_value = 1.0
+step = 0.001
+script = ExtResource("5_ex2rw")
+
+[node name="Music Label" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="Music" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Sound"
+max_value = 1.0
+step = 0.001
+script = ExtResource("5_ex2rw")
+
+[node name="Sound Effects" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "Sound Effect Volume"
+
+[node name="Sound Effect" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Sound"
+max_value = 1.0
+step = 0.001
+script = ExtResource("5_ex2rw")
+
+[node name="Back" type="Button" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rmgc3")
+}
+
+[connection signal="pressed" from="PauseScreen/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Settings/VBoxContainer/Back" to="." method="_on_back_pressed"]
