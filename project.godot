@@ -15,9 +15,10 @@ config/name_localized={
 "la": "Manere Memoria"
 }
 config/version="0.1"
-run/main_scene="res://scenes/prologue/tutorial-one/tutorial-one.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+run/main_scene="res://scenes/title-screen/title-screen.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(0.0846899, 0.0846899, 0.0846899, 1)
+config/icon="res://final-fantasy-vii-seeklogo.png"
 
 [display]
 

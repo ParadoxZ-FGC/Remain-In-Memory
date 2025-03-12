@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Texture2D" uid="uid://b2phenkurvvky" path="res://assets/visual/character/The_Knight_Idle.webp" id="1_b5v1k"]
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_c623h"]
+[ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6v243"]
 animations = [{
