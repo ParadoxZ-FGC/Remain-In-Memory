@@ -149,11 +149,6 @@ autoplay = true
 
 [node name="Player" parent="." instance=ExtResource("5_qpapv")]
 position = Vector2(255, 789)
-speed = null
-jump_speed = null
-max_walk_speed = null
-max_run_speed = null
-stop_force = null
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 0

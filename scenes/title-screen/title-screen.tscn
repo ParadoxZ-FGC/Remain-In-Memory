@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0idldrfge7b8"]
+[gd_scene load_steps=3 format=3 uid="uid://c0idldrfge7b8"]
 
 [ext_resource type="Texture2D" uid="uid://d2yjvd577agao" path="res://assets/visual/bg/fire-emblem-three-houses-logo.jpg" id="1_40lg2"]
+[ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title-screen/change_scene.gd" id="2_aptra"]
 
 [node name="Menu" type="Node2D"]
 
@@ -9,23 +10,27 @@ position = Vector2(958.5, 536.75)
 scale = Vector2(1.5975, 1.59481)
 texture = ExtResource("1_40lg2")
 
-[node name="PlayButton" type="MenuButton" parent="."]
+[node name="PlayButton" type="Button" parent="."]
 offset_left = 224.0
 offset_top = 432.0
 offset_right = 265.0
 offset_bottom = 463.0
 text = "Play"
+script = ExtResource("2_aptra")
 
 [node name="SettingsButton" type="MenuButton" parent="."]
 offset_left = 224.0
 offset_top = 516.0
 offset_right = 294.0
 offset_bottom = 547.0
+toggle_mode = false
 text = "Settings"
 
-[node name="ExitButton" type="MenuButton" parent="."]
+[node name="ExitButton" type="Button" parent="."]
 offset_left = 224.0
 offset_top = 625.0
 offset_right = 261.0
 offset_bottom = 656.0
 text = "Exit"
+script = ExtResource("2_aptra")
+button_name = "exit"

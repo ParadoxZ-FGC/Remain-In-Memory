@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
 @onready var screen_size = get_viewport_rect().size
-@onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-@export var speed = 600
-@export var jump_speed = 500
+@onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
+@export var speed = 1000
+@export var jump_speed = 800
 @export var max_walk_speed = 200
 @export var max_run_speed = 500
-@export var stop_force = 1300
+@export var stop_force = 8000
 
 
 func _physics_process(delta):

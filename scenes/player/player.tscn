@@ -23,6 +23,11 @@ height = 144.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_c623h")
+speed = null
+jump_speed = null
+max_walk_speed = null
+max_run_speed = null
+stop_force = null
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
