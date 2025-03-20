@@ -1,6 +1,14 @@
+<<<<<<< Updated upstream:scenes/menu/menu.tscn
 [gd_scene load_steps=2 format=3 uid="uid://c0idldrfge7b8"]
 
 [ext_resource type="Texture2D" uid="uid://d2yjvd577agao" path="res://visual_assets/bg/fire-emblem-three-houses-logo.jpg" id="1_40lg2"]
+=======
+[gd_scene load_steps=4 format=3 uid="uid://c0idldrfge7b8"]
+
+[ext_resource type="Texture2D" uid="uid://d2yjvd577agao" path="res://assets/visual/bg/fire-emblem-three-houses-logo.jpg" id="1_40lg2"]
+[ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title-screen/change_scene.gd" id="2_aptra"]
+[ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/UI Menus/Settings/Settings.tscn" id="3_3swuw"]
+>>>>>>> Stashed changes:scenes/title-screen/title-screen.tscn
 
 [node name="Menu" type="Node2D"]
 
@@ -29,3 +37,14 @@ offset_top = 625.0
 offset_right = 261.0
 offset_bottom = 656.0
 text = "Exit"
+<<<<<<< Updated upstream:scenes/menu/menu.tscn
+=======
+script = ExtResource("2_aptra")
+button_name = "exit"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Settings" parent="CanvasLayer" instance=ExtResource("3_3swuw")]
+
+[connection signal="pressed" from="SettingsButton" to="CanvasLayer/Settings" method="_on_settings_button_pressed"]
+>>>>>>> Stashed changes:scenes/title-screen/title-screen.tscn

@@ -31,7 +31,6 @@ animation = &"walk"
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(50, 35)
 rotation = -6.28319
-scale = Vector2(1, 1)
 polygon = PackedVector2Array(5.00001, -4.99998, 50, 25, 40, 85, 60, 25, 15, -20, 50, -50, 70, -20, 110, -45, 130, -130, 90, -55, 90, -155, 60, -65, 15, -80, -40, -45, -80, 5.00002, -230, 90, -30, 2.28882e-05, -65, 5.00002, -25, -35, -10, -20, -15, 20, -65, 80, -10, 30)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

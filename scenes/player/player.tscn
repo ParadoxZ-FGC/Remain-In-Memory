@@ -1,6 +1,14 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=4 format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Texture2D" uid="uid://b2phenkurvvky" path="res://visual_assets/character/The_Knight_Idle.webp" id="1_b5v1k"]
+=======
+[gd_scene load_steps=6 format=3 uid="uid://colfn2h16sy1u"]
+
+[ext_resource type="Texture2D" uid="uid://b2phenkurvvky" path="res://assets/visual/character/The_Knight_Idle.webp" id="1_b5v1k"]
+[ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
+[ext_resource type="AudioStream" uid="uid://yk2s46shr87k" path="res://assets/audio/sound-effects/Stone.wav" id="3_gmlin"]
+>>>>>>> Stashed changes
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6v243"]
 animations = [{
@@ -20,7 +28,13 @@ animations = [{
 radius = 29.0
 height = 144.0
 
+<<<<<<< Updated upstream
 [node name="Player" type="CharacterBody2D"]
+=======
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("stone")]
+script = ExtResource("1_c623h")
+stone = NodePath("Sliding Block")
+>>>>>>> Stashed changes
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -30,3 +44,7 @@ animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_u08bn")
+
+[node name="Sliding Block" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gmlin")
+bus = &"Sound Effects"

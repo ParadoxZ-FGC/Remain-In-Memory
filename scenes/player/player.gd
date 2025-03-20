@@ -6,8 +6,13 @@ extends CharacterBody2D
 @export var jump_speed = 500
 @export var max_walk_speed = 200
 @export var max_run_speed = 500
+<<<<<<< Updated upstream
 @export var stop_force = 1300
 
+=======
+@export var stop_force = 8000
+@export var stone: AudioStreamPlayer2D
+>>>>>>> Stashed changes
 
 func _physics_process(delta):
 	var walk = speed * (Input.get_axis("move_left", "move_right"))
@@ -23,9 +28,15 @@ func _physics_process(delta):
 	move_and_slide()
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
-	if velocity.length() > 0:
-		$AnimatedSprite2D.play()
-	else:
+	if velocity.length() > 0: 
+		$AnimatedSprite2D.play() 
+		if is_on_floor():
+			if !stone.playing:
+				stone.play() 
+		else:
+			stone.stop()
+	else: 
+		stone.stop()
 		$AnimatedSprite2D.stop()
 	
 	if velocity.x != 0:
