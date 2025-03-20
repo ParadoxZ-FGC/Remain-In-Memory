@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c0idldrfge7b8"]
 
 [ext_resource type="Texture2D" uid="uid://d2yjvd577agao" path="res://assets/visual/bg/fire-emblem-three-houses-logo.jpg" id="1_40lg2"]
-[ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title-screen/change_scene.gd" id="2_aptra"]
+[ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title-screen/buttons.gd" id="2_aptra"]
 [ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/UI Menus/Settings/Settings.tscn" id="3_3swuw"]
 
 [node name="Menu" type="Node2D"]

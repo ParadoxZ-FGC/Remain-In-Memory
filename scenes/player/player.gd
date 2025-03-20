@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var screen_size = get_viewport_rect().size
+@export var screen_size = get_viewport_rect().size
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @export var speed = 1000
 @export var jump_speed = 800
@@ -16,7 +16,7 @@ func _physics_process(delta):
 	else:
 		velocity.x += walk * delta
 	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if Input.is_action_pressed("run") else clamp(velocity.x, -max_walk_speed, max_walk_speed)
-	$AnimatedSprite2D.scale = Vector2(0.2, 0.1) if Input.is_action_pressed("crouch") else Vector2(0.2, 0.2)
+	$AnimatedSprite2D.scale = Vector2(0.2, 0.1) if Input.is_action_pressed("crouch_look_down") else Vector2(0.2, 0.2)
 	
 	velocity.y += gravity * delta
 	
