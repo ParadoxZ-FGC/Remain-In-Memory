@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0idldrfge7b8"]
+[gd_scene load_steps=4 format=3 uid="uid://c0idldrfge7b8"]
 
 [ext_resource type="Texture2D" uid="uid://d2yjvd577agao" path="res://assets/visual/bg/fire-emblem-three-houses-logo.jpg" id="1_40lg2"]
 [ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title-screen/buttons.gd" id="2_aptra"]
+[ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/UI Menus/Settings/Settings.tscn" id="3_3swuw"]
 
 [node name="Menu" type="Node2D"]
 
@@ -34,3 +35,13 @@ offset_bottom = 656.0
 text = "Exit"
 script = ExtResource("2_aptra")
 button_name = "exit"
+
+[node name="Settings" parent="." instance=ExtResource("3_3swuw")]
+offset_left = 890.0
+offset_top = 544.0
+offset_right = 890.0
+offset_bottom = 544.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[connection signal="pressed" from="SettingsButton" to="Settings" method="_on_settings_button_pressed"]

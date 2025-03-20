@@ -1,0 +1,174 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8umepsy68yck"]
+
+[ext_resource type="Script" uid="uid://2ddfhdbvsq4v" path="res://scenes/UI Menus/Pause Screen/pause_screen.gd" id="1_fs5ud"]
+[ext_resource type="Shader" uid="uid://bffb1cpqbfaua" path="res://scenes/UI Menus/Pause Screen/Pause Screen.gdshader" id="1_j1h8m"]
+[ext_resource type="PackedScene" uid="uid://c0idldrfge7b8" path="res://scenes/title-screen/title-screen.tscn" id="2_1coml"]
+[ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/UI Menus/Settings/Settings.tscn" id="4_1coml"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fs5ud"]
+shader = ExtResource("1_j1h8m")
+shader_parameter/lod = 0.0
+shader_parameter/tint_color = Vector4(0, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_8hkqw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_fs5ud")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dqt4f"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_fs5ud")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.832]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0enuw"]
+_data = {
+&"RESET": SubResource("Animation_8hkqw"),
+&"blur": SubResource("Animation_dqt4f")
+}
+
+[node name="PauseScreen" type="Control" node_paths=PackedStringArray("resume_button", "settings", "vbox")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fs5ud")
+resume_button = NodePath("PanelContainer/VBoxContainer/Resume")
+scene = ExtResource("2_1coml")
+settings = NodePath("Settings")
+vbox = NodePath("PanelContainer/VBoxContainer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fs5ud")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -354.0
+offset_top = -255.0
+offset_right = 354.0
+offset_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Title Screen" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit to Title Screen
+"
+
+[node name="Alt F4" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit to desktop
+"
+
+[node name="Restart(For Debugging)" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart(Debugger)"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0enuw")
+}
+
+[node name="Settings" parent="." instance=ExtResource("4_1coml")]
+layout_mode = 1
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Title Screen" to="." method="_on_title_screen_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Alt F4" to="." method="_on_alt_f_4_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart(For Debugging)" to="." method="_on_restart_for_debugging_pressed"]
