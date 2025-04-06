@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rocry"]
 [ext_resource type="Texture2D" uid="uid://ddfbmyu5iwrl" path="res://assets/visual/tilemaps/Tilemap-Cobble.png" id="3_6ly85"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hrhsj"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b3vbw"]
 texture = ExtResource("3_6ly85")
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -120,7 +120,7 @@ texture = ExtResource("3_6ly85")
 
 [sub_resource type="TileSet" id="TileSet_4wb8h"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_hrhsj")
+sources/0 = SubResource("TileSetAtlasSource_b3vbw")
 
 [node name="Tutorial-two" type="Node2D"]
 

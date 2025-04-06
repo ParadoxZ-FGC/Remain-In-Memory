@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c0idldrfge7b8"]
 
-[ext_resource type="Texture2D" uid="uid://d2yjvd577agao" path="res://assets/visual/bg/fire-emblem-three-houses-logo.jpg" id="1_40lg2"]
+[ext_resource type="Texture2D" uid="uid://1nkarpwg6gm2" path="res://assets/visual/bg/title.jpg" id="1_3swuw"]
 [ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title-screen/buttons.gd" id="2_aptra"]
 [ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/UI Menus/Settings/Settings.tscn" id="3_3swuw"]
 
@@ -8,30 +8,30 @@
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(958.5, 536.75)
-scale = Vector2(1.5975, 1.59481)
-texture = ExtResource("1_40lg2")
+scale = Vector2(3.004, 3)
+texture = ExtResource("1_3swuw")
 
 [node name="PlayButton" type="Button" parent="."]
-offset_left = 224.0
-offset_top = 432.0
-offset_right = 265.0
-offset_bottom = 463.0
+offset_left = 791.0
+offset_top = 593.0
+offset_right = 1041.0
+offset_bottom = 676.0
 text = "Play"
 script = ExtResource("2_aptra")
 
 [node name="SettingsButton" type="MenuButton" parent="."]
-offset_left = 224.0
-offset_top = 516.0
-offset_right = 294.0
-offset_bottom = 547.0
+offset_left = 787.0
+offset_top = 674.0
+offset_right = 1075.0
+offset_bottom = 763.0
 toggle_mode = false
 text = "Settings"
 
 [node name="ExitButton" type="Button" parent="."]
-offset_left = 224.0
-offset_top = 625.0
-offset_right = 261.0
-offset_bottom = 656.0
+offset_left = 772.0
+offset_top = 802.0
+offset_right = 1057.0
+offset_bottom = 853.0
 text = "Exit"
 script = ExtResource("2_aptra")
 button_name = "exit"
