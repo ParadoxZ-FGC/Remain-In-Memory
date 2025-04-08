@@ -1,47 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0idldrfge7b8"]
+[gd_scene load_steps=5 format=3 uid="uid://c0idldrfge7b8"]
 
 [ext_resource type="Texture2D" uid="uid://1nkarpwg6gm2" path="res://assets/visual/bg/title.jpg" id="1_3swuw"]
 [ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title-screen/buttons.gd" id="2_aptra"]
 [ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/UI Menus/Settings/Settings.tscn" id="3_3swuw"]
+[ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="4_pcs22"]
 
 [node name="Menu" type="Node2D"]
 
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(958.5, 536.75)
-scale = Vector2(3.004, 3)
+self_modulate = Color(0.377919, 0.377919, 0.377919, 1)
+position = Vector2(960, 540)
+scale = Vector2(3, 3)
 texture = ExtResource("1_3swuw")
 
 [node name="PlayButton" type="Button" parent="."]
-offset_left = 791.0
-offset_top = 593.0
-offset_right = 1041.0
-offset_bottom = 676.0
+offset_left = 860.0
+offset_top = 600.0
+offset_right = 1060.0
+offset_bottom = 680.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Play"
+flat = true
 script = ExtResource("2_aptra")
 
 [node name="SettingsButton" type="MenuButton" parent="."]
-offset_left = 787.0
-offset_top = 674.0
-offset_right = 1075.0
-offset_bottom = 763.0
+offset_left = 860.0
+offset_top = 700.0
+offset_right = 1060.0
+offset_bottom = 780.0
 toggle_mode = false
 text = "Settings"
 
 [node name="ExitButton" type="Button" parent="."]
-offset_left = 772.0
-offset_top = 802.0
-offset_right = 1057.0
-offset_bottom = 853.0
+offset_left = 860.0
+offset_top = 800.0
+offset_right = 1060.0
+offset_bottom = 880.0
 text = "Exit"
+flat = true
 script = ExtResource("2_aptra")
 button_name = "exit"
+scene = ""
 
 [node name="Settings" parent="." instance=ExtResource("3_3swuw")]
-offset_left = 890.0
-offset_top = 544.0
-offset_right = 890.0
-offset_bottom = 544.0
+offset_left = 960.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 540.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
+
+[node name="Lamp2" type="PointLight2D" parent="."]
+position = Vector2(963, 579)
+scale = Vector2(23.6875, 40.5625)
+energy = 5.47
+shadow_enabled = true
+texture = ExtResource("4_pcs22")
+
+[node name="PointLight2D9" type="PointLight2D" parent="Lamp2"]
+position = Vector2(-0.180452, -2.39867)
+scale = Vector2(3.60902, 2.07577)
+color = Color(0.393086, 0.393086, 0.393085, 1)
+energy = 8.21
+shadow_enabled = true
+texture = ExtResource("4_pcs22")
 
 [connection signal="pressed" from="SettingsButton" to="Settings" method="_on_settings_button_pressed"]

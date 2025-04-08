@@ -49,5 +49,5 @@ func _on_restart_for_debugging_pressed():
 	resume()
 	get_tree().reload_current_scene()
 
-func _process(delta):
+func _process(_delta):
 	testEsc()

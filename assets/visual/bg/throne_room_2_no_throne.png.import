@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0yw6ko0lfvg8"
-path="res://.godot/imported/Castle Hallway Stairs.jpg-f980186b31b760109ecba44a6279aad9.ctex"
+uid="uid://kqo78p6y4ib1"
+path="res://.godot/imported/throne_room_2_no_throne.png-7febd7936475c69761c9da562f1d04c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/bg/Castle Hallway Stairs.jpg"
-dest_files=["res://.godot/imported/Castle Hallway Stairs.jpg-f980186b31b760109ecba44a6279aad9.ctex"]
+source_file="res://assets/visual/bg/throne_room_2_no_throne.png"
+dest_files=["res://.godot/imported/throne_room_2_no_throne.png-7febd7936475c69761c9da562f1d04c9.ctex"]
 
 [params]
 

@@ -195,7 +195,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 3000
 limit_bottom = 1080
-limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="Player"]
@@ -232,7 +231,7 @@ texture = ExtResource("10_u6yve")
 [node name="PauseScreen" parent="Pause" instance=ExtResource("7_354rv")]
 
 [node name="ChangeScene" type="Area2D" parent="."]
-position = Vector2(520, 779)
+position = Vector2(2329, 811)
 script = ExtResource("13_1mlff")
 path = "res://scenes/prologue/tutorial-two/tutorial-two.tscn"
 

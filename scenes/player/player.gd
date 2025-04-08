@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
-@export var screen_size = Vector2(2500, 1080)
+@export var upper = Vector2(0, 0)
+@export var lower = Vector2(2500, 1080)
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @export var speed = 1000
-@export var jump_speed = 800
-@export var max_walk_speed = 200
+@export var jump_speed = 900
+@export var max_walk_speed = 300
 @export var max_run_speed = 500
 @export var stop_force = 8000
 @export var stone: AudioStreamPlayer2D
@@ -21,7 +22,7 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	
 	move_and_slide()
-	position = position.clamp(Vector2.ZERO, screen_size)
+	position = position.clamp(upper, lower)
 	
 	if velocity.length() > 0:
 		if is_on_floor(): 
