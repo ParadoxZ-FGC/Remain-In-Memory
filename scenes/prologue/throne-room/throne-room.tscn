@@ -492,7 +492,6 @@ tile_set = SubResource("TileSet_35vq6")
 
 [node name="Player" parent="." instance=ExtResource("2_rbw3j")]
 position = Vector2(194, 889)
-screen_size = Vector2(2500, 1080)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 0

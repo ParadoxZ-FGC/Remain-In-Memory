@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://mgefkek60rmx"]
+[gd_scene load_steps=26 format=3 uid="uid://mgefkek60rmx"]
 
 [ext_resource type="Script" uid="uid://fhvvxtuvqsqd" path="res://scenes/mob/mob.gd" id="1_c2o0r"]
 [ext_resource type="Texture2D" uid="uid://c0ptkh3ukgj5a" path="res://assets/visual/enemies/turret-Sheet.png" id="2_nnm6l"]
@@ -168,6 +168,10 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nnm6l"]
+radius = 42.0
+height = 122.0
+
 [node name="Mob" type="RigidBody2D"]
 collision_mask = 0
 gravity_scale = 0.0
@@ -176,13 +180,12 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = -6.28319
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vldki")
 animation = &"idle"
 frame_progress = 0.93583
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(50, 35)
-rotation = -6.28319
-polygon = PackedVector2Array(-31.9998, -39.0001, -26.9998, -41.0001, -28.9998, -49.0001, -33.9997, -57.0002, -43.9997, -60.0002, -52.9997, -60.0002, -66.9997, -56.0003, -71.9998, -49.0003, -73.9998, -41.0003, -67.9998, -39.0003, -67.9999, -13.0003, -58, -10.0003, -56, -3.00025, -44, -3.0002, -42, -10.0002, -31.9999, -12.0001)
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_nnm6l")
