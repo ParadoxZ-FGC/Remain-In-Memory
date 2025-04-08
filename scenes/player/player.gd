@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var screen_size = get_viewport_rect().size
+@export var screen_size = Vector2(2500, 1080)
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @export var speed = 1000
 @export var jump_speed = 800
