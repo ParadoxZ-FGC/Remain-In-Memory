@@ -28,7 +28,7 @@ func exit_settings_menu():
 func _on_exit_settings_pressed():
 	exit_settings_menu()
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("esc") and visible:
 		exit_settings_menu()
 

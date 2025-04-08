@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2b8677xv2n0n"
-path="res://.godot/imported/jordan-thomas-throne-room-original.jpg-e90032dbebe5d43e6ae2455bbda0fe68.ctex"
+uid="uid://bgq7dx5vloivv"
+path="res://.godot/imported/Throne_prop.png-55c62c15b90e94d1bffbf8c199afa686.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/bg/jordan-thomas-throne-room-original.jpg"
-dest_files=["res://.godot/imported/jordan-thomas-throne-room-original.jpg-e90032dbebe5d43e6ae2455bbda0fe68.ctex"]
+source_file="res://assets/visual/bg/Throne_prop.png"
+dest_files=["res://.godot/imported/Throne_prop.png-55c62c15b90e94d1bffbf8c199afa686.ctex"]
 
 [params]
 

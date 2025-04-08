@@ -183,7 +183,7 @@ rotation = -6.28319
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vldki")
 animation = &"idle"
-frame_progress = 0.93583
+autoplay = "idle"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

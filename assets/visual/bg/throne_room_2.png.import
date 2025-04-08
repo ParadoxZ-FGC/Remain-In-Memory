@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2yjvd577agao"
-path="res://.godot/imported/fire-emblem-three-houses-logo.jpg-fd5969ae42b3f7787c058373aa137e36.ctex"
+uid="uid://dx3b0bsnjkemr"
+path="res://.godot/imported/throne_room_2.png-1a3856b2c2c87562b921350a658920a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/bg/fire-emblem-three-houses-logo.jpg"
-dest_files=["res://.godot/imported/fire-emblem-three-houses-logo.jpg-fd5969ae42b3f7787c058373aa137e36.ctex"]
+source_file="res://assets/visual/bg/throne_room_2.png"
+dest_files=["res://.godot/imported/throne_room_2.png-1a3856b2c2c87562b921350a658920a3.ctex"]
 
 [params]
 
