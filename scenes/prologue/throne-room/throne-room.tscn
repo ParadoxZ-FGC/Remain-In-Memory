@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://1atkktyrh75f"]
+[gd_scene load_steps=17 format=4 uid="uid://1atkktyrh75f"]
 
 [ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_uy2l1"]
 [ext_resource type="Texture2D" uid="uid://dx3b0bsnjkemr" path="res://assets/visual/bg/throne_room_2.png" id="1_ym15t"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="7_35vq6"]
 [ext_resource type="Texture2D" uid="uid://bsnkk6p1xguo2" path="res://assets/visual/enemies/boss-idle.png" id="8_n217a"]
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="8_ym15t"]
+[ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="10_p66qs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q2e8l"]
 texture = ExtResource("8_ym15t")
@@ -573,6 +574,7 @@ texture = ExtResource("1_ym15t")
 stream = ExtResource("1_uy2l1")
 volume_db = -10.0
 autoplay = true
+bus = &"Music"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(0, -56)
@@ -685,3 +687,11 @@ scale = Vector2(0.522556, 0.522556)
 energy = 2.0
 shadow_enabled = true
 texture = ExtResource("7_35vq6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("10_p66qs")]
+offset_left = 1.0
+offset_right = 1.0
+size_flags_horizontal = 4
+size_flags_vertical = 4

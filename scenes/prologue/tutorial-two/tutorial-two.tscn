@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://wrin7ux4mc07"]
+[gd_scene load_steps=24 format=4 uid="uid://wrin7ux4mc07"]
 
 [ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/prologue/tutorial-two/tutorial_two.gd" id="1_6itxs"]
 [ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_b3vbw"]
@@ -13,6 +13,7 @@
 [ext_resource type="OccluderPolygon2D" uid="uid://dlhn6lpejdhmt" path="res://scenes/prologue/tutorial-two/tutorial-two.tres" id="9_qbwta"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="11_jyxw7"]
 [ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/mob/mob.tscn" id="11_ra2nw"]
+[ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="14_uqdrb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wb8h"]
 texture = ExtResource("5_qbwta")
@@ -531,6 +532,7 @@ script = ExtResource("1_6itxs")
 stream = ExtResource("1_b3vbw")
 volume_db = -10.0
 autoplay = true
+bus = &"Music"
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(959, 360.72)
@@ -724,5 +726,18 @@ path = "res://scenes/prologue/throne-room/throne-room.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChangeScene"]
 shape = SubResource("RectangleShape2D_v5bv6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("14_uqdrb")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 967.0
+offset_top = 501.0
+offset_right = 967.0
+offset_bottom = 501.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="body_entered" from="ChangeScene" to="ChangeScene" method="_on_body_entered"]
