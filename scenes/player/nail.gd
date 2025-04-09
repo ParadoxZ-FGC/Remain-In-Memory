@@ -18,7 +18,7 @@ func _ready():
 	
 	connect("animation_finished", _on_animation_finished) 
 
-func _process(delta): 
+func _process(_delta): 
 	if Input.is_action_just_pressed("attack"): 
 		attack() 
 

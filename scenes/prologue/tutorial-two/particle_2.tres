@@ -1,4 +1,4 @@
-[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://dlhn6lpejdhmt"]
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://bjcx6ebxx13kf"]
 
 [sub_resource type="Curve" id="Curve_5bkbr"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.251534, 1), 0.0, 0.0, 0, 0, Vector2(0.748466, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -10,7 +10,7 @@ curve = SubResource("Curve_5bkbr")
 [resource]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(1500, 500, 1)
+emission_box_extents = Vector3(1400, 800, 1)
 angle_min = -45.0
 angle_max = 45.0
 inherit_velocity_ratio = 10.0
