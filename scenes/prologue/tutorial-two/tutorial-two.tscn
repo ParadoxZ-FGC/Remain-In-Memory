@@ -13,7 +13,7 @@
 [ext_resource type="OccluderPolygon2D" uid="uid://dlhn6lpejdhmt" path="res://scenes/prologue/tutorial-two/tutorial-two.tres" id="9_qbwta"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="11_jyxw7"]
 [ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/mob/mob.tscn" id="11_ra2nw"]
-[ext_resource type="FontFile" uid="uid://c2krg6e4qra6j" path="res://assets/visual/UI/fonts/Inria-Sans/InriaSans-Regular.ttf" id="14_uqdrb"]
+[ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="14_uqdrb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wb8h"]
 texture = ExtResource("5_qbwta")
@@ -532,6 +532,7 @@ script = ExtResource("1_6itxs")
 stream = ExtResource("1_b3vbw")
 volume_db = -10.0
 autoplay = true
+bus = &"Music"
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(959, 360.72)
@@ -735,5 +736,17 @@ theme_override_fonts/normal_font = ExtResource("14_uqdrb")
 text = "Sprint - Shift / Left-Stick
 
 Attack - Left-Click / B"
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("14_uqdrb")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 967.0
+offset_top = 501.0
+offset_right = 967.0
+offset_bottom = 501.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="body_entered" from="ChangeScene" to="ChangeScene" method="_on_body_entered"]
