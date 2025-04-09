@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://wrin7ux4mc07"]
+[gd_scene load_steps=24 format=4 uid="uid://wrin7ux4mc07"]
 
 [ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/prologue/tutorial-two/tutorial_two.gd" id="1_6itxs"]
 [ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_b3vbw"]
@@ -13,6 +13,7 @@
 [ext_resource type="OccluderPolygon2D" uid="uid://dlhn6lpejdhmt" path="res://scenes/prologue/tutorial-two/tutorial-two.tres" id="9_qbwta"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="11_jyxw7"]
 [ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/mob/mob.tscn" id="11_ra2nw"]
+[ext_resource type="FontFile" uid="uid://c2krg6e4qra6j" path="res://assets/visual/UI/fonts/Inria-Sans/InriaSans-Regular.ttf" id="14_uqdrb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wb8h"]
 texture = ExtResource("5_qbwta")
@@ -724,5 +725,15 @@ path = "res://scenes/prologue/throne-room/throne-room.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChangeScene"]
 shape = SubResource("RectangleShape2D_v5bv6")
+
+[node name="Sprint" type="RichTextLabel" parent="."]
+offset_left = 666.0
+offset_top = 756.0
+offset_right = 839.0
+offset_bottom = 836.0
+theme_override_fonts/normal_font = ExtResource("14_uqdrb")
+text = "Sprint - Shift / Left-Stick
+
+Attack - Left-Click / B"
 
 [connection signal="body_entered" from="ChangeScene" to="ChangeScene" method="_on_body_entered"]

@@ -28,6 +28,10 @@ window/size/mode=4
 window/size/borderless=true
 window/stretch/mode="canvas_items"
 
+[gui]
+
+theme/custom_font="uid://c2krg6e4qra6j"
+
 [input]
 
 move_left={
