@@ -5,10 +5,10 @@ extends AnimatedSprite2D
 
 func _on_facing_changed(facing_right: bool) -> void: 
 	if(facing_right): 
-		position.x = 72.5 
+		position.x = 11
 		rotate(PI)
 	else: 
-		position.x = -72.5 
+		position.x = -11
 		rotate(PI)
 
 func _ready(): 

@@ -17,7 +17,8 @@ config/name_localized={
 config/version="0.1"
 run/main_scene="res://scenes/title-screen/title-screen.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-boot_splash/bg_color=Color(0.0846899, 0.0846899, 0.0846899, 1)
+boot_splash/bg_color=Color(0.0295066, 0.0295065, 0.0295066, 1)
+boot_splash/image="uid://crqjfspp25kjv"
 config/icon="uid://crqjfspp25kjv"
 
 [display]

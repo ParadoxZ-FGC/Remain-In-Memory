@@ -1,22 +1,72 @@
-[gd_scene load_steps=13 format=3 uid="uid://colfn2h16sy1u"]
+[gd_scene load_steps=21 format=3 uid="uid://colfn2h16sy1u"]
 
-[ext_resource type="Texture2D" uid="uid://b2phenkurvvky" path="res://assets/visual/character/The_Knight_Idle.webp" id="1_b5v1k"]
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/health.gd" id="2_lvxji"]
 [ext_resource type="AudioStream" uid="uid://bier21cu6vlso" path="res://assets/audio/sound-effects/Stone.wav" id="3_gmlin"]
+[ext_resource type="Texture2D" uid="uid://dtppk3y1nys6t" path="res://assets/visual/character/king-Sheet.png" id="4_5gtgg"]
 [ext_resource type="Script" uid="uid://cadh1n1g4w666" path="res://scenes/components/hitbox.gd" id="5_75vfm"]
 [ext_resource type="Texture2D" uid="uid://btl5acaji4pe0" path="res://assets/visual/character/nail.jpg" id="5_qek5x"]
 [ext_resource type="Script" uid="uid://b6w5l21fecgju" path="res://scenes/components/hurtbox.gd" id="6_0owmy"]
 [ext_resource type="Script" uid="uid://cgxvvtxeagatb" path="res://scenes/player/nail.gd" id="6_5gtgg"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_h17s1"]
+atlas = ExtResource("4_5gtgg")
+region = Rect2(0, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je7p5"]
+atlas = ExtResource("4_5gtgg")
+region = Rect2(64, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm80t"]
+atlas = ExtResource("4_5gtgg")
+region = Rect2(128, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
+atlas = ExtResource("4_5gtgg")
+region = Rect2(192, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugbui"]
+atlas = ExtResource("4_5gtgg")
+region = Rect2(256, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcs02"]
+atlas = ExtResource("4_5gtgg")
+region = Rect2(320, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myrg7"]
+atlas = ExtResource("4_5gtgg")
+region = Rect2(384, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
+atlas = ExtResource("4_5gtgg")
+region = Rect2(448, 96, 64, 96)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_6v243"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_b5v1k")
+"texture": SubResource("AtlasTexture_h17s1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_b5v1k")
+"texture": SubResource("AtlasTexture_je7p5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm80t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx1jg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugbui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcs02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myrg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvlxm")
 }],
 "loop": true,
 "name": &"walk",
@@ -24,8 +74,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u08bn"]
-radius = 29.0
-height = 144.0
+radius = 4.0
+height = 16.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h17s1"]
 animations = [{
@@ -57,9 +107,11 @@ script = ExtResource("2_lvxji")
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1.5)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_6v243")
 animation = &"walk"
+frame_progress = 0.189877
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_u08bn")
@@ -69,9 +121,9 @@ stream = ExtResource("3_gmlin")
 bus = &"Sound Effects"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(72.5, 25.75)
+position = Vector2(11, 2)
 rotation = -1.5708
-scale = Vector2(0.334821, 0.367223)
+scale = Vector2(0.0380078, 0.0416859)
 sprite_frames = SubResource("SpriteFrames_h17s1")
 animation = &"attack"
 script = ExtResource("6_5gtgg")

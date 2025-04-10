@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://wrin7ux4mc07"]
+[gd_scene load_steps=25 format=4 uid="uid://wrin7ux4mc07"]
 
 [ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/prologue/tutorial-two/tutorial_two.gd" id="1_6itxs"]
 [ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_b3vbw"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="5_qbwta"]
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="7_6itxs"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="8_fct1m"]
-[ext_resource type="OccluderPolygon2D" uid="uid://dlhn6lpejdhmt" path="res://scenes/prologue/tutorial-two/tutorial-two.tres" id="9_qbwta"]
 [ext_resource type="Material" uid="uid://bjcx6ebxx13kf" path="res://scenes/prologue/tutorial-two/particle_2.tres" id="9_yuadt"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="11_jyxw7"]
 [ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/mob/mob.tscn" id="11_ra2nw"]
@@ -560,7 +559,6 @@ tile_set = SubResource("TileSet_uqdrb")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="BG-Tiles"]
 position = Vector2(48.5, 55.5)
 scale = Vector2(0.5, 0.5)
-occluder = ExtResource("9_qbwta")
 
 [node name="Ground" type="TileMapLayer" parent="."]
 position = Vector2(0, -56)
@@ -579,6 +577,7 @@ process_material = ExtResource("9_yuadt")
 
 [node name="Player" parent="." instance=ExtResource("2_rocry")]
 position = Vector2(129, 856)
+scale = Vector2(8, 8)
 upper = Vector2(0, -500)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

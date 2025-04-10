@@ -888,6 +888,7 @@ texture = ExtResource("8_n217a")
 
 [node name="Player" parent="." instance=ExtResource("2_rbw3j")]
 position = Vector2(-66, 891)
+scale = Vector2(8, 8)
 upper = Vector2(-250, 0)
 lower = Vector2(1920, 1080)
 

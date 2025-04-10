@@ -545,6 +545,7 @@ texture = SubResource("GradientTexture2D_130in")
 
 [node name="Player" parent="." instance=ExtResource("5_qpapv")]
 position = Vector2(255, 789)
+scale = Vector2(8, 8)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 0
