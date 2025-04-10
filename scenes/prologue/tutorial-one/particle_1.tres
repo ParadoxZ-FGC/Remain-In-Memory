@@ -1,11 +1,11 @@
-[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://dlhn6lpejdhmt"]
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://du8v75s3bvq3o"]
 
-[sub_resource type="Curve" id="Curve_5bkbr"]
+[sub_resource type="Curve" id="Curve_130in"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.251534, 1), 0.0, 0.0, 0, 0, Vector2(0.748466, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_gm85s"]
-curve = SubResource("Curve_5bkbr")
+[sub_resource type="CurveTexture" id="CurveTexture_130in"]
+curve = SubResource("Curve_130in")
 
 [resource]
 particle_flag_disable_z = true
@@ -23,7 +23,7 @@ linear_accel_min = -2.23517e-06
 linear_accel_max = 0.999998
 scale_min = 2.0
 scale_max = 6.0
-scale_curve = SubResource("CurveTexture_gm85s")
+scale_curve = SubResource("CurveTexture_130in")
 turbulence_noise_strength = 20.0
 turbulence_noise_speed_random = 1.18
 turbulence_influence_min = 0.0
