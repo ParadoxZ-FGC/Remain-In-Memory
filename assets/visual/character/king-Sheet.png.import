@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvs3xajcwbex2"
-path="res://.godot/imported/The_Hollow_Knight_Idle.webp-d7e542f61a63d7e96389cd0396300a17.ctex"
+uid="uid://dtppk3y1nys6t"
+path="res://.godot/imported/king-Sheet.png-de97700b52a8593c348fdd21925b7796.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/character/The_Hollow_Knight_Idle.webp"
-dest_files=["res://.godot/imported/The_Hollow_Knight_Idle.webp-d7e542f61a63d7e96389cd0396300a17.ctex"]
+source_file="res://assets/visual/character/king-Sheet.png"
+dest_files=["res://.godot/imported/king-Sheet.png-de97700b52a8593c348fdd21925b7796.ctex"]
 
 [params]
 
