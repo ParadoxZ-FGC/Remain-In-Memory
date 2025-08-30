@@ -759,6 +759,7 @@ grow_vertical = 1
 
 [node name="ChangeScene" type="Area2D" parent="."]
 position = Vector2(1246, -265)
+collision_mask = 512
 script = ExtResource("11_jyxw7")
 path = "res://scenes/prologue/throne-room/throne-room.tscn"
 

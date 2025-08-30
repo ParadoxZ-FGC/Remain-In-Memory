@@ -602,6 +602,7 @@ offset_bottom = 7.0
 
 [node name="ChangeScene" type="Area2D" parent="."]
 position = Vector2(2329, 811)
+collision_mask = 512
 script = ExtResource("13_1mlff")
 path = "res://scenes/prologue/tutorial-two/tutorial-two.tscn"
 
