@@ -69,3 +69,4 @@ size_flags_vertical = 0
 
 [connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_pressed"]
 [connection signal="pressed" from="SettingsButton" to="Settings" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="ExitButton" method="_on_pressed"]

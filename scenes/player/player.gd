@@ -17,30 +17,32 @@ var facing_right = true
 func _ready(): 
 	connect("facing_changed", Callable($AnimatedSprite2D2, "_on_facing_changed"))
 
-func set_facing() -> void: 
-	if(Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right")): 
-		#print("nuh uh")
-		pass
-	elif (Input.is_action_pressed("move_right")):
+func set_facing(facingAxis: float) -> void: 
+	if (facingAxis > 0):
 		#print("right")  
 		if (!facing_right): 
 			facing_right = true 
 			emit_signal("facing_changed", facing_right)
-	elif (Input.is_action_pressed("move_left")):
+	elif (facingAxis < 0):
 		#print("left")
 		if (facing_right): 
 			facing_right = false 
 			emit_signal("facing_changed", facing_right)
 
 func _physics_process(delta):
-	set_facing()
-	var walk = speed * (Input.get_axis("move_left", "move_right"))
+	var facingAxis = Input.get_axis("move_left", "move_right")
+	set_facing(facingAxis)
+	var walk = speed * facingAxis
 	if abs(walk) < speed * 0.2:
 		velocity.x = move_toward(velocity.x, 0, stop_force * delta)
 	else:
 		velocity.x += walk * delta
 	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if Input.is_action_pressed("run") else clamp(velocity.x, -max_walk_speed, max_walk_speed)
 	$AnimatedSprite2D.scale = Vector2(0.2, 0.1) if Input.is_action_pressed("crouch_look_down") else Vector2(0.2, 0.2)
+	
+	# This shrinks the player so they can go under shorter areas, whoever, it gets stuck on the floor
+	#$CollisionShape2D.scale = Vector2(1, 0.5) if Input.is_action_pressed("crouch_look_down") else Vector2(1, 1)
+	#$HurtBox/CollisionShape2D.scale = Vector2(1, 0.5) if Input.is_action_pressed("crouch_look_down") else Vector2(1, 1)
 	 
 	
 	velocity.y += gravity * delta

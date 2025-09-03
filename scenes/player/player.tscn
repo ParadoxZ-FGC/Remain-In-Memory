@@ -98,6 +98,9 @@ animations = [{
 size = Vector2(80.6402, 359.455)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("stone")]
+collision_layer = 513
+floor_constant_speed = true
+floor_snap_length = 12.0
 script = ExtResource("1_c623h")
 stone = NodePath("AudioStreamPlayer2D")
 metadata/_edit_group_ = true

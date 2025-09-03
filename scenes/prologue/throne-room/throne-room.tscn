@@ -997,7 +997,6 @@ shadow_enabled = true
 texture = ExtResource("7_35vq6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("10_p66qs")]
 offset_left = 1.0

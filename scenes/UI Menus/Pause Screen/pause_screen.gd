@@ -7,15 +7,22 @@ extends Control
 
 func _ready(): 
 	settings.hide()
+	for child in $PanelContainer/VBoxContainer.get_children():
+		child.disabled = true
 	$AnimationPlayer.play("RESET")
 
 func resume():  
 	resume_button.release_focus()
 	get_tree().paused = false
+	for child in $PanelContainer/VBoxContainer.get_children():
+		child.disabled = true
 	$AnimationPlayer.play_backwards("blur")
+	
 
 func pause():
-	get_tree().paused = true 
+	get_tree().paused = true
+	for child in $PanelContainer/VBoxContainer.get_children():
+		child.disabled = false
 	$AnimationPlayer.play("blur")
 
 func testEsc():
