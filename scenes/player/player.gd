@@ -15,7 +15,7 @@ signal facing_changed(facing_right: bool)
 var facing_right = true
 
 func _ready(): 
-	connect("facing_changed", Callable($AnimatedSprite2D2, "_on_facing_changed"))
+	connect("facing_changed", Callable($AnimatedWeaponSprite, "_on_facing_changed"))
 
 func set_facing(facingAxis: float) -> void: 
 	if (facingAxis > 0):
@@ -38,7 +38,7 @@ func _physics_process(delta):
 	else:
 		velocity.x += walk * delta
 	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if Input.is_action_pressed("run") else clamp(velocity.x, -max_walk_speed, max_walk_speed)
-	$AnimatedSprite2D.scale = Vector2(0.2, 0.1) if Input.is_action_pressed("crouch_look_down") else Vector2(0.2, 0.2)
+	$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1) if Input.is_action_pressed("crouch_look_down") else Vector2(0.2, 0.2)
 	
 	# This shrinks the player so they can go under shorter areas, whoever, it gets stuck on the floor
 	#$CollisionShape2D.scale = Vector2(1, 0.5) if Input.is_action_pressed("crouch_look_down") else Vector2(1, 1)
@@ -56,15 +56,18 @@ func _physics_process(delta):
 				stone.play()
 		else: 
 			stone.stop()
-		$AnimatedSprite2D.play()
+		$AnimatedPlayerSprite.play()
 	else: 
 		stone.stop()
-		$AnimatedSprite2D.stop()
+		$AnimatedPlayerSprite.stop()
 	
 	if velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_v = false
-		$AnimatedSprite2D.flip_h = velocity.x < 0
+		$AnimatedPlayerSprite.animation = "walk"
+		$AnimatedPlayerSprite.flip_v = false
+		$AnimatedPlayerSprite.flip_h = velocity.x < 0
 	
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = -jump_speed
+
+func _on_health_health_depleted() -> void:
+	get_tree().quit()

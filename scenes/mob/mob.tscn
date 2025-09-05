@@ -177,7 +177,8 @@ radius = 42.0
 height = 122.0
 
 [node name="Mob" type="RigidBody2D" node_paths=PackedStringArray("boom")]
-collision_mask = 0
+collision_layer = 64
+collision_mask = 2
 gravity_scale = 0.0
 script = ExtResource("1_c2o0r")
 boom = NodePath("HurtBox/AudioStreamPlayer2D")
@@ -188,21 +189,21 @@ script = ExtResource("2_feath")
 max_health = 1
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedMobSprite" type="AnimatedSprite2D" parent="."]
 rotation = -6.28319
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vldki")
-animation = &"shoot"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="MobCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_nnm6l")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 16
 script = ExtResource("3_w5ba3")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://b6w5l21fecgju"
@@ -217,7 +218,7 @@ shape = SubResource("CapsuleShape2D_nnm6l")
 debug_color = Color(0.85798, 0.998061, 0, 0.42)
 
 [node name="HitBox" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 192
 collision_mask = 0
 script = ExtResource("5_kk3ds")
 metadata/_custom_type_script = "uid://cadh1n1g4w666"

@@ -90,8 +90,11 @@ attack={
 
 [layer_names]
 
-2d_physics/layer_4="collisions"
-2d_physics/layer_10="transitions"
+2d_physics/layer_2="environment"
+2d_physics/layer_4="player"
+2d_physics/layer_5="playerAttack"
+2d_physics/layer_7="enemy"
+2d_physics/layer_8="enemyAttack"
 
 [rendering]
 
