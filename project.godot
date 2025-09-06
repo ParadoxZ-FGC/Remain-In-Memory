@@ -21,6 +21,10 @@ boot_splash/bg_color=Color(0.0295066, 0.0295065, 0.0295066, 1)
 boot_splash/image="uid://crqjfspp25kjv"
 config/icon="uid://crqjfspp25kjv"
 
+[autoload]
+
+PlayerData="*res://player_data.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -90,8 +94,11 @@ attack={
 
 [layer_names]
 
-2d_physics/layer_4="collisions"
-2d_physics/layer_10="transitions"
+2d_physics/layer_2="environment"
+2d_physics/layer_4="player"
+2d_physics/layer_5="playerAttack"
+2d_physics/layer_7="enemy"
+2d_physics/layer_8="enemyAttack"
 
 [rendering]
 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=4 uid="uid://1atkktyrh75f"]
+[gd_scene load_steps=20 format=4 uid="uid://1atkktyrh75f"]
 
 [ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_uy2l1"]
 [ext_resource type="Texture2D" uid="uid://dx3b0bsnjkemr" path="res://assets/visual/bg/throne_room_2.png" id="1_ym15t"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rbw3j"]
-[ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="4_hufqj"]
 [ext_resource type="Texture2D" uid="uid://ecvwd682hypb" path="res://assets/visual/bg/glass.png" id="4_q2e8l"]
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="5_ym15t"]
 [ext_resource type="Texture2D" uid="uid://c1xyw1l4oma0a" path="res://assets/visual/tilemaps/door2-arch.png" id="6_35vq6"]
@@ -841,7 +840,8 @@ texture = ExtResource("5_ym15t")
 0:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_35vq6"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 72
 sources/1 = SubResource("TileSetAtlasSource_n217a")
 sources/0 = SubResource("TileSetAtlasSource_c34a2")
 sources/4 = SubResource("TileSetAtlasSource_p66qs")
@@ -898,23 +898,6 @@ limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
 position_smoothing_enabled = true
-
-[node name="UI" type="CanvasLayer" parent="Player"]
-
-[node name="H-f" type="Sprite2D" parent="Player/UI"]
-position = Vector2(92, 71)
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("4_hufqj")
-
-[node name="H-f2" type="Sprite2D" parent="Player/UI"]
-position = Vector2(169, 71)
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("4_hufqj")
-
-[node name="H-f3" type="Sprite2D" parent="Player/UI"]
-position = Vector2(247, 71)
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("4_hufqj")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(6.10352e-05, 3.05176e-05)

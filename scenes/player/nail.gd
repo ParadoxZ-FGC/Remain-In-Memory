@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
  
-
 @onready var hitbox = $HitBox 
+
 
 func _on_facing_changed(facing_right: bool) -> void: 
 	if(facing_right): 
@@ -11,6 +11,7 @@ func _on_facing_changed(facing_right: bool) -> void:
 		position.x = -11
 		rotate(PI)
 
+
 func _ready(): 
 	hide()
 	hitbox.set_deferred("monitoring", false) 
@@ -18,9 +19,11 @@ func _ready():
 	
 	connect("animation_finished", _on_animation_finished) 
 
+
 func _process(_delta): 
 	if Input.is_action_just_pressed("attack"): 
 		attack() 
+
 
 func attack():
 	show() 
@@ -32,6 +35,7 @@ func attack():
 	await animation_finished 
 	
 	_on_animation_finished()
+
 
 func _on_animation_finished(): 
 	hide()

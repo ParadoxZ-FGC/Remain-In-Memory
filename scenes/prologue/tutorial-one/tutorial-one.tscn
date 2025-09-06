@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://c836gbrc44pj2"]
+[gd_scene load_steps=26 format=4 uid="uid://c836gbrc44pj2"]
 
 [ext_resource type="Script" uid="uid://dow6k3two06fj" path="res://scenes/prologue/tutorial-one/tutorial-one.gd" id="1_n3noj"]
 [ext_resource type="Texture2D" uid="uid://el662e7dqqae" path="res://assets/visual/placeholders/city/desaturated-layers/c-0.png" id="3_0kat4"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="7_354rv"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="7_gc787"]
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="8_gc787"]
-[ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="9_0hmbj"]
 [ext_resource type="FontFile" uid="uid://c2krg6e4qra6j" path="res://assets/visual/UI/fonts/Inria-Sans/InriaSans-Regular.ttf" id="9_130in"]
 [ext_resource type="Material" uid="uid://du8v75s3bvq3o" path="res://scenes/prologue/tutorial-one/particle_1.tres" id="9_gm85s"]
 [ext_resource type="Texture2D" uid="uid://bad1do8djipn4" path="res://assets/visual/placeholders/city/desaturated-layers/c-4.png" id="10_u6yve"]
@@ -348,7 +347,8 @@ texture = ExtResource("8_gc787")
 2:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_wy4lw"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 72
 sources/0 = SubResource("TileSetAtlasSource_130in")
 sources/1 = SubResource("TileSetAtlasSource_gm85s")
 
@@ -380,7 +380,7 @@ use_hdr = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hmbj"]
 size = Vector2(20, 226)
 
-[node name="Tutorial One" type="Node"]
+[node name="Tutorial One" type="Node2D"]
 script = ExtResource("1_n3noj")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
@@ -554,23 +554,6 @@ limit_right = 3000
 limit_bottom = 1080
 position_smoothing_enabled = true
 
-[node name="UI" type="CanvasLayer" parent="Player"]
-
-[node name="H-f" type="Sprite2D" parent="Player/UI"]
-position = Vector2(92, 71)
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("9_0hmbj")
-
-[node name="H-f2" type="Sprite2D" parent="Player/UI"]
-position = Vector2(169, 71)
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("9_0hmbj")
-
-[node name="H-f3" type="Sprite2D" parent="Player/UI"]
-position = Vector2(247, 71)
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("9_0hmbj")
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 self_modulate = Color(0.233925, 0.233925, 0.233925, 0.227451)
 position = Vector2(1496, 504)
@@ -600,13 +583,16 @@ offset_top = 7.0
 offset_right = 5.0
 offset_bottom = 7.0
 
-[node name="ChangeScene" type="Area2D" parent="."]
+[node name="SceneTransitions" type="Node2D" parent="."]
+
+[node name="ChangeScene" type="Area2D" parent="SceneTransitions"]
 position = Vector2(2329, 811)
-collision_mask = 512
+collision_layer = 0
+collision_mask = 520
 script = ExtResource("13_1mlff")
 path = "res://scenes/prologue/tutorial-two/tutorial-two.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChangeScene"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
 shape = SubResource("RectangleShape2D_0hmbj")
 
-[connection signal="body_entered" from="ChangeScene" to="ChangeScene" method="_on_body_entered"]
+[connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]
