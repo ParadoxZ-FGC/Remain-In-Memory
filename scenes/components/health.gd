@@ -8,9 +8,11 @@ signal health_depleted
 @export var max_health: int = 3: set = set_max_health, get = get_max_health  
 @export var immortality: bool = false: set = set_immortality, get = get_immortality  
 @export var immortalityDuration = 1
-var immortality_timer: Timer = null
 
 @onready var health: int = max_health: set = set_health, get = get_health
+
+var immortality_timer: Timer = null
+
 
 func set_max_health(value : int): 
 	
@@ -23,16 +25,20 @@ func set_max_health(value : int):
 		 
 		if health > max_health: 
 			health = max_health
-			
+
+
 func get_max_health() -> int:
 	return max_health
+
 
 func set_immortality(value: bool):
 	immortality = value
 
+
 func get_immortality() -> bool:
 	return immortality 
  
+
 func set_temporary_immortality(time: float): 
 	if immortality_timer == null: 
 		immortality_timer = Timer.new() 
@@ -48,9 +54,11 @@ func set_temporary_immortality(time: float):
 	get_parent().find_child("HurtBox").set_deferred("monitoring", false)
 	immortality_timer.start()
 
+
 func resolve_temporary_immortality():
 	immortality = false
 	get_parent().find_child("HurtBox").set_deferred("monitoring", true)
+
 
 func set_health(value : int): 
 	if value < health and immortality: 
@@ -66,6 +74,7 @@ func set_health(value : int):
 		
 		if health <= 0:
 			health_depleted.emit()
+
 
 func get_health() -> int: 
 	return health

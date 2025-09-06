@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
+signal facing_changed(facing_right: bool) 
+
 @export var upper = Vector2(0, 0)
 @export var lower = Vector2(2500, 1080)
-@onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @export var speed = 1000
 @export var jump_speed = 900
 @export var max_walk_speed = 300
@@ -11,11 +12,18 @@ extends CharacterBody2D
 @export var stone: AudioStreamPlayer2D 
 @export var facingRight: bool = true
 
-signal facing_changed(facing_right: bool) 
+@onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
+@onready var health : Health = $Health
+
+var scene_transitions
 var facing_right = true
 
-func _ready(): 
+
+func _ready():
 	connect("facing_changed", Callable($AnimatedWeaponSprite, "_on_facing_changed"))
+	health.max_health = PlayerData.maximum_health
+	health.health = PlayerData.current_health
+
 
 func set_facing(facingAxis: float) -> void: 
 	if (facingAxis > 0):
@@ -28,6 +36,7 @@ func set_facing(facingAxis: float) -> void:
 		if (facing_right): 
 			facing_right = false 
 			emit_signal("facing_changed", facing_right)
+
 
 func _physics_process(delta):
 	var facingAxis = Input.get_axis("move_left", "move_right")
@@ -69,5 +78,17 @@ func _physics_process(delta):
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = -jump_speed
 
+
 func _on_health_health_depleted() -> void:
 	get_tree().quit()
+
+
+func on_scene_transitions() -> void:
+	PlayerData.maximum_health = health.max_health
+	PlayerData.current_health = health.health
+
+
+func connect_triggers():
+	if scene_transitions != null:
+		for trigger in scene_transitions.get_children():
+			trigger.triggered.connect(on_scene_transitions)

@@ -1,7 +1,9 @@
-extends Node2D
+extends WorldScene
+
 
 func _ready() -> void:
-	pass
+	connect_scene_transitions_to_player()
+
 
 func _process(_delta: float) -> void:
 	pass

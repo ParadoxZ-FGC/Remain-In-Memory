@@ -21,6 +21,10 @@ boot_splash/bg_color=Color(0.0295066, 0.0295065, 0.0295066, 1)
 boot_splash/image="uid://crqjfspp25kjv"
 config/icon="uid://crqjfspp25kjv"
 
+[autoload]
+
+PlayerData="*res://player_data.gd"
+
 [display]
 
 window/size/viewport_width=1920

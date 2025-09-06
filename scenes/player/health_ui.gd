@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var health = get_child_count() * 2
 @onready var currentHeart = get_child_count() - 1
 
+
 func _on_health_health_changed(diff) -> void:
 	
 	diff = absi(diff)
@@ -14,8 +15,8 @@ func _on_health_health_changed(diff) -> void:
 	for i in range(diff):
 		health -= 1
 		hurt()
-		
-	
+
+
 func hurt() -> void:
 	
 	var heart = hearts[currentHeart].get_children()
@@ -26,6 +27,7 @@ func hurt() -> void:
 			if (heartState.name == "Heart-Half" && health > 0):
 				currentHeart -= 1
 			break
+
 
 func heal() -> void:
 	

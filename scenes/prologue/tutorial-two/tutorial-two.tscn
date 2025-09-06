@@ -740,14 +740,16 @@ offset_bottom = 501.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="ChangeScene" type="Area2D" parent="."]
+[node name="SceneTransitions" type="Node2D" parent="."]
+
+[node name="ChangeScene" type="Area2D" parent="SceneTransitions"]
 position = Vector2(1246, -265)
 collision_layer = 0
 collision_mask = 520
 script = ExtResource("11_jyxw7")
 path = "res://scenes/prologue/throne-room/throne-room.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChangeScene"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
 shape = SubResource("RectangleShape2D_v5bv6")
 
-[connection signal="body_entered" from="ChangeScene" to="ChangeScene" method="_on_body_entered"]
+[connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]
