@@ -1,11 +1,10 @@
-[gd_scene load_steps=25 format=4 uid="uid://wrin7ux4mc07"]
+[gd_scene load_steps=24 format=4 uid="uid://wrin7ux4mc07"]
 
 [ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/prologue/tutorial-two/tutorial_two.gd" id="1_6itxs"]
 [ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_b3vbw"]
 [ext_resource type="Texture2D" uid="uid://4nf1hfqm8fhw" path="res://assets/visual/bg/castle_background2.png" id="2_fct1m"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rocry"]
 [ext_resource type="Texture2D" uid="uid://c1xyw1l4oma0a" path="res://assets/visual/tilemaps/door2-arch.png" id="4_4wb8h"]
-[ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="4_6ly85"]
 [ext_resource type="Texture2D" uid="uid://de57xb55c6k8n" path="res://assets/visual/tilemaps/test-1.png" id="5_fct1m"]
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="5_qbwta"]
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="7_6itxs"]
@@ -517,7 +516,8 @@ texture = ExtResource("7_6itxs")
 0:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_4wb8h"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 72
 sources/1 = SubResource("TileSetAtlasSource_qbwta")
 sources/2 = SubResource("TileSetAtlasSource_6itxs")
 sources/0 = SubResource("TileSetAtlasSource_ra2nw")
@@ -587,23 +587,6 @@ limit_top = -500
 limit_right = 1920
 limit_bottom = 1080
 position_smoothing_enabled = true
-
-[node name="UI" type="CanvasLayer" parent="Player"]
-
-[node name="H-f" type="Sprite2D" parent="Player/UI"]
-position = Vector2(92, 71)
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("4_6ly85")
-
-[node name="H-f2" type="Sprite2D" parent="Player/UI"]
-position = Vector2(169, 71)
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("4_6ly85")
-
-[node name="H-f3" type="Sprite2D" parent="Player/UI"]
-position = Vector2(247, 71)
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("4_6ly85")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(6.10352e-05, 3.05176e-05)
@@ -758,12 +741,16 @@ offset_bottom = 501.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="ChangeScene" type="Area2D" parent="."]
+[node name="SceneTransitions" type="Node2D" parent="."]
+
+[node name="ChangeScene" type="Area2D" parent="SceneTransitions"]
 position = Vector2(1246, -265)
+collision_layer = 0
+collision_mask = 520
 script = ExtResource("11_jyxw7")
 path = "res://scenes/prologue/throne-room/throne-room.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChangeScene"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
 shape = SubResource("RectangleShape2D_v5bv6")
 
-[connection signal="body_entered" from="ChangeScene" to="ChangeScene" method="_on_body_entered"]
+[connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]
