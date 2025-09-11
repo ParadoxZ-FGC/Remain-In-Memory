@@ -108,6 +108,7 @@ floor_constant_speed = true
 floor_snap_length = 12.0
 script = ExtResource("1_c623h")
 stone = NodePath("AudioStreamPlayer2D")
+facingRight = false
 metadata/_edit_group_ = true
 
 [node name="Health" type="Node" parent="."]

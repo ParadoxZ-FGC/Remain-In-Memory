@@ -5,12 +5,14 @@ signal facing_changed(facing_right: bool)
 @export var upper = Vector2(0, 0)
 @export var lower = Vector2(2500, 1080)
 @export var speed = 1000
-@export var jump_speed = 900
+@export var jump_speed = 800
 @export var max_walk_speed = 300
 @export var max_run_speed = 500
 @export var stop_force = 8000
+@export var drag_force = 500
 @export var stone: AudioStreamPlayer2D 
 @export var facingRight: bool = true
+var lastfacing: bool = true
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
@@ -43,9 +45,17 @@ func _physics_process(delta):
 	set_facing(facingAxis)
 	var walk = speed * facingAxis
 	if abs(walk) < speed * 0.2:
-		velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+		if is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+		else:
+			velocity.x = move_toward(velocity.x, 0, drag_force * delta)
 	else:
-		velocity.x += walk * delta
+		if lastfacing != facing_right:
+			lastfacing = facing_right
+			velocity.x -= velocity.x / 8 * 7
+			
+	velocity.x += walk * delta
+	
 	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if Input.is_action_pressed("run") else clamp(velocity.x, -max_walk_speed, max_walk_speed)
 	$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1) if Input.is_action_pressed("crouch_look_down") else Vector2(0.2, 0.2)
 	
