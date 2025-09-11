@@ -1,5 +1,6 @@
-[gd_scene load_steps=20 format=4 uid="uid://1atkktyrh75f"]
+[gd_scene load_steps=21 format=4 uid="uid://1atkktyrh75f"]
 
+[ext_resource type="Script" uid="uid://b1mi2jg3167qe" path="res://scenes/prologue/throne-room/throne_room.gd" id="1_q2e8l"]
 [ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_uy2l1"]
 [ext_resource type="Texture2D" uid="uid://dx3b0bsnjkemr" path="res://assets/visual/bg/throne_room_2.png" id="1_ym15t"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rbw3j"]
@@ -847,6 +848,7 @@ sources/0 = SubResource("TileSetAtlasSource_c34a2")
 sources/4 = SubResource("TileSetAtlasSource_p66qs")
 
 [node name="ThroneRoom" type="Node2D"]
+script = ExtResource("1_q2e8l")
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(960, 540)

@@ -363,11 +363,11 @@ fill = 2
 fill_from = Vector2(0.529915, 0.521368)
 fill_to = Vector2(0, 0)
 
-[sub_resource type="Gradient" id="Gradient_130in"]
+[sub_resource type="Gradient" id="Gradient_x65u3"]
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_gm85s"]
-gradient = SubResource("Gradient_130in")
+gradient = SubResource("Gradient_x65u3")
 use_hdr = true
 
 [sub_resource type="Gradient" id="Gradient_gc787"]
@@ -585,14 +585,14 @@ offset_bottom = 7.0
 
 [node name="SceneTransitions" type="Node2D" parent="."]
 
-[node name="ChangeScene" type="Area2D" parent="SceneTransitions"]
+[node name="ToCastle" type="Area2D" parent="SceneTransitions" groups=["scene_transitions"]]
 position = Vector2(2329, 811)
 collision_layer = 0
 collision_mask = 520
 script = ExtResource("13_1mlff")
 path = "res://scenes/prologue/tutorial-two/tutorial-two.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ToCastle"]
 shape = SubResource("RectangleShape2D_0hmbj")
 
-[connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]
+[connection signal="body_entered" from="SceneTransitions/ToCastle" to="SceneTransitions/ToCastle" method="_on_body_entered"]

@@ -540,7 +540,7 @@ position = Vector2(959, 360.72)
 scale = Vector2(2.99687, 2.51962)
 texture = ExtResource("2_fct1m")
 
-[node name="Sprint_Attack" type="RichTextLabel" parent="."]
+[node name="Sprint-Attack Instructions" type="RichTextLabel" parent="."]
 offset_left = 666.0
 offset_top = 756.0
 offset_right = 839.0
@@ -586,6 +586,10 @@ limit_top = -500
 limit_right = 1920
 limit_bottom = 1080
 position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_right_margin = 0.15
+drag_bottom_margin = 0.15
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(6.10352e-05, 3.05176e-05)
@@ -742,14 +746,14 @@ grow_vertical = 1
 
 [node name="SceneTransitions" type="Node2D" parent="."]
 
-[node name="ChangeScene" type="Area2D" parent="SceneTransitions"]
+[node name="ToThroneRoom" type="Area2D" parent="SceneTransitions" groups=["scene_transitions"]]
 position = Vector2(1246, -265)
 collision_layer = 0
 collision_mask = 520
 script = ExtResource("11_jyxw7")
 path = "res://scenes/prologue/throne-room/throne-room.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ToThroneRoom"]
 shape = SubResource("RectangleShape2D_v5bv6")
 
-[connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]
+[connection signal="body_entered" from="SceneTransitions/ToThroneRoom" to="SceneTransitions/ToThroneRoom" method="_on_body_entered"]

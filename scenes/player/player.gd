@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-signal facing_changed(facing_right: bool) 
+signal facing_changed(facing_right: bool)
+signal updated
 
 @export var upper = Vector2(0, 0)
 @export var lower = Vector2(2500, 1080)
@@ -17,7 +18,6 @@ var lastfacing: bool = true
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
 
-var scene_transitions
 var facing_right = true
 
 
@@ -96,9 +96,10 @@ func _on_health_health_depleted() -> void:
 func on_scene_transitions() -> void:
 	PlayerData.maximum_health = health.max_health
 	PlayerData.current_health = health.health
+	updated.emit()
 
 
 func connect_triggers():
-	if scene_transitions != null:
-		for trigger in scene_transitions.get_children():
-			trigger.triggered.connect(on_scene_transitions)
+	var triggers = get_tree().get_nodes_in_group("scene_transitions")
+	for trigger in triggers:
+		trigger.triggered.connect(on_scene_transitions)
