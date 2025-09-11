@@ -548,6 +548,7 @@ position = Vector2(255, 789)
 scale = Vector2(8, 8)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = 0
 limit_right = 3000
@@ -581,6 +582,7 @@ process_material = ExtResource("9_gm85s")
 
 [node name="Foreground" type="ParallaxBackground" parent="."]
 layer = 1
+follow_viewport_scale = 2.0
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Foreground"]
 motion_scale = Vector2(2, 2)
