@@ -1,11 +1,11 @@
 [gd_scene load_steps=37 format=3 uid="uid://mgefkek60rmx"]
 
+
 [ext_resource type="Script" uid="uid://fhvvxtuvqsqd" path="res://scenes/mob/mob.gd" id="1_c2o0r"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/health.gd" id="2_feath"]
 [ext_resource type="Texture2D" uid="uid://c0ptkh3ukgj5a" path="res://assets/visual/enemies/turret-Sheet.png" id="2_nnm6l"]
-[ext_resource type="Script" uid="uid://b6w5l21fecgju" path="res://scenes/components/hurtbox.gd" id="3_w5ba3"]
-[ext_resource type="AudioStream" uid="uid://b5yljpyjsd6oc" path="res://assets/audio/sound-effects/Bigbooms4.mp3" id="5_fhx6o"]
-[ext_resource type="Script" uid="uid://cadh1n1g4w666" path="res://scenes/components/hitbox.gd" id="5_kk3ds"]
+[ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="4_feath"]
+[ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="5_kk3ds"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kk3ds"]
 atlas = ExtResource("2_nnm6l")
@@ -235,13 +235,19 @@ animations = [{
 radius = 42.0
 height = 122.0
 
-[node name="Mob" type="RigidBody2D" node_paths=PackedStringArray("boom")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fhx6o"]
+radius = 42.0
+height = 122.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_feath"]
+radius = 42.0
+height = 122.0
+
+[node name="Mob" type="RigidBody2D"]
 collision_layer = 64
 collision_mask = 2
 gravity_scale = 0.0
 script = ExtResource("1_c2o0r")
-boom = NodePath("HurtBox/AudioStreamPlayer2D")
-metadata/_edit_group_ = true
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_feath")
@@ -261,30 +267,18 @@ frame_progress = 0.540621
 [node name="MobCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_nnm6l")
 
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 0
-collision_mask = 16
-script = ExtResource("3_w5ba3")
-health = NodePath("../Health")
-metadata/_custom_type_script = "uid://b6w5l21fecgju"
+[node name="Hurtbox" parent="." instance=ExtResource("4_feath")]
+monitoring = false
+layers = 64
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HurtBox"]
-stream = ExtResource("5_fhx6o")
-volume_db = 24.0
-bus = &"Sound Effects"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_fhx6o")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CapsuleShape2D_nnm6l")
-debug_color = Color(0.85798, 0.998061, 0, 0.42)
+[node name="Hitbox" parent="." instance=ExtResource("5_kk3ds")]
+monitorable = false
+layers = 8
 
-[node name="HitBox" type="Area2D" parent="."]
-collision_layer = 192
-collision_mask = 0
-script = ExtResource("5_kk3ds")
-metadata/_custom_type_script = "uid://cadh1n1g4w666"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CapsuleShape2D_nnm6l")
-debug_color = Color(0.942852, 0.0848162, 0.556527, 0.42)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_feath")
 
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
