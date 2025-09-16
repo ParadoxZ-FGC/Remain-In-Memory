@@ -719,15 +719,16 @@ shadow_enabled = true
 texture = ExtResource("8_fct1m")
 
 [node name="Mob" parent="." instance=ExtResource("11_ra2nw")]
-position = Vector2(1241, 863)
+position = Vector2(1241, 872)
 
 [node name="Mob2" parent="." instance=ExtResource("11_ra2nw")]
-position = Vector2(1005, 381)
+position = Vector2(1005, 392)
 
 [node name="Mob3" parent="." instance=ExtResource("11_ra2nw")]
-position = Vector2(399, -94)
+position = Vector2(399, -88)
 
 [node name="Pause" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="PauseScreen" parent="Pause" instance=ExtResource("14_uqdrb")]
 anchors_preset = 0
