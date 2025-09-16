@@ -1,17 +1,17 @@
-[gd_scene load_steps=25 format=3 uid="uid://colfn2h16sy1u"]
+[gd_scene load_steps=26 format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/health.gd" id="2_lvxji"]
 [ext_resource type="AudioStream" uid="uid://bier21cu6vlso" path="res://assets/audio/sound-effects/Stone.wav" id="3_gmlin"]
 [ext_resource type="Texture2D" uid="uid://dtppk3y1nys6t" path="res://assets/visual/character/king-Sheet.png" id="4_5gtgg"]
-[ext_resource type="Script" uid="uid://cadh1n1g4w666" path="res://scenes/components/hitbox.gd" id="5_75vfm"]
 [ext_resource type="Texture2D" uid="uid://btl5acaji4pe0" path="res://assets/visual/character/nail.jpg" id="5_qek5x"]
-[ext_resource type="Script" uid="uid://b6w5l21fecgju" path="res://scenes/components/hurtbox.gd" id="6_0owmy"]
-[ext_resource type="Script" uid="uid://cgxvvtxeagatb" path="res://scenes/player/nail.gd" id="6_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="9_5gtgg"]
 [ext_resource type="Script" uid="uid://v5svl3mpw3jj" path="res://scenes/player/health_ui.gd" id="9_fm80t"]
 [ext_resource type="Texture2D" uid="uid://2356anoxvhp" path="res://assets/visual/UI/hearts/h-e.png" id="9_je7p5"]
 [ext_resource type="Texture2D" uid="uid://devcp3wgml0q7" path="res://assets/visual/UI/hearts/h-h.png" id="10_fm80t"]
+[ext_resource type="PackedScene" uid="uid://vspiyrcuxewo" path="res://scenes/components/attack.tscn" id="10_gx1jg"]
+[ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="12_fm80t"]
+[ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="12_gx1jg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h17s1"]
 atlas = ExtResource("4_5gtgg")
@@ -81,7 +81,7 @@ animations = [{
 radius = 4.0
 height = 16.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_h17s1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -98,8 +98,11 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qek5x"]
-size = Vector2(80.6402, 359.455)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ugbui"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcs02"]
+radius = 4.0
+height = 16.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("stone")]
 collision_layer = 8
@@ -108,8 +111,6 @@ floor_constant_speed = true
 floor_snap_length = 12.0
 script = ExtResource("1_c623h")
 stone = NodePath("AudioStreamPlayer2D")
-facingRight = false
-metadata/_edit_group_ = true
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_lvxji")
@@ -128,37 +129,6 @@ shape = SubResource("CapsuleShape2D_u08bn")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_gmlin")
 bus = &"Sound Effects"
-
-[node name="AnimatedWeaponSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(11, 2)
-rotation = -1.5708
-scale = Vector2(0.0380078, 0.0416859)
-sprite_frames = SubResource("SpriteFrames_h17s1")
-animation = &"attack"
-script = ExtResource("6_5gtgg")
-
-[node name="HitBox" type="Area2D" parent="AnimatedWeaponSprite"]
-visible = false
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("5_75vfm")
-metadata/_custom_type_script = "uid://cadh1n1g4w666"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedWeaponSprite/HitBox"]
-position = Vector2(0.746696, -1.36148)
-shape = SubResource("RectangleShape2D_qek5x")
-debug_color = Color(0.8, 0.858824, 0.0666667, 0.419608)
-
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 0
-collision_mask = 192
-script = ExtResource("6_0owmy")
-health = NodePath("../Health")
-metadata/_custom_type_script = "uid://b6w5l21fecgju"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CapsuleShape2D_u08bn")
-debug_color = Color(0.972028, 0, 0.443895, 0.42)
 
 [node name="Health UI" type="CanvasLayer" parent="."]
 script = ExtResource("9_fm80t")
@@ -210,6 +180,35 @@ texture = ExtResource("10_fm80t")
 [node name="Heart-Full" type="Sprite2D" parent="Health UI/Heart2"]
 scale = Vector2(4.375, 4.375)
 texture = ExtResource("9_5gtgg")
+
+[node name="Sword" parent="." instance=ExtResource("10_gx1jg")]
+duration = 0.07
+
+[node name="sprite" type="AnimatedSprite2D" parent="Sword"]
+visible = false
+position = Vector2(11, 1)
+rotation = -1.5708
+scale = Vector2(0.0380078, 0.0416859)
+sprite_frames = SubResource("SpriteFrames_ugbui")
+animation = &"attack"
+frame_progress = 0.862686
+
+[node name="hitbox" parent="Sword" instance=ExtResource("12_fm80t")]
+position = Vector2(11, 1)
+scale = Vector2(0.75, 0.155)
+enabled = false
+knockback = true
+layers = 582
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/hitbox"]
+shape = SubResource("RectangleShape2D_ugbui")
+
+[node name="Hurtbox" parent="." instance=ExtResource("12_gx1jg")]
+layers = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_fcs02")
+debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
 
 [connection signal="health_changed" from="Health" to="Health UI" method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
