@@ -1,57 +1,41 @@
 extends CharacterBody2D
 
-signal facing_changed(facing_right: bool) 
-
 @export var upper = Vector2(0, 0)
 @export var lower = Vector2(2500, 1080)
 @export var speed = 1000
 @export var jump_speed = 800
+@export var coyote: float = 0.03
+var coyoteTimer: float = 0 #BUG Implemented Coyote Time, unsure if its what's allowing me to spam space bar and fly. Made a change, may have fixed it.
 @export var max_walk_speed = 300
 @export var max_run_speed = 500
 @export var stop_force = 8000
 @export var drag_force = 500
 @export var stone: AudioStreamPlayer2D 
-@export var facingRight: bool = true
-var lastfacing: bool = true
-
+var movementDirection: bool = true #rightward = true
+var movementIntentionDirection: bool = true
+var movementIntention: int
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
 
 var scene_transitions
-var facing_right = true
 
 
 func _ready():
-	connect("facing_changed", Callable($AnimatedWeaponSprite, "_on_facing_changed"))
 	health.max_health = PlayerData.maximum_health
 	health.health = PlayerData.current_health
 
-
-func set_facing(facingAxis: float) -> void: 
-	if (facingAxis > 0):
-		#print("right")  
-		if (!facing_right): 
-			facing_right = true 
-			emit_signal("facing_changed", facing_right)
-	elif (facingAxis < 0):
-		#print("left")
-		if (facing_right): 
-			facing_right = false 
-			emit_signal("facing_changed", facing_right)
-
-
 func _physics_process(delta):
-	var facingAxis = Input.get_axis("move_left", "move_right")
-	set_facing(facingAxis)
-	var walk = speed * facingAxis
+	var movementIntention = Input.get_axis("move_left", "move_right")
+	movementDirection = true if velocity.x > 0 else false
+	movementIntentionDirection = true if movementIntention >= 0 else false
+	var walk = speed * movementIntention
 	if abs(walk) < speed * 0.2:
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, stop_force * delta)
 		else:
 			velocity.x = move_toward(velocity.x, 0, drag_force * delta)
 	else:
-		if lastfacing != facing_right:
-			lastfacing = facing_right
+		if movementIntentionDirection != movementDirection:
 			velocity.x -= velocity.x / 8 * 7
 			
 	velocity.x += walk * delta
@@ -84,9 +68,20 @@ func _physics_process(delta):
 		$AnimatedPlayerSprite.animation = "walk"
 		$AnimatedPlayerSprite.flip_v = false
 		$AnimatedPlayerSprite.flip_h = velocity.x < 0
+		if $Sword.attacking == false:
+			$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+		
+	if is_on_floor():
+		coyoteTimer = 0
+	else:
+		coyoteTimer += delta
+		clamp(coyoteTimer, 0, coyote)
 	
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
+	if (is_on_floor() or coyoteTimer < coyote) and Input.is_action_just_pressed("jump"):
 		velocity.y = -jump_speed
+	
+	if Input.is_action_just_pressed("attack"):
+		$Sword.attack()
 
 
 func _on_health_health_depleted() -> void:

@@ -19,10 +19,10 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 
 func _on_health_health_depleted() -> void:
-	$HitBox.set_deferred("monitorable", false)
-	boom.play()
+	$Hitbox.free()
+	#boom.play()
 	$AnimatedMobSprite.sprite_frames.set_animation_loop("die", false)
 	$AnimatedMobSprite.play("die")
 	await $AnimatedMobSprite.animation_finished
-	boom.stop()
+	#boom.stop()
 	queue_free()

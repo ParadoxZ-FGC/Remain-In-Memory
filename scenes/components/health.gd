@@ -51,13 +51,13 @@ func set_temporary_immortality(time: float):
 	immortality_timer.set_wait_time(time)
 	immortality_timer.timeout.connect(resolve_temporary_immortality) 
 	immortality = true
-	get_parent().find_child("HurtBox").set_deferred("monitoring", false)
+	get_parent().find_child("Hurtbox").set_deferred("monitoring", false)
 	immortality_timer.start()
 
 
 func resolve_temporary_immortality():
 	immortality = false
-	get_parent().find_child("HurtBox").set_deferred("monitoring", true)
+	get_parent().find_child("Hurtbox").set_deferred("monitoring", true)
 
 
 func set_health(value : int): 
