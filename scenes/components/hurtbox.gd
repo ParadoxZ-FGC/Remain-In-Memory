@@ -1,16 +1,25 @@
 class_name HurtBox
 extends Area2D 
 
-signal received_damage(damage: int)
+@export var enabled: bool = true: set = set_enabled, get = get_enabled
+@export_flags("Environment:2", "Breakable:4", "Player:8", "Enemy:64", "Hazard:512") var layers = 0
 
-@export var health: Health
+#region Setters and Getters
+func set_enabled(x: bool):
+	enabled = x
+	set_deferred("monitorable", x)
 
+func get_enabled():
+	return enabled
+#endregion
 
-func _ready(): 
-	connect("area_entered", _on_area_entered)
+func update_layers():
+	collision_layer = layers
 
+func _ready():
+	set_enabled(enabled)
+	update_layers()
 
-func _on_area_entered(area) -> void:
-	if area != null && (area.get("name") == "HitBox"): # Slightly redundant, the only area that should be detected are mob hitboxes due to physics masks
-		health.health -= area.damage 
-		received_damage.emit(area.damage) 
+func take_damage(x : int):
+	var HP = get_parent().find_child("Health")
+	HP.set_health(HP.health - x)
