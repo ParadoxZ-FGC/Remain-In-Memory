@@ -893,7 +893,7 @@ upper = Vector2(-250, 0)
 lower = Vector2(1920, 1080)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.75, 1.75)
 limit_left = -250
 limit_top = 0
 limit_right = 1920
