@@ -1,25 +1,43 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0idldrfge7b8"]
+[gd_scene load_steps=12 format=3 uid="uid://c0idldrfge7b8"]
 
 [ext_resource type="Texture2D" uid="uid://1nkarpwg6gm2" path="res://assets/visual/bg/title.jpg" id="1_3swuw"]
+[ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="1_lr85p"]
+[ext_resource type="Material" uid="uid://dgu3mqx0lkg25" path="res://scenes/title-screen/title-screen.tres" id="2_88tdx"]
 [ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title-screen/buttons.gd" id="2_aptra"]
 [ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/UI Menus/Settings/Settings.tscn" id="3_3swuw"]
 [ext_resource type="Texture2D" uid="uid://c4bolb5awkkg2" path="res://assets/visual/play.png" id="3_n0f26"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="4_pcs22"]
 [ext_resource type="Texture2D" uid="uid://b5xmvsq7ewt3u" path="res://assets/visual/settings.png" id="5_88tdx"]
 [ext_resource type="Texture2D" uid="uid://dy2a058jf327l" path="res://assets/visual/exit.png" id="6_4xtok"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/fonts/NocturneSerifTest-Light.otf" id="9_4xtok"]
+[ext_resource type="FontFile" uid="uid://c7dc7sfjmpx8c" path="res://assets/visual/fonts/Silkscreen-Regular.ttf" id="9_q5m6g"]
 
-[node name="Menu" type="Node2D"]
+[node name="Title Screen" type="Node2D"]
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_lr85p")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
 
 [node name="BG" type="Sprite2D" parent="."]
-self_modulate = Color(0.377919, 0.377919, 0.377919, 1)
+self_modulate = Color(0, 0, 0, 1)
 position = Vector2(960, 540)
 scale = Vector2(3, 3)
 texture = ExtResource("1_3swuw")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BG"]
+amount = 100
+lifetime = 3.0
+preprocess = 10.0
+explosiveness = 0.4
+randomness = 0.6
+process_material = ExtResource("2_88tdx")
+
 [node name="Light" type="PointLight2D" parent="."]
-position = Vector2(963, 579)
-scale = Vector2(23.6875, 40.5625)
-energy = 5.47
+position = Vector2(957.5, 545)
+scale = Vector2(32.71875, 35.062496)
+color = Color(0.106225856, 0.49445403, 0, 1)
 shadow_enabled = true
 texture = ExtResource("4_pcs22")
 
@@ -59,7 +77,30 @@ icon = ExtResource("6_4xtok")
 flat = true
 script = ExtResource("2_aptra")
 
+[node name="Title" type="RichTextLabel" parent="."]
+offset_left = 576.0
+offset_top = 35.0
+offset_right = 1315.0
+offset_bottom = 443.0
+theme_override_fonts/normal_font = ExtResource("9_4xtok")
+theme_override_font_sizes/normal_font_size = 160
+text = "Remain in
+Memory"
+
+[node name="SubTitle" type="RichTextLabel" parent="."]
+offset_left = 684.0
+offset_top = 434.0
+offset_right = 1299.0
+offset_bottom = 503.0
+theme_override_colors/default_color = Color(0.1224483, 0.4361574, 0.27436632, 1)
+theme_override_fonts/normal_font = ExtResource("9_q5m6g")
+theme_override_font_sizes/normal_font_size = 50
+text = "~ Manere Memoria"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Settings" parent="." instance=ExtResource("3_3swuw")]
+visible = false
 offset_left = 960.0
 offset_top = 540.0
 offset_right = 960.0
