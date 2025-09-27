@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c5oyryy1dc36j"
-path="res://.godot/imported/InriaSans-BoldItalic.ttf-f78cbebd62251babbe6297c3a10fef3c.fontdata"
+uid="uid://b7diwbd0lb1ge"
+path="res://.godot/imported/Silkscreen-Bold.ttf-a27033e2f9b0e5d3f65dd182508dc9b5.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/UI/fonts/Inria-Sans/InriaSans-BoldItalic.ttf"
-dest_files=["res://.godot/imported/InriaSans-BoldItalic.ttf-f78cbebd62251babbe6297c3a10fef3c.fontdata"]
+source_file="res://assets/visual/fonts/Silkscreen-Bold.ttf"
+dest_files=["res://.godot/imported/Silkscreen-Bold.ttf-a27033e2f9b0e5d3f65dd182508dc9b5.fontdata"]
 
 [params]
 

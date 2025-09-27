@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c5oyryy1dc36j"
-path="res://.godot/imported/InriaSans-BoldItalic.ttf-f78cbebd62251babbe6297c3a10fef3c.fontdata"
+uid="uid://dbl4wvy4c7130"
+path="res://.godot/imported/NocturneSerifTest-Light.otf-3835c85e595867b3183611721e61e0e0.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/UI/fonts/Inria-Sans/InriaSans-BoldItalic.ttf"
-dest_files=["res://.godot/imported/InriaSans-BoldItalic.ttf-f78cbebd62251babbe6297c3a10fef3c.fontdata"]
+source_file="res://assets/visual/fonts/NocturneSerifTest-Light.otf"
+dest_files=["res://.godot/imported/NocturneSerifTest-Light.otf-3835c85e595867b3183611721e61e0e0.fontdata"]
 
 [params]
 
