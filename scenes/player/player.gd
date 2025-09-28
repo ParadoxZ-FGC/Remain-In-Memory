@@ -1,19 +1,24 @@
 extends CharacterBody2D
 
+
+signal updated
+
 @export var upper = Vector2(0, 0)
 @export var lower = Vector2(2500, 1080)
 @export var speed = 1000
 @export var jump_speed = 800
 @export var coyote: float = 0.03
-var coyoteTimer: float = 0 #BUG Implemented Coyote Time, unsure if its what's allowing me to spam space bar and fly. Made a change, may have fixed it.
 @export var max_walk_speed = 300
 @export var max_run_speed = 500
 @export var stop_force = 8000
 @export var drag_force = 500
-@export var stone: AudioStreamPlayer2D 
+@export var stone: AudioStreamPlayer2D
+ 
+var coyoteTimer: float = 0 #BUG Implemented Coyote Time, unsure if its what's allowing me to spam space bar and fly. Made a change, may have fixed it.
 var movementDirection: bool = true #rightward = true
 var movementIntentionDirection: bool = true
-var movementIntention: int
+var movementIntention: float
+
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
 
@@ -25,7 +30,7 @@ func _ready():
 	health.health = PlayerData.current_health
 
 func _physics_process(delta):
-	var movementIntention = Input.get_axis("move_left", "move_right")
+	movementIntention = Input.get_axis("move_left", "move_right")
 	movementDirection = true if velocity.x > 0 else false
 	movementIntentionDirection = true if movementIntention >= 0 else false
 	var walk = speed * movementIntention
@@ -41,11 +46,6 @@ func _physics_process(delta):
 	velocity.x += walk * delta
 	
 	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if Input.is_action_pressed("run") else clamp(velocity.x, -max_walk_speed, max_walk_speed)
-	$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1) if Input.is_action_pressed("crouch_look_down") else Vector2(0.2, 0.2)
-	
-	# This shrinks the player so they can go under shorter areas, whoever, it gets stuck on the floor
-	#$CollisionShape2D.scale = Vector2(1, 0.5) if Input.is_action_pressed("crouch_look_down") else Vector2(1, 1)
-	#$HurtBox/CollisionShape2D.scale = Vector2(1, 0.5) if Input.is_action_pressed("crouch_look_down") else Vector2(1, 1)
 	 
 	
 	velocity.y += gravity * delta
@@ -82,6 +82,18 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("attack"):
 		$Sword.attack()
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if (event.is_action_pressed("crouch_look_down")):
+		$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1)
+		$PlayerCollisionShape.scale = Vector2(1, 0.5)
+		$Hurtbox/CollisionShape2D.scale = Vector2(1, 0.5)
+		
+	elif (event.is_action_released("crouch_look_down")):
+		$AnimatedPlayerSprite.scale = Vector2(0.2, 0.2)
+		$PlayerCollisionShape.scale = Vector2(1, 1)
+		$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
 
 
 func _on_health_health_depleted() -> void:

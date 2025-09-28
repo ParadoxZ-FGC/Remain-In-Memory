@@ -1,6 +1,5 @@
-[gd_scene load_steps=21 format=4 uid="uid://1atkktyrh75f"]
+[gd_scene load_steps=20 format=4 uid="uid://1atkktyrh75f"]
 
-[ext_resource type="Script" uid="uid://b1mi2jg3167qe" path="res://scenes/prologue/throne-room/throne_room.gd" id="1_q2e8l"]
 [ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_uy2l1"]
 [ext_resource type="Texture2D" uid="uid://dx3b0bsnjkemr" path="res://assets/visual/bg/throne_room_2.png" id="1_ym15t"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rbw3j"]
@@ -961,10 +960,10 @@ position = Vector2(6.10352e-05, 3.05176e-05)
 color = Color(0.306923, 0.306923, 0.306923, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("10_p66qs")]
 offset_left = 1.0
 offset_right = 1.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+metadata/_edit_lock_ = true

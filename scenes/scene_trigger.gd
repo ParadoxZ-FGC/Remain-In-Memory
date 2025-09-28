@@ -1,8 +1,13 @@
 extends Area2D
 
+
 signal triggered
 
 @export var path: String
+
+
+func _ready() -> void:
+	add_to_group("scene_transitions")
 
 
 func _on_body_entered(_body) -> void:

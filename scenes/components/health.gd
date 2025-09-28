@@ -3,15 +3,21 @@ extends Node
  
 signal max_health_changed(diff: int)
 signal health_changed(diff: int)
-signal health_depleted 
+signal health_depleted
 
 @export var max_health: int = 3: set = set_max_health, get = get_max_health  
 @export var immortality: bool = false: set = set_immortality, get = get_immortality  
 @export var immortalityDuration = 1
+@export var character_sprite : Node2D
+@export var damage_blink_color := Color(1,1,1,1)
+
+var immortality_timer: Timer = null
 
 @onready var health: int = max_health: set = set_health, get = get_health
 
-var immortality_timer: Timer = null
+
+func _ready() -> void:
+	character_sprite.material.set_shader_parameter("blink_color", damage_blink_color)
 
 
 func set_max_health(value : int): 
@@ -68,6 +74,8 @@ func set_health(value : int):
 	if clamped_value != health: 
 		var difference = clamped_value - health 
 		if (difference < 0):
+			var tween = create_tween()
+			tween.tween_method(sprite_shader_blink_intensity, 1.0, 0, immortalityDuration)
 			set_temporary_immortality(immortalityDuration)
 		health = value
 		health_changed.emit(difference) 
@@ -78,3 +86,7 @@ func set_health(value : int):
 
 func get_health() -> int: 
 	return health
+
+
+func sprite_shader_blink_intensity(new_value: float) -> void:
+	character_sprite.material.set_shader_parameter("blink_intensity", new_value)

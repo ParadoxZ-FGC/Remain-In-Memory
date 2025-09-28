@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=4 uid="uid://jt4i8qfjhqs3"]
+[gd_scene load_steps=19 format=4 uid="uid://jt4i8qfjhqs3"]
 
 [ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="1_cg11o"]
 [ext_resource type="Texture2D" uid="uid://de57xb55c6k8n" path="res://assets/visual/tilemaps/test-1.png" id="1_sxaqu"]
+[ext_resource type="Script" uid="uid://cg1ftmb3deny0" path="res://scenes/prologue/tutorial-one/intro.gd" id="1_tou0t"]
 [ext_resource type="Material" uid="uid://cxscbwdlfdcbp" path="res://scenes/prologue/tutorial-one/particle_i.tres" id="1_x54yq"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="2_h4h7o"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="3_mg604"]
@@ -325,6 +326,7 @@ fill = 1
 fill_from = Vector2(0.521368, 0.521368)
 
 [node name="Intro" type="Node2D"]
+script = ExtResource("1_tou0t")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_cg11o")
@@ -334,7 +336,7 @@ bus = &"Music"
 
 [node name="SceneTransitions" type="Node2D" parent="."]
 
-[node name="ChangeScene" type="Area2D" parent="SceneTransitions"]
+[node name="ChangeScene" type="Area2D" parent="SceneTransitions" groups=["scene_transitions"]]
 position = Vector2(3929, 1504)
 collision_layer = 0
 collision_mask = 520
@@ -458,12 +460,12 @@ position = Vector2(0, -1)
 color = Color(0.295866, 0.295867, 0.295866, 1)
 
 [node name="Pause" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PauseScreen" parent="Pause" instance=ExtResource("8_a45m6")]
 offset_left = 5.0
 offset_top = 7.0
 offset_right = 5.0
 offset_bottom = 7.0
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]

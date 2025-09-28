@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgeqk4w1l7onc"]
+
+[ext_resource type="Script" uid="uid://cusomnsuun1p0" path="res://scenes/components/world_scene.gd" id="1_eyflq"]
+[ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_xo6ye"]
+[ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="3_xo6ye"]
+
+[node name="WorldScene" type="Node2D"]
+script = ExtResource("1_eyflq")
+metadata/_custom_type_script = "uid://cusomnsuun1p0"
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="BackgroundTileset" type="TileMapLayer" parent="."]
+scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
+
+[node name="GroundTileset" type="TileMapLayer" parent="."]
+scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("2_xo6ye")]
+scale = Vector2(8, 8)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = -500
+limit_right = 1920
+limit_bottom = 1080
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_right_margin = 0.15
+drag_bottom_margin = 0.15
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="Lighting" type="CanvasGroup" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Enemies" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="SceneTransitions" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Pause" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="Pause" instance=ExtResource("3_xo6ye")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 967.0
+offset_top = 501.0
+offset_right = 967.0
+offset_bottom = 501.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_lock_ = true

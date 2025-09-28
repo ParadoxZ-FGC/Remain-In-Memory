@@ -104,6 +104,7 @@ attack={
 2d_physics/layer_7="enemy"
 2d_physics/layer_8="enemyAttack"
 2d_physics/layer_9="enemyMagic"
+2d_physics/layer_10="hazard"
 
 [rendering]
 

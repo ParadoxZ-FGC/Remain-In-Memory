@@ -1,35 +1,23 @@
-[gd_scene load_steps=37 format=3 uid="uid://mgefkek60rmx"]
+[gd_scene load_steps=44 format=3 uid="uid://mgefkek60rmx"]
 
-
+[ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="1_0a8ii"]
 [ext_resource type="Script" uid="uid://fhvvxtuvqsqd" path="res://scenes/mob/mob.gd" id="1_c2o0r"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/health.gd" id="2_feath"]
 [ext_resource type="Texture2D" uid="uid://c0ptkh3ukgj5a" path="res://assets/visual/enemies/turret-Sheet.png" id="2_nnm6l"]
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="4_feath"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="5_kk3ds"]
+[ext_resource type="Script" uid="uid://12fgvi0w1br" path="res://scenes/mob/turret_cannonball.gd" id="6_0a8ii"]
+[ext_resource type="Texture2D" uid="uid://c15in3yd58d2y" path="res://assets/visual/enemies/turret-ball.png" id="6_kk3ds"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kk3ds"]
-atlas = ExtResource("2_nnm6l")
-region = Rect2(64, 64, 64, 64)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0a8ii"]
+resource_local_to_scene = true
+shader = ExtResource("1_0a8ii")
+shader_parameter/blink_color = Color(1, 1, 1, 1)
+shader_parameter/blink_intensity = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fhx6o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj1ul"]
 atlas = ExtResource("2_nnm6l")
-region = Rect2(128, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0a8ii"]
-atlas = ExtResource("2_nnm6l")
-region = Rect2(192, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q52e7"]
-atlas = ExtResource("2_nnm6l")
-region = Rect2(256, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tyl3q"]
-atlas = ExtResource("2_nnm6l")
-region = Rect2(0, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c5yut"]
-atlas = ExtResource("2_nnm6l")
-region = Rect2(64, 128, 64, 64)
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iba42"]
 atlas = ExtResource("2_nnm6l")
@@ -67,10 +55,6 @@ region = Rect2(384, 160, 64, 80)
 atlas = ExtResource("2_nnm6l")
 region = Rect2(448, 160, 64, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cj1ul"]
-atlas = ExtResource("2_nnm6l")
-region = Rect2(0, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_xl36c"]
 atlas = ExtResource("2_nnm6l")
 region = Rect2(128, 128, 64, 64)
@@ -94,6 +78,30 @@ region = Rect2(64, 192, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mas3e"]
 atlas = ExtResource("2_nnm6l")
 region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk3ds"]
+atlas = ExtResource("2_nnm6l")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhx6o"]
+atlas = ExtResource("2_nnm6l")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a8ii"]
+atlas = ExtResource("2_nnm6l")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q52e7"]
+atlas = ExtResource("2_nnm6l")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyl3q"]
+atlas = ExtResource("2_nnm6l")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5yut"]
+atlas = ExtResource("2_nnm6l")
+region = Rect2(64, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fstew"]
 atlas = ExtResource("2_nnm6l")
@@ -123,25 +131,10 @@ region = Rect2(0, 64, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kk3ds")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fhx6o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0a8ii")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q52e7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tyl3q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c5yut")
+"texture": SubResource("AtlasTexture_cj1ul")
 }],
 "loop": true,
-"name": &"aim",
+"name": &"asleep",
 "speed": 8.0
 }, {
 "frames": [{
@@ -178,14 +171,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cj1ul")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_xl36c")
 }, {
 "duration": 1.0,
@@ -203,8 +188,31 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mas3e")
 }],
-"loop": true,
+"loop": false,
 "name": &"shoot",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk3ds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhx6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a8ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q52e7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyl3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5yut")
+}],
+"loop": true,
+"name": &"standby",
 "speed": 8.0
 }, {
 "frames": [{
@@ -226,22 +234,28 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_esqtm")
 }],
-"loop": true,
+"loop": false,
 "name": &"wake",
 "speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nnm6l"]
 radius = 42.0
-height = 122.0
+height = 128.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fhx6o"]
 radius = 42.0
-height = 122.0
+height = 128.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_feath"]
 radius = 42.0
-height = 122.0
+height = 128.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feath"]
+size = Vector2(1000, 366)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0a8ii"]
+radius = 7.0
 
 [node name="Mob" type="RigidBody2D"]
 collision_layer = 64
@@ -249,25 +263,28 @@ collision_mask = 2
 gravity_scale = 0.0
 script = ExtResource("1_c2o0r")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("character_sprite")]
 script = ExtResource("2_feath")
-max_health = 1
+max_health = 2
+character_sprite = NodePath("../AnimatedMobSprite")
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
 [node name="AnimatedMobSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_0a8ii")
 rotation = -6.28319
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vldki")
-animation = &"wake"
-autoplay = "idle"
-frame_progress = 0.540621
+animation = &"asleep"
+autoplay = "asleep"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="MobCollisionShape" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_nnm6l")
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_feath")]
+visible = false
 monitoring = false
 layers = 64
 
@@ -275,10 +292,39 @@ layers = 64
 shape = SubResource("CapsuleShape2D_fhx6o")
 
 [node name="Hitbox" parent="." instance=ExtResource("5_kk3ds")]
+visible = false
 monitorable = false
 layers = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CapsuleShape2D_feath")
 
+[node name="Detectionbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectionbox"]
+position = Vector2(0, -119)
+shape = SubResource("RectangleShape2D_feath")
+
+[node name="Cannonball" type="Node2D" parent="."]
+position = Vector2(-21, -13)
+script = ExtResource("6_0a8ii")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Cannonball"]
+scale = Vector2(2, 2)
+texture = ExtResource("6_kk3ds")
+
+[node name="Hitbox" parent="Cannonball" instance=ExtResource("5_kk3ds")]
+enabled = false
+layers = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cannonball/Hitbox"]
+shape = SubResource("CircleShape2D_0a8ii")
+
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
+[connection signal="body_entered" from="Detectionbox" to="." method="_on_detectionbox_body_entered"]
+[connection signal="body_exited" from="Detectionbox" to="." method="_on_detectionbox_body_exited"]
+[connection signal="impacted" from="Cannonball/Hitbox" to="Cannonball" method="_on_hitbox_impacted"]

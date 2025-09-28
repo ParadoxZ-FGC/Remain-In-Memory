@@ -21,5 +21,6 @@ func _ready():
 	update_layers()
 
 func take_damage(x : int):
+	print("Damage Taken")
 	var HP = get_parent().find_child("Health")
 	HP.set_health(HP.health - x)
