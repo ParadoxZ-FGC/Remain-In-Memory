@@ -24,7 +24,7 @@ config/icon="uid://crqjfspp25kjv"
 
 [autoload]
 
-PlayerData="*res://player_data.gd"
+PlayerData="*res://scenes/components/player_data.gd"
 
 [display]
 
@@ -33,6 +33,10 @@ window/size/viewport_height=1080
 window/size/mode=4
 window/size/borderless=true
 window/stretch/mode="canvas_items"
+
+[global_group]
+
+scene_transitions=""
 
 [gui]
 
@@ -91,11 +95,16 @@ attack={
 
 [layer_names]
 
+2d_physics/layer_1="default"
 2d_physics/layer_2="environment"
+2d_physics/layer_3="breakables"
 2d_physics/layer_4="player"
 2d_physics/layer_5="playerAttack"
+2d_physics/layer_6="playerMagic"
 2d_physics/layer_7="enemy"
 2d_physics/layer_8="enemyAttack"
+2d_physics/layer_9="enemyMagic"
+2d_physics/layer_10="hazard"
 
 [rendering]
 

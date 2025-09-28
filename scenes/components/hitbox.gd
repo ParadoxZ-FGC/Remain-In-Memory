@@ -1,6 +1,8 @@
 class_name HitBox
 extends Area2D 
 
+signal impacted
+
 @export var enabled: bool = true: set = set_enabled, get = get_enabled
 @export var damage: int = 1: set = set_damage, get = get_damage
 @export var knockback: bool = false: set = set_knockback, get = get_knockback
@@ -38,5 +40,6 @@ func _ready():
 func _on_area_entered(area: HurtBox) -> void:
 	if area.get_collision_layer_value(3) or area.get_collision_layer_value(4) or area.get_collision_layer_value(7):
 		area.take_damage(damage)
+		impacted.emit()
 	if knockback:
 		pass #TODO Knockback

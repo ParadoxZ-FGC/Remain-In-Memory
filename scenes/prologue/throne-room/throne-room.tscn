@@ -960,10 +960,10 @@ position = Vector2(6.10352e-05, 3.05176e-05)
 color = Color(0.306923, 0.306923, 0.306923, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("10_p66qs")]
 offset_left = 1.0
 offset_right = 1.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+metadata/_edit_lock_ = true
