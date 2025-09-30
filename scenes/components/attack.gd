@@ -2,6 +2,7 @@
 
 @export_category("Attack")
 @export_range(0, 1, 0.01, "or_greater") var duration: float
+@export_range(0, 30, 0.25, "or_greater") var cooldown: float
 @export_enum("Melee", "Projectile", "Lobbed") var attackType: int:
 	set(value):
 		attackType = value
@@ -9,6 +10,7 @@
 
 var pierceCount: int
 var attacking: bool = false
+var debounce: bool = false
 
 func _get_property_list():
 	if Engine.is_editor_hint():
@@ -24,10 +26,14 @@ func _get_property_list():
 		return ret
 
 func attack():
-	$hitbox.set_enabled(true)
-	$sprite.visible = true
-	attacking = true
-	await get_tree().create_timer(duration).timeout
-	$hitbox.set_enabled(false)
-	$sprite.visible = false
-	attacking = false
+	if not debounce:
+		debounce = true
+		$hitbox.set_enabled(true)
+		$sprite.visible = true
+		attacking = true
+		await get_tree().create_timer(duration).timeout
+		$hitbox.set_enabled(false)
+		$sprite.visible = false
+		attacking = false
+		await get_tree().create_timer(cooldown).timeout
+		debounce = false

@@ -13,8 +13,8 @@ signal updated
 @export var stop_force = 8000
 @export var drag_force = 500
 @export var stone: AudioStreamPlayer2D
- 
-var coyoteTimer: float = 0 #BUG Implemented Coyote Time, unsure if its what's allowing me to spam space bar and fly. Made a change, may have fixed it.
+
+var coyoteTimer: float = 0
 var movementDirection: bool = true #rightward = true
 var movementIntentionDirection: bool = true
 var movementIntention: float
@@ -78,11 +78,20 @@ func _physics_process(delta):
 		clamp(coyoteTimer, 0, coyote)
 	
 	if (is_on_floor() or coyoteTimer < coyote) and Input.is_action_just_pressed("jump"):
-		velocity.y = -jump_speed
+		jump()
+	
+	if not is_on_floor() and Input.is_action_just_released("jump"):
+		jump_stop()
 	
 	if Input.is_action_just_pressed("attack"):
 		$Sword.attack()
 
+func jump():
+	velocity.y = -jump_speed
+
+func jump_stop():
+	if velocity.y < -100:
+		velocity.y = -100
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("crouch_look_down")):
