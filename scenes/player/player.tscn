@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="12_gx1jg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ugbui"]
+resource_local_to_scene = true
 shader = ExtResource("3_gx1jg")
 shader_parameter/blink_color = Color(1, 1, 1, 1)
 shader_parameter/blink_intensity = 0.0
