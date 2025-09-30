@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="5_ym15t"]
 [ext_resource type="Texture2D" uid="uid://c1xyw1l4oma0a" path="res://assets/visual/tilemaps/door2-arch.png" id="6_35vq6"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="7_35vq6"]
-[ext_resource type="Texture2D" uid="uid://bsnkk6p1xguo2" path="res://assets/visual/enemies/boss-idle.png" id="8_n217a"]
+[ext_resource type="PackedScene" uid="uid://dw7ebiin8spox" path="res://scenes/bosses/morose/prologue_morose.tscn" id="8_p66qs"]
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="8_ym15t"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="10_p66qs"]
 
@@ -895,6 +895,7 @@ position = Vector2(-66, 891)
 scale = Vector2(8, 8)
 upper = Vector2(-250, 0)
 lower = Vector2(1920, 1080)
+jump_speed = 1000
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)
@@ -904,11 +905,15 @@ limit_right = 1920
 limit_bottom = 1080
 position_smoothing_enabled = true
 
-[node name="Boss-idle" type="Sprite2D" parent="."]
-position = Vector2(1394, 861)
-texture = ExtResource("8_n217a")
+[node name="Morose" parent="." node_paths=PackedStringArray("left_edge", "right_edge", "target") instance=ExtResource("8_p66qs")]
+position = Vector2(1334, 800)
+left_edge = NodePath("../BossBoundary/Left")
+right_edge = NodePath("../BossBoundary/Right")
+target = NodePath("../Player")
 
 [node name="Lighting" type="CanvasGroup" parent="."]
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Lamp1" type="PointLight2D" parent="Lighting"]
 position = Vector2(-112.00001, 723.00006)
@@ -967,3 +972,11 @@ offset_right = 1.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 metadata/_edit_lock_ = true
+
+[node name="BossBoundary" type="Node2D" parent="."]
+
+[node name="Left" type="Marker2D" parent="BossBoundary"]
+position = Vector2(-40, 900)
+
+[node name="Right" type="Marker2D" parent="BossBoundary"]
+position = Vector2(1740, 900)
