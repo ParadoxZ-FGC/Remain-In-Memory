@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://c836gbrc44pj2"]
+[gd_scene load_steps=30 format=4 uid="uid://c836gbrc44pj2"]
 
 [ext_resource type="Script" uid="uid://dow6k3two06fj" path="res://scenes/prologue/tutorial-one/tutorial-one.gd" id="1_n3noj"]
 [ext_resource type="Texture2D" uid="uid://el662e7dqqae" path="res://assets/visual/placeholders/city/desaturated-layers/c-0.png" id="3_0kat4"]
@@ -57,46 +57,6 @@ texture_region_size = Vector2i(32, 32)
 3:4/0 = 0
 4:4/0 = 0
 0:5/0 = 0
-0:6/0 = 0
-1:6/0 = 0
-2:6/0 = 0
-3:6/0 = 0
-4:6/0 = 0
-6:6/0 = 0
-7:6/0 = 0
-8:6/0 = 0
-0:7/0 = 0
-1:7/0 = 0
-2:7/0 = 0
-3:7/0 = 0
-4:7/0 = 0
-6:7/0 = 0
-7:7/0 = 0
-8:7/0 = 0
-0:8/0 = 0
-1:8/0 = 0
-2:8/0 = 0
-3:8/0 = 0
-4:8/0 = 0
-6:8/0 = 0
-7:8/0 = 0
-8:8/0 = 0
-0:9/0 = 0
-1:9/0 = 0
-2:9/0 = 0
-3:9/0 = 0
-4:9/0 = 0
-6:9/0 = 0
-7:9/0 = 0
-8:9/0 = 0
-0:10/0 = 0
-6:10/0 = 0
-7:10/0 = 0
-8:10/0 = 0
-0:11/0 = 0
-6:11/0 = 0
-7:11/0 = 0
-8:11/0 = 0
 5:0/0 = 0
 6:3/0 = 0
 6:4/0 = 0
@@ -451,6 +411,15 @@ physics_layer_0/collision_mask = 72
 sources/0 = SubResource("TileSetAtlasSource_130in")
 sources/1 = SubResource("TileSetAtlasSource_gm85s")
 
+[sub_resource type="Gradient" id="Gradient_q2e8l"]
+offsets = PackedFloat32Array(0, 0.49333334, 0.72)
+colors = PackedColorArray(0.32884318, 0.24211574, 1, 1, 0.061154462, 0.06542372, 0.17642733, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4r36o"]
+gradient = SubResource("Gradient_q2e8l")
+fill = 1
+fill_from = Vector2(0.521368, 0.521368)
+
 [sub_resource type="Gradient" id="Gradient_x65u3"]
 colors = PackedColorArray(1, 1, 1, 0, 0, 0, 0, 1)
 
@@ -502,6 +471,7 @@ metadata/_edit_lock_ = true
 repeat_size = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/SkyLayer"]
+self_modulate = Color(0.26126057, 0.2888717, 0.4325404, 1)
 scale = Vector2(3, 3)
 texture = ExtResource("3_0kat4")
 centered = false
@@ -511,6 +481,7 @@ scroll_scale = Vector2(0.5, 0.5)
 repeat_size = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/HillsLayer"]
+self_modulate = Color(0.19434929, 0.19434926, 0.19434926, 1)
 texture = ExtResource("4_u6yve")
 centered = false
 
@@ -519,7 +490,7 @@ scroll_scale = Vector2(0.7, 0.7)
 repeat_size = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/CityLayer"]
-self_modulate = Color(0.834614, 0.834614, 0.834614, 1)
+self_modulate = Color(0.5649628, 0.56496114, 0.56496155, 1)
 texture = ExtResource("5_0hmbj")
 centered = false
 
@@ -528,7 +499,7 @@ scroll_scale = Vector2(0.9, 0.9)
 repeat_size = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/TownLayer"]
-self_modulate = Color(0.637843, 0.637843, 0.637843, 1)
+self_modulate = Color(0.38549262, 0.38549244, 0.38549247, 1)
 texture = ExtResource("6_1mlff")
 centered = false
 
@@ -598,6 +569,12 @@ scale = Vector2(6, 6)
 shadow_enabled = true
 texture = ExtResource("7_gc787")
 
+[node name="Moonlight" type="PointLight2D" parent="Lighting"]
+position = Vector2(1472.0002, 305.49982)
+scale = Vector2(50.000008, 37.39062)
+energy = 0.6
+texture = SubResource("GradientTexture2D_4r36o")
+
 [node name="Move" type="RichTextLabel" parent="."]
 offset_left = 420.0
 offset_top = 955.0
@@ -631,7 +608,7 @@ randomness = 1.0
 process_material = ExtResource("9_gm85s")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.169245, 0.169245, 0.169245, 1)
+color = Color(0.19076231, 0.19076234, 0.19076225, 1)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
