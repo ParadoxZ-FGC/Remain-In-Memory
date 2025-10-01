@@ -868,14 +868,14 @@ energy = 0.6
 shadow_enabled = true
 texture = ExtResource("8_fct1m")
 
-[node name="Sprint_Attack" type="RichTextLabel" parent="."]
-offset_left = 178.0
-offset_top = 954.0
-offset_right = 301.0
-offset_bottom = 979.0
+[node name="Attack" type="RichTextLabel" parent="."]
+offset_left = 179.0
+offset_top = 1004.0
+offset_right = 302.0
+offset_bottom = 1029.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("13_uqdrb")
-text = "J / X to attack"
+text = "J to attack"
 horizontal_alignment = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
