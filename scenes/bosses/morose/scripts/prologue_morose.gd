@@ -71,7 +71,9 @@ func _attack() -> void:
 		else:
 			anim_player.play("stab_front_right")
 		
+	$BossSword/Hitbox.set_enabled(true)
 	await anim_player.animation_finished
+	$BossSword/Hitbox.set_enabled(false)
 	_rest()
 	
 	var timer = get_tree().create_timer(randi_range(1, 3), false, false)
@@ -124,4 +126,5 @@ func _on_health_health_depleted() -> void:
 
 func _on_health_health_changed(diff: int) -> void:
 	if (sign(diff) == -1.0):
-		hurt_particles.emitting = true
+		hurt_particles.amount_ratio = $Health.health * 1.0 / $Health.max_health
+		hurt_particles.restart()

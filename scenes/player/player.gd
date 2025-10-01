@@ -29,6 +29,7 @@ func _ready():
 	health.max_health = PlayerData.maximum_health
 	health.health = PlayerData.current_health
 
+
 func _physics_process(delta):
 	movementIntention = Input.get_axis("move_left", "move_right")
 	movementDirection = true if velocity.x > 0 else false
@@ -86,12 +87,15 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack"):
 		$Sword.attack()
 
+
 func jump():
 	velocity.y = -jump_speed
+
 
 func jump_stop():
 	if velocity.y < -100:
 		velocity.y = -100
+
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("crouch_look_down")):
@@ -106,7 +110,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func _on_health_health_depleted() -> void:
-	get_tree().quit()
+	var title_screen = preload("res://scenes/title-screen/title-screen.tscn")
+	PlayerData.current_health = PlayerData.maximum_health
+	get_tree().call_deferred("change_scene_to_packed", title_screen)
 
 
 func on_scene_transitions() -> void:

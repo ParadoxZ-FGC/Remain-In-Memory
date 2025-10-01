@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://mgefkek60rmx"]
+[gd_scene load_steps=48 format=3 uid="uid://mgefkek60rmx"]
 
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="1_0a8ii"]
 [ext_resource type="Script" uid="uid://fhvvxtuvqsqd" path="res://scenes/mob/mob.gd" id="1_c2o0r"]
@@ -8,6 +8,33 @@
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="5_kk3ds"]
 [ext_resource type="Script" uid="uid://12fgvi0w1br" path="res://scenes/mob/turret_cannonball.gd" id="6_0a8ii"]
 [ext_resource type="Texture2D" uid="uid://c15in3yd58d2y" path="res://assets/visual/enemies/turret-ball.png" id="6_kk3ds"]
+[ext_resource type="Texture2D" uid="uid://br0g7t0hh5f3q" path="res://assets/visual/enemies/gear-particle.png.png" id="9_q52e7"]
+
+[sub_resource type="Curve" id="Curve_q52e7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7536232, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tyl3q"]
+curve = SubResource("Curve_q52e7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tyl3q"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 20, 0)
+emission_shape = 1
+emission_sphere_radius = 25.0
+angle_min = 1.0728835e-05
+angle_max = 720.0
+spread = 30.0
+flatness = 1.0
+initial_velocity_min = 250.0
+initial_velocity_max = 500.0
+angular_velocity_min = -720.0
+angular_velocity_max = 719.99994
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 49.999996
+scale_min = 0.59999996
+alpha_curve = SubResource("CurveTexture_tyl3q")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0a8ii"]
 resource_local_to_scene = true
@@ -269,6 +296,17 @@ max_health = 2
 character_sprite = NodePath("../AnimatedMobSprite")
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
+[node name="HurtParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 3
+texture = ExtResource("9_q52e7")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+visibility_rect = Rect2(-300, -100, 600, 200)
+process_material = SubResource("ParticleProcessMaterial_tyl3q")
+
 [node name="AnimatedMobSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_0a8ii")
 rotation = -6.28319
@@ -324,6 +362,7 @@ layers = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cannonball/Hitbox"]
 shape = SubResource("CircleShape2D_0a8ii")
 
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="body_entered" from="Detectionbox" to="." method="_on_detectionbox_body_entered"]
 [connection signal="body_exited" from="Detectionbox" to="." method="_on_detectionbox_body_exited"]

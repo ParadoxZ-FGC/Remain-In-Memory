@@ -10,14 +10,18 @@ signal health_depleted
 @export var immortalityDuration = 1
 @export var character_sprite : Node2D
 @export var damage_blink_color := Color(1,1,1,1)
+@export var damage_transition : Tween.TransitionType = Tween.TransitionType.TRANS_LINEAR
 
 var immortality_timer: Timer = null
+var first_pass = true # Used because player "technically" takes damage when loading a new scene when they had less than maximum health in the previous scene
 
 @onready var health: int = max_health: set = set_health, get = get_health
 
 
 func _ready() -> void:
 	character_sprite.material.set_shader_parameter("blink_color", damage_blink_color)
+	if PlayerData.current_health == health or get_parent().name != "Player":
+		first_pass = false
 
 
 func set_max_health(value : int): 
@@ -74,9 +78,13 @@ func set_health(value : int):
 	if clamped_value != health: 
 		var difference = clamped_value - health 
 		if (difference < 0):
-			var tween = create_tween()
-			tween.tween_method(sprite_shader_blink_intensity, 1.0, 0, immortalityDuration)
-			set_temporary_immortality(immortalityDuration)
+			if not first_pass:
+				var tween = create_tween()
+				tween.set_trans(damage_transition)
+				tween.tween_method(sprite_shader_blink_intensity, 1.0, 0, immortalityDuration)
+				set_temporary_immortality(immortalityDuration)
+			else:
+				first_pass = false
 		health = value
 		health_changed.emit(difference) 
 		
