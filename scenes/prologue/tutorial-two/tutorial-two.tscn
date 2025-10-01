@@ -742,9 +742,11 @@ lose_focus_timer = 1
 
 [node name="Mob2" parent="Enemies" instance=ExtResource("11_ra2nw")]
 position = Vector2(1005, 447)
+facing = 1
 
 [node name="Mob3" parent="Enemies" instance=ExtResource("11_ra2nw")]
 position = Vector2(399, -33)
+facing = 1
 
 [node name="Lighting" type="CanvasGroup" parent="."]
 position = Vector2(1000, 287.00003)

@@ -13,6 +13,16 @@ func _ready():
 	$AnimationPlayer.play("RESET")
 
 
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("esc"):
+		if settings.visible:
+			settings.exit_settings_menu()  # Close settings first if it's open
+		elif get_tree().paused:
+			resume()
+		else:
+			pause()
+
+
 func resume():  
 	resume_button.release_focus()
 	get_tree().paused = false
@@ -26,16 +36,6 @@ func pause():
 	for child in $PanelContainer/VBoxContainer.get_children():
 		child.disabled = false
 	$AnimationPlayer.play("blur")
-
-
-func testEsc():
-	if Input.is_action_just_pressed("esc"):
-		if settings.visible:
-			settings.exit_settings_menu()  # Close settings first if it's open
-		elif get_tree().paused:
-			resume()
-		else:
-			pause()
 
 
 func _on_resume_pressed():
@@ -53,6 +53,7 @@ func _on_settings_pressed():
 
 func _on_title_screen_pressed():
 	resume()
+	PlayerData.current_health = PlayerData.maximum_health
 	get_tree().change_scene_to_packed(scene)
 
 
@@ -64,7 +65,3 @@ func _on_alt_f_4_pressed():
 func _on_restart_for_debugging_pressed():
 	resume()
 	get_tree().reload_current_scene()
-
-
-func _process(_delta):
-	testEsc()

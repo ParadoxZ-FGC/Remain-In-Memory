@@ -3,22 +3,31 @@ extends RigidBody2D
 
 signal state_changed
 
-enum States {INACTIVE, DEACTIVATING, READY, STANDBY, FIRING, DYING}
+enum States {
+	INACTIVE, 
+	DEACTIVATING, 
+	READY, 
+	STANDBY, 
+	FIRING, 
+	DYING
+}
 
 @export var boom: AudioStreamPlayer2D
 @export var projectile_speed: int = 500
 @export var fire_recovery_duration: int = 5
 @export var lose_focus_timer: int = 5
+@export_range(-1, 1, 2) var facing : int = -1
 
 var is_dead : bool = false
 var current_state : States
-var facing : int = -1
 var target : Node2D
 var to_deactive := true
 var to_activate := false
 var can_deactivate := false
 
-@onready var cannonball_loaded = $Cannonball
+@onready var cannonball_loaded := $Cannonball
+@onready var hurt_particles := $HurtParticles
+@onready var hurt_particles_process_mat = $HurtParticles.get("process_material")
 
 
 func _ready() -> void:
@@ -26,6 +35,11 @@ func _ready() -> void:
 	#$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
 	current_state = States.INACTIVE
 	$AnimatedMobSprite.play("asleep")
+	if facing == 1:
+		$AnimatedMobSprite.flip_h = true
+		cannonball_loaded.flipped = true
+		cannonball_loaded.position = Vector2(21.0, -13)
+		hurt_particles_process_mat.direction.x = -1
 
 
 func _physics_process(_delta: float) -> void:
@@ -42,11 +56,13 @@ func _physics_process(_delta: float) -> void:
 			$AnimatedMobSprite.flip_h = true
 			cannonball_loaded.flipped = true
 			cannonball_loaded.position = Vector2(21.0, -13)
+			hurt_particles_process_mat.direction.x = -1
 		else:
 			facing = -1
 			$AnimatedMobSprite.flip_h = false
 			cannonball_loaded.flipped = false
 			cannonball_loaded.position = Vector2(-21.0, -13)
+			hurt_particles_process_mat.direction.x = 1
 		
 		if (current_state == States.READY):
 			print("FIRE!!")
@@ -143,3 +159,8 @@ func _on_detectionbox_body_exited(_body: Node2D) -> void:
 	
 func print_state() -> void:
 	print(States.find_key(current_state))
+
+
+func _on_health_health_changed(diff: int) -> void:
+	if (sign(diff) == -1.0):
+		hurt_particles.emitting = true

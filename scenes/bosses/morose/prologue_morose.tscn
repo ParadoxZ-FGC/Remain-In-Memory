@@ -16,7 +16,7 @@ shader_parameter/blink_color = Color(0, 0, 0, 1)
 shader_parameter/blink_intensity = 0.0
 
 [sub_resource type="Curve" id="Curve_1m6f0"]
-_data = [Vector2(0.26633167, 1), 0.0, 0.0, 0, 0, Vector2(0.47236183, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_nnxmi"]
@@ -69,6 +69,62 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kob7e"]
+resource_name = "rest_left"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSword:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.268928]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossSword:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_0f5yr"]
+resource_name = "rest_right"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSword:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.2689280275926285]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossSword:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-10, 20)]
 }
 
 [sub_resource type="Animation" id="Animation_a0coo"]
@@ -183,62 +239,6 @@ tracks/1/keys = {
 "values": [-0.17453292519943295, -0.7853981633974483, 2.2689280275926285, 2.2689280275926285, -0.17453292519943295]
 }
 
-[sub_resource type="Animation" id="Animation_0f5yr"]
-resource_name = "rest_right"
-length = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BossSword:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [2.2689280275926285]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BossSword:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-10, 20)]
-}
-
-[sub_resource type="Animation" id="Animation_kob7e"]
-resource_name = "rest_left"
-length = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BossSword:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-2.268928]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BossSword:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(10, 20)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a0coo"]
 _data = {
 &"RESET": SubResource("Animation_nnxmi"),
@@ -260,6 +260,7 @@ script = ExtResource("2_vd3w4")
 max_health = 30
 character_sprite = NodePath("../BossSprite")
 damage_blink_color = Color(0, 0, 0, 0.78431374)
+damage_transition = 5
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
 [node name="BossSprite" type="Sprite2D" parent="."]
@@ -270,11 +271,13 @@ metadata/_edit_lock_ = true
 [node name="HurtParticles" type="GPUParticles2D" parent="BossSprite"]
 show_behind_parent = true
 emitting = false
+amount = 9
 texture = ExtResource("8_1m6f0")
-lifetime = 0.3
+lifetime = 0.75
 one_shot = true
 explosiveness = 1.0
 randomness = 0.5
+visibility_rect = Rect2(-300, -200, 600, 400)
 trail_enabled = true
 trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_a0coo")
@@ -295,6 +298,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_eo4y3")
 
 [node name="Hitbox" parent="BossSword" instance=ExtResource("4_a1hcm")]
+enabled = false
 damage = 2
 layers = 8
 
