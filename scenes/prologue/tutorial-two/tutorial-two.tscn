@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=4 uid="uid://wrin7ux4mc07"]
 
 [ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/prologue/tutorial-two/tutorial_two.gd" id="1_6itxs"]
-[ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_b3vbw"]
 [ext_resource type="Texture2D" uid="uid://4nf1hfqm8fhw" path="res://assets/visual/bg/castle_background2.png" id="2_fct1m"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rocry"]
+[ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="2_uqdrb"]
 [ext_resource type="Texture2D" uid="uid://c1xyw1l4oma0a" path="res://assets/visual/tilemaps/door2-arch.png" id="4_4wb8h"]
 [ext_resource type="Texture2D" uid="uid://de57xb55c6k8n" path="res://assets/visual/tilemaps/test-1.png" id="5_fct1m"]
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="5_qbwta"]
@@ -683,8 +683,7 @@ sources/6 = SubResource("TileSetAtlasSource_jyxw7")
 script = ExtResource("1_6itxs")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_b3vbw")
-volume_db = -10.0
+stream = ExtResource("2_uqdrb")
 autoplay = true
 bus = &"Music"
 

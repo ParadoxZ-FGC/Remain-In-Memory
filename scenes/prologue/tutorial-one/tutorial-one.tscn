@@ -1,8 +1,8 @@
 [gd_scene load_steps=30 format=4 uid="uid://c836gbrc44pj2"]
 
 [ext_resource type="Script" uid="uid://dow6k3two06fj" path="res://scenes/prologue/tutorial-one/tutorial-one.gd" id="1_n3noj"]
+[ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="2_gm85s"]
 [ext_resource type="Texture2D" uid="uid://el662e7dqqae" path="res://assets/visual/placeholders/city/desaturated-layers/c-0.png" id="3_0kat4"]
-[ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="4_opabc"]
 [ext_resource type="Texture2D" uid="uid://bf4ci8surcvng" path="res://assets/visual/placeholders/city/desaturated-layers/c-1.png" id="4_u6yve"]
 [ext_resource type="Texture2D" uid="uid://x6wn8pl3bqi" path="res://assets/visual/placeholders/city/desaturated-layers/c-2.png" id="5_0hmbj"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="5_qpapv"]
@@ -446,8 +446,7 @@ use_hdr = true
 script = ExtResource("1_n3noj")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_opabc")
-volume_db = -10.0
+stream = ExtResource("2_gm85s")
 autoplay = true
 bus = &"Music"
 
