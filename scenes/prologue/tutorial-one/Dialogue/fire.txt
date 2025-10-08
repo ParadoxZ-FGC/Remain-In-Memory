@@ -1,0 +1,3 @@
+LINE The fire fires fireatiously
+LINE This is a second line of [rainbow]dialogue[/rainbow]
+EOF

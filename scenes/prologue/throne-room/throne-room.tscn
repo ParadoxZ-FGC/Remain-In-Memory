@@ -869,7 +869,6 @@ limit_left = -250
 limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
-position_smoothing_enabled = true
 
 [node name="Morose" parent="." node_paths=PackedStringArray("left_edge", "right_edge", "target") instance=ExtResource("8_p66qs")]
 position = Vector2(1334, 800)
