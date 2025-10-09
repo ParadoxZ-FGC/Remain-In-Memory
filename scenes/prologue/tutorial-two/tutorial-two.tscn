@@ -729,7 +729,6 @@ limit_left = 0
 limit_top = -460
 limit_right = 1920
 limit_bottom = 1140
-position_smoothing_enabled = true
 
 [node name="Enemies" type="CanvasGroup" parent="."]
 metadata/_edit_group_ = true
