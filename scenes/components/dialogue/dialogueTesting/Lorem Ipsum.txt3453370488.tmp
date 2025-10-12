@@ -1,0 +1,9 @@
+LINE Hello
+LINE How are you?
+CHOICE {Good, Bad}
+IF Good
+LINE Good!
+ENDIF
+IF Bad
+LINE Sorry...
+ENDIF
