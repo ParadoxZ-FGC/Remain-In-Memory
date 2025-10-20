@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://jt4i8qfjhqs3"]
+[gd_scene load_steps=18 format=4 uid="uid://jt4i8qfjhqs3"]
 
 [ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="1_cg11o"]
 [ext_resource type="Texture2D" uid="uid://de57xb55c6k8n" path="res://assets/visual/tilemaps/test-1.png" id="1_sxaqu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="2_h4h7o"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="3_mg604"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="5_x54yq"]
+[ext_resource type="PackedScene" uid="uid://cp2nwh0krspaf" path="res://scenes/components/interactable.tscn" id="7_tou0t"]
 [ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/fonts/NocturneSerifTest-Light.otf" id="7_xliqy"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="8_a45m6"]
 
@@ -242,7 +243,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 4250
 limit_bottom = 1900
-position_smoothing_enabled = true
 
 [node name="Lighting" type="CanvasGroup" parent="."]
 
@@ -264,6 +264,10 @@ position = Vector2(3498.8752, 445.37512)
 scale = Vector2(91.214836, 57.925777)
 energy = 3.0
 texture = SubResource("GradientTexture2D_cg11o")
+
+[node name="Interactable" parent="Lighting" instance=ExtResource("7_tou0t")]
+position = Vector2(176, 279)
+file = "res://scenes/prologue/tutorial-one/Dialogue/fire.txt"
 
 [node name="Jump" type="RichTextLabel" parent="."]
 offset_left = 806.0

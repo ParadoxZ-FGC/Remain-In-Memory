@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://snpu574qvx7o"]
+
+[ext_resource type="Script" uid="uid://bg7h58hljosm5" path="res://scenes/components/dialogue/DialogueHandler.gd" id="1_tcvru"]
+[ext_resource type="Texture2D" uid="uid://el662e7dqqae" path="res://assets/visual/placeholders/city/desaturated-layers/c-0.png" id="2_tqpex"]
+
+[node name="DialogueHandler" type="CanvasLayer"]
+script = ExtResource("1_tcvru")
+
+[node name="Background" type="NinePatchRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 480.0
+offset_top = 755.95996
+offset_right = -480.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_tqpex")
+region_rect = Rect2(0, 0, 640, 360)
+
+[node name="Text" type="RichTextLabel" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.05
+anchor_right = 0.98
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.72678554, 0.7639458, 0.6592749, 1)
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[rainbow]Lorem ipsum[/rainbow] dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+scroll_active = false
+
+[node name="typingTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="typingTimer" to="." method="_on_typing_timer_timeout"]

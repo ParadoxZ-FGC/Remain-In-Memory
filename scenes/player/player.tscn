@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://colfn2h16sy1u"]
+[gd_scene load_steps=29 format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/health.gd" id="2_lvxji"]
 [ext_resource type="AudioStream" uid="uid://bier21cu6vlso" path="res://assets/audio/sound-effects/Stone.wav" id="3_gmlin"]
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="3_gx1jg"]
+[ext_resource type="PackedScene" uid="uid://snpu574qvx7o" path="res://scenes/components/dialogue/DialogueHandler.tscn" id="3_ugbui"]
 [ext_resource type="Texture2D" uid="uid://dtppk3y1nys6t" path="res://assets/visual/character/king-Sheet.png" id="4_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://btl5acaji4pe0" path="res://assets/visual/character/nail.jpg" id="5_qek5x"]
 [ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="9_5gtgg"]
@@ -125,6 +126,9 @@ max_health = 6
 character_sprite = NodePath("../AnimatedPlayerSprite")
 damage_blink_color = Color(0.5924475, 2.201982e-06, 4.3317675e-07, 1)
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
+
+[node name="DialogueHandler" parent="." instance=ExtResource("3_ugbui")]
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ugbui")
