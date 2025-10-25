@@ -9,7 +9,7 @@ signal interact(file)
 signal stopInteract
 signal fileRead
 signal dialogue_segment_finished(next_segment: String)
-signal dialogue_segment_parsed(speaker:String, _emotion:String, dialogue_text:String, responses:Dictionary, next_segment:String)
+signal dialogue_segment_parsed(speaker:String, _emotion:String, side:String, dialogue_text:String, responses:Dictionary, next_segment:String)
 signal continue_dialogue
 signal finish_cutscene
 signal swap_control_state

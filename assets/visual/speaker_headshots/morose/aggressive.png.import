@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxucmvamiyob"
-path="res://.godot/imported/Current_Main_Character_Face-1.png.png-340200851fd412f06c442ce9ac4309f8.ctex"
+uid="uid://bu5jtrhcnqaxp"
+path="res://.godot/imported/aggressive.png-ea0f7a1ce75a219f3a4684504b08b964.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/character/Current_Main_Character_Face-1.png.png"
-dest_files=["res://.godot/imported/Current_Main_Character_Face-1.png.png-340200851fd412f06c442ce9ac4309f8.ctex"]
+source_file="res://assets/visual/speaker_headshots/morose/aggressive.png"
+dest_files=["res://.godot/imported/aggressive.png-ea0f7a1ce75a219f3a4684504b08b964.ctex"]
 
 [params]
 
