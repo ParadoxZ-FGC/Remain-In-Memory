@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people>
+	<person>
+		<name>Jeff Bridges</name>
+		<age>43</age>
+		<sex>Male</sex>
+		<favorite_color>Blue</favorite_color>
+	</person>
+	<person>
+		<name>Nathaniel Brook</name>
+		<age>24</age>
+		<sex>Male</sex>
+		<favorite_color>Purple</favorite_color>
+	</person>
+</people>

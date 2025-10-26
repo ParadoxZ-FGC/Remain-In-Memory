@@ -85,9 +85,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u08bn"]
-radius = 4.0
-height = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcs02"]
+size = Vector2(5, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 animations = [{
@@ -138,7 +137,8 @@ sprite_frames = SubResource("SpriteFrames_6v243")
 animation = &"walk"
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_u08bn")
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_fcs02")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_gmlin")
@@ -209,6 +209,7 @@ animation = &"attack"
 frame_progress = 0.862686
 
 [node name="hitbox" parent="Sword" instance=ExtResource("12_fm80t")]
+visible = false
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
 enabled = false
@@ -219,6 +220,7 @@ layers = 582
 shape = SubResource("RectangleShape2D_ugbui")
 
 [node name="Hurtbox" parent="." instance=ExtResource("12_gx1jg")]
+visible = false
 layers = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

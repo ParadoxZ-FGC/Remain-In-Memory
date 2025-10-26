@@ -1,6 +1,10 @@
 extends CharacterBody2D
 
+
 signal updated
+
+enum dialogueTypes {None, Chatting, Talking} #TODO I have no idea if we want "passive conversation", like npcs saying things without player input, that's what Chatting is for, just in case
+enum player_states {User_Controlled, System_Controlled}
 
 @export var upper = Vector2(0, 0)
 @export var lower = Vector2(2500, 1080)
@@ -17,16 +21,16 @@ var coyoteTimer: float = 0
 var movementDirection: bool = true #rightward = true
 var movementIntentionDirection: bool = true
 var movementIntention: float
+var scene_transitions
+var currentDialogue : dialogueTypes = dialogueTypes.None
+var current_player_state : player_states = player_states.User_Controlled
+var interactable : bool = false #Is there something to interact with
+var interactFile : String #INFO Interactable currently only handles dialogue, so this would be the file one reads from
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
 @onready var dialogueHandler = $DialogueHandler
 
-var scene_transitions
-enum dialogueTypes {None, Chatting, Talking} #TODO I have no idea if we want "passive conversation", like npcs saying things without player input, that's what Chatting is for, just in case
-var currentDialogue : int = dialogueTypes.None
-var interactable : bool = false #Is there something to interact with
-var interactFile : String #INFO Interactable currently only handles dialogue, so this would be the file one reads from
 
 func _ready():
 	health.max_health = PlayerData.maximum_health
@@ -34,21 +38,26 @@ func _ready():
 	EventBus.connect("interact", _on_interactable)
 	EventBus.connect("stopInteract", _off_interactable)
 	EventBus.connect("fileRead", _text_over)
+	EventBus.swap_control_state.connect(_swap_player_control_state)
+
 
 func _on_interactable(file): #Signals when overlapping interactable
 	interactable = true
 	interactFile = file
 
+
 func _off_interactable(): #Signals when leaving interactable #BUG/ALERT This will almost definitely cause issues with multiple interactables close enough to eachother to both be overlapped by the player.
 	interactable = false
 	interactFile = ""
 
+
 func _text_over(): #Signals when dialogue file is done
 	currentDialogue = dialogueTypes.None
 
+
 func _physics_process(delta):
-	if currentDialogue != dialogueTypes.Talking: #If player isnt in dialogue do normal player activities
-		move(delta) #NOTICE Movement has been move(ment)d to a function
+	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
+		move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
 		if Input.is_action_just_pressed("attack"):
 			$Sword.attack()
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
@@ -59,6 +68,9 @@ func _physics_process(delta):
 	elif currentDialogue == dialogueTypes.Talking: #If player is in dialogue, only allow interact key which advances it.
 		if Input.is_action_just_pressed("interact"):
 			dialogueHandler.readFile()
+			
+	elif current_player_state == player_states.System_Controlled:
+		move(0, delta)
 	
 	if velocity.length() > 0:
 		if is_on_floor(): 
@@ -78,8 +90,9 @@ func _physics_process(delta):
 		if $Sword.attacking == false:
 			$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
 
-func move(delta):
-	movementIntention = Input.get_axis("move_left", "move_right")
+
+func move(movement_vector, delta):
+	movementIntention = movement_vector
 	movementDirection = true if velocity.x > 0 else false
 	movementIntentionDirection = true if movementIntention >= 0 else false
 	var walk = speed * movementIntention
@@ -94,7 +107,7 @@ func move(delta):
 			
 	velocity.x += walk * delta
 	
-	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if Input.is_action_pressed("run") else clamp(velocity.x, -max_walk_speed, max_walk_speed)
+	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if (Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled) else clamp(velocity.x, -max_walk_speed, max_walk_speed)
 	 
 	
 	velocity.y += gravity * delta
@@ -107,12 +120,7 @@ func move(delta):
 	else:
 		coyoteTimer += delta
 		clamp(coyoteTimer, 0, coyote)
-	
-	if (is_on_floor() or coyoteTimer < coyote) and Input.is_action_just_pressed("jump"):
-		jump()
-	
-	if not is_on_floor() and Input.is_action_just_released("jump"):
-		jump_stop()
+
 
 func jump():
 	velocity.y = -jump_speed
@@ -124,15 +132,22 @@ func jump_stop():
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if (event.is_action_pressed("crouch_look_down")):
-		$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1)
-		$PlayerCollisionShape.scale = Vector2(1, 0.5)
-		$Hurtbox/CollisionShape2D.scale = Vector2(1, 0.5)
+	if (current_player_state == player_states.User_Controlled):
+		if (event.is_action_pressed("crouch_look_down")):
+			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1)
+			$PlayerCollisionShape.scale = Vector2(1, 0.5)
+			$Hurtbox/CollisionShape2D.scale = Vector2(1, 0.5)
+			
+		elif (event.is_action_released("crouch_look_down")):
+			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.2)
+			$PlayerCollisionShape.scale = Vector2(1, 1)
+			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
+			
+		if (is_on_floor() or coyoteTimer < coyote) and event.is_action_pressed("jump"):
+			jump()
 		
-	elif (event.is_action_released("crouch_look_down")):
-		$AnimatedPlayerSprite.scale = Vector2(0.2, 0.2)
-		$PlayerCollisionShape.scale = Vector2(1, 1)
-		$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
+		if not is_on_floor() and event.is_action_released("jump"):
+			jump_stop()
 
 
 func _on_health_health_depleted() -> void:
@@ -146,7 +161,15 @@ func on_scene_transitions() -> void:
 	PlayerData.current_health = health.health
 	updated.emit()
 
+
 func connect_triggers():
 	var triggers = get_tree().get_nodes_in_group("scene_transitions")
 	for trigger in triggers:
 		trigger.triggered.connect(on_scene_transitions)
+
+
+func _swap_player_control_state() -> void:
+	if (current_player_state == player_states.User_Controlled):
+		current_player_state = player_states.System_Controlled
+	else:
+		current_player_state = player_states.User_Controlled
