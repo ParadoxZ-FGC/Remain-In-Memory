@@ -65,7 +65,7 @@ func _physics_process(_delta: float) -> void:
 			hurt_particles_process_mat.direction.x = 1
 		
 		if (current_state == States.READY):
-			print("FIRE!!")
+			#print("FIRE!!")
 			current_state = States.FIRING
 			state_changed.emit()
 			fire()
@@ -141,24 +141,25 @@ func _on_health_health_depleted() -> void:
 
 
 func _on_detectionbox_body_entered(body: Node2D) -> void:
-	print("Detection Entered")
+	#print("Detection Entered")
 	to_deactive = false
 	if current_state == States.DEACTIVATING:
 		await state_changed
 	if current_state == States.INACTIVE and not to_deactive:
-		print("Detected")
+		#print("Detected")
 		target = body
 		to_activate = true
 
 
 func _on_detectionbox_body_exited(_body: Node2D) -> void:
-	print("Dectection Exited")
+	#print("Dectection Exited")
 	to_deactive = true
 	combat_cooldown()
 	
 	
 func print_state() -> void:
-	print(States.find_key(current_state))
+	pass
+	#print(States.find_key(current_state))
 
 
 func _on_health_health_changed(diff: int) -> void:
