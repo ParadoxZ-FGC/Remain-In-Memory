@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue_scenes>
+	<prologue_boss>
+		<boss_greeting>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				Ah...[br]Hello... weary traveler...
+			</message>
+			<player_responses />
+			<next_segment>nomad_question_1</next_segment>
+		</boss_greeting>
+		<nomad_question_1>
+			<speaker>
+				<name>traveler</name>
+				<emotion>neutral</emotion>
+				<side>left</side>
+			</speaker>
+			<message>
+				What is this place?
+			</message>
+			<player_responses />
+			<next_segment>boss_response_1</next_segment>
+		</nomad_question_1>
+		<boss_response_1>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				This...?[br]This is my castle...
+			</message>
+			<player_responses>
+				<nomad_stupid_question>Who are you?</nomad_stupid_question>
+				<nomad_guess>I take it you're the king?</nomad_guess>
+			</player_responses>
+			<next_segment>nomad_stupid_question</next_segment>
+		</boss_response_1>
+		<nomad_stupid_question>
+			<speaker>
+				<name>traveler</name>
+				<emotion>neutral</emotion>
+				<side>left</side>
+			</speaker>
+			<message>
+				Who are you?
+			</message>
+			<player_responses />
+			<next_segment>boss_response_2</next_segment>
+		</nomad_stupid_question>
+		<nomad_guess>
+			<speaker>
+				<name>traveler</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				I take it you're the king?
+			</message>
+			<player_responses />
+			<next_segment>boss_response_3</next_segment>
+		</nomad_guess>
+		<boss_response_2>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				Who... am I?[br]This is my castle...
+			</message>
+			<player_responses />
+			<next_segment>intimidate_nomad</next_segment>
+		</boss_response_2>
+		<boss_response_3>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				This is my castle...
+			</message>
+			<player_responses />
+			<next_segment>intimidate_nomad_alt</next_segment>
+		</boss_response_3>
+		<intimidate_nomad>
+			<speaker>
+				<name>morose</name>
+				<emotion>aggressive</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				[outline_color=black][color=indigo][b][font_size=50][shake rate=25.0 level=15 connected=1]WHO DO YOU THINK I AM?![/shake][/font_size][/b][/color][/outline_color]
+			</message>
+			<player_responses />
+			<next_segment>shimmy</next_segment>
+		</intimidate_nomad>
+		<intimidate_nomad_alt>
+			<speaker>
+				<name>morose</name>
+				<emotion>aggressive</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				[outline_color=black][color=indigo][b][font_size=50][shake rate=25.0 level=15 connected=1]WHO ELSE WOULD I BE?![/shake][/font_size][/b][/color][/outline_color]
+			</message>
+			<player_responses />
+			<next_segment>shimmy</next_segment>
+		</intimidate_nomad_alt>
+		<shimmy>
+			<speaker>
+				<name>traveler</name>
+				<emotion>neutral</emotion>
+				<side>left</side>
+			</speaker>
+			<message>
+				[wave amp=50.0 freq=10.0 connected=1]Shimmy shimmy yay, shimmy yay, shimmy ya (drank)[br]Swalla-la-la (drank)[br]Swalla-la-la (swalla-la-la)[br]Swalla-la-la[/wave]
+			</message>
+			<player_responses />
+			<next_segment />
+		</shimmy>
+	</prologue_boss>
+	<town_chatter>
+		<chat_one>
+			<speaker>
+				<name />
+				<emotion />
+				<side />
+			</speaker>
+			<message>
+				I love vegetable beef barley soup!
+			</message>
+			<player_responses />
+			<next_segment />
+		</chat_one>
+	</town_chatter>
+</dialogue_scenes>

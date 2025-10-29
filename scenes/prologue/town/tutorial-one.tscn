@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=4 uid="uid://c836gbrc44pj2"]
 
-[ext_resource type="Script" uid="uid://dow6k3two06fj" path="res://scenes/prologue/tutorial-one/tutorial-one.gd" id="1_n3noj"]
 [ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="2_gm85s"]
+[ext_resource type="Script" uid="uid://dow6k3two06fj" path="res://scenes/prologue/town/tutorial-one.gd" id="1_n3noj"]
 [ext_resource type="Texture2D" uid="uid://el662e7dqqae" path="res://assets/visual/placeholders/city/desaturated-layers/c-0.png" id="3_0kat4"]
 [ext_resource type="Texture2D" uid="uid://bf4ci8surcvng" path="res://assets/visual/placeholders/city/desaturated-layers/c-1.png" id="4_u6yve"]
 [ext_resource type="Texture2D" uid="uid://x6wn8pl3bqi" path="res://assets/visual/placeholders/city/desaturated-layers/c-2.png" id="5_0hmbj"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="7_gc787"]
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="8_gc787"]
 [ext_resource type="Texture2D" uid="uid://de57xb55c6k8n" path="res://assets/visual/tilemaps/test-1.png" id="9_130in"]
-[ext_resource type="Material" uid="uid://du8v75s3bvq3o" path="res://scenes/prologue/tutorial-one/particle_1.tres" id="9_gm85s"]
+[ext_resource type="Material" uid="uid://du8v75s3bvq3o" path="res://scenes/prologue/town/particle_1.tres" id="9_gm85s"]
 [ext_resource type="Texture2D" uid="uid://bad1do8djipn4" path="res://assets/visual/placeholders/city/desaturated-layers/c-4.png" id="10_u6yve"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="13_1mlff"]
 [ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/fonts/NocturneSerifTest-Light.otf" id="16_gm85s"]
