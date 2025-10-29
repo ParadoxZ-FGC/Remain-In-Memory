@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=4 uid="uid://wrin7ux4mc07"]
 
-[ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/prologue/tutorial-two/tutorial_two.gd" id="1_6itxs"]
+[ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/prologue/castle/tutorial_two.gd" id="1_6itxs"]
 [ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_b3vbw"]
 [ext_resource type="Texture2D" uid="uid://4nf1hfqm8fhw" path="res://assets/visual/bg/castle_background2.png" id="2_fct1m"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rocry"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="5_qbwta"]
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="7_6itxs"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="8_fct1m"]
-[ext_resource type="Material" uid="uid://bjcx6ebxx13kf" path="res://scenes/prologue/tutorial-two/particle_2.tres" id="9_yuadt"]
+[ext_resource type="Material" uid="uid://bjcx6ebxx13kf" path="res://scenes/prologue/castle/particle_2.tres" id="9_yuadt"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="11_jyxw7"]
 [ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/mob/mob.tscn" id="11_ra2nw"]
 [ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/fonts/NocturneSerifTest-Light.otf" id="13_uqdrb"]
