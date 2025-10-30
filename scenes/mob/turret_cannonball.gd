@@ -21,6 +21,7 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if (current_state == States.FIRED):
 		position += directionVector * delta
+		$Hitbox.activate(-1)
 
 
 func fire(speed : int, direction : int) -> void:
@@ -28,7 +29,6 @@ func fire(speed : int, direction : int) -> void:
 	timer.timeout.connect(_end_of_life)
 	directionVector = Vector2(speed * direction, 0)
 	visible = true
-	$Hitbox.enabled = true
 	current_state = States.FIRED
 
 

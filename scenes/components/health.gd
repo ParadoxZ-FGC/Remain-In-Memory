@@ -7,7 +7,7 @@ signal health_depleted
 
 @export var max_health: int = 3: set = set_max_health, get = get_max_health  
 @export var immortality: bool = false: set = set_immortality, get = get_immortality  
-@export var immortalityDuration = 1
+@export var immortalityDuration: float = 1
 @export var character_sprite : Node2D
 @export var damage_blink_color := Color(1,1,1,1)
 @export var damage_transition : Tween.TransitionType = Tween.TransitionType.TRANS_LINEAR

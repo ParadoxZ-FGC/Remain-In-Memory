@@ -127,10 +127,10 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 func _on_health_health_depleted() -> void:
 	current_state = States.DYING
+	$Hitbox.disable()
 	state_changed.emit()
 	var anim = $AnimatedMobSprite
 	anim.stop()
-	$Hitbox.free()
 	#boom.play()
 	anim.offset = Vector2(0, -8)
 	anim.sprite_frames.set_animation_loop("die", false)
