@@ -6,12 +6,14 @@ signal updated
 @export var lower = Vector2(2500, 1080)
 @export var speed = 1000
 @export var jump_speed = 800
-@export var coyote: float = 0.03
+@export var coyote: float = 0.03 #How long the player has to input a jump after walking off of a platform. Makes the game feel better.
 @export var max_walk_speed = 300
 @export var max_run_speed = 500
-@export var stop_force = 8000
-@export var drag_force = 500
+@export var stop_force = 8000 #friction
+@export var drag_force = 500 #friction, but for air
 @export var stone: AudioStreamPlayer2D
+@export var knockbackTime: float = 0.05 #How long the player is in knockback, may move to takeKnockback function.
+var inKnockback: bool = false #Disables most movement.
 
 var coyoteTimer: float = 0
 var movementDirection: bool = true #rightward = true
@@ -48,7 +50,8 @@ func _text_over(): #Signals when dialogue file is done
 
 func _physics_process(delta):
 	if currentDialogue != dialogueTypes.Talking: #If player isnt in dialogue do normal player activities
-		move(delta) #NOTICE Movement has been move(ment)d to a function
+		if not inKnockback:
+			move(delta) #NOTICE Movement has been move(ment)d to a function
 		if Input.is_action_just_pressed("attack"):
 			$Sword.attack()
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
@@ -72,11 +75,16 @@ func _physics_process(delta):
 		$AnimatedPlayerSprite.stop()
 	
 	if velocity.x != 0:
-		$AnimatedPlayerSprite.animation = "walk"
-		$AnimatedPlayerSprite.flip_v = false
-		$AnimatedPlayerSprite.flip_h = velocity.x < 0
-		if $Sword.attacking == false:
-			$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+		if not inKnockback:
+			$AnimatedPlayerSprite.animation = "walk"
+			$AnimatedPlayerSprite.flip_v = false
+			$AnimatedPlayerSprite.flip_h = velocity.x < 0
+			if $Sword.attacking == false:
+				$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+	else:
+		$AnimatedPlayerSprite.animation = "idle"
+	
+	move_and_slide()
 
 func move(delta):
 	movementIntention = Input.get_axis("move_left", "move_right")
@@ -99,7 +107,6 @@ func move(delta):
 	
 	velocity.y += gravity * delta
 	
-	move_and_slide()
 	position = position.clamp(upper, lower)
 	
 	if is_on_floor():
@@ -150,3 +157,18 @@ func connect_triggers():
 	var triggers = get_tree().get_nodes_in_group("scene_transitions")
 	for trigger in triggers:
 		trigger.triggered.connect(on_scene_transitions)
+
+##Causes the player to take knockback. Direction values are multiplied by force to determine velocity. Disables most movement for knockbackTime seconds.
+func take_knockback(force: float, direction: Vector2):
+	if not inKnockback:
+		inKnockback = true
+		velocity = Vector2(0,0)
+		print(force)
+		if $AnimatedPlayerSprite.flip_h:
+			velocity.x -= force * direction.x
+		else:
+			velocity.x += force * direction.x
+		velocity.y -= force * direction.y
+		await get_tree().create_timer(knockbackTime).timeout
+		inKnockback = false
+		velocity = Vector2(0,0)

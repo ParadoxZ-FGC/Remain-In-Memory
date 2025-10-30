@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://colfn2h16sy1u"]
+[gd_scene load_steps=33 format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/health.gd" id="2_lvxji"]
@@ -134,6 +134,23 @@ animations = [{
 radius = 4.0
 height = 16.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qek5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qek5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qek5x")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 6.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ugbui"]
 size = Vector2(24, 20)
 
@@ -230,20 +247,22 @@ duration = 0.07
 attackCooldown = 0.25
 multiattack = 3
 comboDuration = 0.5
-comboCooldown = 0.35
+comboCooldown = 0.6
 attackType = 1
 
-[node name="Sprite" type="Sprite2D" parent="Sword"]
+[node name="Sprite" type="AnimatedSprite2D" parent="Sword"]
 visible = false
-position = Vector2(8.999999, 0.99999994)
-rotation = -1.5707964
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("5_qek5x")
+position = Vector2(11, 1)
+rotation = -1.5708
+scale = Vector2(0.0380078, 0.0416859)
+sprite_frames = SubResource("SpriteFrames_ugbui")
+animation = &"attack"
+frame_progress = 0.862686
 
 [node name="Hitbox1" parent="Sword" instance=ExtResource("12_fm80t")]
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
-hitboxType = 1
+knockback = true
 layers = 582
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/Hitbox1"]
@@ -254,12 +273,6 @@ shape = SubResource("RectangleShape2D_ugbui")
 [node name="RayCast2D" type="RayCast2D" parent="Sword/Hitbox1"]
 position = Vector2(-14.666667, -6.4516134)
 target_position = Vector2(24, 7.6909225e-07)
-collision_mask = 2
-collide_with_areas = true
-
-[node name="Knockback Direction" type="Marker2D" parent="Sword"]
-position = Vector2(-2, -1.0000002)
-scale = Vector2(1, 1.0000001)
 
 [node name="Hurtbox" parent="." instance=ExtResource("12_gx1jg")]
 layers = 8
