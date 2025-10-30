@@ -292,7 +292,7 @@ script = ExtResource("1_c2o0r")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("character_sprite")]
 script = ExtResource("2_feath")
-max_health = 2
+immortalityDuration = 0.01
 character_sprite = NodePath("../AnimatedMobSprite")
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
@@ -322,7 +322,6 @@ visible = false
 shape = SubResource("CapsuleShape2D_nnm6l")
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_feath")]
-visible = false
 monitoring = false
 layers = 64
 
@@ -330,7 +329,6 @@ layers = 64
 shape = SubResource("CapsuleShape2D_fhx6o")
 
 [node name="Hitbox" parent="." instance=ExtResource("5_kk3ds")]
-visible = false
 monitorable = false
 layers = 8
 
@@ -356,7 +354,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_kk3ds")
 
 [node name="Hitbox" parent="Cannonball" instance=ExtResource("5_kk3ds")]
-enabled = false
 layers = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cannonball/Hitbox"]
