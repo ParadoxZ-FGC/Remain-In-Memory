@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://colfn2h16sy1u"]
+[gd_scene load_steps=29 format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/health.gd" id="2_lvxji"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://snpu574qvx7o" path="res://scenes/components/dialogue/DialogueHandler.tscn" id="3_ugbui"]
 [ext_resource type="Texture2D" uid="uid://dtppk3y1nys6t" path="res://assets/visual/character/king-Sheet.png" id="4_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://btl5acaji4pe0" path="res://assets/visual/character/nail.jpg" id="5_qek5x"]
-[ext_resource type="Texture2D" uid="uid://b2phenkurvvky" path="res://assets/visual/character/The_Knight_Idle.webp" id="6_fcs02"]
 [ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="9_5gtgg"]
 [ext_resource type="Script" uid="uid://v5svl3mpw3jj" path="res://scenes/player/health_ui.gd" id="9_fm80t"]
 [ext_resource type="Texture2D" uid="uid://2356anoxvhp" path="res://assets/visual/UI/hearts/h-e.png" id="9_je7p5"]
@@ -21,18 +20,6 @@ resource_local_to_scene = true
 shader = ExtResource("3_gx1jg")
 shader_parameter/blink_color = Color(1, 1, 1, 1)
 shader_parameter/blink_intensity = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uf5tr"]
-atlas = ExtResource("4_5gtgg")
-region = Rect2(0, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lgqa7"]
-atlas = ExtResource("4_5gtgg")
-region = Rect2(448, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ydkj"]
-atlas = ExtResource("4_5gtgg")
-region = Rect2(0, 96, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h17s1"]
 atlas = ExtResource("4_5gtgg")
@@ -70,38 +57,6 @@ region = Rect2(448, 96, 64, 96)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uf5tr")
-}],
-"loop": true,
-"name": &"Attack1",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_fcs02")
-}],
-"loop": true,
-"name": &"Attack2",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lgqa7")
-}],
-"loop": true,
-"name": &"Attack3",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8ydkj")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_h17s1")
 }, {
 "duration": 1.0,
@@ -130,12 +85,27 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u08bn"]
-radius = 4.0
-height = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcs02"]
+size = Vector2(5, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qek5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qek5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qek5x")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 6.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ugbui"]
-size = Vector2(24, 20)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcs02"]
 radius = 4.0
@@ -164,11 +134,11 @@ material = SubResource("ShaderMaterial_ugbui")
 position = Vector2(0, -1.5)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_6v243")
-animation = &"idle"
-autoplay = "idle"
+animation = &"walk"
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_u08bn")
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_fcs02")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_gmlin")
@@ -227,41 +197,30 @@ texture = ExtResource("9_5gtgg")
 
 [node name="Sword" parent="." instance=ExtResource("10_gx1jg")]
 duration = 0.07
-attackCooldown = 0.25
-multiattack = 3
-comboDuration = 0.5
-comboCooldown = 0.35
-attackType = 1
+cooldown = 0.75
 
-[node name="Sprite" type="Sprite2D" parent="Sword"]
+[node name="sprite" type="AnimatedSprite2D" parent="Sword"]
 visible = false
-position = Vector2(8.999999, 0.99999994)
-rotation = -1.5707964
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("5_qek5x")
+position = Vector2(11, 1)
+rotation = -1.5708
+scale = Vector2(0.0380078, 0.0416859)
+sprite_frames = SubResource("SpriteFrames_ugbui")
+animation = &"attack"
+frame_progress = 0.862686
 
-[node name="Hitbox1" parent="Sword" instance=ExtResource("12_fm80t")]
+[node name="hitbox" parent="Sword" instance=ExtResource("12_fm80t")]
+visible = false
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
-hitboxType = 1
+enabled = false
+knockback = true
 layers = 582
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/Hitbox1"]
-position = Vector2(-2.666667, 0)
-scale = Vector2(1, 1.0000002)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/hitbox"]
 shape = SubResource("RectangleShape2D_ugbui")
 
-[node name="RayCast2D" type="RayCast2D" parent="Sword/Hitbox1"]
-position = Vector2(-14.666667, -6.4516134)
-target_position = Vector2(24, 7.6909225e-07)
-collision_mask = 2
-collide_with_areas = true
-
-[node name="Knockback Direction" type="Marker2D" parent="Sword"]
-position = Vector2(-2, -1.0000002)
-scale = Vector2(1, 1.0000001)
-
 [node name="Hurtbox" parent="." instance=ExtResource("12_gx1jg")]
+visible = false
 layers = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

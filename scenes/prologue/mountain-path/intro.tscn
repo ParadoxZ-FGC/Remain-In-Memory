@@ -2,8 +2,8 @@
 
 [ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="1_cg11o"]
 [ext_resource type="Texture2D" uid="uid://de57xb55c6k8n" path="res://assets/visual/tilemaps/test-1.png" id="1_sxaqu"]
-[ext_resource type="Script" uid="uid://cg1ftmb3deny0" path="res://scenes/prologue/tutorial-one/intro.gd" id="1_tou0t"]
-[ext_resource type="Material" uid="uid://cxscbwdlfdcbp" path="res://scenes/prologue/tutorial-one/particle_i.tres" id="1_x54yq"]
+[ext_resource type="Script" uid="uid://cg1ftmb3deny0" path="res://scenes/prologue/mountain-path/intro.gd" id="1_tou0t"]
+[ext_resource type="Material" uid="uid://cxscbwdlfdcbp" path="res://scenes/prologue/mountain-path/particle_i.tres" id="1_x54yq"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="2_h4h7o"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="3_mg604"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="5_x54yq"]

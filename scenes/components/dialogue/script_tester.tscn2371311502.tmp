@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://v6othncymlcc"]
+
+[ext_resource type="Script" uid="uid://bmgwgurgclk8m" path="res://xml_reader.gd" id="1_3ubrj"]
+
+[node name="Script Tester" type="Node"]
+script = ExtResource("1_3ubrj")
