@@ -197,13 +197,17 @@ texture = ExtResource("9_5gtgg")
 
 [node name="Sword" parent="." instance=ExtResource("10_gx1jg")]
 duration = 0.07
-cooldown = 0.75
+attackCooldown = 0.1
+multiattack = 3
+comboDuration = 0.5
+comboCooldown = 0.5
+attackType = 1
 
 [node name="sprite" type="AnimatedSprite2D" parent="Sword"]
 visible = false
-position = Vector2(11, 1)
+position = Vector2(11.000001, 1)
 rotation = -1.5708
-scale = Vector2(0.0380078, 0.0416859)
+scale = Vector2(0.039786927, 0.0436372)
 sprite_frames = SubResource("SpriteFrames_ugbui")
 animation = &"attack"
 frame_progress = 0.862686
@@ -212,12 +216,19 @@ frame_progress = 0.862686
 visible = false
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
-enabled = false
-knockback = true
 layers = 582
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/hitbox"]
 shape = SubResource("RectangleShape2D_ugbui")
+
+[node name="RayCast2D" type="RayCast2D" parent="Sword/hitbox"]
+position = Vector2(-14.666667, 0)
+scale = Vector2(1.3333334, 6.4516134)
+target_position = Vector2(19, 0)
+collision_mask = 2
+
+[node name="Knockback Direction" type="Marker2D" parent="Sword"]
+position = Vector2(-1, 0)
 
 [node name="Hurtbox" parent="." instance=ExtResource("12_gx1jg")]
 visible = false

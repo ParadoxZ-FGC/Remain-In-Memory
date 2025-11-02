@@ -109,7 +109,7 @@ func attack():
 				hitbox = hitboxes[comboCounter]
 			comboCounter += 1
 			if comboCounter >= multiattack:
-				withinCombo = false
+				comboTimer = 0
 			else:
 				comboTimer = comboDuration
 		else:
