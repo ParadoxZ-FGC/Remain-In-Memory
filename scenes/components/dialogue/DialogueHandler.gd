@@ -19,6 +19,7 @@ var response_options : Dictionary
 var next_segment : String
 
 @onready var typingTimer := $typingTimer
+@onready var audio := $AudioStreamPlayer
 
 
 func _ready():
@@ -36,6 +37,7 @@ func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text
 	next_segment = next_seg
 	response_options = responses.duplicate()
 	var headshot_path := "res://assets/visual/speaker_headshots/"
+	var voice_path := "res://assets/audio/speaker_voices/"
 	if side == "left":
 		working_dialog = $LeftSideDialog
 		working_text = $LeftSideDialog/HBoxContainer/Text
@@ -52,7 +54,12 @@ func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text
 	
 	if working_speaker != null:
 		headshot_path = headshot_path + speaker + "/" + emotion + ".png"
+		voice_path = voice_path + speaker + "/" + emotion + ".wav"
 		working_speaker.texture = load(headshot_path)
+	else:
+		voice_path = voice_path + "generic.wav"
+	
+	audio.stream = AudioStreamWAV.load_from_file(voice_path)
 	
 	var regex = RegEx.new()
 	regex.compile("\\[.*?\\]")
@@ -85,6 +92,7 @@ func update_message(message: String) -> void:
 	if not visible: #If the dialogue box isn't visible, make it so.
 		visible = true
 	typingTimer.start() #Start the character typing timer
+	audio.play()
 
 
 func _on_typing_timer_timeout() -> void: #Every time_between_characters seconds
@@ -94,7 +102,7 @@ func _on_typing_timer_timeout() -> void: #Every time_between_characters seconds
 	else:
 		fullVis = true #Otherwise, the text is all written
 		typingTimer.stop()
-		await EventBus.continue_dialogue
+		await EventBus.interact
 		working_dialog.visible = false
 		talking_accelerated = false
 		if !response_options.is_empty():
@@ -105,7 +113,7 @@ func _on_typing_timer_timeout() -> void: #Every time_between_characters seconds
 			$RightSideDialog.visible = false
 			$GenericDialog.visible = false
 			EventBus.swap_control_state.emit()
-			EventBus.finish_cutscene.emit()
+			EventBus.finish_dialogue.emit(DialogueManager.current_scene)
 		EventBus.dialogue_segment_finished.emit(next_segment)
 		emit_signal("finished") #TODO probably vestigal
 

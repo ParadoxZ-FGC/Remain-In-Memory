@@ -679,7 +679,7 @@ sources/2 = SubResource("TileSetAtlasSource_6itxs")
 sources/0 = SubResource("TileSetAtlasSource_ra2nw")
 sources/6 = SubResource("TileSetAtlasSource_jyxw7")
 
-[node name="Castle" type="Node2D"]
+[node name="Castle" type="Node"]
 script = ExtResource("1_6itxs")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]

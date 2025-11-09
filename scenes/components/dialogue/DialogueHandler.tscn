@@ -242,4 +242,7 @@ text_direction = 3
 [node name="typingTimer" type="Timer" parent="."]
 wait_time = 0.05
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pitch_scale = 0.9
+
 [connection signal="timeout" from="typingTimer" to="." method="_on_typing_timer_timeout"]

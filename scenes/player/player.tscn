@@ -216,6 +216,7 @@ frame_progress = 0.862686
 visible = false
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
+hitboxType = 1
 layers = 582
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/hitbox"]

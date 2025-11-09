@@ -1,5 +1,5 @@
 class_name WorldScene
-extends Node2D
+extends Node
 ## WorldScene should be extended by any scene that the player will be in.
 ##
 ## For functions and variables that all scenes that player is in should have.

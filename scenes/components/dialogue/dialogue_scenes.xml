@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dialogue_scenes>
+	<intro_campfire>
+		<crackles>
+			<speaker>
+				<name />
+				<emotion />
+				<side />
+			</speaker>
+			<message>
+				The campfire crackles and pops. 
+			</message>
+			<player_responses />
+			<next_segment>warmth</next_segment>
+		</crackles>
+		<warmth>
+			<speaker>
+				<name />
+				<emotion />
+				<side />
+			</speaker>
+			<message>
+				It fills you with warmth for your journey ahead. 
+			</message>
+			<player_responses />
+			<next_segment />
+		</warmth>
+	</intro_campfire>
 	<prologue_boss>
 		<boss_greeting>
 			<speaker>

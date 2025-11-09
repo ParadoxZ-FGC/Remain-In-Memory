@@ -27,7 +27,7 @@ var scene_transitions
 var currentDialogue : dialogueTypes = dialogueTypes.None
 var current_player_state : player_states = player_states.User_Controlled
 var interactable : bool = false #Is there something to interact with
-var interactFile : String #INFO Interactable currently only handles dialogue, so this would be the file one reads from
+var interact_scene : String #INFO Interactable currently only handles dialogue, so this would be the file one reads from
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
@@ -37,23 +37,29 @@ var interactFile : String #INFO Interactable currently only handles dialogue, so
 func _ready():
 	health.max_health = PlayerData.maximum_health
 	health.health = PlayerData.current_health
-	EventBus.connect("interact", _on_interactable)
-	EventBus.connect("stopInteract", _off_interactable)
-	EventBus.connect("fileRead", _text_over)
+	EventBus.start_dialogue.connect(_on_dialogue_start)
+	EventBus.finish_dialogue.connect(_text_over)
 	EventBus.swap_control_state.connect(_swap_player_control_state)
+	#EventBus.connect("interaction_available", _on_interactable)
+	#EventBus.connect("interaction_unavailable", _off_interactable)
+	#EventBus.connect("finish_dialogue", _text_over)
 
 
-func _on_interactable(file): #Signals when overlapping interactable
-	interactable = true
-	interactFile = file
+func _on_dialogue_start():
+	currentDialogue = dialogueTypes.Talking
 
 
-func _off_interactable(): #Signals when leaving interactable #BUG/ALERT This will almost definitely cause issues with multiple interactables close enough to eachother to both be overlapped by the player.
-	interactable = false
-	interactFile = ""
+#func _on_interactable(dialogue_scene): #Signals when overlapping interactable
+	#interactable = true
+	#interact_scene = dialogue_scene
 
 
-func _text_over(): #Signals when dialogue file is done
+#func _off_interactable(): #Signals when leaving interactable #BUG/ALERT This will almost definitely cause issues with multiple interactables close enough to eachother to both be overlapped by the player.
+	#interactable = false
+	#interact_scene = ""
+
+
+func _text_over(_cutscene:String): #Signals when dialogue file is done
 	currentDialogue = dialogueTypes.None
 
 
@@ -65,13 +71,13 @@ func _physics_process(delta):
 			$Sword.attack()
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
 			currentDialogue = dialogueTypes.Talking
-			dialogueHandler.openFile(interactFile)
-			dialogueHandler.readFile()
-		
+			DialogueManager.load_dialogue_scene(interact_scene)
+	
 	elif currentDialogue == dialogueTypes.Talking: #If player is in dialogue, only allow interact key which advances it.
 		if Input.is_action_just_pressed("interact"):
-			dialogueHandler.readFile()
-			
+			pass
+			#dialogueHandler.readFile()
+	
 	elif current_player_state == player_states.System_Controlled:
 		move(0, delta)
 	
@@ -109,11 +115,11 @@ func move(movement_vector, delta):
 	else:
 		if movementIntentionDirection != movementDirection:
 			velocity.x -= velocity.x / 8 * 7
-			
+	
 	velocity.x += walk * delta
 	
 	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if (Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled) else clamp(velocity.x, -max_walk_speed, max_walk_speed)
-	 
+	
 	
 	velocity.y += gravity * delta
 	
@@ -152,6 +158,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		
 		if not is_on_floor() and event.is_action_released("jump"):
 			jump_stop()
+		
+	else:
+		if (event.is_action_released("crouch_look_down")):
+			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.2)
+			$PlayerCollisionShape.scale = Vector2(1, 1)
+			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
 
 
 func _on_health_health_depleted() -> void:
