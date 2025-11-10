@@ -8,6 +8,7 @@ extends Area2D
 ##Requires a CollisionShape2D node as a child, as well as a RayCast2D with no collision mask for Melee hitboxes.
 
 ##Currently unused
+@warning_ignore("unused_signal")
 signal impacted
 
 ##Whether or not the hitbox is currently able to scan and interact with hurtboxes. Removed from export as it's not the source of functionality anymore.
@@ -69,8 +70,8 @@ func _ready():
 		
 		ray.set_collision_mask_value(2, true)
 
-func _physics_process(delta: float) -> void:
-	if hitboxType == codeAttackList.Stationary:
+func _physics_process(_delta: float) -> void:
+	if hitboxType == codeAttackList.Stationary and monitoring:
 		activate(-1)
 
 ##Causes the hitbox to scan for overlapping areas. It sorts them by distance and culls any past walls (in the case of Melee hitboxes) and any past the provided pierce count.

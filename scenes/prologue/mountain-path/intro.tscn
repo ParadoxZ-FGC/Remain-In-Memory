@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="2_h4h7o"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="3_mg604"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="5_x54yq"]
-[ext_resource type="PackedScene" uid="uid://cp2nwh0krspaf" path="res://scenes/components/interactable.tscn" id="7_tou0t"]
+[ext_resource type="PackedScene" uid="uid://cp2nwh0krspaf" path="res://scenes/components/dialogue_interactable.tscn" id="7_tou0t"]
 [ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/fonts/NocturneSerifTest-Light.otf" id="7_xliqy"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="8_a45m6"]
 
@@ -164,7 +164,7 @@ gradient = SubResource("Gradient_tou0t")
 fill = 1
 fill_from = Vector2(0.521368, 0.521368)
 
-[node name="Intro" type="Node2D"]
+[node name="Intro" type="Node"]
 script = ExtResource("1_tou0t")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
@@ -253,14 +253,14 @@ limit_bottom = 1900
 
 [node name="Lighting" type="CanvasGroup" parent="."]
 
-[node name="Fire" type="PointLight2D" parent="Lighting"]
+[node name="Campfire" type="PointLight2D" parent="Lighting"]
 position = Vector2(254, 234.49995)
 scale = Vector2(41.875, 32.46875)
 color = Color(0.752941, 0.509804, 0.254902, 1)
 shadow_enabled = true
 texture = ExtResource("2_h4h7o")
 
-[node name="PointLight2D11" type="PointLight2D" parent="Lighting/Fire"]
+[node name="PointLight2D11" type="PointLight2D" parent="Lighting/Campfire"]
 position = Vector2(-1.8149259, 1.4321477)
 scale = Vector2(0.20961581, 0.2999082)
 color = Color(0.752941, 0.509804, 0.254902, 1)
@@ -275,7 +275,7 @@ texture = SubResource("GradientTexture2D_cg11o")
 
 [node name="Interactable" parent="Lighting" instance=ExtResource("7_tou0t")]
 position = Vector2(176, 279)
-file = "res://scenes/prologue/tutorial-one/Dialogue/fire.txt"
+dialogue_scene = "intro_campfire"
 
 [node name="Jump" type="RichTextLabel" parent="."]
 offset_left = 806.0
@@ -311,6 +311,7 @@ position = Vector2(0, -1)
 color = Color(0.295866, 0.295867, 0.295866, 1)
 
 [node name="Pause" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="PauseScreen" parent="Pause" instance=ExtResource("8_a45m6")]
 offset_left = 5.0

@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="8_ym15t"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="10_p66qs"]
 [ext_resource type="Texture2D" uid="uid://bsnkk6p1xguo2" path="res://assets/visual/enemies/boss-idle.png" id="12_lmcfn"]
+[ext_resource type="PackedScene" uid="uid://cp2nwh0krspaf" path="res://scenes/components/dialogue_interactable.tscn" id="12_s4lif"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q2e8l"]
 resource_name = "ground"
@@ -825,10 +826,7 @@ gradient = SubResource("Gradient_q2e8l")
 fill = 1
 fill_from = Vector2(0.521368, 0.521368)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_q2e8l"]
-b = Vector2(0, -500)
-
-[node name="Throne Room" type="Node2D"]
+[node name="Throne Room" type="Node"]
 script = ExtResource("1_q2e8l")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
@@ -936,6 +934,7 @@ color = Color(0.306923, 0.306923, 0.306923, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("10_p66qs")]
+visible = false
 offset_left = 1.0
 offset_right = 1.0
 size_flags_horizontal = 4
@@ -950,17 +949,13 @@ position = Vector2(60, 900)
 [node name="Right" type="Marker2D" parent="BossBoundary"]
 position = Vector2(1740, 900)
 
-[node name="BossTrigger" type="Area2D" parent="."]
-position = Vector2(651, 960)
-collision_layer = 0
-collision_mask = 8
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BossTrigger"]
-shape = SubResource("SegmentShape2D_q2e8l")
-
 [node name="BossSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(1380, 856)
 gizmo_extents = 25.0
 
-[connection signal="body_entered" from="BossTrigger" to="." method="_on_boss_trigger_body_entered"]
+[node name="BossCutscene" parent="." instance=ExtResource("12_s4lif")]
+position = Vector2(648, 704)
+scale = Vector2(1, 25)
+dialogue_scene = "prologue_boss"
+type = 1
+oneshot = true

@@ -442,7 +442,7 @@ fill_to = Vector2(0, 0)
 gradient = SubResource("Gradient_x65u3")
 use_hdr = true
 
-[node name="Town" type="Node2D"]
+[node name="Town" type="Node"]
 script = ExtResource("1_n3noj")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]

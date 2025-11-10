@@ -2,6 +2,7 @@ extends Node
 
 
 var dialogue_scenes : Dictionary
+var current_scene : String
 var scene_segments : Dictionary
 var speaker_name : String
 var speaker_emotion : String
@@ -27,6 +28,7 @@ func _ready() -> void:
 
 
 func load_dialogue_scene(scene_name : String) -> void:
+	current_scene = scene_name
 	EventBus.swap_control_state.emit()
 	scene_segments.clear()
 	var parser = XMLParser.new()
