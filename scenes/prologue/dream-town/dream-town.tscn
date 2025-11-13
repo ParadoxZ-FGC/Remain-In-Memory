@@ -1,7 +1,7 @@
-[gd_scene load_steps=30 format=4 uid="uid://bcs6yplsgedtw"]
+[gd_scene load_steps=25 format=4 uid="uid://bcs6yplsgedtw"]
 
 [ext_resource type="Script" uid="uid://c30i32liqr01v" path="res://scenes/prologue/dream-town/dream-town.gd" id="1_crvkx"]
-[ext_resource type="AudioStream" uid="uid://bacdle7hewxdd" path="res://assets/audio/bgm/Town.mp3" id="2_x7kos"]
+[ext_resource type="AudioStream" uid="uid://rs76aliu3uy6" path="res://assets/audio/bgm/Town-Variant2.mp3" id="2_crvkx"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="3_56y30"]
 [ext_resource type="Texture2D" uid="uid://el662e7dqqae" path="res://assets/visual/placeholders/city/desaturated-layers/c-0.png" id="4_y6gku"]
 [ext_resource type="Texture2D" uid="uid://bf4ci8surcvng" path="res://assets/visual/placeholders/city/desaturated-layers/c-1.png" id="5_0yaam"]
@@ -420,33 +420,11 @@ gradient = SubResource("Gradient_q2e8l")
 fill = 1
 fill_from = Vector2(0.521368, 0.521368)
 
-[sub_resource type="Gradient" id="Gradient_x65u3"]
-colors = PackedColorArray(1, 1, 1, 0, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gm85s"]
-gradient = SubResource("Gradient_x65u3")
-use_hdr = true
-
-[sub_resource type="Gradient" id="Gradient_gm85s"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.54099, 0.54099, 0.54099, 0.47451)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_x65u3"]
-gradient = SubResource("Gradient_gm85s")
-fill = 2
-fill_from = Vector2(0.529915, 0.521368)
-fill_to = Vector2(0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_130in"]
-gradient = SubResource("Gradient_x65u3")
-use_hdr = true
-
 [node name="Town" type="Node2D"]
 script = ExtResource("1_crvkx")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_x7kos")
+stream = ExtResource("2_crvkx")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
@@ -586,30 +564,12 @@ text = "Shift / Left Trigger to run"
 horizontal_alignment = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(1, 0.7555533, 0.79897684, 1)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="LeftG" type="Sprite2D" parent="CanvasModulate"]
-visible = false
-position = Vector2(183, 584)
-rotation = -3.1415882
-scale = Vector2(6.0625, 18.6562)
-texture = SubResource("GradientTexture2D_gm85s")
-
-[node name="MiddleG" type="Sprite2D" parent="CanvasModulate"]
-position = Vector2(1495, 612)
-scale = Vector2(47.3125, 20.0938)
-texture = SubResource("GradientTexture2D_x65u3")
-
-[node name="RightG" type="Sprite2D" parent="CanvasModulate"]
-visible = false
-position = Vector2(2660, 589.5)
-scale = Vector2(12.9219, 18.8281)
-texture = SubResource("GradientTexture2D_130in")
-
 [node name="Foreground" type="Node2D" parent="."]
+visible = false
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
