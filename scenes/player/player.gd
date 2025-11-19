@@ -90,7 +90,7 @@ func _physics_process(delta):
 		$AnimatedPlayerSprite.play()
 	else: 
 		stone.stop()
-		$AnimatedPlayerSprite.stop()
+		$AnimatedPlayerSprite.animation = "idle"
 	
 	if velocity.x != 0 and not inKnockback:
 		$AnimatedPlayerSprite.animation = "walk"
