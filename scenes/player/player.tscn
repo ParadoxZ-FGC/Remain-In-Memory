@@ -55,6 +55,11 @@ region = Rect2(448, 96, 64, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6v243"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h17s1")
