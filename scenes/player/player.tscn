@@ -155,8 +155,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ugbui"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcs02"]
-radius = 4.0
-height = 16.0
+radius = 3.0
+height = 10.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("stone")]
 collision_layer = 8
@@ -279,10 +279,10 @@ collision_mask = 2
 position = Vector2(-1, 0)
 
 [node name="Hurtbox" parent="." instance=ExtResource("12_gx1jg")]
-visible = false
 layers = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_fcs02")
 debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
 
