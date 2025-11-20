@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bcs6yplsgedtw"]
+[gd_scene load_steps=24 format=4 uid="uid://bcs6yplsgedtw"]
 
 [ext_resource type="Script" uid="uid://c30i32liqr01v" path="res://scenes/prologue/dream-town/dream-town.gd" id="1_crvkx"]
 [ext_resource type="AudioStream" uid="uid://rs76aliu3uy6" path="res://assets/audio/bgm/Town-Variant2.mp3" id="2_crvkx"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="10_23ced"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="11_4ws4v"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="12_nuyh6"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/fonts/NocturneSerifTest-Light.otf" id="13_jwy52"]
 [ext_resource type="Texture2D" uid="uid://bad1do8djipn4" path="res://assets/visual/placeholders/city/desaturated-layers/c-4.png" id="14_46rou"]
 [ext_resource type="Material" uid="uid://brkmmfw433ie1" path="res://scenes/prologue/dream-town/particle_1.tres" id="15_6kmxp"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="16_sc5lq"]
@@ -553,15 +552,6 @@ position = Vector2(1472.0002, 305.49982)
 scale = Vector2(50.000008, 37.39062)
 energy = 0.6
 texture = SubResource("GradientTexture2D_4r36o")
-
-[node name="Move" type="RichTextLabel" parent="."]
-offset_left = 420.0
-offset_top = 955.0
-offset_right = 651.0
-offset_bottom = 984.0
-theme_override_fonts/normal_font = ExtResource("13_jwy52")
-text = "Shift / Left Trigger to run"
-horizontal_alignment = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(1, 0.7555533, 0.79897684, 1)
