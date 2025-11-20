@@ -1,12 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgeqk4w1l7onc"]
+[gd_scene load_steps=3 format=3 uid="uid://dgeqk4w1l7onc"]
 
-[ext_resource type="Script" uid="uid://cusomnsuun1p0" path="res://scenes/components/world_scene.gd" id="1_eyflq"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_xo6ye"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="3_xo6ye"]
 
-[node name="WorldScene" type="Node2D"]
-script = ExtResource("1_eyflq")
-metadata/_custom_type_script = "uid://cusomnsuun1p0"
+[node name="WorldScene" type="Node"]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 

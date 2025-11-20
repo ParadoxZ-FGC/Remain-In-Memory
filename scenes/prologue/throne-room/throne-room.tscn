@@ -1,7 +1,7 @@
-[gd_scene load_steps=24 format=4 uid="uid://1atkktyrh75f"]
+[gd_scene load_steps=43 format=4 uid="uid://1atkktyrh75f"]
 
+[ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="1_p66qs"]
 [ext_resource type="Script" uid="uid://b1mi2jg3167qe" path="res://scenes/prologue/throne-room/throne_room.gd" id="1_q2e8l"]
-[ext_resource type="AudioStream" uid="uid://caqnyldc876kc" path="res://assets/audio/bgm/april-showers.mp3" id="1_uy2l1"]
 [ext_resource type="Texture2D" uid="uid://dx3b0bsnjkemr" path="res://assets/visual/bg/throne_room_2.png" id="1_ym15t"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rbw3j"]
 [ext_resource type="Texture2D" uid="uid://ecvwd682hypb" path="res://assets/visual/bg/glass.png" id="4_q2e8l"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="7_35vq6"]
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="8_ym15t"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/UI Menus/Pause Screen/Pause Screen.tscn" id="10_p66qs"]
+[ext_resource type="Script" uid="uid://cithvlwbecwyr" path="res://scenes/components/shakable_camera.gd" id="11_s4lif"]
 [ext_resource type="Texture2D" uid="uid://bsnkk6p1xguo2" path="res://assets/visual/enemies/boss-idle.png" id="12_lmcfn"]
+[ext_resource type="PackedScene" uid="uid://cp2nwh0krspaf" path="res://scenes/components/dialogue_interactable.tscn" id="12_s4lif"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q2e8l"]
 resource_name = "ground"
@@ -816,6 +818,51 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 72
 sources/0 = SubResource("TileSetAtlasSource_s4lif")
 
+[sub_resource type="Curve" id="Curve_q2618"]
+_data = [Vector2(0.3472222, 1), 0.0, 0.0, 0, 0, Vector2(0.6527778, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hk0ty"]
+curve = SubResource("Curve_q2618")
+
+[sub_resource type="Gradient" id="Gradient_lu21n"]
+offsets = PackedFloat32Array(0.2736842, 0.55789477)
+colors = PackedColorArray(0, 0, 0, 1, 0.61960787, 0.003921569, 0.9019608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s72rq"]
+gradient = SubResource("Gradient_lu21n")
+
+[sub_resource type="Curve" id="Curve_3teuq"]
+_data = [Vector2(0.25, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_05cdv"]
+curve = SubResource("Curve_3teuq")
+
+[sub_resource type="Curve" id="Curve_dojx7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.7549019, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5gdry"]
+curve = SubResource("Curve_dojx7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_32l12"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -1, 0)
+direction = Vector3(0, -1, 0)
+spread = 30.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+radial_velocity_min = 249.99997
+radial_velocity_max = 499.99997
+radial_velocity_curve = SubResource("CurveTexture_05cdv")
+gravity = Vector3(0, -392, 0)
+scale_min = 1.5
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_5gdry")
+color_ramp = SubResource("GradientTexture1D_s72rq")
+alpha_curve = SubResource("CurveTexture_hk0ty")
+
 [sub_resource type="Gradient" id="Gradient_q2e8l"]
 offsets = PackedFloat32Array(0, 0.49333334, 0.86)
 colors = PackedColorArray(0.32884318, 0.24211574, 1, 1, 0.061154462, 0.06542372, 0.17642733, 1, 0, 0, 0, 1)
@@ -825,15 +872,62 @@ gradient = SubResource("Gradient_q2e8l")
 fill = 1
 fill_from = Vector2(0.521368, 0.521368)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_q2e8l"]
-b = Vector2(0, -500)
+[sub_resource type="Curve" id="Curve_s4lif"]
+_data = [Vector2(0.3472222, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[node name="Throne Room" type="Node2D"]
+[sub_resource type="CurveTexture" id="CurveTexture_uqav2"]
+curve = SubResource("Curve_s4lif")
+
+[sub_resource type="Gradient" id="Gradient_q2618"]
+offsets = PackedFloat32Array(0.2736842, 0.55789477)
+colors = PackedColorArray(0.6213058, 0.003037628, 0.9012143, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hk0ty"]
+gradient = SubResource("Gradient_q2618")
+
+[sub_resource type="Curve" id="Curve_lmcfn"]
+_data = [Vector2(0.25, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s4lif"]
+curve = SubResource("Curve_lmcfn")
+
+[sub_resource type="Curve" id="Curve_uqav2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.7549019, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q2618"]
+curve = SubResource("Curve_uqav2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hk0ty"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -1000, 0)
+emission_shape_scale = Vector3(1.5, 0.1, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 500.0
+emission_ring_inner_radius = 500.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+radial_velocity_min = -1000.0
+radial_velocity_max = -500.0
+radial_velocity_curve = SubResource("CurveTexture_s4lif")
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_q2618")
+color_ramp = SubResource("GradientTexture1D_hk0ty")
+alpha_curve = SubResource("CurveTexture_uqav2")
+
+[node name="Throne Room" type="Node"]
 script = ExtResource("1_q2e8l")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_uy2l1")
-volume_db = -10.0
+stream = ExtResource("1_p66qs")
 autoplay = true
 bus = &"Music"
 
@@ -867,12 +961,25 @@ tile_set = SubResource("TileSet_uqav2")
 position = Vector2(955, 794)
 texture = ExtResource("12_lmcfn")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="MoroseThrone"]
+emitting = false
+amount = 100
+texture = ExtResource("7_35vq6")
+lifetime = 3.0
+one_shot = true
+visibility_rect = Rect2(-250, -750, 500, 1000)
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_32l12")
+
 [node name="Player" parent="." instance=ExtResource("2_rbw3j")]
 position = Vector2(-45, 892)
 scale = Vector2(8, 8)
 upper = Vector2(-250, 0)
 lower = Vector2(1920, 1080)
 jump_speed = 1000
+to_scene_on_death = false
+death_scene = "res://scenes/title-screen/title-screen.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)
@@ -880,6 +987,7 @@ limit_left = -250
 limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
+script = ExtResource("11_s4lif")
 
 [node name="Lighting" type="CanvasGroup" parent="."]
 metadata/_edit_group_ = true
@@ -951,17 +1059,35 @@ position = Vector2(60, 900)
 [node name="Right" type="Marker2D" parent="BossBoundary"]
 position = Vector2(1740, 900)
 
-[node name="BossTrigger" type="Area2D" parent="."]
-position = Vector2(651, 960)
-collision_layer = 0
-collision_mask = 8
+[node name="BossSpawnLocation" type="Marker2D" parent="."]
+position = Vector2(1088, 832)
+gizmo_extents = 25.0
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BossTrigger"]
-shape = SubResource("SegmentShape2D_q2e8l")
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BossSpawnLocation"]
+emitting = false
+amount = 50
+texture = ExtResource("7_35vq6")
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.1
+visibility_rect = Rect2(-750, -750, 1500, 1000)
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_hk0ty")
 
-[node name="BossSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(1380, 856)
-gizmo_extents = 25.0
+[node name="BossCutscene" parent="." instance=ExtResource("12_s4lif")]
+position = Vector2(648, 704)
+scale = Vector2(1, 25)
+dialogue_scene = "prologue_boss"
+type = 1
+oneshot = true
 
-[connection signal="body_entered" from="BossTrigger" to="." method="_on_boss_trigger_body_entered"]
+[node name="ColorRect" type="ColorRect" parent="."]
+top_level = true
+visibility_layer = 7
+z_index = 10
+offset_left = -256.0
+offset_right = 1984.0
+offset_bottom = 1216.0
+color = Color(0, 0, 0, 0)
