@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://rheabj0dgrdu"]
+
+[ext_resource type="Script" uid="uid://dpqny71vw7km3" path="res://scenes/prologue/end/prologue_end.gd" id="1_5w3wv"]
+
+[node name="PrologueEnd" type="Node"]
+script = ExtResource("1_5w3wv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="ToBeContinued" type="RichTextLabel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 448.0
+offset_top = 384.0
+offset_right = -512.0
+offset_bottom = -504.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 100
+text = "To be continued..."
+horizontal_alignment = 1
+vertical_alignment = 1
+text_direction = 1
+
+[node name="InAct1" type="RichTextLabel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 976.0
+offset_top = 576.0
+offset_right = -624.0
+offset_bottom = -376.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "...in Act One"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_direction = 1
+
+[node name="PressK" type="RichTextLabel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 672.0
+offset_right = -640.0
+offset_bottom = -344.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+text = "Press K"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_direction = 1

@@ -690,8 +690,13 @@ bus = &"Music"
 [node name="Background" type="Node2D" parent="."]
 texture_filter = 1
 
-[node name="Parallax2D" type="Parallax2D" parent="Background"]
-autoscroll = Vector2(0, -100)
+[node name="ChangeScene" type="Area2D" parent="SceneTransitions" groups=["scene_transitions"]]
+position = Vector2(1536, -256)
+collision_layer = 0
+collision_mask = 520
+script = ExtResource("11_jyxw7")
+path = "res://scenes/prologue/throne-room/throne-room.tscn"
+metadata/_edit_group_ = true
 
 [node name="BG" type="Sprite2D" parent="Background/Parallax2D"]
 position = Vector2(0, -1120)
@@ -715,6 +720,7 @@ tile_set = SubResource("TileSet_4wb8h")
 position = Vector2(128, 920)
 scale = Vector2(8, 8)
 upper = Vector2(0, -1500)
+death_scene = "res://scenes/title-screen/title-screen.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)
@@ -943,7 +949,6 @@ position = Vector2(-79, 4)
 shape = SubResource("RectangleShape2D_v5bv6")
 
 [node name="Pause" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PauseScreen" parent="Pause" instance=ExtResource("14_uqdrb")]
 anchors_preset = 0

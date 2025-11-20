@@ -243,6 +243,7 @@ tile_set = SubResource("TileSet_1plli")
 position = Vector2(108, 222)
 scale = Vector2(8, 8)
 lower = Vector2(6300, 2000)
+death_scene = "res://scenes/title-screen/title-screen.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)
@@ -311,7 +312,6 @@ position = Vector2(0, -1)
 color = Color(0.295866, 0.295867, 0.295866, 1)
 
 [node name="Pause" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PauseScreen" parent="Pause" instance=ExtResource("8_a45m6")]
 offset_left = 5.0

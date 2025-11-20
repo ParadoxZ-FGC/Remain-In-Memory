@@ -30,6 +30,7 @@ func fire(speed : int, direction : int) -> void:
 	directionVector = Vector2(speed * direction, 0)
 	visible = true
 	current_state = States.FIRED
+	$Hitbox.enable()
 
 
 func _end_of_life() -> void:
