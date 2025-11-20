@@ -43,6 +43,7 @@ func _ready():
 	#EventBus.connect("interaction_available", _on_interactable)
 	#EventBus.connect("interaction_unavailable", _off_interactable)
 	#EventBus.connect("finish_dialogue", _text_over)
+	$AnimatedPlayerSprite.play()
 
 
 func _on_dialogue_start():
@@ -87,10 +88,10 @@ func _physics_process(delta):
 				stone.play()
 		else: 
 			stone.stop()
-		$AnimatedPlayerSprite.play()
+		
 	else: 
 		stone.stop()
-		$AnimatedPlayerSprite.stop()
+		$AnimatedPlayerSprite.animation = "idle"
 	
 	if velocity.x != 0 and not inKnockback:
 		$AnimatedPlayerSprite.animation = "walk"
@@ -99,6 +100,11 @@ func _physics_process(delta):
 		if $Sword.attacking == false:
 			$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
 	
+	if velocity.x != 0 and Input.is_action_pressed("run"):
+		$AnimatedPlayerSprite.speed_scale = 2
+	else:
+		$AnimatedPlayerSprite.speed_scale = 1
+		
 	move_and_slide()
 
 
