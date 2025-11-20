@@ -1,18 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0idldrfge7b8"]
+[gd_scene load_steps=9 format=3 uid="uid://c0idldrfge7b8"]
 
 [ext_resource type="Texture2D" uid="uid://1nkarpwg6gm2" path="res://assets/visual/bg/title.jpg" id="1_3swuw"]
 [ext_resource type="AudioStream" uid="uid://b1h8cttteoyit" path="res://assets/audio/bgm/Opening-1.mp3" id="1_lr85p"]
 [ext_resource type="Material" uid="uid://dgu3mqx0lkg25" path="res://scenes/title-screen/title-screen.tres" id="2_88tdx"]
 [ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title-screen/buttons.gd" id="2_aptra"]
 [ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/UI Menus/Settings/Settings.tscn" id="3_3swuw"]
-[ext_resource type="Texture2D" uid="uid://c4bolb5awkkg2" path="res://assets/visual/UI/play.png" id="3_n0f26"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="4_pcs22"]
-[ext_resource type="Texture2D" uid="uid://b5xmvsq7ewt3u" path="res://assets/visual/UI/settings.png" id="5_88tdx"]
-[ext_resource type="Texture2D" uid="uid://dy2a058jf327l" path="res://assets/visual/UI/exit.png" id="6_4xtok"]
 [ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/fonts/NocturneSerifTest-Light.otf" id="9_4xtok"]
 [ext_resource type="FontFile" uid="uid://c7dc7sfjmpx8c" path="res://assets/visual/fonts/Silkscreen-Regular.ttf" id="9_q5m6g"]
 
 [node name="Title Screen" type="Node2D"]
+texture_filter = 1
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_lr85p")
@@ -49,30 +47,39 @@ shadow_enabled = true
 texture = ExtResource("4_pcs22")
 
 [node name="PlayButton" type="Button" parent="."]
+texture_filter = 1
 offset_left = 860.0
 offset_top = 600.0
 offset_right = 1060.0
 offset_bottom = 680.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-icon = ExtResource("3_n0f26")
+theme_override_fonts/font = ExtResource("9_4xtok")
+theme_override_font_sizes/font_size = 38
+text = "PLAY"
 flat = true
 script = ExtResource("2_aptra")
 
 [node name="SettingsButton" type="MenuButton" parent="."]
+texture_filter = 1
 offset_left = 860.0
-offset_top = 700.0
+offset_top = 705.0
 offset_right = 1060.0
-offset_bottom = 780.0
+offset_bottom = 785.0
+theme_override_fonts/font = ExtResource("9_4xtok")
+theme_override_font_sizes/font_size = 38
 toggle_mode = false
-icon = ExtResource("5_88tdx")
+text = "SETTINGS"
 
 [node name="ExitButton" type="Button" parent="."]
+texture_filter = 1
 offset_left = 860.0
-offset_top = 800.0
+offset_top = 810.0
 offset_right = 1060.0
-offset_bottom = 880.0
-icon = ExtResource("6_4xtok")
+offset_bottom = 890.0
+theme_override_fonts/font = ExtResource("9_4xtok")
+theme_override_font_sizes/font_size = 38
+text = "EXIT"
 flat = true
 script = ExtResource("2_aptra")
 
