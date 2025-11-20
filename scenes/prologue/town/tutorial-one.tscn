@@ -514,6 +514,7 @@ tile_set = SubResource("TileSet_wy4lw")
 [node name="Player" parent="." instance=ExtResource("5_qpapv")]
 position = Vector2(242, 863)
 scale = Vector2(8, 8)
+death_scene = "res://scenes/title-screen/title-screen.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)
@@ -590,7 +591,6 @@ metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="LeftG" type="Sprite2D" parent="CanvasModulate"]
-visible = false
 position = Vector2(183, 584)
 rotation = -3.1415882
 scale = Vector2(6.0625, 18.6562)
@@ -602,7 +602,6 @@ scale = Vector2(47.3125, 20.0938)
 texture = SubResource("GradientTexture2D_x65u3")
 
 [node name="RightG" type="Sprite2D" parent="CanvasModulate"]
-visible = false
 position = Vector2(2660, 589.5)
 scale = Vector2(12.9219, 18.8281)
 texture = SubResource("GradientTexture2D_130in")

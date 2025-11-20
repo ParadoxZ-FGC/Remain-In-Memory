@@ -82,7 +82,7 @@
 			<speaker>
 				<name>traveler</name>
 				<emotion>neutral</emotion>
-				<side>right</side>
+				<side>left</side>
 			</speaker>
 			<message>
 				I take it you're the king?
@@ -97,7 +97,7 @@
 				<side>right</side>
 			</speaker>
 			<message>
-				Who... am I?[br]This is my castle...
+				Who... am [i]I[/i]?[br]This is [b]my[/b] castle...
 			</message>
 			<player_responses />
 			<next_segment>intimidate_nomad</next_segment>
@@ -109,7 +109,7 @@
 				<side>right</side>
 			</speaker>
 			<message>
-				This is my castle...
+				This is [i]my[/i] castle...
 			</message>
 			<player_responses />
 			<next_segment>intimidate_nomad_alt</next_segment>
@@ -124,7 +124,7 @@
 				[outline_color=black][color=indigo][b][font_size=50][shake rate=25.0 level=15 connected=1]WHO DO YOU THINK I AM?![/shake][/font_size][/b][/color][/outline_color]
 			</message>
 			<player_responses />
-			<next_segment>shimmy</next_segment>
+			<next_segment />
 		</intimidate_nomad>
 		<intimidate_nomad_alt>
 			<speaker>
@@ -136,21 +136,51 @@
 				[outline_color=black][color=indigo][b][font_size=50][shake rate=25.0 level=15 connected=1]WHO ELSE WOULD I BE?![/shake][/font_size][/b][/color][/outline_color]
 			</message>
 			<player_responses />
-			<next_segment>shimmy</next_segment>
+			<next_segment />
 		</intimidate_nomad_alt>
-		<shimmy>
+	</prologue_boss>
+	<prologue_boss_attacks>
+		<prepare>
 			<speaker>
-				<name>traveler</name>
+				<name>morose</name>
 				<emotion>neutral</emotion>
-				<side>left</side>
+				<side>right</side>
 			</speaker>
 			<message>
-				[wave amp=50.0 freq=10.0 connected=1]Shimmy shimmy yay, shimmy yay, shimmy ya (drank)[br]Swalla-la-la (drank)[br]Swalla-la-la (swalla-la-la)[br]Swalla-la-la[/wave]
+				[shake rate=15.0 level=5 connected=1]Prepare thyself![/shake]
 			</message>
 			<player_responses />
 			<next_segment />
-		</shimmy>
-	</prologue_boss>
+		</prepare>
+	</prologue_boss_attacks>
+	<prologue_boss_wins>
+		<prepare>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side/ >
+			</speaker>
+			<message>
+				[shake rate=15.0 level=5 connected=1]Know your place...[/shake]
+			</message>
+			<player_responses />
+			<next_segment />
+		</prepare>
+	</prologue_boss_wins>
+	<prologue_boss_losses>
+		<prepare>
+			<speaker>
+				<name>morose</name>
+				<emotion>aggressive</emotion>
+				<side/ >
+			</speaker>
+			<message>
+				[shake rate=20.0 level=10 connected=1]How... dare... you...[/shake]
+			</message>
+			<player_responses />
+			<next_segment />
+		</prepare>
+	</prologue_boss_losses>
 	<town_chatter>
 		<chat_one>
 			<speaker>

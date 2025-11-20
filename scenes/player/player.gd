@@ -17,8 +17,10 @@ enum player_states {User_Controlled, System_Controlled}
 @export var drag_force = 500
 @export var stone: AudioStreamPlayer2D
 @export var knockbackTime: float = 0.05 #Determines how long the player is in knockback, @TODO might move to the knockback function itself
-var inKnockback: bool = false #Whether or not the player is in knockback, limits movement.
+@export var to_scene_on_death := true
+@export var death_scene : String
 
+var inKnockback: bool = false #Whether or not the player is in knockback, limits movement.
 var coyoteTimer: float = 0
 var movementDirection: bool = true #rightward = true
 var movementIntentionDirection: bool = true
@@ -31,7 +33,9 @@ var interact_scene : String #INFO Interactable currently only handles dialogue, 
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
+@onready var hearts := $"Health UI"
 @onready var dialogueHandler = $DialogueHandler
+@onready var player_sprite := $AnimatedPlayerSprite
 
 
 func _ready():
@@ -167,9 +171,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func _on_health_health_depleted() -> void:
-	var title_screen = preload("res://scenes/title-screen/title-screen.tscn")
-	PlayerData.current_health = PlayerData.maximum_health
-	get_tree().call_deferred("change_scene_to_packed", title_screen)
+	if to_scene_on_death:
+		var scene = load(death_scene)
+		PlayerData.current_health = PlayerData.maximum_health
+		get_tree().call_deferred("change_scene_to_packed", scene)
+		
+	else:
+		EventBus.player_dies.emit()
 
 
 func on_scene_transitions() -> void:
