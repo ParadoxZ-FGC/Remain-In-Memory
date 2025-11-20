@@ -690,11 +690,12 @@ bus = &"Music"
 [node name="SceneTransitions" type="Node2D" parent="."]
 
 [node name="ChangeScene" type="Area2D" parent="SceneTransitions" groups=["scene_transitions"]]
-position = Vector2(1246, -265)
+position = Vector2(1536, -256)
 collision_layer = 0
 collision_mask = 520
 script = ExtResource("11_jyxw7")
 path = "res://scenes/prologue/throne-room/throne-room.tscn"
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
 shape = SubResource("RectangleShape2D_v5bv6")
@@ -721,6 +722,7 @@ tile_set = SubResource("TileSet_4wb8h")
 position = Vector2(128, 920)
 scale = Vector2(8, 8)
 upper = Vector2(0, -1500)
+death_scene = "res://scenes/title-screen/title-screen.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)
@@ -892,7 +894,6 @@ position = Vector2(6.10352e-05, 3.05176e-05)
 color = Color(0.306923, 0.306923, 0.306923, 1)
 
 [node name="Pause" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PauseScreen" parent="Pause" instance=ExtResource("14_uqdrb")]
 anchors_preset = 0

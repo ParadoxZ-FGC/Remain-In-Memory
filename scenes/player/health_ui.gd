@@ -5,6 +5,16 @@ extends CanvasLayer
 @onready var currentHeart = get_child_count() - 1
 
 
+func enable() -> void:
+	for heart in hearts:
+		heart.visible = true
+
+
+func disable() -> void:
+	for heart in hearts:
+		heart.visible = false
+
+
 func _on_health_health_changed(diff) -> void:
 	
 	diff = absi(diff)

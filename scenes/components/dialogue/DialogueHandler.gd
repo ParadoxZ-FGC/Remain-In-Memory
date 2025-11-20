@@ -56,6 +56,8 @@ func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text
 		headshot_path = headshot_path + speaker + "/" + emotion + ".png"
 		voice_path = voice_path + speaker + "/" + emotion + ".wav"
 		working_speaker.texture = load(headshot_path)
+	elif speaker != null and emotion != null:
+		voice_path = voice_path + speaker + "/" + emotion + ".wav"
 	else:
 		voice_path = voice_path + "generic.wav"
 	

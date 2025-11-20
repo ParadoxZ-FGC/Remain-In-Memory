@@ -12,6 +12,7 @@ signal dialogue_segment_finished(next_segment:String)
 signal dialogue_segment_parsed(speaker:String, _emotion:String, side:String, dialogue_text:String, responses:Dictionary, next_segment:String)
 signal finish_dialogue(finished_cutscene:String)
 signal swap_control_state
+signal player_dies
 @warning_ignore_restore("unused_signal")
 
 func _unhandled_key_input(event: InputEvent) -> void:

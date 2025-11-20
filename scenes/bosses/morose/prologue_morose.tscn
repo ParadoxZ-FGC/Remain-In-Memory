@@ -257,7 +257,7 @@ script = ExtResource("1_eo4y3")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("character_sprite")]
 script = ExtResource("2_vd3w4")
-max_health = 30
+max_health = 15
 character_sprite = NodePath("../BossSprite")
 damage_blink_color = Color(0, 0, 0, 0.78431374)
 damage_transition = 5
@@ -298,7 +298,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_eo4y3")
 
 [node name="Hitbox" parent="BossSword" instance=ExtResource("4_a1hcm")]
-enabled = false
 damage = 2
 layers = 8
 
