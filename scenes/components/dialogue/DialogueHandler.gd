@@ -16,7 +16,7 @@ var working_text : RichTextLabel
 var working_text_length : int
 var working_speaker : TextureRect
 var response_options : Dictionary
-var next_segment : String
+var next_scene : Dictionary
 
 @onready var typingTimer := $typingTimer
 @onready var audio := $AudioStreamPlayer
@@ -32,17 +32,17 @@ func _ready():
 	typingTimer.wait_time = time_between_characters
 
 
-func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text:String, responses:Dictionary, next_seg:String) -> void: # TODO: Add general information dialog (Player, other person, information)
+func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text:String, responses:Dictionary, next:Dictionary) -> void: # TODO: Add general information dialog (Player, other person, information)
 	typingTimer.wait_time = time_between_characters
-	next_segment = next_seg
+	next_scene = next
 	response_options = responses.duplicate()
-	print("designate_dialog start")
-	print("headshots")
+	#print("designate_dialog start")
+	#print("headshots")
 	var headshot_path := "res://assets/visual/speaker_headshots/"
-	dirReader(headshot_path)
-	print("voices")
+	#dirReader(headshot_path)
+	#print("voices")
 	var voice_path := "res://assets/audio/speaker_voices/"
-	dirReader(voice_path)
+	#dirReader(voice_path)
 	
 	if side == "left":
 		working_dialog = $LeftSideDialog
@@ -69,7 +69,6 @@ func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text
 	
 	var loaded = ResourceLoader.load(voice_path, "AudioStreamWAV")
 	audio.stream = loaded
-	
 	
 	var regex = RegEx.new()
 	regex.compile("\\[.*?\\]")
@@ -118,13 +117,13 @@ func _on_typing_timer_timeout() -> void: #Every time_between_characters seconds
 		if !response_options.is_empty():
 			designate_responses()
 			return
-		if next_segment.is_empty():
+		if next_scene.is_empty():
 			$LeftSideDialog.visible = false
 			$RightSideDialog.visible = false
 			$GenericDialog.visible = false
 			EventBus.swap_control_state.emit()
-			EventBus.finish_dialogue.emit(DialogueManager.current_scene)
-		EventBus.dialogue_segment_finished.emit(next_segment)
+			EventBus.finish_dialogue.emit(DialogueManager.dialogue_scenes.find_key(DialogueManager.current_cutscene))
+		EventBus.dialogue_segment_finished.emit(next_scene.duplicate())
 		emit_signal("finished") #TODO probably vestigal
 
 
@@ -134,7 +133,7 @@ func _accelerate_reading_speed():
 
 func _choice_made(choice: String):
 	$ResponseDialog.visible = false
-	EventBus.dialogue_segment_finished.emit(choice)
+	EventBus.dialogue_segment_finished.emit(DialogueManager.current_cutscene.get(choice))
 
 
 func _unhandled_key_input(event: InputEvent) -> void:

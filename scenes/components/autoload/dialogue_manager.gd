@@ -1,193 +1,69 @@
 extends Node
 
 
-var dialogue_scenes_bytes : PackedByteArray
-var dialogue_scenes : Dictionary
-var current_scene : String
-var scene_segments : Dictionary
+@export var dialogue_scenes : Dictionary
+@export var current_cutscene : Dictionary
 var speaker_name : String
 var speaker_emotion : String
 var speaker_side : String
-var segment_dialogue : String
+var scene_dialogue : String
 var responses : Dictionary
-var next_segment : String
+var next_scene : Dictionary
 
 
 func _ready() -> void:
-	
-	var dir = DirAccess.open("res://silly")
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir():
-				print("Found directory: " + file_name)
-			else:
-				print("Found file: " + file_name)
-			file_name = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
-	
 	EventBus.dialogue_segment_finished.connect(_on_dialogue_segment_finished)
-	var bytes_raw = FileAccess.get_file_as_bytes("res://silly/dialogue_scenes.txt")
-	print("Bytes - Raw: ", bytes_raw)
-	var err = FileAccess.get_open_error()
-	print("Error: ", error_string(err))
-	var parser = XMLParser.new()
-	dialogue_scenes_bytes = bytes_raw
-	parser.open_buffer(dialogue_scenes_bytes)
-	while parser.read() != ERR_FILE_EOF:
-		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
-			if parser.get_node_name() == "dialogue_scenes":
-				continue
-			else:
-				dialogue_scenes[parser.get_node_name()] = parser.get_node_offset()
-				parser.skip_section()
-				
-	#print(dialogue_scenes)
-	#EventBus.dialogue_segment_finished.connect(_on_dialogue_segment_finished)
-	##dialogue_scenes_xml = FileAccess.open("res://scenes/components/dialogue/dialogue_scenes.txt", FileAccess.READ)
-	##dialogue_scenes_xml = preload("res://scenes/components/dialogue/dialogue_scenes.txt")
-	##parser.open("res://scenes/components/dialogue/dialogue_scenes.txt")
-	#dialogue_scenes_bytes = FileAccess.get_file_as_bytes("res://scenes/components/dialogue/dialogue_scenes.txt")
-	#print(dialogue_scenes_bytes)
-	#var parser = XMLParser.new()
-	#parser.open_buffer(dialogue_scenes_bytes)
-	#while parser.read() != ERR_FILE_EOF:
-		#if parser.get_node_type() == XMLParser.NODE_ELEMENT:
-			#if parser.get_node_name() == "dialogue_scenes":
-				#continue
-			#else:
-				#dialogue_scenes[parser.get_node_name()] = parser.get_node_offset()
-				#parser.skip_section()
-				#
-	##print(dialogue_scenes)
+	var file = FileAccess.open("res://scenes/components/dialogue/dialogue_scenes.json", FileAccess.READ)
+	var _err = FileAccess.get_open_error()
+	#print("Error: ", error_string(err))
+	var json = JSON.new()
+	json.parse(file.get_as_text())
+	dialogue_scenes = json.data
 
 
-func load_dialogue_scene(scene_name : String) -> void:
-	current_scene = scene_name
+func load_dialogue_scene(cutscene_name : String) -> void:
 	EventBus.swap_control_state.emit()
-	scene_segments.clear()
-	var parser = XMLParser.new()
-	#parser.open("res://scenes/components/dialogue/dialogue_scenes.txt")
-	parser.open_buffer(dialogue_scenes_bytes)
-	parser.seek(dialogue_scenes.get(scene_name))
-	while parser.read() != ERR_FILE_EOF and !(parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.get_node_name() == scene_name):
-		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
-			if parser.get_node_name() == scene_name:
-				continue
-			else:
-				scene_segments[parser.get_node_name()] = parser.get_node_offset()
-				parser.skip_section()
-				
-	#print(scene_segments, "\n")
-	dialog_builder(scene_segments.keys()[0])
+	current_cutscene.clear()
+	current_cutscene.assign(dialogue_scenes.get(cutscene_name))
+	
+	#print("Cutscene Name: ", cutscene_name)
+	#print(current_cutscene, "\n")
+	dialog_builder(current_cutscene.values()[0])
 
 
-func dialog_builder(segment_name : String) -> void:
-	#print("Segment Name: ", segment_name)
-	next_segment = ""
-	var parser = XMLParser.new()
-	#parser.open("res://scenes/components/dialogue/dialogue_scenes.txt")
-	parser.open_buffer(dialogue_scenes_bytes)
-	parser.seek(scene_segments.get(segment_name))
-	while parser.read() != ERR_FILE_EOF and !(parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.get_node_name() == segment_name):
-		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
-			#print("Element: ", parser.get_node_name())
-			match parser.get_node_name():
-				"speaker":
-					while parser.read() != ERR_FILE_EOF and !(parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.get_node_name() == "speaker"):
-						if parser.get_node_type() == XMLParser.NODE_ELEMENT:
-							match parser.get_node_name():
-								"name":
-									if parser.is_empty():
-										speaker_name = ""
-									else:
-										if parser.read() != ERR_FILE_EOF and parser.get_node_type() == XMLParser.NODE_TEXT:
-											speaker_name = parser.get_node_data().strip_escapes()
-										else:
-											print("uh oh")
-								"emotion":
-									if parser.is_empty():
-										speaker_emotion = ""
-									else:
-										if parser.read() != ERR_FILE_EOF and parser.get_node_type() == XMLParser.NODE_TEXT:
-											speaker_emotion = parser.get_node_data().strip_escapes()
-										else:
-											print("uh oh!")
-								"side":
-									if parser.is_empty():
-										speaker_side = ""
-									else:
-										if parser.read() != ERR_FILE_EOF and parser.get_node_type() == XMLParser.NODE_TEXT:
-											speaker_side = parser.get_node_data().strip_escapes()
-										else:
-											print("uh oh!!")
-				"message":
-					if parser.read() != ERR_FILE_EOF and parser.get_node_type() == XMLParser.NODE_TEXT:
-						segment_dialogue = parser.get_node_data().strip_escapes()
-					else:
-						print("uh oh!!!")
-				"player_responses":
-					responses.clear()
-					if !parser.is_empty():
-						#print("There's responses")
-						var response_key = ""
-						var response_value = ""
-						while parser.read() != ERR_FILE_EOF and !(parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.get_node_name() == "player_responses"):
-							if parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
-								continue
-							
-							if parser.get_node_type() == XMLParser.NODE_ELEMENT:
-								response_key = parser.get_node_name()
-								#print("key found - ", response_key)
-							elif parser.get_node_type() == XMLParser.NODE_TEXT and !parser.get_node_data().strip_escapes().is_empty():
-								response_value = parser.get_node_data().strip_escapes()
-								#print("value found - ", response_value)
-								
-							if !response_key.is_empty() and !response_value.is_empty():
-								responses[response_key] = response_value
-								#print("pair added - ", responses)
-								response_key = ""
-								response_value = ""
-				"next_segment":
-					if !parser.is_empty():
-						if parser.read() != ERR_FILE_EOF and parser.get_node_type() == XMLParser.NODE_TEXT:
-							next_segment = parser.get_node_data().strip_escapes()
-						else:
-							print("uh oh!!!!!")
+func dialog_builder(scene : Dictionary) -> void:
+	#print("Scene Name: ", current_cutscene.find_key(scene))
+	next_scene.clear()
 	
-	#print(speaker_name)
-	#print(speaker_emotion)
-	#print(segment_dialogue)
-	#print(next_segment)
-	#print(responses)
-	#print("\n\n")
+	var speaker : Dictionary = scene.get("speaker")
+	speaker_name = speaker.get("name")
+	speaker_emotion = speaker.get("emotion")
+	speaker_side = speaker.get("side")
 	
-	EventBus.dialogue_segment_parsed.emit(speaker_name, speaker_emotion, speaker_side, segment_dialogue, responses, next_segment)
+	scene_dialogue = scene.get("message")
+	
+	responses.clear()
+	var player_responses = scene.get("player_responses")
+	if typeof(player_responses) == TYPE_DICTIONARY:
+		responses.assign(player_responses)
+	
+	next_scene.clear()
+	var next = scene.get("next_scene")
+	if next != "":
+		next_scene.assign(current_cutscene.get(scene.get("next_scene")))
+	
+	#print("Name: ", speaker_name)
+	#print("Emotion: ", speaker_emotion)
+	#print("Side: ", speaker_side)
+	#print("Dialogue: ", scene_dialogue)
+	#print("Next Scene: ", scene.get("next_scene"), "\t", next_scene)
+	#print("Responses: ", responses)
+	#print("\n")
+	
+	EventBus.dialogue_segment_parsed.emit(speaker_name, speaker_emotion, speaker_side, scene_dialogue, responses, next_scene)
 	responses.clear()
 
 
-func _on_dialogue_segment_finished(next_up: String) -> void:
+func _on_dialogue_segment_finished(next_up: Dictionary) -> void:
 	if !next_up.is_empty():
 		dialog_builder(next_up)
-
-
-	#while parser.read() != ERR_FILE_EOF and !(parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.get_node_name() == scene_name):
-		#var message = ""
-		#if parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
-			#message += "/"
-		#
-		#if parser.get_node_type() == XMLParser.NODE_ELEMENT or parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
-			#message += parser.get_node_name()
-		#
-		#elif parser.get_node_type() == XMLParser.NODE_TEXT:
-			#if (!parser.get_node_data().strip_escapes().is_empty()):
-				#message += parser.get_node_data().strip_edges()
-			#else:
-				#continue
-		#
-		#else:
-			#message += "[ELSE]"
-		#
-		#print(message)
