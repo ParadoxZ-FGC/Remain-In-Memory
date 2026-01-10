@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckhrqpfehxdbq"]
+
+[ext_resource type="AudioStream" uid="uid://djeiqjbqxny8k" path="res://assets/audio/speaker_voices/traveler/neutral.wav" id="1_b17er"]
+[ext_resource type="AudioStream" uid="uid://6p6wbkijvqkv" path="res://assets/audio/speaker_voices/morose/neutral.wav" id="2_h2i6a"]
+[ext_resource type="AudioStream" uid="uid://dcginwrt5we7" path="res://assets/audio/speaker_voices/morose/aggressive.wav" id="3_2rcxr"]
+[ext_resource type="AudioStream" uid="uid://dybg63pg1sa68" path="res://assets/audio/speaker_voices/generic.wav" id="4_5kwxt"]
+
+[node name="Voices" type="Node"]
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Neutral" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("1_b17er")
+
+[node name="Morose" type="Node" parent="."]
+
+[node name="Neutral" type="AudioStreamPlayer" parent="Morose"]
+stream = ExtResource("2_h2i6a")
+
+[node name="Aggressive" type="AudioStreamPlayer" parent="Morose"]
+stream = ExtResource("3_2rcxr")
+
+[node name="Generic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5kwxt")

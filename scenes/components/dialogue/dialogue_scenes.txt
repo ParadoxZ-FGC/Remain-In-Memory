@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue_scenes>
+	<intro_campfire>
+		<crackles>
+			<speaker>
+				<name />
+				<emotion />
+				<side />
+			</speaker>
+			<message>
+				The campfire crackles and pops. 
+			</message>
+			<player_responses />
+			<next_segment>warmth</next_segment>
+		</crackles>
+		<warmth>
+			<speaker>
+				<name />
+				<emotion />
+				<side />
+			</speaker>
+			<message>
+				It fills you with warmth for your journey ahead. 
+			</message>
+			<player_responses />
+			<next_segment />
+		</warmth>
+	</intro_campfire>
+	<prologue_boss>
+		<boss_greeting>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				Ah...[br]Hello... weary traveler...
+			</message>
+			<player_responses />
+			<next_segment>nomad_question_1</next_segment>
+		</boss_greeting>
+		<nomad_question_1>
+			<speaker>
+				<name>traveler</name>
+				<emotion>neutral</emotion>
+				<side>left</side>
+			</speaker>
+			<message>
+				What is this place?
+			</message>
+			<player_responses />
+			<next_segment>boss_response_1</next_segment>
+		</nomad_question_1>
+		<boss_response_1>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				This...?[br]This is my castle...
+			</message>
+			<player_responses>
+				<nomad_stupid_question>Who are you?</nomad_stupid_question>
+				<nomad_guess>I take it you're the king?</nomad_guess>
+			</player_responses>
+			<next_segment>nomad_stupid_question</next_segment>
+		</boss_response_1>
+		<nomad_stupid_question>
+			<speaker>
+				<name>traveler</name>
+				<emotion>neutral</emotion>
+				<side>left</side>
+			</speaker>
+			<message>
+				Who are you?
+			</message>
+			<player_responses />
+			<next_segment>boss_response_2</next_segment>
+		</nomad_stupid_question>
+		<nomad_guess>
+			<speaker>
+				<name>traveler</name>
+				<emotion>neutral</emotion>
+				<side>left</side>
+			</speaker>
+			<message>
+				I take it you're the king?
+			</message>
+			<player_responses />
+			<next_segment>boss_response_3</next_segment>
+		</nomad_guess>
+		<boss_response_2>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				Who... am [i]I[/i]?[br]This is [b]my[/b] castle...
+			</message>
+			<player_responses />
+			<next_segment>intimidate_nomad</next_segment>
+		</boss_response_2>
+		<boss_response_3>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				This is [i]my[/i] castle...
+			</message>
+			<player_responses />
+			<next_segment>intimidate_nomad_alt</next_segment>
+		</boss_response_3>
+		<intimidate_nomad>
+			<speaker>
+				<name>morose</name>
+				<emotion>aggressive</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				[outline_color=black][color=indigo][b][font_size=50][shake rate=25.0 level=15 connected=1]WHO DO YOU THINK I AM?![/shake][/font_size][/b][/color][/outline_color]
+			</message>
+			<player_responses />
+			<next_segment />
+		</intimidate_nomad>
+		<intimidate_nomad_alt>
+			<speaker>
+				<name>morose</name>
+				<emotion>aggressive</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				[outline_color=black][color=indigo][b][font_size=50][shake rate=25.0 level=15 connected=1]WHO ELSE WOULD I BE?![/shake][/font_size][/b][/color][/outline_color]
+			</message>
+			<player_responses />
+			<next_segment />
+		</intimidate_nomad_alt>
+	</prologue_boss>
+	<prologue_boss_attacks>
+		<prepare>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side>right</side>
+			</speaker>
+			<message>
+				[shake rate=15.0 level=5 connected=1]Prepare thyself![/shake]
+			</message>
+			<player_responses />
+			<next_segment />
+		</prepare>
+	</prologue_boss_attacks>
+	<prologue_boss_wins>
+		<prepare>
+			<speaker>
+				<name>morose</name>
+				<emotion>neutral</emotion>
+				<side/ >
+			</speaker>
+			<message>
+				[shake rate=15.0 level=5 connected=1]Know your place...[/shake]
+			</message>
+			<player_responses />
+			<next_segment />
+		</prepare>
+	</prologue_boss_wins>
+	<prologue_boss_losses>
+		<prepare>
+			<speaker>
+				<name>morose</name>
+				<emotion>aggressive</emotion>
+				<side/ >
+			</speaker>
+			<message>
+				[shake rate=20.0 level=10 connected=1]How... dare... you...[/shake]
+			</message>
+			<player_responses />
+			<next_segment />
+		</prepare>
+	</prologue_boss_losses>
+	<town_chatter>
+		<chat_one>
+			<speaker>
+				<name />
+				<emotion />
+				<side />
+			</speaker>
+			<message>
+				I love vegetable beef barley soup!
+			</message>
+			<player_responses />
+			<next_segment />
+		</chat_one>
+	</town_chatter>
+</dialogue_scenes>

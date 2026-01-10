@@ -1,6 +1,7 @@
 extends Node
 
 
+var dialogue_scenes_bytes : PackedByteArray
 var dialogue_scenes : Dictionary
 var current_scene : String
 var scene_segments : Dictionary
@@ -13,9 +14,28 @@ var next_segment : String
 
 
 func _ready() -> void:
+	
+	var dir = DirAccess.open("res://silly")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				print("Found directory: " + file_name)
+			else:
+				print("Found file: " + file_name)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	
 	EventBus.dialogue_segment_finished.connect(_on_dialogue_segment_finished)
+	var bytes_raw = FileAccess.get_file_as_bytes("res://silly/dialogue_scenes.txt")
+	print("Bytes - Raw: ", bytes_raw)
+	var err = FileAccess.get_open_error()
+	print("Error: ", error_string(err))
 	var parser = XMLParser.new()
-	parser.open("res://scenes/components/dialogue/dialogue_scenes.xml")
+	dialogue_scenes_bytes = bytes_raw
+	parser.open_buffer(dialogue_scenes_bytes)
 	while parser.read() != ERR_FILE_EOF:
 		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
 			if parser.get_node_name() == "dialogue_scenes":
@@ -25,6 +45,23 @@ func _ready() -> void:
 				parser.skip_section()
 				
 	#print(dialogue_scenes)
+	#EventBus.dialogue_segment_finished.connect(_on_dialogue_segment_finished)
+	##dialogue_scenes_xml = FileAccess.open("res://scenes/components/dialogue/dialogue_scenes.txt", FileAccess.READ)
+	##dialogue_scenes_xml = preload("res://scenes/components/dialogue/dialogue_scenes.txt")
+	##parser.open("res://scenes/components/dialogue/dialogue_scenes.txt")
+	#dialogue_scenes_bytes = FileAccess.get_file_as_bytes("res://scenes/components/dialogue/dialogue_scenes.txt")
+	#print(dialogue_scenes_bytes)
+	#var parser = XMLParser.new()
+	#parser.open_buffer(dialogue_scenes_bytes)
+	#while parser.read() != ERR_FILE_EOF:
+		#if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			#if parser.get_node_name() == "dialogue_scenes":
+				#continue
+			#else:
+				#dialogue_scenes[parser.get_node_name()] = parser.get_node_offset()
+				#parser.skip_section()
+				#
+	##print(dialogue_scenes)
 
 
 func load_dialogue_scene(scene_name : String) -> void:
@@ -32,7 +69,8 @@ func load_dialogue_scene(scene_name : String) -> void:
 	EventBus.swap_control_state.emit()
 	scene_segments.clear()
 	var parser = XMLParser.new()
-	parser.open("res://scenes/components/dialogue/dialogue_scenes.xml")
+	#parser.open("res://scenes/components/dialogue/dialogue_scenes.txt")
+	parser.open_buffer(dialogue_scenes_bytes)
 	parser.seek(dialogue_scenes.get(scene_name))
 	while parser.read() != ERR_FILE_EOF and !(parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.get_node_name() == scene_name):
 		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
@@ -50,7 +88,8 @@ func dialog_builder(segment_name : String) -> void:
 	#print("Segment Name: ", segment_name)
 	next_segment = ""
 	var parser = XMLParser.new()
-	parser.open("res://scenes/components/dialogue/dialogue_scenes.xml")
+	#parser.open("res://scenes/components/dialogue/dialogue_scenes.txt")
+	parser.open_buffer(dialogue_scenes_bytes)
 	parser.seek(scene_segments.get(segment_name))
 	while parser.read() != ERR_FILE_EOF and !(parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.get_node_name() == segment_name):
 		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
