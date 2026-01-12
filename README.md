@@ -34,5 +34,3 @@ Programmers : Luke, Lucien, and Jake "the Rundler"
 BGM : Kevin
 
 SFX: Dax
-
-
