@@ -1,4 +1,4 @@
-@icon("res://assets/visual/dialogue_bubble.png")
+@icon("res://assets/visual/ui/dialogue_bubble.png")
 class_name DialogueInteractable
 extends Interactable
 

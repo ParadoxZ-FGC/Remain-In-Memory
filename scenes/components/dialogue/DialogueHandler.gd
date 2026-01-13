@@ -16,7 +16,7 @@ var working_text : RichTextLabel
 var working_text_length : int
 var working_speaker : TextureRect
 var response_options : Dictionary
-var next_segment : String
+var next_scene : Dictionary
 
 @onready var typingTimer := $typingTimer
 @onready var audio := $AudioStreamPlayer
@@ -32,12 +32,18 @@ func _ready():
 	typingTimer.wait_time = time_between_characters
 
 
-func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text:String, responses:Dictionary, next_seg:String) -> void: # TODO: Add general information dialog (Player, other person, information)
+func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text:String, responses:Dictionary, next:Dictionary) -> void: # TODO: Add general information dialog (Player, other person, information)
 	typingTimer.wait_time = time_between_characters
-	next_segment = next_seg
+	next_scene = next
 	response_options = responses.duplicate()
-	var headshot_path := "res://assets/visual/speaker_headshots/"
-	var voice_path := "res://assets/audio/speaker_voices/"
+	#print("designate_dialog start")
+	#print("headshots")
+	var headshot_path := "res://assets/visual/ui/dialog/headshots/"
+	#dirReader(headshot_path)
+	#print("voices")
+	var voice_path := "res://assets/audio/voices/"
+	#dirReader(voice_path)
+	
 	if side == "left":
 		working_dialog = $LeftSideDialog
 		working_text = $LeftSideDialog/HBoxContainer/Text
@@ -56,12 +62,13 @@ func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text
 		headshot_path = headshot_path + speaker + "/" + emotion + ".png"
 		voice_path = voice_path + speaker + "/" + emotion + ".wav"
 		working_speaker.texture = load(headshot_path)
-	elif speaker != null and emotion != null:
+	elif speaker != "" and emotion != "":
 		voice_path = voice_path + speaker + "/" + emotion + ".wav"
 	else:
 		voice_path = voice_path + "generic.wav"
 	
-	audio.stream = AudioStreamWAV.load_from_file(voice_path)
+	var loaded = ResourceLoader.load(voice_path, "AudioStreamWAV")
+	audio.stream = loaded
 	
 	var regex = RegEx.new()
 	regex.compile("\\[.*?\\]")
@@ -110,13 +117,13 @@ func _on_typing_timer_timeout() -> void: #Every time_between_characters seconds
 		if !response_options.is_empty():
 			designate_responses()
 			return
-		if next_segment.is_empty():
+		if next_scene.is_empty():
 			$LeftSideDialog.visible = false
 			$RightSideDialog.visible = false
 			$GenericDialog.visible = false
 			EventBus.swap_control_state.emit()
-			EventBus.finish_dialogue.emit(DialogueManager.current_scene)
-		EventBus.dialogue_segment_finished.emit(next_segment)
+			EventBus.finish_dialogue.emit(DialogueManager.dialogue_scenes.find_key(DialogueManager.current_cutscene))
+		EventBus.dialogue_segment_finished.emit(next_scene.duplicate())
 		emit_signal("finished") #TODO probably vestigal
 
 
@@ -126,7 +133,7 @@ func _accelerate_reading_speed():
 
 func _choice_made(choice: String):
 	$ResponseDialog.visible = false
-	EventBus.dialogue_segment_finished.emit(choice)
+	EventBus.dialogue_segment_finished.emit(DialogueManager.current_cutscene.get(choice))
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -179,3 +186,18 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	#var line = f.get_line() 
 	#var tagLine = line.split(" ", false, 1) #split into command and text (Ex, the line "LINE Hello" would be split into "LINE" and "Hello", denoting a simple written line
 	#return tagLine
+
+func dirReader(dir_path):
+	var dir = DirAccess.open(dir_path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				print("Found directory: " + file_name)
+				dirReader(dir_path + "/" + file_name)
+			else:
+				print("Found file: " + file_name)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
