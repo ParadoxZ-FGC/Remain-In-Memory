@@ -15,7 +15,7 @@ config/name_localized={
 "la": "Manere Memoria"
 }
 config/version="0.1"
-run/main_scene="res://scenes/title-screen/title-screen.tscn"
+run/main_scene="uid://c0idldrfge7b8"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/fullsize=false

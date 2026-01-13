@@ -38,10 +38,10 @@ func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text
 	response_options = responses.duplicate()
 	#print("designate_dialog start")
 	#print("headshots")
-	var headshot_path := "res://assets/visual/speaker_headshots/"
+	var headshot_path := "res://assets/visual/ui/dialog/headshots/"
 	#dirReader(headshot_path)
 	#print("voices")
-	var voice_path := "res://assets/audio/speaker_voices/"
+	var voice_path := "res://assets/audio/voices/"
 	#dirReader(voice_path)
 	
 	if side == "left":

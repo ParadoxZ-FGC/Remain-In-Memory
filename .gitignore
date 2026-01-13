@@ -3,3 +3,4 @@
 /android/
 
 find . -size +100M | cat >> .gitignore
+*.exe
