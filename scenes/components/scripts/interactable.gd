@@ -1,4 +1,4 @@
-class_name Interactable #INFO Currently only supports dialogue interactions, but I figured I'd make the full class for the future
+class_name Interactable
 extends Node2D
 
 
@@ -6,18 +6,29 @@ enum interaction_type {MANUAL, AUTOMATIC}
 
 @export var type: interaction_type = interaction_type.MANUAL
 @export var oneshot := false
+@export var enabled := true : set = set_enabled
 
-var enabled := true : 
-	set(x):
-		enabled = x
-		detection.set_deferred("monitoring", x)
 var interactable: bool = false
 
 @onready var detection := $Area2D
 
 
+func set_enabled(value : bool):
+	enabled = value
+	if detection != null:
+		detection.set_deferred("monitoring", value)
+
+
 func _ready():
 	EventBus.interact.connect(_on_interaction)
+	ready_additions()
+
+
+## ready_additions() should be overwritten to add additional
+## functionality to _ready().
+## _ready() will call ready_additions()
+func ready_additions() -> void:
+	pass
 
 
 func _on_interaction() -> void:

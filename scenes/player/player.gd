@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name PlayerCharacter
 
 
 signal updated
@@ -196,6 +197,11 @@ func connect_triggers():
 	var triggers = get_tree().get_nodes_in_group("scene_transitions")
 	for trigger in triggers:
 		trigger.triggered.connect(on_scene_transitions)
+	
+	# And doors
+	var doors = get_tree().get_nodes_in_group("doors")
+	for door in doors:
+		door.triggered.connect(on_scene_transitions)
 
 
 func _swap_player_control_state() -> void:

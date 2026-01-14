@@ -27,6 +27,7 @@ config/icon="uid://crqjfspp25kjv"
 PlayerData="*res://scenes/components/autoload/player_data.gd"
 EventBus="*res://scenes/components/autoload/event_bus.gd"
 DialogueManager="*res://scenes/components/autoload/dialogue_manager.gd"
+EnemyManager="*res://scenes/components/autoload/enemy_manager.gd"
 
 [display]
 
@@ -39,6 +40,7 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 scene_transitions=""
+doors="loadzone to change scenes"
 
 [gui]
 

@@ -64,7 +64,7 @@ func _post_cutscene_effects(cutscene:String) -> void:
 		var tweenk = create_tween()
 		tweenk.tween_property($ColorRect, "color", Color(0,0,0,1), 5)
 		await tweenk.finished
-		get_tree().call_deferred("change_scene_to_file", "res://scenes/prologue/end/prologue_end.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/levels/prologue/credits/prologue_end.tscn")
 
 func _on_player_death():
 	EventBus.swap_control_state.emit()

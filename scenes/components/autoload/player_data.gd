@@ -1,4 +1,8 @@
 extends Node
 
-var maximum_health = 6
-var current_health = 6
+# Player stats
+var maximum_health : int = 6
+var current_health : int = 6
+
+# Player data
+var destination : String
