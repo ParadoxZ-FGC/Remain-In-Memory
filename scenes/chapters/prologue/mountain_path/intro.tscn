@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://jt4i8qfjhqs3"]
+[gd_scene load_steps=17 format=4 uid="uid://jt4i8qfjhqs3"]
 
 [ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="1_cg11o"]
 [ext_resource type="Texture2D" uid="uid://de57xb55c6k8n" path="res://assets/visual/tilemaps/earth.png" id="1_sxaqu"]
@@ -6,13 +6,10 @@
 [ext_resource type="Material" uid="uid://cxscbwdlfdcbp" path="res://scenes/chapters/prologue/mountain_path/intro_p.tres" id="1_x54yq"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="2_h4h7o"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="3_mg604"]
-[ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="5_x54yq"]
 [ext_resource type="PackedScene" uid="uid://cp2nwh0krspaf" path="res://scenes/components/dialogue_interactable.tscn" id="7_tou0t"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="7_xliqy"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/UI/fonts/NocturneSerifTest-Light.otf" id="7_xliqy"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/ui/pause_screen/pause_screen.tscn" id="8_a45m6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1rh0"]
-size = Vector2(63, 226)
+[ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="10_qd2mc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a45m6"]
 resource_name = "ground"
@@ -173,20 +170,6 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
-[node name="SceneTransitions" type="Node2D" parent="."]
-position = Vector2(2048, 0)
-
-[node name="ChangeScene" type="Area2D" parent="SceneTransitions" groups=["scene_transitions"]]
-position = Vector2(3929, 1504)
-collision_layer = 0
-collision_mask = 520
-script = ExtResource("5_x54yq")
-path = "res://scenes/chapters/prologue/town/town.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
-position = Vector2(274, 156)
-shape = SubResource("RectangleShape2D_m1rh0")
-
 [node name="BG-Tiles6" type="TileMapLayer" parent="."]
 modulate = Color(0.158473, 0.158472, 0.158472, 1)
 show_behind_parent = true
@@ -249,7 +232,7 @@ death_scene = "res://scenes/title-screen/title-screen.tscn"
 zoom = Vector2(1.6, 1.6)
 limit_left = 0
 limit_top = 0
-limit_right = 6300
+limit_right = 6208
 limit_bottom = 1900
 
 [node name="Lighting" type="CanvasGroup" parent="."]
@@ -320,4 +303,11 @@ offset_right = 5.0
 offset_bottom = 7.0
 metadata/_edit_lock_ = true
 
-[connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]
+[node name="Doors" type="Node2D" parent="."]
+position = Vector2(2048, 0)
+
+[node name="ToTown" parent="Doors" instance=ExtResource("10_qd2mc")]
+position = Vector2(4256, 1792)
+level_scene = "res://scenes/chapters/prologue/town/town.tscn"
+destination = "ToMountain"
+type = 1

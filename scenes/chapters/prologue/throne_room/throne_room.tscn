@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://c56c0ehykru0r"]
+[gd_scene load_steps=44 format=4 uid="uid://c56c0ehykru0r"]
 
 [ext_resource type="Script" uid="uid://b1mi2jg3167qe" path="res://scenes/chapters/prologue/throne_room/throne_room.gd" id="1_q2e8l"]
 [ext_resource type="Texture2D" uid="uid://dx3b0bsnjkemr" path="res://assets/visual/bg/castle/throne_room_2.png" id="1_ym15t"]

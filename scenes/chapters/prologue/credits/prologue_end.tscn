@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://rheabj0dgrdu"]
 
-[ext_resource type="Script" uid="uid://dpqny71vw7km3" path="res://scenes/prologue/end/prologue_end.gd" id="1_5w3wv"]
+[ext_resource type="Script" uid="uid://dpqny71vw7km3" path="res://scenes/chapters/prologue/credits/prologue_end.gd" id="1_vpquh"]
 
 [node name="PrologueEnd" type="Node"]
-script = ExtResource("1_5w3wv")
+script = ExtResource("1_vpquh")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1920.0
