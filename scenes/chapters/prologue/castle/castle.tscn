@@ -1,6 +1,6 @@
-[gd_scene load_steps=23 format=4 uid="uid://wrin7ux4mc07"]
+[gd_scene load_steps=24 format=4 uid="uid://wrin7ux4mc07"]
 
-[ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/levels/prologue/castle/castle.gd" id="1_6itxs"]
+[ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/chapters/prologue/castle/castle.gd" id="1_6itxs"]
 [ext_resource type="AudioStream" uid="uid://4lqi0l2p3x7r" path="res://assets/audio/bgm/CastleDreamv2.mp3" id="2_5ieeb"]
 [ext_resource type="Texture2D" uid="uid://4nf1hfqm8fhw" path="res://assets/visual/bg/castle/castle_background2.png" id="2_fct1m"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rocry"]
@@ -9,11 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="5_qbwta"]
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="7_6itxs"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="8_fct1m"]
-[ext_resource type="Material" uid="uid://bjcx6ebxx13kf" path="res://scenes/levels/prologue/castle/castle_p2.tres" id="9_yuadt"]
+[ext_resource type="Material" uid="uid://bjcx6ebxx13kf" path="res://scenes/chapters/prologue/castle/castle_p2.tres" id="9_yuadt"]
+[ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="11_jyxw7"]
 [ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/enemy/enemy.tscn" id="11_ra2nw"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/UI/fonts/NocturneSerifTest-Light.otf" id="13_uqdrb"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="13_uqdrb"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/ui/pause_screen/pause_screen.tscn" id="14_uqdrb"]
-[ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="15_xdbdx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uqdrb"]
 resource_name = "ground"
@@ -676,6 +676,9 @@ sources/2 = SubResource("TileSetAtlasSource_6itxs")
 sources/0 = SubResource("TileSetAtlasSource_ra2nw")
 sources/6 = SubResource("TileSetAtlasSource_jyxw7")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5bv6"]
+size = Vector2(87, 172)
+
 [node name="Castle" type="Node"]
 script = ExtResource("1_6itxs")
 
@@ -708,8 +711,7 @@ tile_set = SubResource("TileSet_4wb8h")
 [node name="Player" parent="." instance=ExtResource("2_rocry")]
 position = Vector2(128, 920)
 scale = Vector2(8, 8)
-upper = Vector2(-128, -1500)
-lower = Vector2(2628, 1080)
+upper = Vector2(0, -1500)
 death_scene = "res://scenes/title-screen/title-screen.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -924,10 +926,23 @@ process_material = ExtResource("9_yuadt")
 position = Vector2(6.10352e-05, 3.05176e-05)
 color = Color(0.306923, 0.306923, 0.306923, 1)
 
+[node name="SceneTransitions" type="Node2D" parent="."]
+position = Vector2(1751, -1196)
+
+[node name="ChangeScene" type="Area2D" parent="SceneTransitions" groups=["scene_transitions"]]
+position = Vector2(111, -17)
+collision_layer = 0
+collision_mask = 520
+script = ExtResource("11_jyxw7")
+path = "res://scenes/chapters/prologue/throne_room/throne_room.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
+position = Vector2(-79, 4)
+shape = SubResource("RectangleShape2D_v5bv6")
+
 [node name="Pause" type="CanvasLayer" parent="."]
 
 [node name="PauseScreen" parent="Pause" instance=ExtResource("14_uqdrb")]
-visible = false
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -939,16 +954,4 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="Doors" type="Node2D" parent="."]
-
-[node name="ToTown" parent="Doors" instance=ExtResource("15_xdbdx")]
-position = Vector2(80, 992)
-spawn_position = 2
-level_scene = "res://scenes/levels/prologue/town/town.tscn"
-destination = "ToCastle"
-
-[node name="ToThroneRoom" parent="Doors" instance=ExtResource("15_xdbdx")]
-position = Vector2(1776, -1120)
-spawn_position = 1
-level_scene = "res://scenes/levels/prologue/throne_room/throne_room.tscn"
-destination = "ToCastle"
+[connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]
