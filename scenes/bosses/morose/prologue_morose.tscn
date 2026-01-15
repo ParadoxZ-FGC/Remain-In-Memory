@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bnw6kubn7c8t8" path="res://scenes/bosses/morose/scripts/prologue_morose.gd" id="1_eo4y3"]
 [ext_resource type="Texture2D" uid="uid://c1lwelf2mr1i" path="res://assets/visual/placeholders/prologue_boss/Dark Sword Morose V2-1.png.png" id="2_eo4y3"]
-[ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/health.gd" id="2_vd3w4"]
+[ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="2_vd3w4"]
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="3_wsn6w"]
 [ext_resource type="Texture2D" uid="uid://cwmb6oxyo5doq" path="res://assets/visual/placeholders/prologue_boss/morose-idle.png" id="4_1m6f0"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="4_a1hcm"]
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="5_pg4pn"]
-[ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/light/light.png" id="8_1m6f0"]
+[ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="8_1m6f0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1m6f0"]
 resource_local_to_scene = true

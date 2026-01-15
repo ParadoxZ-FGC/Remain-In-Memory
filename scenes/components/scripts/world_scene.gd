@@ -30,8 +30,15 @@ func _ready() -> void:
 	_fade.scale = Vector2(1000, 1000)
 	add_child(_fade)
 	_player_connect_triggers()
-	var player = find_child("Player")
+	var player : PlayerCharacter = find_child("Player")
 	player.updated.connect(_fade_out)
+	
+	var doors = get_tree().get_nodes_in_group("doors")
+	for door : DoorInteractable in doors:
+		door.calculate_exit_positions()
+		if door.name == PlayerData.destination:
+			player.position = door.exit_locations[door.spawn_position]
+	
 	ready_additions()
 	_fade_in()
 

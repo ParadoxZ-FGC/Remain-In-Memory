@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7m4k4q815gv1"]
 
-[ext_resource type="Script" uid="uid://2tsbidi4wljt" path="res://scenes/UI Menus/Settings/settings.gd" id="1_mpc1u"]
-[ext_resource type="PackedScene" uid="uid://dxeg8qfusavyd" path="res://scenes/UI Menus/Volume Slider/volume-slider.tscn" id="2_lcphq"]
+[ext_resource type="Script" uid="uid://2tsbidi4wljt" path="res://scenes/ui/settings_screen/settings_screen.gd" id="1_mpc1u"]
+[ext_resource type="PackedScene" uid="uid://dxeg8qfusavyd" path="res://scenes/ui/volume_slider/volume_slider.tscn" id="2_lcphq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcphq"]
 bg_color = Color(0, 0, 0, 1)

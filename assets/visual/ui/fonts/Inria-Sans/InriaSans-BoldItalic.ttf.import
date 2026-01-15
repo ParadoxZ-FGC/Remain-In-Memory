@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c5oyryy1dc36j"
-path="res://.godot/imported/InriaSans-BoldItalic.ttf-ca7c1b175bb676618d2ef3194da01d9e.fontdata"
+path="res://.godot/imported/InriaSans-BoldItalic.ttf-f78cbebd62251babbe6297c3a10fef3c.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/ui/fonts/Inria-Sans/InriaSans-BoldItalic.ttf"
-dest_files=["res://.godot/imported/InriaSans-BoldItalic.ttf-ca7c1b175bb676618d2ef3194da01d9e.fontdata"]
+source_file="res://assets/visual/UI/fonts/Inria-Sans/InriaSans-BoldItalic.ttf"
+dest_files=["res://.godot/imported/InriaSans-BoldItalic.ttf-f78cbebd62251babbe6297c3a10fef3c.fontdata"]
 
 [params]
 

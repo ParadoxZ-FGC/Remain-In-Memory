@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://c836gbrc44pj2"]
+[gd_scene load_steps=31 format=4 uid="uid://c836gbrc44pj2"]
 
 [ext_resource type="Script" uid="uid://dow6k3two06fj" path="res://scenes/chapters/prologue/town/town.gd" id="1_n3noj"]
 [ext_resource type="AudioStream" uid="uid://bacdle7hewxdd" path="res://assets/audio/bgm/Town.mp3" id="2_0oj2w"]
@@ -15,11 +15,8 @@
 [ext_resource type="Material" uid="uid://du8v75s3bvq3o" path="res://scenes/chapters/prologue/town/town.tres" id="9_gm85s"]
 [ext_resource type="Texture2D" uid="uid://cr4uhkeuqr5sk" path="res://assets/visual/tilemaps/inn.png" id="9_i3v4c"]
 [ext_resource type="Texture2D" uid="uid://bad1do8djipn4" path="res://assets/visual/bg/city/desaturated-layers/c-4.png" id="10_u6yve"]
-[ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="13_1mlff"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="16_gm85s"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hmbj"]
-size = Vector2(20, 226)
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/UI/fonts/NocturneSerifTest-Light.otf" id="16_gm85s"]
+[ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="17_d6ect"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x65u3"]
 resource_name = "placeholder"
@@ -530,18 +527,6 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
-[node name="SceneTransitions" type="Node2D" parent="."]
-
-[node name="ChangeScene" type="Area2D" parent="SceneTransitions" groups=["scene_transitions"]]
-position = Vector2(2329, 811)
-collision_layer = 0
-collision_mask = 520
-script = ExtResource("13_1mlff")
-path = "res://scenes/chapters/prologue/castle/castle.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
-shape = SubResource("RectangleShape2D_0hmbj")
-
 [node name="Background" type="Node2D" parent="."]
 texture_filter = 1
 metadata/_edit_group_ = true
@@ -596,13 +581,14 @@ tile_set = SubResource("TileSet_wy4lw")
 [node name="Player" parent="." instance=ExtResource("5_qpapv")]
 position = Vector2(242, 863)
 scale = Vector2(8, 8)
+lower = Vector2(3392, 1080)
 death_scene = "res://scenes/title-screen/title-screen.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)
 limit_left = 0
 limit_top = 0
-limit_right = 3000
+limit_right = 3232
 limit_bottom = 1080
 
 [node name="Lighting" type="CanvasGroup" parent="."]
@@ -728,13 +714,27 @@ randomness = 1.0
 process_material = ExtResource("9_gm85s")
 
 [node name="Pause" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PauseScreen" parent="Pause" instance=ExtResource("7_354rv")]
+visible = false
 offset_left = 5.0
 offset_top = 7.0
 offset_right = 5.0
 offset_bottom = 7.0
 metadata/_edit_lock_ = true
 
-[connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]
+[node name="Doors" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="ToMountain" parent="Doors" instance=ExtResource("17_d6ect")]
+position = Vector2(-96, 928)
+spawn_position = 2
+level_scene = "res://scenes/chapters/prologue/mountain_path/intro.tscn"
+destination = "ToTown"
+type = 1
+
+[node name="ToCastle" parent="Doors" instance=ExtResource("17_d6ect")]
+position = Vector2(3328, 928)
+level_scene = "res://scenes/chapters/prologue/castle/castle.tscn"
+destination = "ToTown"
+type = 1

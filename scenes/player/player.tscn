@@ -1,11 +1,11 @@
 [gd_scene load_steps=36 format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
-[ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/health.gd" id="2_lvxji"]
+[ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="2_lvxji"]
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="3_gx1jg"]
 [ext_resource type="PackedScene" uid="uid://snpu574qvx7o" path="res://scenes/components/dialogue/DialogueHandler.tscn" id="3_ugbui"]
 [ext_resource type="Texture2D" uid="uid://bo44qmhu7i2b" path="res://assets/visual/character/player-Sheet.png" id="5_ugbui"]
-[ext_resource type="AudioStream" uid="uid://bkbwq4s1rq16u" path="res://assets/audio/sound-effects/PC_Footstep1.wav" id="6_ugbui"]
+[ext_resource type="AudioStream" uid="uid://bkbwq4s1rq16u" path="res://assets/audio/sfx/PC_Footstep1.wav" id="6_ugbui"]
 [ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="9_5gtgg"]
 [ext_resource type="Script" uid="uid://v5svl3mpw3jj" path="res://scenes/player/health_ui.gd" id="9_fm80t"]
 [ext_resource type="Texture2D" uid="uid://2356anoxvhp" path="res://assets/visual/UI/hearts/h-e.png" id="9_je7p5"]

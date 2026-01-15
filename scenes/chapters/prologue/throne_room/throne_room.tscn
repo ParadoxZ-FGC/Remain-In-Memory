@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://c56c0ehykru0r"]
+[gd_scene load_steps=44 format=4 uid="uid://c56c0ehykru0r"]
 
 [ext_resource type="Script" uid="uid://b1mi2jg3167qe" path="res://scenes/chapters/prologue/throne_room/throne_room.gd" id="1_q2e8l"]
 [ext_resource type="Texture2D" uid="uid://dx3b0bsnjkemr" path="res://assets/visual/bg/castle/throne_room_2.png" id="1_ym15t"]
@@ -10,9 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="7_35vq6"]
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="8_ym15t"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/ui/pause_screen/pause_screen.tscn" id="10_p66qs"]
-[ext_resource type="Script" uid="uid://cithvlwbecwyr" path="res://scenes/components/shakable_camera.gd" id="11_s4lif"]
+[ext_resource type="Script" uid="uid://cithvlwbecwyr" path="res://scenes/components/scripts/shakable_camera.gd" id="11_s4lif"]
 [ext_resource type="Texture2D" uid="uid://bsnkk6p1xguo2" path="res://assets/visual/enemies/boss-idle.png" id="12_lmcfn"]
 [ext_resource type="PackedScene" uid="uid://cp2nwh0krspaf" path="res://scenes/components/dialogue_interactable.tscn" id="12_s4lif"]
+[ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="14_a5n1e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q2e8l"]
 resource_name = "ground"
@@ -931,8 +932,6 @@ stream = ExtResource("2_s4lif")
 autoplay = true
 bus = &"Music"
 
-[node name="SceneTransitions" type="Node2D" parent="."]
-
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 scale = Vector2(1.5, 1.6875)
@@ -1045,6 +1044,7 @@ color = Color(0.306923, 0.306923, 0.306923, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("10_p66qs")]
+visible = false
 offset_left = 1.0
 offset_right = 1.0
 size_flags_horizontal = 4
@@ -1091,3 +1091,12 @@ offset_left = -256.0
 offset_right = 1984.0
 offset_bottom = 1216.0
 color = Color(0, 0, 0, 0)
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="ToCastle" parent="Doors" instance=ExtResource("14_a5n1e")]
+position = Vector2(-112, 960)
+spawn_position = 1
+level_scene = "res://scenes/levels/prologue/castle/castle.tscn"
+destination = "ToThroneRoom"
+enabled = false

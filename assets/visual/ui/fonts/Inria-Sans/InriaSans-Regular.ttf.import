@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c2krg6e4qra6j"
-path="res://.godot/imported/InriaSans-Regular.ttf-70a4b9b763cd9890cc02b524c356919c.fontdata"
+path="res://.godot/imported/InriaSans-Regular.ttf-5d55c9b6e96e8ecabe789fceaa9d3706.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/ui/fonts/Inria-Sans/InriaSans-Regular.ttf"
-dest_files=["res://.godot/imported/InriaSans-Regular.ttf-70a4b9b763cd9890cc02b524c356919c.fontdata"]
+source_file="res://assets/visual/UI/fonts/Inria-Sans/InriaSans-Regular.ttf"
+dest_files=["res://.godot/imported/InriaSans-Regular.ttf-5d55c9b6e96e8ecabe789fceaa9d3706.fontdata"]
 
 [params]
 

@@ -4,9 +4,12 @@ extends Control
 @export var scene: PackedScene 
 @export var settings: Node  # Ensure this references the settings node 
 @export var vbox: VBoxContainer
+@export var rect: ColorRect
 
 
-func _ready(): 
+func _ready():
+	rect.material.set_shader_parameter("lod", 0)
+	visible = true
 	settings.hide()
 	for child in $PanelContainer/VBoxContainer.get_children():
 		child.disabled = true
