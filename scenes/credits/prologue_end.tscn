@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://rheabj0dgrdu"]
 
-[ext_resource type="Script" uid="uid://dpqny71vw7km3" path="res://scenes/prologue/end/prologue_end.gd" id="1_5w3wv"]
+[ext_resource type="Script" uid="uid://dpqny71vw7km3" path="res://scenes/credits/prologue_end.gd" id="1_5w3wv"]
 
 [node name="PrologueEnd" type="Node"]
 script = ExtResource("1_5w3wv")

@@ -36,4 +36,4 @@ func _start_timer() -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
-		get_tree().call_deferred("change_scene_to_file", "res://scenes/title-screen/title-screen.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/title_screen/title_screen.tscn")

@@ -33,7 +33,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(957.5, 539)
+position = Vector2(960, 540)
 texture = SubResource("GradientTexture2D_yegqs")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="BG"]
