@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=4 uid="uid://wrin7ux4mc07"]
 
-[ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/levels/prologue/castle/castle.gd" id="1_6itxs"]
+[ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/chapters/prologue/castle/castle.gd" id="1_6itxs"]
 [ext_resource type="AudioStream" uid="uid://4lqi0l2p3x7r" path="res://assets/audio/bgm/CastleDreamv2.mp3" id="2_5ieeb"]
 [ext_resource type="Texture2D" uid="uid://4nf1hfqm8fhw" path="res://assets/visual/bg/castle/castle_background2.png" id="2_fct1m"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rocry"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://6t8yhcrpinnk" path="res://assets/visual/tilemaps/ground.png" id="5_qbwta"]
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="7_6itxs"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="8_fct1m"]
-[ext_resource type="Material" uid="uid://bjcx6ebxx13kf" path="res://scenes/levels/prologue/castle/castle_p2.tres" id="9_yuadt"]
+[ext_resource type="Material" uid="uid://bjcx6ebxx13kf" path="res://scenes/chapters/prologue/castle/castle_p2.tres" id="9_yuadt"]
 [ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="11_jyxw7"]
 [ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/enemy/enemy.tscn" id="11_ra2nw"]
 [ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="13_uqdrb"]
@@ -934,7 +934,7 @@ position = Vector2(111, -17)
 collision_layer = 0
 collision_mask = 520
 script = ExtResource("11_jyxw7")
-path = "res://scenes/levels/prologue/throne_room/throne_room.tscn"
+path = "res://scenes/chapters/prologue/throne_room/throne_room.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene"]
 position = Vector2(-79, 4)
