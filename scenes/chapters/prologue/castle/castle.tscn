@@ -709,7 +709,6 @@ tile_set = SubResource("TileSet_4wb8h")
 position = Vector2(128, 920)
 scale = Vector2(8, 8)
 upper = Vector2(0, -1500)
-death_scene = "res://scenes/title-screen/title-screen.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)

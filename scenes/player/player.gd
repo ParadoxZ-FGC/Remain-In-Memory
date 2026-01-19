@@ -34,14 +34,17 @@ var interact_scene : String #INFO Interactable currently only handles dialogue, 
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
-@onready var hearts := $"Health UI"
 @onready var dialogueHandler = $DialogueHandler
 @onready var player_sprite := $AnimatedPlayerSprite
+@onready var hearts := $GUILayer/GUI/HealthDisplay
+@onready var gauge := $GUILayer/GUI/Gauge
 
 
 func _ready():
 	health.max_health = PlayerData.maximum_health
 	health.health = PlayerData.current_health
+	gauge.needle_angle = PlayerData.current_gauge_angle
+	gauge.enable()
 	EventBus.start_dialogue.connect(_on_dialogue_start)
 	EventBus.finish_dialogue.connect(_text_over)
 	EventBus.swap_control_state.connect(_swap_player_control_state)
@@ -190,6 +193,7 @@ func _on_health_health_depleted() -> void:
 func on_scene_transitions() -> void:
 	PlayerData.maximum_health = health.max_health
 	PlayerData.current_health = health.health
+	PlayerData.current_gauge_angle = gauge.needle_angle
 	updated.emit()
 
 
@@ -223,3 +227,10 @@ func take_knockback(force: float, direction: Vector2):
 		await get_tree().create_timer(knockbackTime).timeout
 		velocity = Vector2(0,0)
 		inKnockback = false
+
+
+func _on_hitbox_impacted() -> void:
+	gauge.needle_angle = gauge.needle_angle + 15.0
+	if gauge.needle_angle >= 270.0:
+		gauge.needle_angle = 0
+		health.set_health(health.health - 1)

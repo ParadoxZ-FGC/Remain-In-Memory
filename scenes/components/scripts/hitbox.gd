@@ -95,6 +95,7 @@ func activate(pierce: int):
 	
 	for x in hits:
 		x.take_damage(damage)
+		impacted.emit()
 	
 	if hitboxType == codeAttackList.Melee and ray.is_colliding() and hits.size() == 0 and selfKnockback > 0:
 		parent.apply_knockback(selfKnockback)

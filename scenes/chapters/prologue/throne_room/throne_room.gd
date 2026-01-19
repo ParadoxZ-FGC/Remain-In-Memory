@@ -71,6 +71,7 @@ func _on_player_death():
 	morose.talking = true
 	morose.sword.visible = false
 	$Player.hearts.disable()
+	$Player.gauge.disable()
 	$Player.player_sprite.use_parent_material = true
 	var tweener = create_tween()
 	tweener.tween_property($Player, "modulate", Color(0,0,0,1), 1.5)
@@ -84,5 +85,6 @@ func _on_player_death():
 
 func _on_boss_death():
 	$Player.hearts.disable()
+	$Player.gauge.disable()
 	$Player/Camera2D.screen_shake(2, 0)
 	DialogueManager.load_dialogue_scene("prologue_boss_losses")
