@@ -978,7 +978,6 @@ upper = Vector2(-250, 0)
 lower = Vector2(1920, 1080)
 jump_speed = 1000
 to_scene_on_death = false
-death_scene = "res://scenes/title-screen/title-screen.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)

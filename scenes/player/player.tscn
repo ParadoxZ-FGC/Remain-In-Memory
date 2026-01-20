@@ -1,15 +1,13 @@
-[gd_scene load_steps=36 format=3 uid="uid://colfn2h16sy1u"]
+[gd_scene load_steps=34 format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="2_lvxji"]
+[ext_resource type="PackedScene" uid="uid://dd3tdpid7s8u4" path="res://scenes/player/health_display.tscn" id="3_fm80t"]
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="3_gx1jg"]
 [ext_resource type="PackedScene" uid="uid://snpu574qvx7o" path="res://scenes/components/dialogue/DialogueHandler.tscn" id="3_ugbui"]
 [ext_resource type="Texture2D" uid="uid://bo44qmhu7i2b" path="res://assets/visual/character/player-Sheet.png" id="5_ugbui"]
 [ext_resource type="AudioStream" uid="uid://bkbwq4s1rq16u" path="res://assets/audio/sfx/PC_Footstep1.wav" id="6_ugbui"]
-[ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="9_5gtgg"]
-[ext_resource type="Script" uid="uid://v5svl3mpw3jj" path="res://scenes/player/health_ui.gd" id="9_fm80t"]
-[ext_resource type="Texture2D" uid="uid://2356anoxvhp" path="res://assets/visual/UI/hearts/h-e.png" id="9_je7p5"]
-[ext_resource type="Texture2D" uid="uid://devcp3wgml0q7" path="res://assets/visual/UI/hearts/h-h.png" id="10_fm80t"]
+[ext_resource type="PackedScene" uid="uid://567t451bxtoi" path="res://new/gauge.tscn" id="7_fcs02"]
 [ext_resource type="PackedScene" uid="uid://vspiyrcuxewo" path="res://scenes/components/attack.tscn" id="10_gx1jg"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="12_fm80t"]
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="12_gx1jg"]
@@ -168,6 +166,17 @@ floor_constant_speed = true
 floor_snap_length = 12.0
 script = ExtResource("1_c623h")
 stone = NodePath("AudioStreamPlayer2D")
+death_scene = "res://scenes/title_screen/title_screen.tscn"
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Node2D" parent="GUILayer"]
+position = Vector2(128, 128)
+
+[node name="Gauge" parent="GUILayer/GUI" instance=ExtResource("7_fcs02")]
+
+[node name="HealthDisplay" parent="GUILayer/GUI" instance=ExtResource("3_fm80t")]
+position = Vector2(128, 0)
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("character_sprite")]
 script = ExtResource("2_lvxji")
@@ -187,6 +196,7 @@ sprite_frames = SubResource("SpriteFrames_6v243")
 animation = &"walk"
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_fcs02")
 
@@ -196,57 +206,6 @@ volume_db = -10.0
 pitch_scale = 0.75
 attenuation = 0.39229205
 bus = &"Sound Effects"
-
-[node name="Health UI" type="CanvasLayer" parent="."]
-script = ExtResource("9_fm80t")
-
-[node name="Heart0" type="CanvasLayer" parent="Health UI"]
-offset = Vector2(92, 72)
-transform = Transform2D(1, 0, 0, 1, 92, 72)
-
-[node name="Heart-Empty" type="Sprite2D" parent="Health UI/Heart0"]
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("9_je7p5")
-
-[node name="Heart-Half" type="Sprite2D" parent="Health UI/Heart0"]
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("10_fm80t")
-
-[node name="Heart-Full" type="Sprite2D" parent="Health UI/Heart0"]
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("9_5gtgg")
-
-[node name="Heart1" type="CanvasLayer" parent="Health UI"]
-offset = Vector2(169, 72)
-transform = Transform2D(1, 0, 0, 1, 169, 72)
-
-[node name="Heart-Empty" type="Sprite2D" parent="Health UI/Heart1"]
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("9_je7p5")
-
-[node name="Heart-Half" type="Sprite2D" parent="Health UI/Heart1"]
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("10_fm80t")
-
-[node name="Heart-Full" type="Sprite2D" parent="Health UI/Heart1"]
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("9_5gtgg")
-
-[node name="Heart2" type="CanvasLayer" parent="Health UI"]
-offset = Vector2(246, 72)
-transform = Transform2D(1, 0, 0, 1, 246, 72)
-
-[node name="Heart-Empty" type="Sprite2D" parent="Health UI/Heart2"]
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("9_je7p5")
-
-[node name="Heart-Half" type="Sprite2D" parent="Health UI/Heart2"]
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("10_fm80t")
-
-[node name="Heart-Full" type="Sprite2D" parent="Health UI/Heart2"]
-scale = Vector2(4.375, 4.375)
-texture = ExtResource("9_5gtgg")
 
 [node name="Sword" parent="." instance=ExtResource("10_gx1jg")]
 duration = 0.07
@@ -281,9 +240,11 @@ target_position = Vector2(19, 0)
 collision_mask = 2
 
 [node name="Knockback Direction" type="Marker2D" parent="Sword"]
+visible = false
 position = Vector2(-1, 0)
 
 [node name="Hurtbox" parent="." instance=ExtResource("12_gx1jg")]
+visible = false
 layers = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -291,5 +252,6 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_fcs02")
 debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
 
-[connection signal="health_changed" from="Health" to="Health UI" method="_on_health_health_changed"]
+[connection signal="health_changed" from="Health" to="GUILayer/GUI/HealthDisplay" method="_on_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
+[connection signal="impacted" from="Sword/hitbox" to="." method="_on_hitbox_impacted"]
