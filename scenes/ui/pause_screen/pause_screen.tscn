@@ -1,11 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://c8umepsy68yck"]
 
-[ext_resource type="Script" uid="uid://2ddfhdbvsq4v" path="res://scenes/UI Menus/Pause Screen/pause_screen.gd" id="1_fs5ud"]
-[ext_resource type="Shader" uid="uid://bffb1cpqbfaua" path="res://scenes/UI Menus/Pause Screen/Pause Screen.gdshader" id="1_j1h8m"]
-[ext_resource type="PackedScene" uid="uid://c0idldrfge7b8" path="res://scenes/title-screen/title-screen.tscn" id="2_1coml"]
-[ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/UI Menus/Settings/Settings.tscn" id="4_1coml"]
+[ext_resource type="Script" uid="uid://2ddfhdbvsq4v" path="res://scenes/ui/pause_screen/pause_screen.gd" id="1_fs5ud"]
+[ext_resource type="Shader" uid="uid://bffb1cpqbfaua" path="res://scenes/ui/pause_screen/pause_screen.gdshader" id="1_j1h8m"]
+[ext_resource type="PackedScene" uid="uid://c0idldrfge7b8" path="res://scenes/title_screen/title_screen.tscn" id="2_1coml"]
+[ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/ui/settings_screen/settings_screen.tscn" id="4_1coml"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fs5ud"]
+resource_local_to_scene = true
 shader = ExtResource("1_j1h8m")
 shader_parameter/lod = 0.0
 shader_parameter/tint_color = Vector4(0, 0, 0, 0)
@@ -26,7 +27,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("ColorRect:material:shader_parameter/lod")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -95,7 +96,7 @@ _data = {
 &"blur": SubResource("Animation_dqt4f")
 }
 
-[node name="PauseScreen" type="Control" node_paths=PackedStringArray("resume_button", "settings", "vbox")]
+[node name="PauseScreen" type="Control" node_paths=PackedStringArray("resume_button", "settings", "vbox", "rect")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -108,6 +109,7 @@ resume_button = NodePath("PanelContainer/VBoxContainer/Resume")
 scene = ExtResource("2_1coml")
 settings = NodePath("Settings")
 vbox = NodePath("PanelContainer/VBoxContainer")
+rect = NodePath("ColorRect")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_fs5ud")
@@ -165,6 +167,7 @@ libraries = {
 }
 
 [node name="Settings" parent="." instance=ExtResource("4_1coml")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]

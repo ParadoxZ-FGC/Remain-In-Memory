@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://dd3tdpid7s8u4"]
+
+[ext_resource type="Script" uid="uid://0s1vcgyftp20" path="res://scenes/player/health_ui_canvas.gd" id="1_0s7l4"]
+[ext_resource type="Texture2D" uid="uid://2356anoxvhp" path="res://assets/visual/UI/hearts/h-e.png" id="2_bvi1u"]
+[ext_resource type="Texture2D" uid="uid://devcp3wgml0q7" path="res://assets/visual/UI/hearts/h-h.png" id="3_ijv13"]
+[ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="4_pjrse"]
+[ext_resource type="Texture2D" uid="uid://s00rnjw3jpwu" path="res://assets/visual/UI/hearts/h-a.png" id="5_sndvw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86l2d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bvi1u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ijv13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pjrse")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sndvw")
+}],
+"loop": false,
+"name": &"HealthStates",
+"speed": 5.0
+}]
+
+[node name="HealthDisplay" type="CanvasGroup"]
+scale = Vector2(4, 4)
+script = ExtResource("1_0s7l4")
+
+[node name="Heart" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_86l2d")
+animation = &"HealthStates"
+frame = 2

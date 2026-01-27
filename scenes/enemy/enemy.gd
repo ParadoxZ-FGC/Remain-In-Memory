@@ -31,6 +31,8 @@ var can_deactivate := false
 
 
 func _ready() -> void:
+	if EnemyManager.persistance.has(get_path()):
+		queue_free()
 	#var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
 	#$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
 	current_state = States.INACTIVE
@@ -137,6 +139,7 @@ func _on_health_health_depleted() -> void:
 	anim.play("die")
 	await anim.animation_finished
 	#boom.stop()
+	EnemyManager.persistance.set(get_path(), ["nerd"])
 	queue_free()
 
 

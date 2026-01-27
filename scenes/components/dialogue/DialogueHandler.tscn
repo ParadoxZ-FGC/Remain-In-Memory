@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://snpu574qvx7o"]
 
 [ext_resource type="Script" uid="uid://bg7h58hljosm5" path="res://scenes/components/dialogue/DialogueHandler.gd" id="1_tcvru"]
-[ext_resource type="Texture2D" uid="uid://dcofyjn106o0r" path="res://assets/visual/UI/dialog_box.png" id="2_uw3ex"]
-[ext_resource type="Texture2D" uid="uid://crlb4amtu3sgm" path="res://assets/visual/speaker_headshots/morose/neutral.png" id="3_tqpex"]
-[ext_resource type="Texture2D" uid="uid://bxucmvamiyob" path="res://assets/visual/speaker_headshots/traveler/neutral.png" id="4_0syfc"]
+[ext_resource type="Texture2D" uid="uid://dcofyjn106o0r" path="res://assets/visual/UI/dialog/dialog_box.png" id="2_uw3ex"]
+[ext_resource type="Texture2D" uid="uid://crlb4amtu3sgm" path="res://assets/visual/UI/dialog/headshots/morose/neutral.png" id="3_tqpex"]
+[ext_resource type="Texture2D" uid="uid://bxucmvamiyob" path="res://assets/visual/UI/dialog/headshots/traveler/neutral.png" id="4_0syfc"]
 
 [node name="DialogueHandler" type="CanvasLayer"]
 script = ExtResource("1_tcvru")
