@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c7dc7sfjmpx8c"
-path="res://.godot/imported/Silkscreen-Regular.ttf-0ceeb670d8ab282c5330263fc0f85da7.fontdata"
+path="res://.godot/imported/Silkscreen-Regular.ttf-c68d46e40bc63878ff6286e00f6ee696.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/UI/fonts/Silkscreen-Regular.ttf"
-dest_files=["res://.godot/imported/Silkscreen-Regular.ttf-0ceeb670d8ab282c5330263fc0f85da7.fontdata"]
+source_file="res://assets/visual/ui/fonts/Silkscreen-Regular.ttf"
+dest_files=["res://.godot/imported/Silkscreen-Regular.ttf-c68d46e40bc63878ff6286e00f6ee696.fontdata"]
 
 [params]
 
