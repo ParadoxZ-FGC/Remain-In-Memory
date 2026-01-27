@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bu5jtrhcnqaxp"
-path="res://.godot/imported/aggressive.png-c117bfac950642f86ff33083e5e76cee.ctex"
+path="res://.godot/imported/aggressive.png-88b843d5f0b267a4e37709da1af83226.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/UI/dialog/headshots/morose/aggressive.png"
-dest_files=["res://.godot/imported/aggressive.png-c117bfac950642f86ff33083e5e76cee.ctex"]
+source_file="res://assets/visual/ui/dialog/headshots/morose/aggressive.png"
+dest_files=["res://.godot/imported/aggressive.png-88b843d5f0b267a4e37709da1af83226.ctex"]
 
 [params]
 
