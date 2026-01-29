@@ -1,41 +1,38 @@
 extends Node2D
 
+@export var speed: int = 500
 
-enum States {LOADED, FIRED}
+enum codeAimType {Static = 0, Aiming = 1 }
+@export_enum("Static", "Aiming") var aimType: int
 
-var current_state : States = States.LOADED
-var directionVector : Vector2
+var directionV : Vector2
 var timer : SceneTreeTimer
 var flipped := false
+var directionRay: RayCast2D
+var rayFlipped: bool = false
+var rdy: bool = false
 
 
 func _ready() -> void:
-	visible = false
+	directionRay = $DirectionRay
+	rdy = true
 
+func flip():
+	flipped = !flipped
 
 func _process(_delta: float) -> void:
-	if ($Sprite2D.flip_h != flipped):
-		$Sprite2D.flip_h = flipped
+	if rdy:
+		if ($Projectile/Sprite2D.flip_h != flipped):
+			$Projectile/Sprite2D.flip_h = flipped
+		if (aimType == codeAimType.Static and rayFlipped != flipped):
+			rayFlipped = true
+			directionRay.target_position *= Vector2(-1, 0)
+			position *= Vector2(-1, 0)
 
-
-func _physics_process(delta: float) -> void:
-	if (current_state == States.FIRED):
-		position += directionVector * delta
-		$Hitbox.activate(-1)
-
-
-func fire(speed : int, direction : int) -> void:
-	timer = get_tree().create_timer(5, false, true, false)
-	timer.timeout.connect(_end_of_life)
-	directionVector = Vector2(speed * direction, 0)
-	visible = true
-	current_state = States.FIRED
-	$Hitbox.enable()
-
-
-func _end_of_life() -> void:
-	queue_free()
-
-
-func _on_hitbox_impacted() -> void:
-	_end_of_life()
+func fire() -> void:
+	var projectileToFire = $Projectile.duplicate()
+	add_child(projectileToFire)
+	directionV = Vector2(speed * directionRay.target_position.x, 0)
+	projectileToFire.directionVector = directionV
+	projectileToFire.move()
+	projectileToFire.get_node("Hitbox").activate(-1)

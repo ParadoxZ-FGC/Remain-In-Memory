@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://mgefkek60rmx"]
+[gd_scene format=3 uid="uid://mgefkek60rmx"]
 
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="1_0a8ii"]
 [ext_resource type="Script" uid="uid://fhvvxtuvqsqd" path="res://scenes/enemy/enemy.gd" id="1_c2o0r"]
@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c0ptkh3ukgj5a" path="res://assets/visual/enemies/turret-Sheet.png" id="2_nnm6l"]
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="4_feath"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="5_kk3ds"]
-[ext_resource type="Script" uid="uid://12fgvi0w1br" path="res://scenes/enemy/turret_cannonball.gd" id="6_0a8ii"]
-[ext_resource type="Texture2D" uid="uid://c15in3yd58d2y" path="res://assets/visual/enemies/turret-ball.png" id="6_kk3ds"]
+[ext_resource type="PackedScene" uid="uid://vspiyrcuxewo" path="res://scenes/components/attack.tscn" id="8_4efjx"]
+[ext_resource type="PackedScene" uid="uid://k6hl8gup1n50" path="res://scenes/components/projectile_handler.tscn" id="9_4efjx"]
 [ext_resource type="Texture2D" uid="uid://br0g7t0hh5f3q" path="res://assets/visual/enemies/gear-particle.png.png" id="9_q52e7"]
 
 [sub_resource type="Curve" id="Curve_q52e7"]
@@ -281,22 +281,19 @@ height = 128.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feath"]
 size = Vector2(1000, 366)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0a8ii"]
-radius = 7.0
-
-[node name="Mob" type="RigidBody2D"]
+[node name="Mob" type="RigidBody2D" unique_id=1718633449]
 collision_layer = 64
 collision_mask = 2
 gravity_scale = 0.0
 script = ExtResource("1_c2o0r")
 
-[node name="Health" type="Node" parent="." node_paths=PackedStringArray("character_sprite")]
+[node name="Health" type="Node" parent="." unique_id=933913375 node_paths=PackedStringArray("character_sprite")]
 script = ExtResource("2_feath")
 immortalityDuration = 0.01
 character_sprite = NodePath("../AnimatedMobSprite")
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
-[node name="HurtParticles" type="GPUParticles2D" parent="."]
+[node name="HurtParticles" type="GPUParticles2D" parent="." unique_id=627827382]
 emitting = false
 amount = 3
 texture = ExtResource("9_q52e7")
@@ -307,7 +304,7 @@ randomness = 1.0
 visibility_rect = Rect2(-300, -100, 600, 200)
 process_material = SubResource("ParticleProcessMaterial_tyl3q")
 
-[node name="AnimatedMobSprite" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedMobSprite" type="AnimatedSprite2D" parent="." unique_id=1848405161]
 material = SubResource("ShaderMaterial_0a8ii")
 rotation = -6.28319
 scale = Vector2(2, 2)
@@ -315,53 +312,42 @@ sprite_frames = SubResource("SpriteFrames_vldki")
 animation = &"asleep"
 autoplay = "asleep"
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1914052910]
 
-[node name="MobCollisionShape" type="CollisionShape2D" parent="."]
+[node name="MobCollisionShape" type="CollisionShape2D" parent="." unique_id=966085749]
 visible = false
 shape = SubResource("CapsuleShape2D_nnm6l")
 
-[node name="Hurtbox" parent="." instance=ExtResource("4_feath")]
-monitoring = false
+[node name="Hurtbox" parent="." unique_id=1185818289 instance=ExtResource("4_feath")]
 layers = 64
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=55407739]
 shape = SubResource("CapsuleShape2D_fhx6o")
 
-[node name="Hitbox" parent="." instance=ExtResource("5_kk3ds")]
-monitorable = false
+[node name="Hitbox" parent="." unique_id=1735844836 instance=ExtResource("5_kk3ds")]
 layers = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1124564514]
 shape = SubResource("CapsuleShape2D_feath")
 
-[node name="Detectionbox" type="Area2D" parent="."]
+[node name="Detectionbox" type="Area2D" parent="." unique_id=1475584738]
 visible = false
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectionbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectionbox" unique_id=1243192542]
 position = Vector2(0, -119)
 shape = SubResource("RectangleShape2D_feath")
 
-[node name="Cannonball" type="Node2D" parent="."]
-position = Vector2(-21, -13)
-script = ExtResource("6_0a8ii")
-metadata/_edit_group_ = true
+[node name="Cannon" parent="." unique_id=1917527795 instance=ExtResource("8_4efjx")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Cannonball"]
-scale = Vector2(2, 2)
-texture = ExtResource("6_kk3ds")
-
-[node name="Hitbox" parent="Cannonball" instance=ExtResource("5_kk3ds")]
-monitoring = false
-layers = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cannonball/Hitbox"]
-shape = SubResource("CircleShape2D_0a8ii")
+[node name="ProjectileHandler" parent="Cannon/1/Projectile" parent_id_path=PackedInt32Array(1917527795, 1384441368) index="0" unique_id=545258969 instance=ExtResource("9_4efjx")]
+speed = 500
 
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="body_entered" from="Detectionbox" to="." method="_on_detectionbox_body_entered"]
 [connection signal="body_exited" from="Detectionbox" to="." method="_on_detectionbox_body_exited"]
-[connection signal="impacted" from="Cannonball/Hitbox" to="Cannonball" method="_on_hitbox_impacted"]
+
+[editable path="Cannon"]
+[editable path="Cannon/1/Projectile/ProjectileHandler"]

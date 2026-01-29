@@ -24,6 +24,7 @@ var target : Node2D
 var to_deactive := true
 var to_activate := false
 var can_deactivate := false
+var flipDir: int = facing
 
 @onready var cannonball_loaded := $Cannonball
 @onready var hurt_particles := $HurtParticles
@@ -39,8 +40,9 @@ func _ready() -> void:
 	$AnimatedMobSprite.play("asleep")
 	if facing == 1:
 		$AnimatedMobSprite.flip_h = true
-		cannonball_loaded.flipped = true
-		cannonball_loaded.position = Vector2(21.0, -13)
+		if(facing != flipDir):
+			$Cannon.flip_projectiles()
+			flipDir = facing
 		hurt_particles_process_mat.direction.x = -1
 
 
@@ -56,15 +58,19 @@ func _physics_process(_delta: float) -> void:
 		if (target.position.x - position.x) > 0:
 			facing = 1
 			$AnimatedMobSprite.flip_h = true
-			cannonball_loaded.flipped = true
-			cannonball_loaded.position = Vector2(21.0, -13)
 			hurt_particles_process_mat.direction.x = -1
+			
+			if(facing != flipDir):
+				$Cannon.flip_projectiles()
+				flipDir = facing
 		else:
 			facing = -1
 			$AnimatedMobSprite.flip_h = false
-			cannonball_loaded.flipped = false
-			cannonball_loaded.position = Vector2(-21.0, -13)
 			hurt_particles_process_mat.direction.x = 1
+			
+			if(facing != flipDir):
+				$Cannon.flip_projectiles()
+				flipDir = facing
 		
 		if (current_state == States.READY):
 			#print("FIRE!!")
@@ -78,9 +84,7 @@ func fire() -> void:
 	await anim.animation_looped
 	anim.play("shoot")
 	
-	var cannonball_to_fire = cannonball_loaded.duplicate()
-	add_child(cannonball_to_fire)
-	cannonball_to_fire.fire(projectile_speed, facing)
+	$Cannon.attack()
 	
 	await $AnimatedMobSprite.animation_finished
 	$AnimatedMobSprite.play("standby")
@@ -101,6 +105,7 @@ func activate() -> void:
 	$AnimatedMobSprite.play("wake")
 	await $AnimatedMobSprite.animation_finished
 	$AnimatedMobSprite.play("standby")
+	$Hitbox.activate()
 	current_state = States.READY
 	state_changed.emit()
 
@@ -129,7 +134,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 func _on_health_health_depleted() -> void:
 	current_state = States.DYING
-	$Hitbox.disable()
+	$Hitbox.deactivate()
 	state_changed.emit()
 	var anim = $AnimatedMobSprite
 	anim.stop()

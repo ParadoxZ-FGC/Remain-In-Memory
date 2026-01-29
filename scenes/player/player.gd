@@ -6,6 +6,7 @@ signal updated
 
 enum dialogueTypes {None, Chatting, Talking} #TODO I have no idea if we want "passive conversation", like npcs saying things without player input, that's what Chatting is for, just in case
 enum player_states {User_Controlled, System_Controlled}
+enum weaponSelect {Sword, Glaive}
 
 @export var upper = Vector2(0, 0)
 @export var lower = Vector2(2500, 1080)
@@ -31,6 +32,7 @@ var currentDialogue : dialogueTypes = dialogueTypes.None
 var current_player_state : player_states = player_states.User_Controlled
 var interactable : bool = false #Is there something to interact with
 var interact_scene : String #INFO Interactable currently only handles dialogue, so this would be the file one reads from
+var currentWeapon: weaponSelect = weaponSelect.Sword
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
@@ -76,8 +78,19 @@ func _physics_process(delta):
 	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
 		if not inKnockback:
 			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
+		
+		if Input.is_action_just_pressed("(TEMP) change_weapon"):
+			if currentWeapon < weaponSelect.size() -1:
+				currentWeapon += 1;
+			else:
+				currentWeapon = 0;
+		
 		if Input.is_action_just_pressed("attack"):
-			$Sword.attack()
+			match currentWeapon:
+				weaponSelect.Sword:
+					$Sword.attack()
+				weaponSelect.Glaive:
+					$Glaive.attack()
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
 			currentDialogue = dialogueTypes.Talking
 			DialogueManager.load_dialogue_scene(interact_scene)
@@ -105,8 +118,14 @@ func _physics_process(delta):
 		$AnimatedPlayerSprite.animation = "walk"
 		$AnimatedPlayerSprite.flip_v = false
 		$AnimatedPlayerSprite.flip_h = velocity.x < 0
-		if $Sword.attacking == false:
-			$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+		
+		match currentWeapon:
+				weaponSelect.Sword:
+					if $Sword.attackCooling == false:
+						$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+				weaponSelect.Glaive:
+					if $Glaive.attackCooling == false:
+						$Glaive.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
 	
 	if velocity.x != 0 and Input.is_action_pressed("run"):
 		$AnimatedPlayerSprite.speed_scale = 2

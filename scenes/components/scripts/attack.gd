@@ -11,35 +11,17 @@ class_name Attack
 ##
 ##@experimental: MASSIVELY experimental, "barely" functional (it does what it needs to do for now). It still needs a lot of work.
 
-@export_category("Attack")
-
 ##Duration that the hitbox is enabled (in seconds).
 @export_range(0, 1, 0.01, "or_greater") var duration: float
 
 ##Duration that the attack/hitbox is on cooldown (in seconds).
 @export_range(0.02, 5, 0.01, "or_greater") var attackCooldown: float
 
-##Number of attacks in a combo.
-@export_range(1, 5, 1.0, "or_greater") var multiattack: int
-
-##Time allowed between two combo attacks.
+##Time allowed between two attacks in a string.
 @export_range(0.05, 5, 0.05, "or_greater") var comboDuration: float
 
-##Separate duration that a multiattack is on cooldown for (in seconds). Essentially, the last attack will have this cooldown, whether the player hits all of them or drops the combo.
+##Separate duration that an attack string is on cooldown for (in seconds). Essentially, the last attack will have this cooldown, whether the player hits all of them or drops the combo.
 @export_range(0.25, 5, 0.05, "or_greater") var comboCooldown: float
-
-##Number of hurtboxes to deal damage to in one attack.
-@export_range(1, 25, 1.0, "or_greater") var pierce: int
-
-##What type of attack this node represents.
-enum codeAttackList {Stationary = 1, Melee = 2, Projectile = 3}
-@export_enum("Stationary", "Melee", "Projectile") var attackType: int
-
-##The number of hurtboxes a hitbox can interact with.
-var pierceCount: int
-
-##Whether or not the player is attacking.
-var attacking: bool = false
 
 ##Whether or not the attack is on cooldown.
 var attackCooling: bool = false
@@ -53,19 +35,20 @@ var withinCombo: bool = false
 ##How many hits have been performed in the current combo.
 var comboCounter: int = 0
 
-##Stores $Sprite (or equivalent).
-var sprite
+##Stores attacks as an array
+var attackList = []
 
-##Stores this attack's hitboxes in an array.
-var hitboxes = []
-
-##Stores whether the number of provided hitboxes equals the number of hits in a multihit combo. If not (or if there is no combo) this is set to yes, and only the first hitbox will be used.
-var isSingleHitbox: bool
+##Stores information on contents of attacks (i.e if each attack has a hitbox, sprite, and/or projectile). Key is the specific attack's Node name rather than the node object itself.
+var attackDict = {}
 
 ##Whether or not the combo is on cooldown.
 var comboCooling: bool = false
 
+var attackCount: int
+
 @onready var parent = get_parent()
+
+var firstflip: bool = false
 
 #func _get_property_list():
 #	if Engine.is_editor_hint():
@@ -73,26 +56,28 @@ var comboCooling: bool = false
 #		return ret
 
 func _ready() -> void:
-	var children = get_children()
-	for x in children:
-		if x.is_class("Sprite2D") or x.is_class("AnimatedSprite2D"):
-			sprite = x
-		elif x.is_class("Area2D"):
-			hitboxes.append(x)
-			x.hitboxType = attackType
-	
-	if hitboxes.size() < multiattack:
-		isSingleHitbox = true
-	else:
-		isSingleHitbox = false
+	await get_tree().create_timer(0.05).timeout
+	for x in get_children():
+		attackCount += 1
+		var c = Vector3i(0,0,0)
+		if x.get_node("Hitbox").get_child_count():
+			c += Vector3i(1,0,0)
+		if x.get_node("Sprite").get_child_count():
+			c += Vector3i(0,1,0)
+		if x.get_node("Projectile").get_child_count():
+			c += Vector3i(0,0,1)
+		attackList.append(x)
+		attackDict[x] = c
+		#flip_projectiles(true)
+		firstflip = true
 
 func _physics_process(delta: float) -> void:
 	if withinCombo:
 		if comboTimer > 0:
 			comboTimer -= delta
 		else:
-			comboTimer = comboDuration
 			withinCombo = false
+			comboTimer = comboDuration
 			comboCounter = 0
 			comboCooling = true
 			await get_tree().create_timer(comboCooldown).timeout
@@ -101,35 +86,47 @@ func _physics_process(delta: float) -> void:
 ##Processes attacks, combos, and requests hitboxes to activate.
 func attack():
 	if not attackCooling and not comboCooling:
-		var hitbox
-		if multiattack:
-			if isSingleHitbox:
-				hitbox = hitboxes[0]
-			else:
-				hitbox = hitboxes[comboCounter]
-			comboCounter += 1
-			if comboCounter >= multiattack:
-				comboTimer = 0
-			else:
-				comboTimer = comboDuration
-		else:
-			hitbox = hitboxes[0]
+		var hitbox = null
+		var sprite = null
+		var projectile = null
+		var currentAttack = attackList[comboCounter]
+		var attackInfo = attackDict[currentAttack]
 		
 		attackCooling = true
-		hitbox.activate(pierce)
-		sprite.set_visible(true)
-		attacking = true
-		if multiattack > 1:
-			withinCombo = true
+		if attackInfo.x == 1:
+			hitbox = currentAttack.get_node("Hitbox").get_child(0)
+			hitbox.activate(duration)
+		if attackInfo.y == 1:
+			sprite = currentAttack.get_node("Sprite").get_child(0)
+			sprite.set_visible(true)
+		if attackInfo.z == 1:
+			projectile = currentAttack.get_node("Projectile").get_child(0)
+			projectile.fire()
 		
-		await get_tree().create_timer(duration).timeout #@TODO May be changed to await animation ended signal when those are more set in stone
-		sprite.set_visible(false)
-		attacking = false
-
+		comboCounter += 1
+		if comboCounter >= attackCount:
+			comboTimer = 0
+			comboCounter = 0
+		else:
+			comboTimer = comboDuration
+			if not withinCombo:
+				withinCombo = true
+		
+		await get_tree().create_timer(duration).timeout
+		if(sprite):
+			sprite.set_visible(false)
+		
 		await get_tree().create_timer(attackCooldown).timeout
-		
 		attackCooling = false
 
 ##Tells the parent to take knockback
-func apply_knockback(force: float):
-	parent.take_knockback(force, $"Knockback Direction".position)
+func apply_knockback(force: float, direction: Vector2):
+	parent.take_knockback(force, direction)
+
+func flip_projectiles(ignore : bool = false):
+	if not firstflip:
+		await get_tree().create_timer(0.05).timeout
+	for x in attackList:
+		var projectileN = x.get_node("Projectile")
+		if  projectileN.get_child_count() > 0:
+			projectileN.get_node("ProjectileHandler").flip()

@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="7_xliqy"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/ui/pause_screen/pause_screen.tscn" id="8_a45m6"]
 [ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="10_qd2mc"]
+[ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/enemy/enemy.tscn" id="11_n633v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a45m6"]
 resource_name = "ground"
@@ -343,3 +344,6 @@ position = Vector2(4256, 1792)
 level_scene = "res://scenes/chapters/prologue/town/town.tscn"
 destination = "ToMountain"
 type = 1
+
+[node name="Mob" parent="." unique_id=688607098 instance=ExtResource("11_n633v")]
+position = Vector2(3, 222)
