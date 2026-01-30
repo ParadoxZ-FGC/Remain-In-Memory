@@ -166,7 +166,6 @@ floor_constant_speed = true
 floor_snap_length = 12.0
 script = ExtResource("1_c623h")
 stone = NodePath("AudioStreamPlayer2D")
-death_scene = "res://scenes/title_screen/title_screen.tscn"
 
 [node name="GUILayer" type="CanvasLayer" parent="." unique_id=478102632]
 

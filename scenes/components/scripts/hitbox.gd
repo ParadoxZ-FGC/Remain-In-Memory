@@ -28,7 +28,7 @@ enum codeAttackList {Stationary = 0, Moving = 1 }
 #INFO Hitboxes scan for Hurtboxes, so if a Hitbox "Hit(s)Player" that means it will scan any Hurtboxes labeled "Player"
 
 ##Number of hurtboxes to deal damage to.
-@export_range(1, 25, 1.0, "or_greater") var pierce: int
+@export_range(0, 25, 1.0, "or_greater") var pierce: int
 
 @onready var parent = get_parent().get_parent().get_parent()
 
@@ -75,7 +75,6 @@ func _physics_process(delta: float) -> void:
 	if activated:
 		var overlap = get_overlapping_areas()
 		if overlap.size() > 0:
-			print(overlap)
 			overlap.sort_custom(sort_distance)
 
 			var hits = []

@@ -91,6 +91,7 @@ func _physics_process(delta):
 					$Sword.attack()
 				weaponSelect.Glaive:
 					$Glaive.attack()
+
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
 			currentDialogue = dialogueTypes.Talking
 			DialogueManager.load_dialogue_scene(interact_scene)
