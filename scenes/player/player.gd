@@ -13,7 +13,7 @@ enum player_states {User_Controlled, System_Controlled}
 @export var jump_speed = 800
 @export var coyote: float = 0.03
 @export var max_walk_speed = 300
-@export var max_run_speed = 500
+@export var max_run_speed = 5000 #default 500
 @export var stop_force = 8000
 @export var drag_force = 500
 @export var stone: AudioStreamPlayer2D

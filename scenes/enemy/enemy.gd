@@ -53,18 +53,19 @@ func _physics_process(_delta: float) -> void:
 		deactivate()
 	
 	elif target != null:
-		if (target.position.x - position.x) > 0:
-			facing = 1
-			$AnimatedMobSprite.flip_h = true
-			cannonball_loaded.flipped = true
-			cannonball_loaded.position = Vector2(21.0, -13)
-			hurt_particles_process_mat.direction.x = -1
-		else:
-			facing = -1
-			$AnimatedMobSprite.flip_h = false
-			cannonball_loaded.flipped = false
-			cannonball_loaded.position = Vector2(-21.0, -13)
-			hurt_particles_process_mat.direction.x = 1
+		if is_instance_valid(cannonball_loaded):
+			if (target.position.x - position.x) > 0:
+				facing = 1
+				$AnimatedMobSprite.flip_h = true
+				cannonball_loaded.flipped = true
+				cannonball_loaded.position = Vector2(21.0, -13)
+				hurt_particles_process_mat.direction.x = -1
+			else:
+				facing = -1
+				$AnimatedMobSprite.flip_h = false
+				cannonball_loaded.flipped = false
+				cannonball_loaded.position = Vector2(-21.0, -13)
+				hurt_particles_process_mat.direction.x = 1
 		
 		if (current_state == States.READY):
 			#print("FIRE!!")

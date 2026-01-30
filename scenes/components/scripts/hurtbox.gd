@@ -31,5 +31,7 @@ func _ready():
 
 ##Reduces the HP value of the hurtbox's parent
 func take_damage(x : int):
+	if layers & 8:
+		get_parent().take_knockback(100,Vector2(-10,-10))
 	var HP = get_parent().find_child("Health")
 	HP.set_health(HP.health - x)
