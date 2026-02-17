@@ -159,6 +159,16 @@ focus_previous = NodePath("../../../music_vol_container/music_control")
 mouse_default_cursor_shape = 2
 bus_name = "Sound Effects"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/settings_container" unique_id=79095965]
+layout_mode = 2
+
+[node name="sfx_vol_label" type="Label" parent="PanelContainer/MarginContainer/settings_container/HBoxContainer" unique_id=2020539972]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_8gpq7")
+theme_override_font_sizes/font_size = 30
+text = "Input Map"
+
 [node name="exit-settings" type="Button" parent="PanelContainer/MarginContainer/settings_container" unique_id=1780541166]
 layout_mode = 2
 size_flags_horizontal = 4

@@ -303,10 +303,10 @@ text = "Space to jump"
 horizontal_alignment = 1
 
 [node name="Move_Interact" type="RichTextLabel" parent="." unique_id=2140304702]
-offset_left = 67.0
-offset_top = 354.0
-offset_right = 283.0
-offset_bottom = 429.0
+offset_left = 57.0
+offset_top = 317.0
+offset_right = 325.0
+offset_bottom = 392.0
 theme_override_fonts/normal_font = ExtResource("7_xliqy")
 text = "WASD to move
 K to interact (try it on the campfire)"

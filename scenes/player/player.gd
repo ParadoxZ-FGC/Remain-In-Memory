@@ -16,7 +16,7 @@ enum player_states {User_Controlled, System_Controlled}
 @export var max_run_speed = 500
 @export var stop_force = 8000
 @export var drag_force = 500
-@export var stone: AudioStreamPlayer2D
+@export var walking_sfx: AudioStreamPlayer2D
 @export var knockbackTime: float = 0.05 #Determines how long the player is in knockback, @TODO might move to the knockback function itself
 @export var to_scene_on_death := true
 @export var death_scene : String
@@ -76,6 +76,7 @@ func _physics_process(delta):
 	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
 		if not inKnockback:
 			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
+			#move(Input.get_vector("move_left", "move_right", "look_up", "crouch_look_down"), delta)
 		if Input.is_action_just_pressed("attack"):
 			$Sword.attack()
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
@@ -92,13 +93,13 @@ func _physics_process(delta):
 	
 	if velocity.x != 0:
 		if is_on_floor(): 
-			if !stone.playing:
-				stone.play()
+			if !walking_sfx.playing:
+				walking_sfx.play()
 		else: 
-			stone.stop()
+			walking_sfx.stop()
 		
 	else: 
-		stone.stop()
+		walking_sfx.stop()
 		$AnimatedPlayerSprite.animation = "idle"
 	
 	if velocity.x != 0 and not inKnockback:
@@ -155,7 +156,7 @@ func jump_stop():
 		velocity.y = -100
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if (current_player_state == player_states.User_Controlled):
 		if (event.is_action_pressed("crouch_look_down")):
 			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1)
