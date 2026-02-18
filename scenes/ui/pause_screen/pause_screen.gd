@@ -11,9 +11,9 @@ func _ready():
 	rect.material.set_shader_parameter("lod", 0)
 	visible = true
 	settings.hide()
-	for child in $PanelContainer/VBoxContainer.get_children():
-		child.disabled = true
-	$AnimationPlayer.play("RESET")
+	for child in $PanelContainer/MarginContainer/VBoxContainer.get_children():
+		if child is not HSeparator:
+			child.disabled = true
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -29,15 +29,17 @@ func _unhandled_input(event: InputEvent) -> void:
 func resume():  
 	resume_button.release_focus()
 	get_tree().paused = false
-	for child in $PanelContainer/VBoxContainer.get_children():
-		child.disabled = true
+	for child in $PanelContainer/MarginContainer/VBoxContainer.get_children():
+		if child is not HSeparator:
+			child.disabled = true
 	$AnimationPlayer.play_backwards("blur")
 
 
 func pause():
 	get_tree().paused = true
-	for child in $PanelContainer/VBoxContainer.get_children():
-		child.disabled = false
+	for child in $PanelContainer/MarginContainer/VBoxContainer.get_children():
+		if child is not HSeparator:
+			child.disabled = false
 	$AnimationPlayer.play("blur")
 
 

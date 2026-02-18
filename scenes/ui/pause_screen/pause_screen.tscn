@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8umepsy68yck"]
+[gd_scene format=3 uid="uid://c8umepsy68yck"]
 
 [ext_resource type="Script" uid="uid://2ddfhdbvsq4v" path="res://scenes/ui/pause_screen/pause_screen.gd" id="1_fs5ud"]
 [ext_resource type="Shader" uid="uid://bffb1cpqbfaua" path="res://scenes/ui/pause_screen/pause_screen.gdshader" id="1_j1h8m"]
@@ -10,6 +10,18 @@ resource_local_to_scene = true
 shader = ExtResource("1_j1h8m")
 shader_parameter/lod = 0.0
 shader_parameter/tint_color = Vector4(0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_vp1i6"]
+offsets = PackedFloat32Array(0, 0.55333334, 1)
+colors = PackedColorArray(0, 0.21176471, 0.2509804, 1, 0, 0, 0, 1, 2.466701e-07, 0.21316963, 0.103483565, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_slum2"]
+gradient = SubResource("Gradient_vp1i6")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8jw4"]
+texture = SubResource("GradientTexture2D_slum2")
+region_rect = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Animation" id="Animation_8hkqw"]
 length = 0.001
@@ -96,7 +108,7 @@ _data = {
 &"blur": SubResource("Animation_dqt4f")
 }
 
-[node name="PauseScreen" type="Control" node_paths=PackedStringArray("resume_button", "settings", "vbox", "rect")]
+[node name="PauseScreen" type="Control" unique_id=975962246 node_paths=PackedStringArray("resume_button", "settings", "vbox", "rect")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -105,13 +117,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fs5ud")
-resume_button = NodePath("PanelContainer/VBoxContainer/Resume")
+resume_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Resume")
 scene = ExtResource("2_1coml")
 settings = NodePath("Settings")
-vbox = NodePath("PanelContainer/VBoxContainer")
+vbox = NodePath("PanelContainer/MarginContainer/VBoxContainer")
 rect = NodePath("ColorRect")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=31511425]
 material = SubResource("ShaderMaterial_fs5ud")
 layout_mode = 1
 anchors_preset = 15
@@ -120,58 +132,89 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1015258853]
 modulate = Color(1, 1, 1, 0)
+clip_contents = true
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -354.0
-offset_top = -255.0
-offset_right = 354.0
-offset_bottom = 255.0
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_r8jw4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=835484377]
 layout_mode = 2
-size_flags_vertical = 4
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
 
-[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1380784519]
 layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Resume" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1643973243]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.33
+theme_override_font_sizes/font_size = 50
 text = "Resume"
+flat = true
 
-[node name="Settings" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=355214394]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.33
+theme_override_font_sizes/font_size = 50
 text = "Settings"
+flat = true
 
-[node name="Title Screen" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1465953415]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+
+[node name="Title Screen" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1965131188]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.33
+theme_override_font_sizes/font_size = 50
 text = "Exit to Title Screen
 "
+flat = true
 
-[node name="Alt F4" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Alt F4" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1408647572]
 layout_mode = 2
-text = "Exit to desktop
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.33
+theme_override_font_sizes/font_size = 50
+text = "Exit to Desktop
 "
+flat = true
 
-[node name="Restart(For Debugging)" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1966448864]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "Restart(Debugger)"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0enuw")
-}
+[node name="Restart(For Debugging)" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1165783397]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/font_size = 50
+text = "Restart (Debugger)"
+flat = true
 
-[node name="Settings" parent="." instance=ExtResource("4_1coml")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1484331178]
+libraries/ = SubResource("AnimationLibrary_0enuw")
+
+[node name="Settings" parent="." unique_id=1369571057 instance=ExtResource("4_1coml")]
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Title Screen" to="." method="_on_title_screen_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Alt F4" to="." method="_on_alt_f_4_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart(For Debugging)" to="." method="_on_restart_for_debugging_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Title Screen" to="." method="_on_title_screen_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Alt F4" to="." method="_on_alt_f_4_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Restart(For Debugging)" to="." method="_on_restart_for_debugging_pressed"]

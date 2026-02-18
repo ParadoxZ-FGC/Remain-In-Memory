@@ -159,7 +159,7 @@ animations = [{
 radius = 3.0
 height = 10.0
 
-[node name="Player" type="CharacterBody2D" unique_id=369889498 node_paths=PackedStringArray("stone")]
+[node name="Player" type="CharacterBody2D" unique_id=1282606937 node_paths=PackedStringArray("stone")]
 collision_layer = 8
 collision_mask = 2
 floor_constant_speed = true
@@ -168,46 +168,46 @@ script = ExtResource("1_c623h")
 stone = NodePath("AudioStreamPlayer2D")
 death_scene = "res://scenes/title_screen/title_screen.tscn"
 
-[node name="GUILayer" type="CanvasLayer" parent="." unique_id=1930613050]
+[node name="GUILayer" type="CanvasLayer" parent="." unique_id=1441321824]
 
-[node name="GUI" type="Node2D" parent="GUILayer" unique_id=2105466704]
+[node name="GUI" type="Node2D" parent="GUILayer" unique_id=1628567239]
 position = Vector2(128, 128)
 
-[node name="Gauge" parent="GUILayer/GUI" unique_id=1782121790 instance=ExtResource("7_fcs02")]
+[node name="Gauge" parent="GUILayer/GUI" unique_id=1117448911 instance=ExtResource("7_fcs02")]
 
-[node name="HealthDisplay" parent="GUILayer/GUI" unique_id=559384423 instance=ExtResource("3_fm80t")]
+[node name="HealthDisplay" parent="GUILayer/GUI" unique_id=65973378 instance=ExtResource("3_fm80t")]
 position = Vector2(128, 0)
 
-[node name="Health" type="Node" parent="." unique_id=1648354449 node_paths=PackedStringArray("character_sprite")]
+[node name="Health" type="Node" parent="." unique_id=1629609024 node_paths=PackedStringArray("character_sprite")]
 script = ExtResource("2_lvxji")
 max_health = 6
 character_sprite = NodePath("../AnimatedPlayerSprite")
 damage_blink_color = Color(0.5924475, 2.201982e-06, 4.3317675e-07, 1)
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
-[node name="DialogueHandler" parent="." unique_id=1892676508 instance=ExtResource("3_ugbui")]
+[node name="DialogueHandler" parent="." unique_id=1857735801 instance=ExtResource("3_ugbui")]
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="." unique_id=127478692]
+[node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="." unique_id=881278452]
 material = SubResource("ShaderMaterial_ugbui")
 position = Vector2(0, 2)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_6v243")
 animation = &"walk"
 
-[node name="PlayerCollisionShape" type="CollisionShape2D" parent="." unique_id=1898983511]
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="." unique_id=451519465]
 visible = false
 position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_fcs02")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1563682090]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=549759615]
 stream = ExtResource("6_ugbui")
 volume_db = -10.0
 pitch_scale = 0.75
 attenuation = 0.39229205
 bus = &"Sound Effects"
 
-[node name="Sword" parent="." unique_id=1336528969 instance=ExtResource("10_gx1jg")]
+[node name="Sword" parent="." unique_id=1120895164 instance=ExtResource("10_gx1jg")]
 duration = 0.07
 attackCooldown = 0.1
 multiattack = 3
@@ -215,7 +215,7 @@ comboDuration = 0.5
 comboCooldown = 0.5
 attackType = 1
 
-[node name="sprite" type="AnimatedSprite2D" parent="Sword" unique_id=261656088]
+[node name="sprite" type="AnimatedSprite2D" parent="Sword" unique_id=1590946505]
 visible = false
 position = Vector2(9.000001, 3.0000002)
 rotation = 1.5707964
@@ -223,31 +223,31 @@ scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_ugbui")
 animation = &"attack"
 
-[node name="hitbox" parent="Sword" unique_id=2064013653 instance=ExtResource("12_fm80t")]
+[node name="hitbox" parent="Sword" unique_id=976313947 instance=ExtResource("12_fm80t")]
 visible = false
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
 hitboxType = 1
 layers = 582
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/hitbox" unique_id=685085763]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/hitbox" unique_id=1011931780]
 shape = SubResource("RectangleShape2D_ugbui")
 
-[node name="RayCast2D" type="RayCast2D" parent="Sword/hitbox" unique_id=7525298]
+[node name="RayCast2D" type="RayCast2D" parent="Sword/hitbox" unique_id=516404655]
 position = Vector2(-14.666667, 0)
 scale = Vector2(1.3333334, 6.4516134)
 target_position = Vector2(19, 0)
 collision_mask = 2
 
-[node name="Knockback Direction" type="Marker2D" parent="Sword" unique_id=1557269250]
+[node name="Knockback Direction" type="Marker2D" parent="Sword" unique_id=1069142828]
 visible = false
 position = Vector2(-1, 0)
 
-[node name="Hurtbox" parent="." unique_id=121573106 instance=ExtResource("12_gx1jg")]
+[node name="Hurtbox" parent="." unique_id=844617404 instance=ExtResource("12_gx1jg")]
 visible = false
 layers = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1028479090]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=239767982]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_fcs02")
 debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)

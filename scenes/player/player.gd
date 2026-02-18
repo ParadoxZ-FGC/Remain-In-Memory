@@ -43,7 +43,6 @@ var interact_scene : String #INFO Interactable currently only handles dialogue, 
 func _ready():
 	health.max_health = PlayerData.maximum_health
 	health.health = PlayerData.current_health
-	gauge.needle_angle = PlayerData.current_gauge_angle
 	gauge.enable()
 	EventBus.start_dialogue.connect(_on_dialogue_start)
 	EventBus.finish_dialogue.connect(_text_over)
@@ -235,4 +234,4 @@ func _on_hitbox_impacted() -> void:
 	gauge.needle_angle = gauge.needle_angle + 15.0
 	if gauge.needle_angle >= 270.0:
 		gauge.needle_angle = 0
-		health.set_health(health.health - 1)
+		health.set_health(health.health + 1)

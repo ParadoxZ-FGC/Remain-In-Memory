@@ -961,7 +961,6 @@ position = Vector2(955, 794)
 texture = ExtResource("12_lmcfn")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="MoroseThrone" unique_id=930278259]
-position = Vector2(0, 8)
 emitting = false
 amount = 100
 texture = ExtResource("7_35vq6")
@@ -1065,7 +1064,6 @@ gizmo_extents = 25.0
 metadata/_edit_group_ = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="BossSpawnLocation" unique_id=1819202148]
-position = Vector2(0, 8)
 emitting = false
 amount = 50
 texture = ExtResource("7_35vq6")
