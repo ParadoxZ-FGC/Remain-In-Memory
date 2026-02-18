@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ercv5noohe6b"
-path="res://.godot/imported/door.png-3be30d62300c45d86dfa1f98a47efec7.ctex"
+uid="uid://br0g7t0hh5f3q"
+path="res://.godot/imported/gear-particle.png-baff6fa3970389afed5c16ec37e87167.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/ui/door.png"
-dest_files=["res://.godot/imported/door.png-3be30d62300c45d86dfa1f98a47efec7.ctex"]
+source_file="res://assets/visual/enemies/gear-particle.png"
+dest_files=["res://.godot/imported/gear-particle.png-baff6fa3970389afed5c16ec37e87167.ctex"]
 
 [params]
 
