@@ -15,12 +15,14 @@ func _init() -> void:
 func _on_kbm_choice_pressed() -> void:
 	if(togglePriority == -1): # Check if already in a state
 		togglePriority = 2
+		$"PanelContainer/MarginContainer/HBoxContainer/KBM-Choice".release_focus()
 		EventBus.emit_signal("editBinding")
 
 # Rightside button selection. Handles Controller input
 func _on_con_choice_pressed() -> void:
 	if(togglePriority == -1): # Check if already in a state
 		togglePriority = 3
+		$"PanelContainer/MarginContainer/HBoxContainer/Con-Choice".release_focus()
 		EventBus.emit_signal("editBinding")
 
 # Sets the visual UI configurations of the input editor node
@@ -40,11 +42,13 @@ func updateButtons() -> void:
 		print()
 		print("ISSUE!")
 		print(InputMap.action_get_events(setting_name))
-	$"PanelContainer/MarginContainer/HBoxContainer/KBM-Choice".text = processInputString(kbm.as_text())
-	$"PanelContainer/MarginContainer/HBoxContainer/Con-Choice".text = processInputString(con.as_text())
+	$"PanelContainer/MarginContainer/HBoxContainer/KBM-Choice".text = processInputString(kbm)
+	$"PanelContainer/MarginContainer/HBoxContainer/Con-Choice".text = processInputString(con)
 
 # For any InputEvent, derive a human-friendly name
-func processInputString(n: String) -> String:
+func processInputString(ie: InputEvent) -> String:
+	if(ie == null): return "[ ]" #In the case that only one control method exists
+	var n = ie.as_text()
 	if(n.contains(" - Physical")): return n.get_slice(" - Physical",0)
 	if(n.contains("Joypad Button")):
 		return n.get_slice("(",1).get_slice(",",0)
@@ -64,13 +68,15 @@ func processInputString(n: String) -> String:
 func _input(event: InputEvent) -> void:
 	if(event is InputEventMouseMotion): return
 	if(togglePriority == -1): return
+	if(event is InputEventMouseButton && event.double_click):
+		event.double_click = false;
 	updateBinding(event)
 
 # Updates input bindings by editing the specific control method and recreating
 # the entry in the InputMap to preserve index order
 func updateBinding(input: InputEvent):
-	if(togglePriority == 0): kbm = input
-	elif(togglePriority == 1): con = input
+	if(togglePriority == 0 && !input.is_action(setting_name)): kbm = input
+	elif(togglePriority == 1 && !input.is_action(setting_name)): con = input
 	InputMap.action_erase_events(setting_name)
 	InputMap.action_add_event(setting_name,kbm)
 	InputMap.action_add_event(setting_name,con)
