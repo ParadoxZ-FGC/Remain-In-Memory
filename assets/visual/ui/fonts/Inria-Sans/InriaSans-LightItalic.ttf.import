@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bprtxihf3hu4e"
-path="res://.godot/imported/InriaSans-LightItalic.ttf-c5a00187e4b1c35adcc04fbe6a61359f.fontdata"
+path="res://.godot/imported/InriaSans-LightItalic.ttf-2bcc50d4e7d764252699c1daebf9a224.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/UI/fonts/Inria-Sans/InriaSans-LightItalic.ttf"
-dest_files=["res://.godot/imported/InriaSans-LightItalic.ttf-c5a00187e4b1c35adcc04fbe6a61359f.fontdata"]
+source_file="res://assets/visual/ui/fonts/Inria-Sans/InriaSans-LightItalic.ttf"
+dest_files=["res://.godot/imported/InriaSans-LightItalic.ttf-2bcc50d4e7d764252699c1daebf9a224.fontdata"]
 
 [params]
 

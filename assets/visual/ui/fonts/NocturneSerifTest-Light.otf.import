@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dbl4wvy4c7130"
-path="res://.godot/imported/NocturneSerifTest-Light.otf-5150ab8108ef05f3a76bb879f42ad963.fontdata"
+path="res://.godot/imported/NocturneSerifTest-Light.otf-e6c327fa4ca298a1aee808006e577f9b.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/UI/fonts/NocturneSerifTest-Light.otf"
-dest_files=["res://.godot/imported/NocturneSerifTest-Light.otf-5150ab8108ef05f3a76bb879f42ad963.fontdata"]
+source_file="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf"
+dest_files=["res://.godot/imported/NocturneSerifTest-Light.otf-e6c327fa4ca298a1aee808006e577f9b.fontdata"]
 
 [params]
 

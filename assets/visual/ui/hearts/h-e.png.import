@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2356anoxvhp"
-path="res://.godot/imported/h-e.png-a376971daab85909020b370e752a9c36.ctex"
+path="res://.godot/imported/h-e.png-4f60b068604f7561980572765cf1d45d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/UI/hearts/h-e.png"
-dest_files=["res://.godot/imported/h-e.png-a376971daab85909020b370e752a9c36.ctex"]
+source_file="res://assets/visual/ui/hearts/h-e.png"
+dest_files=["res://.godot/imported/h-e.png-4f60b068604f7561980572765cf1d45d.ctex"]
 
 [params]
 

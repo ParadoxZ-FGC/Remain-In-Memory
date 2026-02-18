@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7m4k4q815gv1"]
+[gd_scene format=3 uid="uid://b7m4k4q815gv1"]
 
 [ext_resource type="Script" uid="uid://2tsbidi4wljt" path="res://scenes/ui/settings_screen/settings_screen.gd" id="1_mpc1u"]
 [ext_resource type="PackedScene" uid="uid://dxeg8qfusavyd" path="res://scenes/ui/volume_slider/volume_slider.tscn" id="2_lcphq"]
@@ -6,7 +6,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcphq"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Settings" type="Control" node_paths=PackedStringArray("exit_settings")]
+[node name="Settings" type="Control" unique_id=1868414710 node_paths=PackedStringArray("exit_settings")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +18,7 @@ grow_vertical = 2
 script = ExtResource("1_mpc1u")
 exit_settings = NodePath("PanelContainer/MarginContainer/VBoxContainer/exit-settings")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=808237670]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lcphq")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=782765113]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/margin_left = 300
@@ -35,27 +35,27 @@ theme_override_constants/margin_top = 200
 theme_override_constants/margin_right = 300
 theme_override_constants/margin_bottom = 200
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=256093230]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=764212823]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 25
 
-[node name="Master-Vol-Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Master-Vol-Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1596042435]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Master"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=400342299]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Master" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Control" instance=ExtResource("2_lcphq")]
+[node name="Master" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Control" unique_id=1768671900 instance=ExtResource("2_lcphq")]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 0
 offset_right = 400.0
@@ -64,60 +64,60 @@ tooltip_text = "Master
 "
 bus_name = "Master"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2053087819]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 25
 
-[node name="Music-Vol-Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Music-Vol-Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1524009884]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Music"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=811797971]
 custom_minimum_size = Vector2(400, 25)
 layout_mode = 2
 
-[node name="Music" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Control" instance=ExtResource("2_lcphq")]
+[node name="Music" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Control" unique_id=173065154 instance=ExtResource("2_lcphq")]
 custom_minimum_size = Vector2(400, 25)
 layout_mode = 0
 offset_right = 400.0
 offset_bottom = 25.0
 bus_name = "Music"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1391756230]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 25
 
-[node name="SoundEffect-Vol-Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="SoundEffect-Vol-Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=843862189]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Sound Effects"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1196624565]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="Sound Effects" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/Control" instance=ExtResource("2_lcphq")]
+[node name="Sound Effects" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/Control" unique_id=1080216931 instance=ExtResource("2_lcphq")]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 0
 offset_right = 400.0
 offset_bottom = 16.0
 bus_name = "Sound Effects"
 
-[node name="exit-settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="exit-settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2047704747]
 layout_mode = 2
 text = "Back"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=854992212]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 400.0
 grow_horizontal = 2
 
-[node name="Master-Vol-Label" type="Label" parent="VBoxContainer"]
+[node name="Master-Vol-Label" type="Label" parent="VBoxContainer" unique_id=1680583217]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Settings"
