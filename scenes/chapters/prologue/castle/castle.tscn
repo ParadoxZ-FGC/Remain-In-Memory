@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="8_fct1m"]
 [ext_resource type="Material" uid="uid://bjcx6ebxx13kf" path="res://scenes/chapters/prologue/castle/castle_p2.tres" id="9_yuadt"]
 [ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/enemy/enemy.tscn" id="11_ra2nw"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="13_uqdrb"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="13_uqdrb"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/ui/pause_screen/pause_screen.tscn" id="14_uqdrb"]
 [ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="15_3po6j"]
 
@@ -716,6 +716,8 @@ limit_left = 0
 limit_top = -1500
 limit_right = 1920
 limit_bottom = 1140
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
 
 [node name="Enemies" type="CanvasGroup" parent="." unique_id=1635850376]
 metadata/_edit_group_ = true
@@ -938,14 +940,15 @@ metadata/_edit_lock_ = true
 
 [node name="Doors" type="Node2D" parent="." unique_id=203503854]
 
-[node name="ToTown" parent="Doors" unique_id=1564227054 instance=ExtResource("15_3po6j")]
-position = Vector2(76, 992)
-spawn_position = 2
-level_scene = "res://scenes/chapters/prologue/town/town.tscn"
-destination = "ToCastle"
-
 [node name="ToThroneRoom" parent="Doors" unique_id=763532232 instance=ExtResource("15_3po6j")]
 position = Vector2(1780, -1120)
 spawn_position = 1
 level_scene = "res://scenes/chapters/prologue/throne_room/throne_room.tscn"
 destination = "ToCastle"
+
+[node name="ToDream" parent="Doors" unique_id=1818827439 instance=ExtResource("15_3po6j")]
+position = Vector2(1780, -1120)
+spawn_position = 1
+level_scene = "res://scenes/chapters/prologue/dream_town/dream_town.tscn"
+destination = "ToDream"
+enabled = false

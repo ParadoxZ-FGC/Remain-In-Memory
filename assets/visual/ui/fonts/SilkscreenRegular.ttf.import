@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dbl4wvy4c7130"
-path="res://.godot/imported/NocturneSerifTest-Light.otf-e6c327fa4ca298a1aee808006e577f9b.fontdata"
+uid="uid://c7dc7sfjmpx8c"
+path="res://.godot/imported/SilkscreenRegular.ttf-3756c50500bb0b11fd6b496f79a0f575.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf"
-dest_files=["res://.godot/imported/NocturneSerifTest-Light.otf-e6c327fa4ca298a1aee808006e577f9b.fontdata"]
+source_file="res://assets/visual/ui/fonts/SilkscreenRegular.ttf"
+dest_files=["res://.godot/imported/SilkscreenRegular.ttf-3756c50500bb0b11fd6b496f79a0f575.fontdata"]
 
 [params]
 

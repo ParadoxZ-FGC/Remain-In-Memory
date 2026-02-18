@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/ui/settings_screen/settings_screen.tscn" id="3_3swuw"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="4_pcs22"]
 [ext_resource type="StyleBox" uid="uid://bwhnh85kwt0k6" path="res://assets/visual/ui/main_menu_button.tres" id="5_yegqs"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="9_4xtok"]
-[ext_resource type="FontFile" uid="uid://c7dc7sfjmpx8c" path="res://assets/visual/ui/fonts/Silkscreen-Regular.ttf" id="9_q5m6g"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="9_4xtok"]
+[ext_resource type="FontFile" uid="uid://c7dc7sfjmpx8c" path="res://assets/visual/ui/fonts/SilkscreenRegular.ttf" id="9_q5m6g"]
 
 [sub_resource type="Gradient" id="Gradient_yegqs"]
 offsets = PackedFloat32Array(0, 0.55333334, 1)

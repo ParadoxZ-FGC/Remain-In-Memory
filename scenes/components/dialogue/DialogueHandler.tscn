@@ -4,12 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://dcofyjn106o0r" path="res://assets/visual/ui/dialog/dialog_box.png" id="2_uw3ex"]
 [ext_resource type="Texture2D" uid="uid://crlb4amtu3sgm" path="res://assets/visual/ui/dialog/headshots/morose/neutral.png" id="3_tqpex"]
 [ext_resource type="Texture2D" uid="uid://bxucmvamiyob" path="res://assets/visual/ui/dialog/headshots/traveler/neutral.png" id="4_0syfc"]
+[ext_resource type="FontFile" uid="uid://dccidyfswk4x8" path="res://assets/visual/ui/fonts/NocturneSerifSemibold.otf" id="4_s0s55"]
+[ext_resource type="FontFile" uid="uid://dyewccjcoyfg6" path="res://assets/visual/ui/fonts/NocturneSerifMediumItalic.otf" id="5_gjvq8"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="5_uw3ex"]
+[ext_resource type="Theme" uid="uid://7bon7hlkrhon" path="res://default_font.tres" id="8_2axq6"]
 
-[node name="DialogueHandler" type="CanvasLayer"]
+[node name="DialogueHandler" type="CanvasLayer" unique_id=2030627623]
 script = ExtResource("1_tcvru")
 time_between_characters = 0.08
 
-[node name="RightSideDialog" type="TextureRect" parent="."]
+[node name="RightSideDialog" type="TextureRect" parent="." unique_id=238466320]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +27,7 @@ grow_vertical = 2
 texture = ExtResource("2_uw3ex")
 metadata/_edit_group_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="RightSideDialog"]
+[node name="HBoxContainer" type="HBoxContainer" parent="RightSideDialog" unique_id=199772934]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
@@ -39,14 +43,17 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Text" type="RichTextLabel" parent="RightSideDialog/HBoxContainer"]
+[node name="Text" type="RichTextLabel" parent="RightSideDialog/HBoxContainer" unique_id=2099214322]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(0.72678554, 0.7639458, 0.6592749, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_constants/line_separation = 0
-theme_override_font_sizes/normal_font_size = 28
+theme_override_fonts/normal_font = ExtResource("5_uw3ex")
+theme_override_fonts/bold_font = ExtResource("4_s0s55")
+theme_override_fonts/italics_font = ExtResource("5_gjvq8")
+theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 28
 theme_override_font_sizes/bold_italics_font_size = 28
 theme_override_font_sizes/italics_font_size = 28
@@ -56,7 +63,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Speaker" type="TextureRect" parent="RightSideDialog/HBoxContainer"]
+[node name="Speaker" type="TextureRect" parent="RightSideDialog/HBoxContainer" unique_id=728315116]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -64,7 +71,7 @@ size_flags_stretch_ratio = 0.3
 texture = ExtResource("3_tqpex")
 stretch_mode = 5
 
-[node name="LeftSideDialog" type="TextureRect" parent="."]
+[node name="LeftSideDialog" type="TextureRect" parent="." unique_id=1603380760]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,7 +85,7 @@ grow_vertical = 2
 texture = ExtResource("2_uw3ex")
 metadata/_edit_group_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LeftSideDialog"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftSideDialog" unique_id=471318328]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
@@ -94,7 +101,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Speaker" type="TextureRect" parent="LeftSideDialog/HBoxContainer"]
+[node name="Speaker" type="TextureRect" parent="LeftSideDialog/HBoxContainer" unique_id=2054777955]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -102,14 +109,17 @@ size_flags_stretch_ratio = 0.3
 texture = ExtResource("4_0syfc")
 stretch_mode = 5
 
-[node name="Text" type="RichTextLabel" parent="LeftSideDialog/HBoxContainer"]
+[node name="Text" type="RichTextLabel" parent="LeftSideDialog/HBoxContainer" unique_id=583429839]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(0.72678554, 0.7639458, 0.6592749, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_constants/line_separation = 0
-theme_override_font_sizes/normal_font_size = 28
+theme_override_fonts/normal_font = ExtResource("5_uw3ex")
+theme_override_fonts/bold_font = ExtResource("4_s0s55")
+theme_override_fonts/italics_font = ExtResource("5_gjvq8")
+theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 28
 theme_override_font_sizes/bold_italics_font_size = 28
 theme_override_font_sizes/italics_font_size = 28
@@ -119,7 +129,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GenericDialog" type="TextureRect" parent="."]
+[node name="GenericDialog" type="TextureRect" parent="." unique_id=1854651801]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,7 +143,7 @@ grow_vertical = 2
 texture = ExtResource("2_uw3ex")
 metadata/_edit_group_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GenericDialog"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GenericDialog" unique_id=1789533095]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
@@ -149,14 +159,17 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Text" type="RichTextLabel" parent="GenericDialog/HBoxContainer"]
+[node name="Text" type="RichTextLabel" parent="GenericDialog/HBoxContainer" unique_id=1721815592]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(0.72678554, 0.7639458, 0.6592749, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_constants/line_separation = 0
-theme_override_font_sizes/normal_font_size = 28
+theme_override_fonts/normal_font = ExtResource("5_uw3ex")
+theme_override_fonts/bold_font = ExtResource("4_s0s55")
+theme_override_fonts/italics_font = ExtResource("5_gjvq8")
+theme_override_font_sizes/normal_font_size = 26
 theme_override_font_sizes/bold_font_size = 28
 theme_override_font_sizes/bold_italics_font_size = 28
 theme_override_font_sizes/italics_font_size = 28
@@ -166,7 +179,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResponseDialog" type="TextureRect" parent="."]
+[node name="ResponseDialog" type="TextureRect" parent="." unique_id=669102971]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,7 +193,7 @@ grow_vertical = 2
 texture = ExtResource("2_uw3ex")
 metadata/_edit_group_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ResponseDialog"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ResponseDialog" unique_id=665668745]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
@@ -196,62 +209,66 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="ChoiceOne" type="Button" parent="ResponseDialog/VBoxContainer"]
+[node name="ChoiceOne" type="Button" parent="ResponseDialog/VBoxContainer" unique_id=1875640793]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../ChoiceFour")
 focus_neighbor_bottom = NodePath("../ChoiceTwo")
 focus_next = NodePath("../ChoiceTwo")
 focus_previous = NodePath("../ChoiceFour")
+theme = ExtResource("8_2axq6")
 action_mode = 0
 button_mask = 0
 text = "Alpha"
 flat = true
 text_direction = 3
 
-[node name="ChoiceTwo" type="Button" parent="ResponseDialog/VBoxContainer"]
+[node name="ChoiceTwo" type="Button" parent="ResponseDialog/VBoxContainer" unique_id=258513879]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../ChoiceOne")
 focus_neighbor_bottom = NodePath("../ChoiceThree")
 focus_next = NodePath("../ChoiceThree")
 focus_previous = NodePath("../ChoiceOne")
+theme = ExtResource("8_2axq6")
 action_mode = 0
 button_mask = 0
 text = "Beta"
 flat = true
 text_direction = 3
 
-[node name="ChoiceThree" type="Button" parent="ResponseDialog/VBoxContainer"]
+[node name="ChoiceThree" type="Button" parent="ResponseDialog/VBoxContainer" unique_id=102177797]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../ChoiceTwo")
 focus_neighbor_bottom = NodePath("../ChoiceFour")
 focus_next = NodePath("../ChoiceFour")
 focus_previous = NodePath("../ChoiceTwo")
+theme = ExtResource("8_2axq6")
 action_mode = 0
 button_mask = 0
 text = "Gamma"
 flat = true
 text_direction = 3
 
-[node name="ChoiceFour" type="Button" parent="ResponseDialog/VBoxContainer"]
+[node name="ChoiceFour" type="Button" parent="ResponseDialog/VBoxContainer" unique_id=1559532659]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../ChoiceThree")
 focus_neighbor_bottom = NodePath("../ChoiceOne")
 focus_next = NodePath("../ChoiceOne")
 focus_previous = NodePath("../ChoiceThree")
+theme = ExtResource("8_2axq6")
 action_mode = 0
 button_mask = 0
 text = "Delta"
 flat = true
 text_direction = 3
 
-[node name="typingTimer" type="Timer" parent="."]
+[node name="typingTimer" type="Timer" parent="." unique_id=901371929]
 wait_time = 0.05
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2055024568]
 pitch_scale = 0.9
 
 [connection signal="timeout" from="typingTimer" to="." method="_on_typing_timer_timeout"]

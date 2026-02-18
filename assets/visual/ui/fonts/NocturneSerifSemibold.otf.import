@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b7diwbd0lb1ge"
-path="res://.godot/imported/Silkscreen-Bold.ttf-2bd18b33ef224b6e0acc7b78db75798e.fontdata"
+uid="uid://dccidyfswk4x8"
+path="res://.godot/imported/NocturneSerifSemibold.otf-a1c8c418d0209e3b00e346d112fd6152.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/ui/fonts/Silkscreen-Bold.ttf"
-dest_files=["res://.godot/imported/Silkscreen-Bold.ttf-2bd18b33ef224b6e0acc7b78db75798e.fontdata"]
+source_file="res://assets/visual/ui/fonts/NocturneSerifSemibold.otf"
+dest_files=["res://.godot/imported/NocturneSerifSemibold.otf-a1c8c418d0209e3b00e346d112fd6152.fontdata"]
 
 [params]
 

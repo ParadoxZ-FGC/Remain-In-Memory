@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="2_h4h7o"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="3_mg604"]
 [ext_resource type="PackedScene" uid="uid://cp2nwh0krspaf" path="res://scenes/components/dialogue_interactable.tscn" id="7_tou0t"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="7_xliqy"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="7_xliqy"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/ui/pause_screen/pause_screen.tscn" id="8_a45m6"]
 [ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="10_qd2mc"]
 
@@ -266,6 +266,8 @@ limit_left = -200
 limit_top = -100
 limit_right = 6208
 limit_bottom = 1900
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
 
 [node name="Lighting" type="CanvasGroup" parent="." unique_id=1503349506]
 

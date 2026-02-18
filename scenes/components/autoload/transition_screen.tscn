@@ -59,6 +59,10 @@ script = ExtResource("1_28a13")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1463710643]
 modulate = Color(1, 1, 1, 0)
+light_mask = 513
+visibility_layer = 513
+z_index = 10
+z_as_relative = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

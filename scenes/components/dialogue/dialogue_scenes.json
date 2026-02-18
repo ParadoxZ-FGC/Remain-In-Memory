@@ -101,7 +101,7 @@
 				"emotion" : "aggressive",
 				"side" : "right"
 			},
-			"message" : "[outline_color=black][color=indigo][b][font_size=50][shake rate=25.0 level=15 connected=1]WHO DO YOU THINK I AM?![/shake][/font_size][/b][/color][/outline_color]",
+			"message" : "[outline_color=black][color=indigo][b][font_size=50][shake rate=25.0 level=15 connected=1]WHO DO YOU THINK I AM?[/shake][/font_size][/b][/color][/outline_color]",
 			"player_responses" : "",
 			"next_scene" : ""
 		},
