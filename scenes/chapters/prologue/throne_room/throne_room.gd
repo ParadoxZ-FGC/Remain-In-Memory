@@ -78,7 +78,7 @@ func _on_player_death():
 	var tweener = create_tween()
 	tweener.tween_property($Player, "modulate", Color(0,0,0,1), 1.5)
 	tweener.chain().tween_property($Player, "modulate", Color(0,0,0,0), 1.5)
-	$Player/Camera2D.screen_shake(1, 3)
+	if($Player/Camera2D != null): $Player/Camera2D.screen_shake(1, 3)
 	await tweener.finished
 	$Player.visible = false
 	EventBus.swap_control_state.emit()
