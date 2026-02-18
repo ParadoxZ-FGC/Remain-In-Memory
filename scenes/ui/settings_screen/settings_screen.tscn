@@ -1,126 +1,172 @@
 [gd_scene format=3 uid="uid://b7m4k4q815gv1"]
 
 [ext_resource type="Script" uid="uid://2tsbidi4wljt" path="res://scenes/ui/settings_screen/settings_screen.gd" id="1_mpc1u"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="2_8gpq7"]
 [ext_resource type="PackedScene" uid="uid://dxeg8qfusavyd" path="res://scenes/ui/volume_slider/volume_slider.tscn" id="2_lcphq"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcphq"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_8gpq7"]
+offsets = PackedFloat32Array(0, 0.36290324, 0.6451613, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
 
-[node name="Settings" type="Control" unique_id=1868414710 node_paths=PackedStringArray("exit_settings")]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7haj2"]
+gradient = SubResource("Gradient_8gpq7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ub8w1"]
+texture = SubResource("GradientTexture1D_7haj2")
+
+[node name="Settings" type="Control" unique_id=288788557 node_paths=PackedStringArray("exit_settings")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mpc1u")
-exit_settings = NodePath("PanelContainer/MarginContainer/VBoxContainer/exit-settings")
+exit_settings = NodePath("PanelContainer/MarginContainer/settings_container/exit-settings")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=808237670]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=754422721]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_lcphq")
+theme_override_styles/panel = SubResource("StyleBoxTexture_ub8w1")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=782765113]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1554000417]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/margin_left = 300
-theme_override_constants/margin_top = 200
-theme_override_constants/margin_right = 300
-theme_override_constants/margin_bottom = 200
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=256093230]
+[node name="settings_container" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1860939590]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=764212823]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 25
-
-[node name="Master-Vol-Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1596042435]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Master"
-
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=400342299]
-custom_minimum_size = Vector2(400, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Master" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Control" unique_id=1768671900 instance=ExtResource("2_lcphq")]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 16.0
-tooltip_text = "Master
-"
-bus_name = "Master"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2053087819]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 25
-
-[node name="Music-Vol-Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1524009884]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Music"
-
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=811797971]
-custom_minimum_size = Vector2(400, 25)
-layout_mode = 2
-
-[node name="Music" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Control" unique_id=173065154 instance=ExtResource("2_lcphq")]
-custom_minimum_size = Vector2(400, 25)
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 25.0
-bus_name = "Music"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1391756230]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 25
-
-[node name="SoundEffect-Vol-Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=843862189]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Sound Effects"
-
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1196624565]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-
-[node name="Sound Effects" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/Control" unique_id=1080216931 instance=ExtResource("2_lcphq")]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 16.0
-bus_name = "Sound Effects"
-
-[node name="exit-settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2047704747]
-layout_mode = 2
-text = "Back"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=854992212]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 400.0
-grow_horizontal = 2
-
-[node name="Master-Vol-Label" type="Label" parent="VBoxContainer" unique_id=1680583217]
+[node name="settings_label" type="Label" parent="PanelContainer/MarginContainer/settings_container" unique_id=1648111143]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Settings"
-vertical_alignment = 1
+vertical_alignment = 2
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/exit-settings" to="." method="_on_exitsettings_pressed"]
+[node name="master_vol_container" type="HBoxContainer" parent="PanelContainer/MarginContainer/settings_container" unique_id=725789251]
+layout_mode = 2
+theme_override_constants/separation = 121
+
+[node name="master_vol_label" type="Label" parent="PanelContainer/MarginContainer/settings_container/master_vol_container" unique_id=1363386416]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_8gpq7")
+theme_override_font_sizes/font_size = 30
+text = "Master"
+
+[node name="master_control" type="Control" parent="PanelContainer/MarginContainer/settings_container/master_vol_container" unique_id=2024257680]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 2
+
+[node name="Master" parent="PanelContainer/MarginContainer/settings_container/master_vol_container/master_control" unique_id=714447508 instance=ExtResource("2_lcphq")]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -10.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
+tooltip_text = "Master
+"
+focus_neighbor_left = NodePath("../../master_vol_label")
+focus_neighbor_bottom = NodePath("../../../music_vol_container/music_control")
+focus_next = NodePath("../../../music_vol_container/music_control")
+mouse_default_cursor_shape = 2
+bus_name = "Master"
+
+[node name="music_vol_container" type="HBoxContainer" parent="PanelContainer/MarginContainer/settings_container" unique_id=1903433234]
+layout_mode = 2
+theme_override_constants/separation = 135
+
+[node name="music_vol_label" type="Label" parent="PanelContainer/MarginContainer/settings_container/music_vol_container" unique_id=57169869]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_8gpq7")
+theme_override_font_sizes/font_size = 30
+text = "Music"
+
+[node name="music_control" type="Control" parent="PanelContainer/MarginContainer/settings_container/music_vol_container" unique_id=511972942]
+custom_minimum_size = Vector2(400, 25)
+layout_mode = 2
+
+[node name="Music" parent="PanelContainer/MarginContainer/settings_container/music_vol_container/music_control" unique_id=647786008 instance=ExtResource("2_lcphq")]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -12.5
+offset_bottom = 12.5
+grow_horizontal = 0
+grow_vertical = 2
+tooltip_text = "Music"
+focus_neighbor_left = NodePath("../../music_vol_label")
+focus_neighbor_top = NodePath("../../../master_vol_container/master_control")
+focus_neighbor_bottom = NodePath("../../../sfx_vol_container/sfx_control")
+focus_next = NodePath("../../../sfx_vol_container/sfx_control")
+focus_previous = NodePath("../../../master_vol_container/master_control")
+mouse_default_cursor_shape = 2
+bus_name = "Music"
+
+[node name="sfx_vol_container" type="HBoxContainer" parent="PanelContainer/MarginContainer/settings_container" unique_id=446926618]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="sfx_vol_label" type="Label" parent="PanelContainer/MarginContainer/settings_container/sfx_vol_container" unique_id=373558102]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_8gpq7")
+theme_override_font_sizes/font_size = 30
+text = "Sound Effects"
+
+[node name="sfx_control" type="Control" parent="PanelContainer/MarginContainer/settings_container/sfx_vol_container" unique_id=1926213074]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Sound Effects" parent="PanelContainer/MarginContainer/settings_container/sfx_vol_container/sfx_control" unique_id=686553460 instance=ExtResource("2_lcphq")]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+tooltip_text = "Sound Effects"
+focus_neighbor_left = NodePath("../../sfx_vol_label")
+focus_neighbor_top = NodePath("../../../music_vol_container/music_control")
+focus_neighbor_bottom = NodePath("../../../exit-settings")
+focus_next = NodePath("../../../exit-settings")
+focus_previous = NodePath("../../../music_vol_container/music_control")
+mouse_default_cursor_shape = 2
+bus_name = "Sound Effects"
+
+[node name="exit-settings" type="Button" parent="PanelContainer/MarginContainer/settings_container" unique_id=1780541166]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../sfx_vol_container/sfx_control")
+focus_previous = NodePath("../sfx_vol_container/sfx_control")
+theme_override_fonts/font = ExtResource("2_8gpq7")
+theme_override_font_sizes/font_size = 24
+text = " Back "
+icon_alignment = 1
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/settings_container/exit-settings" to="." method="_on_exitsettings_pressed"]
