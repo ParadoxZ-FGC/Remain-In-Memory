@@ -78,11 +78,13 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("attack"):
 			$Sword.attack()
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
+			#[This appears to never be called] print("pressed! #1");
 			currentDialogue = dialogueTypes.Talking
 			DialogueManager.load_dialogue_scene(interact_scene)
 	
 	elif currentDialogue == dialogueTypes.Talking: #If player is in dialogue, only allow interact key which advances it.
 		if Input.is_action_just_pressed("interact"):
+			#[This appears to never be called] print("pressed! #2");
 			pass
 			#dialogueHandler.readFile()
 	
@@ -154,7 +156,7 @@ func jump_stop():
 		velocity.y = -100
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if (current_player_state == player_states.User_Controlled):
 		if (event.is_action_pressed("crouch_look_down")):
 			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1)

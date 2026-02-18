@@ -136,7 +136,7 @@ func _choice_made(choice: String):
 	EventBus.dialogue_segment_finished.emit(DialogueManager.current_cutscene.get(choice))
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and !typingTimer.is_stopped() and !talking_accelerated:
 		_accelerate_reading_speed()
 

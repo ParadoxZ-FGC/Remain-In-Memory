@@ -1,18 +1,20 @@
 [gd_scene format=3 uid="uid://b7m4k4q815gv1"]
 
 [ext_resource type="Script" uid="uid://2tsbidi4wljt" path="res://scenes/ui/settings_screen/settings_screen.gd" id="1_mpc1u"]
+[ext_resource type="Texture2D" uid="uid://d2lycc0eyy47h" path="res://assets/visual/ui/temp_settingspatch2.png" id="2_7haj2"]
 [ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="2_8gpq7"]
 [ext_resource type="PackedScene" uid="uid://dxeg8qfusavyd" path="res://scenes/ui/volume_slider/volume_slider.tscn" id="2_lcphq"]
+[ext_resource type="PackedScene" uid="uid://dvpmfneapc58k" path="res://scenes/ui/settings_screen/input_editor.tscn" id="5_ub8w1"]
 
 [sub_resource type="Gradient" id="Gradient_8gpq7"]
 offsets = PackedFloat32Array(0, 0.36290324, 0.6451613, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7haj2"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kgvak"]
 gradient = SubResource("Gradient_8gpq7")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ub8w1"]
-texture = SubResource("GradientTexture1D_7haj2")
+texture = SubResource("GradientTexture1D_kgvak")
 
 [node name="Settings" type="Control" unique_id=288788557 node_paths=PackedStringArray("exit_settings")]
 layout_mode = 3
@@ -22,7 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mpc1u")
-exit_settings = NodePath("PanelContainer/MarginContainer/settings_container/exit-settings")
+exit_settings = NodePath("PanelContainer/VBoxContainer/MarginContainer/exit-settings")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=754422721]
 layout_mode = 1
@@ -33,38 +35,58 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ub8w1")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1554000417]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=1455627369]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_7haj2")
+region_rect = Rect2(0, 0, 97, 97)
+patch_margin_left = 48
+patch_margin_top = 48
+patch_margin_right = 48
+patch_margin_bottom = 48
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SoundTab" type="MarginContainer" parent="PanelContainer" unique_id=1554000417]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
 
-[node name="settings_container" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1860939590]
+[node name="settings_container" type="VBoxContainer" parent="PanelContainer/SoundTab" unique_id=1860939590]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 25
 
-[node name="settings_label" type="Label" parent="PanelContainer/MarginContainer/settings_container" unique_id=1648111143]
-visible = false
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/SoundTab/settings_container" unique_id=450964877]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="SoundTabLabel" type="Label" parent="PanelContainer/SoundTab/settings_container" unique_id=1648111143]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Settings"
+theme_override_fonts/font = ExtResource("2_8gpq7")
+theme_override_font_sizes/font_size = 32
+text = "Settings : Sound"
 vertical_alignment = 2
 
-[node name="master_vol_container" type="HBoxContainer" parent="PanelContainer/MarginContainer/settings_container" unique_id=725789251]
+[node name="master_vol_container" type="HBoxContainer" parent="PanelContainer/SoundTab/settings_container" unique_id=725789251]
 layout_mode = 2
 theme_override_constants/separation = 121
 
-[node name="master_vol_label" type="Label" parent="PanelContainer/MarginContainer/settings_container/master_vol_container" unique_id=1363386416]
+[node name="master_vol_label" type="Label" parent="PanelContainer/SoundTab/settings_container/master_vol_container" unique_id=1363386416]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("2_8gpq7")
 theme_override_font_sizes/font_size = 30
 text = "Master"
 
-[node name="master_control" type="Control" parent="PanelContainer/MarginContainer/settings_container/master_vol_container" unique_id=2024257680]
+[node name="master_control" type="Control" parent="PanelContainer/SoundTab/settings_container/master_vol_container" unique_id=2024257680]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 
-[node name="Master" parent="PanelContainer/MarginContainer/settings_container/master_vol_container/master_control" unique_id=714447508 instance=ExtResource("2_lcphq")]
+[node name="Master" parent="PanelContainer/SoundTab/settings_container/master_vol_container/master_control" unique_id=714447508 instance=ExtResource("2_lcphq")]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 1
 anchors_preset = 6
@@ -85,22 +107,22 @@ focus_next = NodePath("../../../music_vol_container/music_control")
 mouse_default_cursor_shape = 2
 bus_name = "Master"
 
-[node name="music_vol_container" type="HBoxContainer" parent="PanelContainer/MarginContainer/settings_container" unique_id=1903433234]
+[node name="music_vol_container" type="HBoxContainer" parent="PanelContainer/SoundTab/settings_container" unique_id=1903433234]
 layout_mode = 2
 theme_override_constants/separation = 135
 
-[node name="music_vol_label" type="Label" parent="PanelContainer/MarginContainer/settings_container/music_vol_container" unique_id=57169869]
+[node name="music_vol_label" type="Label" parent="PanelContainer/SoundTab/settings_container/music_vol_container" unique_id=57169869]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("2_8gpq7")
 theme_override_font_sizes/font_size = 30
 text = "Music"
 
-[node name="music_control" type="Control" parent="PanelContainer/MarginContainer/settings_container/music_vol_container" unique_id=511972942]
+[node name="music_control" type="Control" parent="PanelContainer/SoundTab/settings_container/music_vol_container" unique_id=511972942]
 custom_minimum_size = Vector2(400, 25)
 layout_mode = 2
 
-[node name="Music" parent="PanelContainer/MarginContainer/settings_container/music_vol_container/music_control" unique_id=647786008 instance=ExtResource("2_lcphq")]
+[node name="Music" parent="PanelContainer/SoundTab/settings_container/music_vol_container/music_control" unique_id=647786008 instance=ExtResource("2_lcphq")]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 1
 anchors_preset = 6
@@ -122,22 +144,22 @@ focus_previous = NodePath("../../../master_vol_container/master_control")
 mouse_default_cursor_shape = 2
 bus_name = "Music"
 
-[node name="sfx_vol_container" type="HBoxContainer" parent="PanelContainer/MarginContainer/settings_container" unique_id=446926618]
+[node name="sfx_vol_container" type="HBoxContainer" parent="PanelContainer/SoundTab/settings_container" unique_id=446926618]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="sfx_vol_label" type="Label" parent="PanelContainer/MarginContainer/settings_container/sfx_vol_container" unique_id=373558102]
+[node name="sfx_vol_label" type="Label" parent="PanelContainer/SoundTab/settings_container/sfx_vol_container" unique_id=373558102]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("2_8gpq7")
 theme_override_font_sizes/font_size = 30
 text = "Sound Effects"
 
-[node name="sfx_control" type="Control" parent="PanelContainer/MarginContainer/settings_container/sfx_vol_container" unique_id=1926213074]
+[node name="sfx_control" type="Control" parent="PanelContainer/SoundTab/settings_container/sfx_vol_container" unique_id=1926213074]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="Sound Effects" parent="PanelContainer/MarginContainer/settings_container/sfx_vol_container/sfx_control" unique_id=686553460 instance=ExtResource("2_lcphq")]
+[node name="Sound Effects" parent="PanelContainer/SoundTab/settings_container/sfx_vol_container/sfx_control" unique_id=686553460 instance=ExtResource("2_lcphq")]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 1
 anchors_preset = 6
@@ -153,20 +175,111 @@ grow_vertical = 2
 tooltip_text = "Sound Effects"
 focus_neighbor_left = NodePath("../../sfx_vol_label")
 focus_neighbor_top = NodePath("../../../music_vol_container/music_control")
-focus_neighbor_bottom = NodePath("../../../exit-settings")
-focus_next = NodePath("../../../exit-settings")
+focus_neighbor_bottom = NodePath("../../../../../VBoxContainer/MarginContainer/exit-settings")
+focus_next = NodePath("../../../../../VBoxContainer/MarginContainer/exit-settings")
 focus_previous = NodePath("../../../music_vol_container/music_control")
 mouse_default_cursor_shape = 2
 bus_name = "Sound Effects"
 
-[node name="exit-settings" type="Button" parent="PanelContainer/MarginContainer/settings_container" unique_id=1780541166]
+[node name="ControlsTab" type="MarginContainer" parent="PanelContainer" unique_id=2111307871]
 layout_mode = 2
 size_flags_horizontal = 4
-focus_neighbor_top = NodePath("../sfx_vol_container/sfx_control")
-focus_previous = NodePath("../sfx_vol_container/sfx_control")
+size_flags_vertical = 0
+
+[node name="settings_container" type="VBoxContainer" parent="PanelContainer/ControlsTab" unique_id=42180967]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 25
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/ControlsTab/settings_container" unique_id=1426843308]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="ControlTabLabel" type="Label" parent="PanelContainer/ControlsTab/settings_container" unique_id=1682882858]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_8gpq7")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
+text = "Settings : Controls"
+vertical_alignment = 2
+
+[node name="Esc" parent="PanelContainer/ControlsTab/settings_container" unique_id=770657262 instance=ExtResource("5_ub8w1")]
+layout_mode = 2
+
+[node name="MoveLeft" parent="PanelContainer/ControlsTab/settings_container" unique_id=1845830318 instance=ExtResource("5_ub8w1")]
+layout_mode = 2
+
+[node name="MoveRight" parent="PanelContainer/ControlsTab/settings_container" unique_id=1902386497 instance=ExtResource("5_ub8w1")]
+layout_mode = 2
+
+[node name="CrouchDown" parent="PanelContainer/ControlsTab/settings_container" unique_id=1559231021 instance=ExtResource("5_ub8w1")]
+layout_mode = 2
+
+[node name="Jump" parent="PanelContainer/ControlsTab/settings_container" unique_id=1681858642 instance=ExtResource("5_ub8w1")]
+layout_mode = 2
+
+[node name="Attack" parent="PanelContainer/ControlsTab/settings_container" unique_id=73556855 instance=ExtResource("5_ub8w1")]
+layout_mode = 2
+
+[node name="Interact" parent="PanelContainer/ControlsTab/settings_container" unique_id=1873741995 instance=ExtResource("5_ub8w1")]
+layout_mode = 2
+
+[node name="Run" parent="PanelContainer/ControlsTab/settings_container" unique_id=1016108147 instance=ExtResource("5_ub8w1")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=727253349]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=930776425]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="SectionRow" type="MarginContainer" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=1105722885]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/SectionRow" unique_id=347480996]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="SoundToggle" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/SectionRow/HBoxContainer" unique_id=1504921452]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_8gpq7")
+theme_override_font_sizes/font_size = 32
+text = "Sound"
+
+[node name="ControlsToggle" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/SectionRow/HBoxContainer" unique_id=552769342]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_8gpq7")
+theme_override_font_sizes/font_size = 32
+text = "Controls"
+
+[node name="exit-settings" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=1780541166]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_neighbor_top = NodePath("../../../SoundTab/settings_container/sfx_vol_container/sfx_control")
+focus_previous = NodePath("../../../SoundTab/settings_container/sfx_vol_container/sfx_control")
+theme_override_fonts/font = ExtResource("2_8gpq7")
+theme_override_font_sizes/font_size = 32
 text = " Back "
 icon_alignment = 1
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/settings_container/exit-settings" to="." method="_on_exitsettings_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/SectionRow/HBoxContainer/SoundToggle" to="." method="_on_sound_toggle_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/SectionRow/HBoxContainer/ControlsToggle" to="." method="_on_controls_toggle_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/exit-settings" to="." method="_on_exitsettings_pressed"]

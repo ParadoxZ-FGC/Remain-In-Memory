@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://crlb4amtu3sgm" path="res://assets/visual/ui/dialog/headshots/morose/neutral.png" id="3_tqpex"]
 [ext_resource type="Texture2D" uid="uid://bxucmvamiyob" path="res://assets/visual/ui/dialog/headshots/traveler/neutral.png" id="4_0syfc"]
 
-[node name="DialogueHandler" type="CanvasLayer"]
+[node name="DialogueHandler" type="CanvasLayer" unique_id=1833591367]
 script = ExtResource("1_tcvru")
 time_between_characters = 0.08
 
-[node name="RightSideDialog" type="TextureRect" parent="."]
+[node name="RightSideDialog" type="TextureRect" parent="." unique_id=1198449259]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ grow_vertical = 2
 texture = ExtResource("2_uw3ex")
 metadata/_edit_group_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="RightSideDialog"]
+[node name="HBoxContainer" type="HBoxContainer" parent="RightSideDialog" unique_id=1156383357]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
@@ -39,7 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Text" type="RichTextLabel" parent="RightSideDialog/HBoxContainer"]
+[node name="Text" type="RichTextLabel" parent="RightSideDialog/HBoxContainer" unique_id=230392740]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -56,7 +56,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Speaker" type="TextureRect" parent="RightSideDialog/HBoxContainer"]
+[node name="Speaker" type="TextureRect" parent="RightSideDialog/HBoxContainer" unique_id=169336237]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -64,7 +64,7 @@ size_flags_stretch_ratio = 0.3
 texture = ExtResource("3_tqpex")
 stretch_mode = 5
 
-[node name="LeftSideDialog" type="TextureRect" parent="."]
+[node name="LeftSideDialog" type="TextureRect" parent="." unique_id=1809396444]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,7 +78,7 @@ grow_vertical = 2
 texture = ExtResource("2_uw3ex")
 metadata/_edit_group_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LeftSideDialog"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftSideDialog" unique_id=982114820]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
@@ -94,7 +94,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Speaker" type="TextureRect" parent="LeftSideDialog/HBoxContainer"]
+[node name="Speaker" type="TextureRect" parent="LeftSideDialog/HBoxContainer" unique_id=1423030440]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -102,7 +102,7 @@ size_flags_stretch_ratio = 0.3
 texture = ExtResource("4_0syfc")
 stretch_mode = 5
 
-[node name="Text" type="RichTextLabel" parent="LeftSideDialog/HBoxContainer"]
+[node name="Text" type="RichTextLabel" parent="LeftSideDialog/HBoxContainer" unique_id=1446699410]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -119,7 +119,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GenericDialog" type="TextureRect" parent="."]
+[node name="GenericDialog" type="TextureRect" parent="." unique_id=1352277939]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,7 +133,7 @@ grow_vertical = 2
 texture = ExtResource("2_uw3ex")
 metadata/_edit_group_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GenericDialog"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GenericDialog" unique_id=16432276]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
@@ -149,7 +149,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Text" type="RichTextLabel" parent="GenericDialog/HBoxContainer"]
+[node name="Text" type="RichTextLabel" parent="GenericDialog/HBoxContainer" unique_id=757250832]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -166,7 +166,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResponseDialog" type="TextureRect" parent="."]
+[node name="ResponseDialog" type="TextureRect" parent="." unique_id=936445634]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,7 +180,7 @@ grow_vertical = 2
 texture = ExtResource("2_uw3ex")
 metadata/_edit_group_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ResponseDialog"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ResponseDialog" unique_id=270250559]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
@@ -196,7 +196,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="ChoiceOne" type="Button" parent="ResponseDialog/VBoxContainer"]
+[node name="ChoiceOne" type="Button" parent="ResponseDialog/VBoxContainer" unique_id=598216320]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../ChoiceFour")
@@ -209,7 +209,7 @@ text = "Alpha"
 flat = true
 text_direction = 3
 
-[node name="ChoiceTwo" type="Button" parent="ResponseDialog/VBoxContainer"]
+[node name="ChoiceTwo" type="Button" parent="ResponseDialog/VBoxContainer" unique_id=89538487]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../ChoiceOne")
@@ -222,7 +222,7 @@ text = "Beta"
 flat = true
 text_direction = 3
 
-[node name="ChoiceThree" type="Button" parent="ResponseDialog/VBoxContainer"]
+[node name="ChoiceThree" type="Button" parent="ResponseDialog/VBoxContainer" unique_id=1768526650]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../ChoiceTwo")
@@ -235,7 +235,7 @@ text = "Gamma"
 flat = true
 text_direction = 3
 
-[node name="ChoiceFour" type="Button" parent="ResponseDialog/VBoxContainer"]
+[node name="ChoiceFour" type="Button" parent="ResponseDialog/VBoxContainer" unique_id=1259264419]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../ChoiceThree")
@@ -248,10 +248,10 @@ text = "Delta"
 flat = true
 text_direction = 3
 
-[node name="typingTimer" type="Timer" parent="."]
+[node name="typingTimer" type="Timer" parent="." unique_id=851795957]
 wait_time = 0.05
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1363757220]
 pitch_scale = 0.9
 
 [connection signal="timeout" from="typingTimer" to="." method="_on_typing_timer_timeout"]
