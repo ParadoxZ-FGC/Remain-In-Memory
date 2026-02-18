@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://rheabj0dgrdu"]
 
 [ext_resource type="Script" uid="uid://dpqny71vw7km3" path="res://scenes/chapters/prologue/credits/prologue_end.gd" id="1_vpquh"]
+[ext_resource type="Theme" uid="uid://7bon7hlkrhon" path="res://default_font.tres" id="2_c3ujm"]
 
 [node name="PrologueEnd" type="Node" unique_id=1721062064]
 script = ExtResource("1_vpquh")
@@ -20,6 +21,7 @@ offset_right = -512.0
 offset_bottom = -504.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_c3ujm")
 theme_override_font_sizes/normal_font_size = 100
 text = "To be continued..."
 horizontal_alignment = 1
@@ -36,6 +38,7 @@ offset_right = -624.0
 offset_bottom = -376.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_c3ujm")
 theme_override_font_sizes/normal_font_size = 32
 text = "...in Act One"
 horizontal_alignment = 2
@@ -52,6 +55,7 @@ offset_right = -640.0
 offset_bottom = -344.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_c3ujm")
 theme_override_font_sizes/normal_font_size = 16
 text = "Press K"
 horizontal_alignment = 1

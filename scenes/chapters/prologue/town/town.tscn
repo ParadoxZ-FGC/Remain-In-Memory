@@ -677,14 +677,13 @@ scale = Vector2(50.000008, 37.39062)
 energy = 0.6
 texture = SubResource("GradientTexture2D_4r36o")
 
-[node name="Move" type="RichTextLabel" parent="." unique_id=1270249651]
-visible = false
-offset_left = 420.0
-offset_top = 955.0
-offset_right = 651.0
-offset_bottom = 984.0
+[node name="Interact" type="RichTextLabel" parent="." unique_id=1270249651]
+offset_left = 1455.0
+offset_top = 954.0
+offset_right = 1717.0
+offset_bottom = 986.0
 theme_override_fonts/normal_font = ExtResource("16_gm85s")
-text = "Shift / Left Trigger to run"
+text = "Use Interact (K) to enter buildings"
 horizontal_alignment = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=247081222]
