@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dvpmfneapc58k"]
+
+[ext_resource type="Script" uid="uid://cja2l5gpqppem" path="res://scenes/ui/settings_screen/input_editor.gd" id="1_cv2gs"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="1_vpw4r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8ct3"]
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 0.5019608)
+border_width_top = 5
+border_width_bottom = 5
+border_color = Color(0.14117648, 0.14117648, 0.14117648, 0.5019608)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="InputEditor" type="Control" unique_id=770657262]
+custom_minimum_size = Vector2(500, 60)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1420.0
+offset_bottom = -1020.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cv2gs")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=235746136]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 60.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x8ct3")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1181817366]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1632612954]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SettingName" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=663674912]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("1_vpw4r")
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "[b]Interact[/b]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="KBM-Choice" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1485854977]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_vpw4r")
+theme_override_font_sizes/font_size = 24
+text = "A"
+
+[node name="Con-Choice" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=601548326]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_vpw4r")
+theme_override_font_sizes/font_size = 20
+text = "A"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/KBM-Choice" to="." method="_on_kbm_choice_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Con-Choice" to="." method="_on_con_choice_pressed"]
