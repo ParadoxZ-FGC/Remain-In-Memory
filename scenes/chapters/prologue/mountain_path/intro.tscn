@@ -194,7 +194,7 @@ gradient = SubResource("Gradient_tou0t")
 fill = 1
 fill_from = Vector2(0.521368, 0.521368)
 
-[node name="Intro" type="Node" unique_id=1423313650]
+[node name="Mountain" type="Node" unique_id=1423313650]
 script = ExtResource("1_tou0t")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1838821472]

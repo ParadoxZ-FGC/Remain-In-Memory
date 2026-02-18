@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://567t451bxtoi"]
+[gd_scene format=3 uid="uid://567t451bxtoi"]
 
 [ext_resource type="Script" uid="uid://dk0covrx4gm74" path="res://new/gauge.gd" id="1_iwwpu"]
 [ext_resource type="Texture2D" uid="uid://m118cd6w5pn8" path="res://new/Steam Gauge.png" id="2_rc423"]
@@ -75,36 +75,34 @@ _data = {
 &"Wiggle": SubResource("Animation_kdq50")
 }
 
-[node name="Gauge" type="Node2D"]
+[node name="Gauge" type="Node2D" unique_id=225876162]
 visible = false
 scale = Vector2(2, 2)
 script = ExtResource("1_iwwpu")
 
-[node name="Offset" type="Node2D" parent="."]
+[node name="Offset" type="Node2D" parent="." unique_id=983461017]
 metadata/_edit_group_ = true
 
-[node name="Base" type="Sprite2D" parent="Offset"]
+[node name="Base" type="Sprite2D" parent="Offset" unique_id=708497608]
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
 
-[node name="Needle" type="Marker2D" parent="Offset"]
+[node name="Needle" type="Marker2D" parent="Offset" unique_id=979471440]
 metadata/_edit_group_ = true
 
-[node name="Needle" type="Sprite2D" parent="Offset/Needle"]
+[node name="Needle" type="Sprite2D" parent="Offset/Needle" unique_id=1481298154]
 rotation = 3.1415925
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
 frame = 1
 
-[node name="Cover" type="Sprite2D" parent="Offset"]
+[node name="Cover" type="Sprite2D" parent="Offset" unique_id=1516106227]
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
 frame = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Offset"]
-libraries = {
-&"": SubResource("AnimationLibrary_mxtn0")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Offset" unique_id=856314557]
+libraries/ = SubResource("AnimationLibrary_mxtn0")

@@ -35,7 +35,7 @@ var interact_scene : String #INFO Interactable currently only handles dialogue, 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
 @onready var dialogueHandler = $DialogueHandler
-@onready var player_sprite := $AnimatedPlayerSprite
+@onready var player_sprite := $player_sprite
 @onready var hearts := $GUILayer/GUI/HealthDisplay
 @onready var gauge := $GUILayer/GUI/Gauge
 
@@ -51,7 +51,7 @@ func _ready():
 	#EventBus.connect("interaction_available", _on_interactable)
 	#EventBus.connect("interaction_unavailable", _off_interactable)
 	#EventBus.connect("finish_dialogue", _text_over)
-	$AnimatedPlayerSprite.play()
+	$player_sprite.play()
 
 
 func _on_dialogue_start():
@@ -76,9 +76,8 @@ func _physics_process(delta):
 	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
 		if not inKnockback:
 			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
-			#move(Input.get_vector("move_left", "move_right", "look_up", "crouch_look_down"), delta)
 		if Input.is_action_just_pressed("attack"):
-			$Sword.attack()
+			$sword.attack()
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
 			currentDialogue = dialogueTypes.Talking
 			DialogueManager.load_dialogue_scene(interact_scene)
@@ -100,19 +99,19 @@ func _physics_process(delta):
 		
 	else: 
 		walking_sfx.stop()
-		$AnimatedPlayerSprite.animation = "idle"
+		$player_sprite.animation = "idle"
 	
 	if velocity.x != 0 and not inKnockback:
-		$AnimatedPlayerSprite.animation = "walk"
-		$AnimatedPlayerSprite.flip_v = false
-		$AnimatedPlayerSprite.flip_h = velocity.x < 0
-		if $Sword.attacking == false:
-			$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+		$player_sprite.animation = "walk"
+		$player_sprite.flip_v = false
+		$player_sprite.flip_h = velocity.x < 0
+		if $sword.attacking == false:
+			$sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
 	
 	if velocity.x != 0 and Input.is_action_pressed("run"):
-		$AnimatedPlayerSprite.speed_scale = 2
+		$player_sprite.speed_scale = 2
 	else:
-		$AnimatedPlayerSprite.speed_scale = 1
+		$player_sprite.speed_scale = 1
 		
 	move_and_slide()
 
@@ -156,15 +155,15 @@ func jump_stop():
 		velocity.y = -100
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if (current_player_state == player_states.User_Controlled):
-		if (event.is_action_pressed("crouch_look_down")):
-			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1)
+		if (event.is_action_pressed("crouch")):
+			$player_sprite.scale = Vector2(0.2, 0.1)
 			$PlayerCollisionShape.scale = Vector2(1, 0.5)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 0.5)
 			
-		elif (event.is_action_released("crouch_look_down")):
-			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.2)
+		elif (event.is_action_released("crouch")):
+			$player_sprite.scale = Vector2(0.2, 0.2)
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
 			
@@ -175,8 +174,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			jump_stop()
 		
 	else:
-		if (event.is_action_released("crouch_look_down")):
-			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.2)
+		if (event.is_action_released("crouch")):
+			$player_sprite.scale = Vector2(0.2, 0.2)
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
 
@@ -220,7 +219,7 @@ func take_knockback(force: float, direction: Vector2):
 	if not inKnockback:
 		inKnockback = true
 		velocity = Vector2(0,0)
-		if $AnimatedPlayerSprite.flip_h:
+		if $player_sprite.flip_h:
 			velocity.x -= force * direction.x
 		else:
 			velocity.x += force * direction.x
