@@ -1,16 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://rheabj0dgrdu"]
+[gd_scene format=3 uid="uid://rheabj0dgrdu"]
 
 [ext_resource type="Script" uid="uid://dpqny71vw7km3" path="res://scenes/chapters/prologue/credits/prologue_end.gd" id="1_vpquh"]
 
-[node name="PrologueEnd" type="Node"]
+[node name="PrologueEnd" type="Node" unique_id=1721062064]
 script = ExtResource("1_vpquh")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=405893533]
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
-[node name="ToBeContinued" type="RichTextLabel" parent="."]
+[node name="ToBeContinued" type="RichTextLabel" parent="." unique_id=979670999]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,7 +26,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 text_direction = 1
 
-[node name="InAct1" type="RichTextLabel" parent="."]
+[node name="InAct1" type="RichTextLabel" parent="." unique_id=1073218383]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -42,7 +42,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 text_direction = 1
 
-[node name="PressK" type="RichTextLabel" parent="."]
+[node name="PressK" type="RichTextLabel" parent="." unique_id=1429049300]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

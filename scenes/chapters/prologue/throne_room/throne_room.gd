@@ -26,7 +26,7 @@ func _post_cutscene_effects(cutscene:String) -> void:
 		var teenie_timer = get_tree().create_timer(2)
 		await teenie_timer.timeout
 		
-		morose = preload("res://scenes/bosses/morose/prologue_morose_v2.tscn").instantiate()
+		morose = preload("res://scenes/bosses/morose/prologue_morose_v3.tscn").instantiate()
 		morose.modulate = Color(1,1,1,0)
 		morose.target = boss_target
 		morose.left_edge = boss_left_bound
@@ -52,7 +52,7 @@ func _post_cutscene_effects(cutscene:String) -> void:
 	elif cutscene == "prologue_boss_attacks":
 		morose.boss.use_parent_material = false
 		morose.sword.visible = true
-		morose.stab(-1)
+		morose.charge()
 		morose.talking = false
 	elif cutscene == "prologue_boss_wins" or cutscene == "prologue_boss_losses":
 		EventBus.swap_control_state.emit()

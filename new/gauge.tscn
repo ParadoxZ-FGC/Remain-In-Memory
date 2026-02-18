@@ -20,7 +20,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_38h6w"]
 resource_name = "Shake"
-length = 0.25
+length = 0.125
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -29,10 +29,10 @@ tracks/0/path = NodePath("Needle/Needle:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0625, 0.125, 0.1875),
+"times": PackedFloat32Array(0, 0.0313, 0.0625, 0.0938),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [3.141592653589793, 3.193952531149623, 3.141592653589793, 3.0892327760299634]
+"values": [3.141592653589793, 3.2288591161895095, 3.141592653589793, 3.0543261909900767]
 }
 
 [sub_resource type="Animation" id="Animation_dgcor"]
@@ -75,34 +75,33 @@ _data = {
 &"Wiggle": SubResource("Animation_kdq50")
 }
 
-[node name="Gauge" type="Node2D" unique_id=225876162]
-visible = false
+[node name="Gauge" type="Node2D" unique_id=374613117]
 scale = Vector2(2, 2)
 script = ExtResource("1_iwwpu")
 
-[node name="Offset" type="Node2D" parent="." unique_id=983461017]
+[node name="Offset" type="Node2D" parent="." unique_id=2014588443]
 metadata/_edit_group_ = true
 
-[node name="Base" type="Sprite2D" parent="Offset" unique_id=708497608]
+[node name="Base" type="Sprite2D" parent="Offset" unique_id=388719511]
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
 
-[node name="Needle" type="Marker2D" parent="Offset" unique_id=979471440]
+[node name="Needle" type="Marker2D" parent="Offset" unique_id=365320796]
 metadata/_edit_group_ = true
 
-[node name="Needle" type="Sprite2D" parent="Offset/Needle" unique_id=1481298154]
+[node name="Needle" type="Sprite2D" parent="Offset/Needle" unique_id=832201627]
 rotation = 3.1415925
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
 frame = 1
 
-[node name="Cover" type="Sprite2D" parent="Offset" unique_id=1516106227]
+[node name="Cover" type="Sprite2D" parent="Offset" unique_id=1906502025]
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
 frame = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Offset" unique_id=856314557]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Offset" unique_id=243686693]
 libraries/ = SubResource("AnimationLibrary_mxtn0")
