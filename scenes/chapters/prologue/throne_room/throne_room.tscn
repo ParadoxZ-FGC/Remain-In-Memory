@@ -987,7 +987,6 @@ limit_left = -250
 limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
-position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 script = ExtResource("11_s4lif")
 

@@ -484,7 +484,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 2800
 limit_bottom = 1080
-position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 
 [node name="Lighting" type="CanvasGroup" parent="." unique_id=1453509637]
