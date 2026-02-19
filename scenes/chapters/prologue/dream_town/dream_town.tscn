@@ -1,8 +1,7 @@
 [gd_scene format=4 uid="uid://bcs6yplsgedtw"]
 
 [ext_resource type="Script" uid="uid://c30i32liqr01v" path="res://scenes/chapters/prologue/dream_town/dream_town.gd" id="1_crvkx"]
-[ext_resource type="AudioStream" uid="uid://rs76aliu3uy6" path="res://assets/audio/bgm/Town-Variant2.mp3" id="2_crvkx"]
-[ext_resource type="Script" uid="uid://o8cxhu2yr1xd" path="res://scenes/scene_trigger.gd" id="3_56y30"]
+[ext_resource type="AudioStream" uid="uid://rs76aliu3uy6" path="res://assets/audio/bgm/d_town_theme2.mp3" id="2_crvkx"]
 [ext_resource type="Texture2D" uid="uid://el662e7dqqae" path="res://assets/visual/bg/city/desaturated-layers/c-0.png" id="4_y6gku"]
 [ext_resource type="Texture2D" uid="uid://bf4ci8surcvng" path="res://assets/visual/bg/city/desaturated-layers/c-1.png" id="5_0yaam"]
 [ext_resource type="Texture2D" uid="uid://x6wn8pl3bqi" path="res://assets/visual/bg/city/desaturated-layers/c-2.png" id="6_1kklw"]
@@ -14,10 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="12_nuyh6"]
 [ext_resource type="Texture2D" uid="uid://bad1do8djipn4" path="res://assets/visual/bg/city/desaturated-layers/c-4.png" id="14_46rou"]
 [ext_resource type="Material" uid="uid://brkmmfw433ie1" path="res://scenes/chapters/prologue/dream_town/dream_town_p.tres" id="15_6kmxp"]
+[ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="15_io47e"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/ui/pause_screen/pause_screen.tscn" id="16_sc5lq"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hmbj"]
-size = Vector2(20, 226)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x65u3"]
 resource_name = "placeholder"
@@ -428,18 +425,6 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
-[node name="SceneTransitions" type="Node2D" parent="." unique_id=1184296576]
-
-[node name="ChangeScene" type="Area2D" parent="SceneTransitions" unique_id=1814254365 groups=["scene_transitions"]]
-position = Vector2(2329, 811)
-collision_layer = 0
-collision_mask = 520
-script = ExtResource("3_56y30")
-path = "res://scenes/prologue/castle/tutorial-two.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ChangeScene" unique_id=1641941719]
-shape = SubResource("RectangleShape2D_0hmbj")
-
 [node name="Background" type="Node2D" parent="." unique_id=175408414]
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
@@ -491,14 +476,16 @@ tile_set = SubResource("TileSet_wy4lw")
 [node name="Player" parent="." unique_id=1927175309 instance=ExtResource("11_4ws4v")]
 position = Vector2(242, 863)
 scale = Vector2(8, 8)
+lower = Vector2(3000, 1080)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=611767174]
 zoom = Vector2(1.6, 1.6)
 limit_left = 0
 limit_top = 0
-limit_right = 3000
+limit_right = 2800
 limit_bottom = 1080
 position_smoothing_enabled = true
+position_smoothing_speed = 4.0
 
 [node name="Lighting" type="CanvasGroup" parent="." unique_id=1453509637]
 visible = false
@@ -592,4 +579,10 @@ offset_right = 5.0
 offset_bottom = 7.0
 metadata/_edit_lock_ = true
 
-[connection signal="body_entered" from="SceneTransitions/ChangeScene" to="SceneTransitions/ChangeScene" method="_on_body_entered"]
+[node name="Doors" type="Node2D" parent="." unique_id=682082394]
+
+[node name="ToCastle" parent="Doors" unique_id=96503864 instance=ExtResource("15_io47e")]
+position = Vector2(2690, 924)
+level_scene = "res://scenes/chapters/prologue/castle/castle.tscn"
+destination = "ToCastle"
+type = 1

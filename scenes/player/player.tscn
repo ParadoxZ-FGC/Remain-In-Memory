@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
+[ext_resource type="Texture2D" uid="uid://brumehf86il6p" path="res://assets/visual/ui/hud.png" id="2_gx1jg"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="2_lvxji"]
 [ext_resource type="PackedScene" uid="uid://dd3tdpid7s8u4" path="res://scenes/player/health_display.tscn" id="3_fm80t"]
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="3_gx1jg"]
 [ext_resource type="PackedScene" uid="uid://snpu574qvx7o" path="res://scenes/components/dialogue/DialogueHandler.tscn" id="3_ugbui"]
 [ext_resource type="Texture2D" uid="uid://bo44qmhu7i2b" path="res://assets/visual/character/player-Sheet.png" id="5_ugbui"]
-[ext_resource type="AudioStream" uid="uid://bkbwq4s1rq16u" path="res://assets/audio/sfx/PC_Footstep1.wav" id="6_ugbui"]
 [ext_resource type="PackedScene" uid="uid://567t451bxtoi" path="res://new/gauge.tscn" id="7_fcs02"]
+[ext_resource type="AudioStream" uid="uid://bqdk4tanl10ox" path="res://assets/audio/sfx/PC_Footsteps_Grass1.wav" id="8_fm80t"]
 [ext_resource type="PackedScene" uid="uid://vspiyrcuxewo" path="res://scenes/components/attack.tscn" id="10_gx1jg"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="12_fm80t"]
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="12_gx1jg"]
@@ -159,55 +160,58 @@ animations = [{
 radius = 3.0
 height = 10.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1282606937 node_paths=PackedStringArray("stone")]
+[node name="Player" type="CharacterBody2D" unique_id=1143754610 node_paths=PackedStringArray("walking_sfx")]
 collision_layer = 8
 collision_mask = 2
 floor_constant_speed = true
 floor_snap_length = 12.0
 script = ExtResource("1_c623h")
-stone = NodePath("AudioStreamPlayer2D")
+walking_sfx = NodePath("walking_sfx")
 death_scene = "res://scenes/title_screen/title_screen.tscn"
 
-[node name="GUILayer" type="CanvasLayer" parent="." unique_id=1441321824]
+[node name="GUILayer" type="CanvasLayer" parent="." unique_id=1808418460]
 
-[node name="GUI" type="Node2D" parent="GUILayer" unique_id=1628567239]
-position = Vector2(128, 128)
+[node name="GUI" type="Node2D" parent="GUILayer" unique_id=356449287]
 
-[node name="Gauge" parent="GUILayer/GUI" unique_id=1117448911 instance=ExtResource("7_fcs02")]
+[node name="HUDbg" type="Sprite2D" parent="GUILayer/GUI" unique_id=1261072761]
+texture = ExtResource("2_gx1jg")
+centered = false
 
-[node name="HealthDisplay" parent="GUILayer/GUI" unique_id=65973378 instance=ExtResource("3_fm80t")]
-position = Vector2(128, 0)
+[node name="Gauge" parent="GUILayer/GUI" unique_id=334908116 instance=ExtResource("7_fcs02")]
+visible = true
+position = Vector2(135, 135)
 
-[node name="Health" type="Node" parent="." unique_id=1629609024 node_paths=PackedStringArray("character_sprite")]
+[node name="HealthDisplay" parent="GUILayer/GUI" unique_id=1851536527 instance=ExtResource("3_fm80t")]
+position = Vector2(280, 90)
+scale = Vector2(5, 5)
+
+[node name="Health" type="Node" parent="." unique_id=478279224 node_paths=PackedStringArray("character_sprite")]
 script = ExtResource("2_lvxji")
 max_health = 6
-character_sprite = NodePath("../AnimatedPlayerSprite")
+character_sprite = NodePath("../player_sprite")
 damage_blink_color = Color(0.5924475, 2.201982e-06, 4.3317675e-07, 1)
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
-[node name="DialogueHandler" parent="." unique_id=1857735801 instance=ExtResource("3_ugbui")]
+[node name="DialogueHandler" parent="." unique_id=61666120 instance=ExtResource("3_ugbui")]
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="." unique_id=881278452]
+[node name="player_sprite" type="AnimatedSprite2D" parent="." unique_id=1346489910]
 material = SubResource("ShaderMaterial_ugbui")
 position = Vector2(0, 2)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_6v243")
 animation = &"walk"
 
-[node name="PlayerCollisionShape" type="CollisionShape2D" parent="." unique_id=451519465]
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="." unique_id=1717978168]
 visible = false
 position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_fcs02")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=549759615]
-stream = ExtResource("6_ugbui")
-volume_db = -10.0
-pitch_scale = 0.75
-attenuation = 0.39229205
+[node name="walking_sfx" type="AudioStreamPlayer2D" parent="." unique_id=897197816]
+stream = ExtResource("8_fm80t")
 bus = &"Sound Effects"
 
-[node name="Sword" parent="." unique_id=1120895164 instance=ExtResource("10_gx1jg")]
+[node name="sword" parent="." unique_id=1340132541 instance=ExtResource("10_gx1jg")]
 duration = 0.07
 attackCooldown = 0.1
 multiattack = 3
@@ -215,7 +219,9 @@ comboDuration = 0.5
 comboCooldown = 0.5
 attackType = 1
 
-[node name="sprite" type="AnimatedSprite2D" parent="Sword" unique_id=1590946505]
+[node name="swing_sfx" type="AudioStreamPlayer2D" parent="sword" unique_id=1840176927]
+
+[node name="sprite" type="AnimatedSprite2D" parent="sword" unique_id=629703404]
 visible = false
 position = Vector2(9.000001, 3.0000002)
 rotation = 1.5707964
@@ -223,35 +229,35 @@ scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_ugbui")
 animation = &"attack"
 
-[node name="hitbox" parent="Sword" unique_id=976313947 instance=ExtResource("12_fm80t")]
+[node name="hitbox" parent="sword" unique_id=1974952317 instance=ExtResource("12_fm80t")]
 visible = false
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
 hitboxType = 1
 layers = 582
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/hitbox" unique_id=1011931780]
+[node name="collision" type="CollisionShape2D" parent="sword/hitbox" unique_id=83036104]
 shape = SubResource("RectangleShape2D_ugbui")
 
-[node name="RayCast2D" type="RayCast2D" parent="Sword/hitbox" unique_id=516404655]
+[node name="RayCast2D" type="RayCast2D" parent="sword/hitbox" unique_id=319138311]
 position = Vector2(-14.666667, 0)
 scale = Vector2(1.3333334, 6.4516134)
 target_position = Vector2(19, 0)
 collision_mask = 2
 
-[node name="Knockback Direction" type="Marker2D" parent="Sword" unique_id=1069142828]
+[node name="knockback_dir" type="Marker2D" parent="sword" unique_id=1360665999]
 visible = false
 position = Vector2(-1, 0)
 
-[node name="Hurtbox" parent="." unique_id=844617404 instance=ExtResource("12_gx1jg")]
+[node name="Hurtbox" parent="." unique_id=464460264 instance=ExtResource("12_gx1jg")]
 visible = false
 layers = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=239767982]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1903995318]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_fcs02")
 debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
 
 [connection signal="health_changed" from="Health" to="GUILayer/GUI/HealthDisplay" method="_on_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
-[connection signal="impacted" from="Sword/hitbox" to="." method="_on_hitbox_impacted"]
+[connection signal="impacted" from="sword/hitbox" to="." method="_on_hitbox_impacted"]

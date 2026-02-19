@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://jt4i8qfjhqs3"]
 
-[ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="1_cg11o"]
+[ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/mountain_s3.mp3" id="1_cg11o"]
 [ext_resource type="Texture2D" uid="uid://de57xb55c6k8n" path="res://assets/visual/tilemaps/earth.png" id="1_sxaqu"]
 [ext_resource type="Script" uid="uid://cg1ftmb3deny0" path="res://scenes/chapters/prologue/mountain_path/intro.gd" id="1_tou0t"]
 [ext_resource type="Material" uid="uid://cxscbwdlfdcbp" path="res://scenes/chapters/prologue/mountain_path/intro_p.tres" id="1_x54yq"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="2_h4h7o"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="3_mg604"]
 [ext_resource type="PackedScene" uid="uid://cp2nwh0krspaf" path="res://scenes/components/dialogue_interactable.tscn" id="7_tou0t"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="7_xliqy"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="7_xliqy"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/ui/pause_screen/pause_screen.tscn" id="8_a45m6"]
 [ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="10_qd2mc"]
 
@@ -194,7 +194,7 @@ gradient = SubResource("Gradient_tou0t")
 fill = 1
 fill_from = Vector2(0.521368, 0.521368)
 
-[node name="Intro" type="Node" unique_id=1423313650]
+[node name="Mountain" type="Node" unique_id=1423313650]
 script = ExtResource("1_tou0t")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1838821472]
@@ -266,6 +266,8 @@ limit_left = -200
 limit_top = -100
 limit_right = 6208
 limit_bottom = 1900
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
 
 [node name="Lighting" type="CanvasGroup" parent="." unique_id=1503349506]
 
@@ -303,10 +305,10 @@ text = "Space to jump"
 horizontal_alignment = 1
 
 [node name="Move_Interact" type="RichTextLabel" parent="." unique_id=2140304702]
-offset_left = 67.0
-offset_top = 354.0
-offset_right = 283.0
-offset_bottom = 429.0
+offset_left = 57.0
+offset_top = 317.0
+offset_right = 325.0
+offset_bottom = 392.0
 theme_override_fonts/normal_font = ExtResource("7_xliqy")
 text = "WASD to move
 K to interact (try it on the campfire)"

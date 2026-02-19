@@ -1,22 +1,23 @@
 [gd_scene format=3 uid="uid://c0idldrfge7b8"]
 
 [ext_resource type="Script" uid="uid://bajwhs5701f4h" path="res://scenes/title_screen/title_screen.gd" id="1_ju3lf"]
-[ext_resource type="AudioStream" uid="uid://b1h8cttteoyit" path="res://assets/audio/bgm/Opening-1.mp3" id="1_lr85p"]
 [ext_resource type="Material" uid="uid://dgu3mqx0lkg25" path="res://scenes/title_screen/title_screen.tres" id="2_88tdx"]
 [ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title_screen/buttons.gd" id="2_aptra"]
+[ext_resource type="AudioStream" uid="uid://ddgr66uf5st4m" path="res://assets/audio/bgm/title_theme.mp3" id="2_xetrx"]
+[ext_resource type="AudioStream" uid="uid://3b2tm1xxdjh4" path="res://assets/audio/sfx/SwordSwing_1.wav" id="2_xoykc"]
 [ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/ui/settings_screen/settings_screen.tscn" id="3_3swuw"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="4_pcs22"]
 [ext_resource type="StyleBox" uid="uid://dywh37qrcvaiv" path="res://assets/visual/ui/main_menu_button_pressed.tres" id="5_xoykc"]
 [ext_resource type="StyleBox" uid="uid://bwhnh85kwt0k6" path="res://assets/visual/ui/main_menu_button.tres" id="5_yegqs"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="9_4xtok"]
-[ext_resource type="FontFile" uid="uid://c7dc7sfjmpx8c" path="res://assets/visual/ui/fonts/Silkscreen-Regular.ttf" id="9_q5m6g"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="9_4xtok"]
+[ext_resource type="FontFile" uid="uid://c7dc7sfjmpx8c" path="res://assets/visual/ui/fonts/SilkscreenRegular.ttf" id="9_q5m6g"]
 
-[sub_resource type="Gradient" id="Gradient_j12ko"]
+[sub_resource type="Gradient" id="Gradient_yegqs"]
 offsets = PackedFloat32Array(0, 0.55333334, 1)
 colors = PackedColorArray(0, 0.21176471, 0.2509804, 1, 0, 0, 0, 1, 2.466701e-07, 0.21316963, 0.103483565, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yegqs"]
-gradient = SubResource("Gradient_j12ko")
+gradient = SubResource("Gradient_yegqs")
 width = 1920
 height = 1080
 fill_from = Vector2(0, 1)
@@ -31,16 +32,21 @@ fill_from = Vector2(0, 1)
 texture_filter = 1
 script = ExtResource("1_ju3lf")
 
-[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=968922825]
-stream = ExtResource("1_lr85p")
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=968922825]
+stream = ExtResource("2_xetrx")
 autoplay = true
 bus = &"Music"
 
-[node name="BG" type="Sprite2D" parent="." unique_id=973136117]
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1695937731]
+stream = ExtResource("2_xoykc")
+pitch_scale = 1.6
+bus = &"Sound Effects"
+
+[node name="BackgroundSprite" type="Sprite2D" parent="." unique_id=973136117]
 position = Vector2(960, 540)
 texture = SubResource("GradientTexture2D_yegqs")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="BG" unique_id=448768363]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BackgroundSprite" unique_id=448768363]
 scale = Vector2(3, 3)
 amount = 100
 lifetime = 3.0
@@ -56,7 +62,7 @@ color = Color(0.106225856, 0.49445403, 0, 1)
 shadow_enabled = true
 texture = ExtResource("4_pcs22")
 
-[node name="PointLight2D9" type="PointLight2D" parent="Light" unique_id=1736899542]
+[node name="Sublight" type="PointLight2D" parent="Light" unique_id=1736899542]
 visible = false
 position = Vector2(-0.180452, -2.39867)
 scale = Vector2(3.60902, 2.07577)
@@ -86,6 +92,7 @@ theme_override_styles/hover = ExtResource("5_yegqs")
 theme_override_styles/focus = ExtResource("5_yegqs")
 text = "Play"
 script = ExtResource("2_aptra")
+scene_to_load = "res://scenes/chapters/prologue/introduction/introduction.tscn"
 
 [node name="SettingsButton" type="Button" parent="." unique_id=1652903219]
 texture_filter = 1
@@ -139,7 +146,7 @@ theme_override_font_sizes/normal_font_size = 160
 text = "Remain in
 Memory"
 
-[node name="Title2" type="RichTextLabel" parent="Title" unique_id=1375399308]
+[node name="TitleShadow" type="RichTextLabel" parent="Title" unique_id=1375399308]
 layout_mode = 0
 offset_right = 739.0
 offset_bottom = 408.0

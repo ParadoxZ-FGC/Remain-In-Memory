@@ -12,5 +12,6 @@ func _ready() -> void:
 
 func _on_body_entered(_body) -> void:
 	triggered.emit()
-	await get_tree().current_scene.fade_out
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	get_tree().call_deferred("change_scene_to_file", path)

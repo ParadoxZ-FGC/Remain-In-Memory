@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://7bon7hlkrhon"]
+
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="1_gp0bv"]
+
+[resource]
+default_font = ExtResource("1_gp0bv")
