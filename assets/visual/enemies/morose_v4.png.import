@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://e8d6udswio1g"
-path="res://.godot/imported/morose_v3.png-d3f1b860cfafa5d15c9a52e2325b0ec3.ctex"
+path="res://.godot/imported/morose_v4.png-46d0e72fd6f29010a5f66bf6c9b04170.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/enemies/morose_v3.png"
-dest_files=["res://.godot/imported/morose_v3.png-d3f1b860cfafa5d15c9a52e2325b0ec3.ctex"]
+source_file="res://assets/visual/enemies/morose_v4.png"
+dest_files=["res://.godot/imported/morose_v4.png-46d0e72fd6f29010a5f66bf6c9b04170.ctex"]
 
 [params]
 

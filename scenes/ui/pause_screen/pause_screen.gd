@@ -41,6 +41,7 @@ func pause():
 		if child is not HSeparator:
 			child.disabled = false
 	$AnimationPlayer.play("blur")
+	%Resume.grab_focus()
 
 
 func _on_resume_pressed():
@@ -59,6 +60,9 @@ func _on_settings_pressed():
 func _on_title_screen_pressed():
 	resume()
 	PlayerData.current_health = PlayerData.maximum_health
+	PlayerData.current_gauge_angle = 0
+	EnemyManager.persistance.clear()
+	Input.stop_joy_vibration(0)
 	get_tree().change_scene_to_packed(scene)
 
 

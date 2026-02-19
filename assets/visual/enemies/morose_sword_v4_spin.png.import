@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqh8g64g1y3qg"
-path="res://.godot/imported/morose_sword_v3_spin.png-47a0206eac39f5eb9e1b6df7df89647f.ctex"
+path="res://.godot/imported/morose_sword_v4_spin.png-cb066bee083fd5b8cbce61087a49ea5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/enemies/morose_sword_v3_spin.png"
-dest_files=["res://.godot/imported/morose_sword_v3_spin.png-47a0206eac39f5eb9e1b6df7df89647f.ctex"]
+source_file="res://assets/visual/enemies/morose_sword_v4_spin.png"
+dest_files=["res://.godot/imported/morose_sword_v4_spin.png-cb066bee083fd5b8cbce61087a49ea5e.ctex"]
 
 [params]
 

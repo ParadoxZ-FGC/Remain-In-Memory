@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c0idldrfge7b8"]
 
+[ext_resource type="Script" uid="uid://bajwhs5701f4h" path="res://scenes/title_screen/title_screen.gd" id="1_ju3lf"]
 [ext_resource type="AudioStream" uid="uid://b1h8cttteoyit" path="res://assets/audio/bgm/Opening-1.mp3" id="1_lr85p"]
 [ext_resource type="Material" uid="uid://dgu3mqx0lkg25" path="res://scenes/title_screen/title_screen.tres" id="2_88tdx"]
 [ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title_screen/buttons.gd" id="2_aptra"]
@@ -22,18 +23,13 @@ fill_from = Vector2(0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xetrx"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j12ko"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yepnq"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yegqs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ju3lf"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xoykc"]
-
 [node name="Title Screen" type="Node2D" unique_id=1004999761]
 texture_filter = 1
+script = ExtResource("1_ju3lf")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=968922825]
 stream = ExtResource("1_lr85p")
@@ -77,32 +73,38 @@ offset_right = 1060.0
 offset_bottom = 680.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ExitButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../ExitButton")
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("9_4xtok")
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxEmpty_xetrx")
 theme_override_styles/pressed = ExtResource("5_xoykc")
 theme_override_styles/hover = ExtResource("5_yegqs")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_j12ko")
+theme_override_styles/focus = ExtResource("5_yegqs")
 text = "Play"
 script = ExtResource("2_aptra")
 
-[node name="SettingsButton" type="MenuButton" parent="." unique_id=715469929]
+[node name="SettingsButton" type="Button" parent="." unique_id=1652903219]
 texture_filter = 1
 offset_left = 860.0
 offset_top = 705.0
 offset_right = 1060.0
 offset_bottom = 785.0
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../ExitButton")
+focus_next = NodePath("../ExitButton")
+focus_previous = NodePath("../PlayButton")
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("9_4xtok")
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxEmpty_yepnq")
 theme_override_styles/pressed = ExtResource("5_xoykc")
 theme_override_styles/hover = ExtResource("5_yegqs")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_yegqs")
-toggle_mode = false
+theme_override_styles/focus = ExtResource("5_yegqs")
 text = "Settings"
-flat = false
 
 [node name="ExitButton" type="Button" parent="." unique_id=716560271]
 texture_filter = 1
@@ -110,13 +112,17 @@ offset_left = 860.0
 offset_top = 810.0
 offset_right = 1060.0
 offset_bottom = 890.0
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../PlayButton")
+focus_next = NodePath("../PlayButton")
+focus_previous = NodePath("../SettingsButton")
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("9_4xtok")
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ju3lf")
 theme_override_styles/pressed = ExtResource("5_xoykc")
 theme_override_styles/hover = ExtResource("5_yegqs")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xoykc")
+theme_override_styles/focus = ExtResource("5_yegqs")
 text = "Exit"
 script = ExtResource("2_aptra")
 

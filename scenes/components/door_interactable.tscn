@@ -1,31 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://be6p1ppc6y1gl"]
+[gd_scene format=3 uid="uid://be6p1ppc6y1gl"]
 
 [ext_resource type="Script" uid="uid://bef0weu331hr6" path="res://scenes/components/scripts/door_interactable.gd" id="1_1r0ex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1r0ex"]
-size = Vector2(64, 128)
+size = Vector2(64, 192)
 
-[node name="DoorInteractable" type="Node2D" groups=["doors"]]
+[node name="DoorInteractable" type="Node2D" unique_id=1537442004 groups=["doors"]]
 script = ExtResource("1_1r0ex")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1972536166]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -64)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1189655327]
+position = Vector2(0, -96)
 shape = SubResource("RectangleShape2D_1r0ex")
 
-[node name="Exits" type="Node2D" parent="."]
+[node name="Exits" type="Node2D" parent="." unique_id=410532227]
 metadata/_edit_group_ = true
 
-[node name="Left" type="Marker2D" parent="Exits"]
+[node name="Left" type="Marker2D" parent="Exits" unique_id=996090116]
 position = Vector2(-128, -64)
 
-[node name="Center" type="Marker2D" parent="Exits"]
+[node name="Center" type="Marker2D" parent="Exits" unique_id=234554745]
 position = Vector2(0, -64)
 
-[node name="Right" type="Marker2D" parent="Exits"]
+[node name="Right" type="Marker2D" parent="Exits" unique_id=1010938781]
 position = Vector2(128, -64)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

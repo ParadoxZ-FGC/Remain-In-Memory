@@ -11,6 +11,7 @@ var flipped := false
 
 func _ready() -> void:
 	visible = false
+	$Hitbox.disable()
 
 
 func _process(_delta: float) -> void:
