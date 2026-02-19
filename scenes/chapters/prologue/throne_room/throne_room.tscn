@@ -929,6 +929,7 @@ script = ExtResource("1_q2e8l")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=2047155929]
 stream = ExtResource("2_s4lif")
+volume_db = -8.0
 autoplay = true
 bus = &"Music"
 

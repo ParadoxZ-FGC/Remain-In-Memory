@@ -269,6 +269,7 @@ text_direction = 3
 wait_time = 0.05
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2055024568]
+volume_db = 8.0
 pitch_scale = 0.9
 
 [connection signal="timeout" from="typingTimer" to="." method="_on_typing_timer_timeout"]
