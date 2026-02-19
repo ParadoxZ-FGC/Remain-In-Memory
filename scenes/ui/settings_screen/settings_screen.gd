@@ -1,5 +1,7 @@
 extends Control 
 
+signal released_focus
+
 @export var exit_settings: Button
 
 var was_paused = false
@@ -34,6 +36,7 @@ func exit_settings_menu():
 	exit_settings.release_focus()
 	EventBus.emit_signal("editBinding")
 	hide()  # Hide settings menu
+	released_focus.emit()
 	
 	# Unpause only if it was accessed from the title screen
 	if not was_paused:
@@ -55,9 +58,11 @@ func checkMode(): # Refers to "settings_mode" variable
 	if(settings_mode == "Sound"):
 		$PanelContainer/SoundTab.show()
 		$PanelContainer/ControlsTab.hide()
+		%SoundToggle.grab_focus()
 	if(settings_mode == "Controls"):
 		$PanelContainer/SoundTab.hide()
 		$PanelContainer/ControlsTab.show()
+		%ControlsToggle.grab_focus()
 
 func _on_settings_button_pressed() -> void:
 	open_settings(true) # Replace with function body.

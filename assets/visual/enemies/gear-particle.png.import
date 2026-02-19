@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e8d6udswio1g"
-path="res://.godot/imported/morose_v3.png-d3f1b860cfafa5d15c9a52e2325b0ec3.ctex"
+uid="uid://br0g7t0hh5f3q"
+path="res://.godot/imported/gear-particle.png-baff6fa3970389afed5c16ec37e87167.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/enemies/morose_v3.png"
-dest_files=["res://.godot/imported/morose_v3.png-d3f1b860cfafa5d15c9a52e2325b0ec3.ctex"]
+source_file="res://assets/visual/enemies/gear-particle.png"
+dest_files=["res://.godot/imported/gear-particle.png-baff6fa3970389afed5c16ec37e87167.ctex"]
 
 [params]
 
