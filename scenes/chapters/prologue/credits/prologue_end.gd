@@ -11,6 +11,7 @@ var timer_started = false
 
 
 func _ready() -> void:
+	Input.stop_joy_vibration(0)
 	TBC.visible_characters = 0
 	IAO.visible_characters = 0
 	press_k.visible = false
@@ -37,4 +38,6 @@ func _start_timer() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		PlayerData.current_health = PlayerData.maximum_health
+		PlayerData.current_gauge_angle = 0
+		EnemyManager.persistance.clear()
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/title_screen/title_screen.tscn")

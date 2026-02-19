@@ -67,6 +67,7 @@ func _post_cutscene_effects(cutscene:String) -> void:
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/chapters/prologue/credits/prologue_end.tscn")
 
 func _on_player_death():
+	Input.start_joy_vibration(0, 1, 1, 0)
 	EventBus.swap_control_state.emit()
 	morose.talking = true
 	morose.sword.visible = false
@@ -84,6 +85,7 @@ func _on_player_death():
 
 
 func _on_boss_death():
+	Input.start_joy_vibration(0, 1, 1, 0)
 	$Player.hearts.disable()
 	$Player.gauge.disable()
 	$Player/Camera2D.screen_shake(2, 0)

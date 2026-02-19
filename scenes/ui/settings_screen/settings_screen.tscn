@@ -48,7 +48,6 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="SoundTab" type="MarginContainer" parent="PanelContainer" unique_id=1554000417]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -101,9 +100,10 @@ grow_horizontal = 0
 grow_vertical = 2
 tooltip_text = "Master
 "
-focus_neighbor_left = NodePath("../../master_vol_label")
-focus_neighbor_bottom = NodePath("../../../music_vol_container/music_control")
-focus_next = NodePath("../../../music_vol_container/music_control")
+focus_neighbor_top = NodePath("../../../../../VBoxContainer/MarginContainer/SectionRow/HBoxContainer/SoundToggle")
+focus_neighbor_bottom = NodePath("../../../music_vol_container/music_control/Music")
+focus_next = NodePath("../../../music_vol_container/music_control/Music")
+focus_previous = NodePath("../../../../../VBoxContainer/MarginContainer/SectionRow/HBoxContainer/SoundToggle")
 mouse_default_cursor_shape = 2
 bus_name = "Master"
 
@@ -136,11 +136,10 @@ offset_bottom = 12.5
 grow_horizontal = 0
 grow_vertical = 2
 tooltip_text = "Music"
-focus_neighbor_left = NodePath("../../music_vol_label")
-focus_neighbor_top = NodePath("../../../master_vol_container/master_control")
-focus_neighbor_bottom = NodePath("../../../sfx_vol_container/sfx_control")
-focus_next = NodePath("../../../sfx_vol_container/sfx_control")
-focus_previous = NodePath("../../../master_vol_container/master_control")
+focus_neighbor_top = NodePath("../../../master_vol_container/master_control/Master")
+focus_neighbor_bottom = NodePath("../../../sfx_vol_container/sfx_control/Sound Effects")
+focus_next = NodePath("../../../sfx_vol_container/sfx_control/Sound Effects")
+focus_previous = NodePath("../../../master_vol_container/master_control/Master")
 mouse_default_cursor_shape = 2
 bus_name = "Music"
 
@@ -173,15 +172,15 @@ offset_bottom = 8.0
 grow_horizontal = 0
 grow_vertical = 2
 tooltip_text = "Sound Effects"
-focus_neighbor_left = NodePath("../../sfx_vol_label")
-focus_neighbor_top = NodePath("../../../music_vol_container/music_control")
+focus_neighbor_top = NodePath("../../../music_vol_container/music_control/Music")
 focus_neighbor_bottom = NodePath("../../../../../VBoxContainer/MarginContainer/exit-settings")
 focus_next = NodePath("../../../../../VBoxContainer/MarginContainer/exit-settings")
-focus_previous = NodePath("../../../music_vol_container/music_control")
+focus_previous = NodePath("../../../music_vol_container/music_control/Music")
 mouse_default_cursor_shape = 2
 bus_name = "Sound Effects"
 
 [node name="ControlsTab" type="MarginContainer" parent="PanelContainer" unique_id=2111307871]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -206,27 +205,59 @@ vertical_alignment = 2
 
 [node name="Esc" parent="PanelContainer/ControlsTab/settings_container" unique_id=770657262 instance=ExtResource("5_ub8w1")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../VBoxContainer/MarginContainer/SectionRow/HBoxContainer/ControlsToggle")
+focus_neighbor_bottom = NodePath("../MoveLeft")
+focus_next = NodePath("../MoveLeft")
+focus_previous = NodePath("../../../VBoxContainer/MarginContainer/SectionRow/HBoxContainer/ControlsToggle")
 
 [node name="MoveLeft" parent="PanelContainer/ControlsTab/settings_container" unique_id=1845830318 instance=ExtResource("5_ub8w1")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Esc")
+focus_neighbor_bottom = NodePath("../MoveRight")
+focus_next = NodePath("../MoveRight")
+focus_previous = NodePath("../Esc")
 
 [node name="MoveRight" parent="PanelContainer/ControlsTab/settings_container" unique_id=1902386497 instance=ExtResource("5_ub8w1")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../MoveLeft")
+focus_neighbor_bottom = NodePath("../CrouchDown")
+focus_next = NodePath("../CrouchDown")
+focus_previous = NodePath("../MoveLeft")
 
 [node name="CrouchDown" parent="PanelContainer/ControlsTab/settings_container" unique_id=1559231021 instance=ExtResource("5_ub8w1")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../MoveRight")
+focus_neighbor_bottom = NodePath("../Jump")
+focus_next = NodePath("../Jump")
+focus_previous = NodePath("../MoveRight")
 
 [node name="Jump" parent="PanelContainer/ControlsTab/settings_container" unique_id=1681858642 instance=ExtResource("5_ub8w1")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../CrouchDown")
+focus_neighbor_bottom = NodePath("../Attack")
+focus_next = NodePath("../Attack")
+focus_previous = NodePath("../CrouchDown")
 
 [node name="Attack" parent="PanelContainer/ControlsTab/settings_container" unique_id=73556855 instance=ExtResource("5_ub8w1")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Jump")
+focus_neighbor_bottom = NodePath("../Interact")
+focus_next = NodePath("../Interact")
+focus_previous = NodePath("../Jump")
 
 [node name="Interact" parent="PanelContainer/ControlsTab/settings_container" unique_id=1873741995 instance=ExtResource("5_ub8w1")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Attack")
+focus_neighbor_bottom = NodePath("../Run")
+focus_next = NodePath("../Run")
+focus_previous = NodePath("../Attack")
 
 [node name="Run" parent="PanelContainer/ControlsTab/settings_container" unique_id=1016108147 instance=ExtResource("5_ub8w1")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Interact")
+focus_neighbor_bottom = NodePath("../../../VBoxContainer/MarginContainer/exit-settings")
+focus_next = NodePath("../../../VBoxContainer/MarginContainer/exit-settings")
+focus_previous = NodePath("../Interact")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=727253349]
 layout_mode = 2
@@ -253,17 +284,25 @@ theme_override_constants/separation = 32
 alignment = 1
 
 [node name="SoundToggle" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/SectionRow/HBoxContainer" unique_id=1504921452]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../ControlsToggle")
+focus_neighbor_right = NodePath("../ControlsToggle")
+focus_next = NodePath("../ControlsToggle")
 theme_override_fonts/font = ExtResource("2_8gpq7")
 theme_override_font_sizes/font_size = 32
 text = "Sound"
 
 [node name="ControlsToggle" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/SectionRow/HBoxContainer" unique_id=552769342]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../SoundToggle")
+focus_neighbor_right = NodePath("../SoundToggle")
+focus_previous = NodePath("../SoundToggle")
 theme_override_fonts/font = ExtResource("2_8gpq7")
 theme_override_font_sizes/font_size = 32
 text = "Controls"
@@ -273,8 +312,8 @@ custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-focus_neighbor_top = NodePath("../../../SoundTab/settings_container/sfx_vol_container/sfx_control")
-focus_previous = NodePath("../../../SoundTab/settings_container/sfx_vol_container/sfx_control")
+focus_neighbor_top = NodePath("../SectionRow/HBoxContainer/SoundToggle")
+focus_previous = NodePath("../SectionRow/HBoxContainer/SoundToggle")
 theme_override_fonts/font = ExtResource("2_8gpq7")
 theme_override_font_sizes/font_size = 32
 text = " Back "

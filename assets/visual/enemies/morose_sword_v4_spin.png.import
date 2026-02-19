@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br0g7t0hh5f3q"
-path="res://.godot/imported/gear-particle.png.png-9144d456ff34888b9636e62ae513fc23.ctex"
+uid="uid://dqh8g64g1y3qg"
+path="res://.godot/imported/morose_sword_v4_spin.png-cb066bee083fd5b8cbce61087a49ea5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/enemies/gear-particle.png.png"
-dest_files=["res://.godot/imported/gear-particle.png.png-9144d456ff34888b9636e62ae513fc23.ctex"]
+source_file="res://assets/visual/enemies/morose_sword_v4_spin.png"
+dest_files=["res://.godot/imported/morose_sword_v4_spin.png-cb066bee083fd5b8cbce61087a49ea5e.ctex"]
 
 [params]
 
