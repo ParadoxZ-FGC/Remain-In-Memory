@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://wrin7ux4mc07"]
 
 [ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/chapters/prologue/castle/castle.gd" id="1_6itxs"]
-[ext_resource type="AudioStream" uid="uid://4lqi0l2p3x7r" path="res://assets/audio/bgm/CastleDreamv2.mp3" id="2_5ieeb"]
+[ext_resource type="AudioStream" uid="uid://4lqi0l2p3x7r" path="res://assets/audio/bgm/d_castle_theme2.mp3" id="2_5ieeb"]
 [ext_resource type="Texture2D" uid="uid://4nf1hfqm8fhw" path="res://assets/visual/bg/castle/castle_background2.png" id="2_fct1m"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rocry"]
 [ext_resource type="Texture2D" uid="uid://c1xyw1l4oma0a" path="res://assets/visual/tilemaps/door.png" id="4_4wb8h"]

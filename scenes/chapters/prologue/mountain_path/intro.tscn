@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://jt4i8qfjhqs3"]
 
-[ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/Opening-3.mp3" id="1_cg11o"]
+[ext_resource type="AudioStream" uid="uid://cq6w81d7yuvi7" path="res://assets/audio/bgm/mountain_s3.mp3" id="1_cg11o"]
 [ext_resource type="Texture2D" uid="uid://de57xb55c6k8n" path="res://assets/visual/tilemaps/earth.png" id="1_sxaqu"]
 [ext_resource type="Script" uid="uid://cg1ftmb3deny0" path="res://scenes/chapters/prologue/mountain_path/intro.gd" id="1_tou0t"]
 [ext_resource type="Material" uid="uid://cxscbwdlfdcbp" path="res://scenes/chapters/prologue/mountain_path/intro_p.tres" id="1_x54yq"]

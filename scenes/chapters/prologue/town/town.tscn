@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://c836gbrc44pj2"]
 
 [ext_resource type="Script" uid="uid://dow6k3two06fj" path="res://scenes/chapters/prologue/town/town.gd" id="1_n3noj"]
-[ext_resource type="AudioStream" uid="uid://bacdle7hewxdd" path="res://assets/audio/bgm/Town.mp3" id="2_0oj2w"]
+[ext_resource type="AudioStream" uid="uid://bacdle7hewxdd" path="res://assets/audio/bgm/town_theme.mp3" id="2_0oj2w"]
 [ext_resource type="Texture2D" uid="uid://el662e7dqqae" path="res://assets/visual/bg/city/desaturated-layers/c-0.png" id="3_0kat4"]
 [ext_resource type="Texture2D" uid="uid://bf4ci8surcvng" path="res://assets/visual/bg/city/desaturated-layers/c-1.png" id="4_u6yve"]
 [ext_resource type="Texture2D" uid="uid://x6wn8pl3bqi" path="res://assets/visual/bg/city/desaturated-layers/c-2.png" id="5_0hmbj"]

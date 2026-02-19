@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bcs6yplsgedtw"]
 
 [ext_resource type="Script" uid="uid://c30i32liqr01v" path="res://scenes/chapters/prologue/dream_town/dream_town.gd" id="1_crvkx"]
-[ext_resource type="AudioStream" uid="uid://rs76aliu3uy6" path="res://assets/audio/bgm/Town-Variant2.mp3" id="2_crvkx"]
+[ext_resource type="AudioStream" uid="uid://rs76aliu3uy6" path="res://assets/audio/bgm/d_town_theme2.mp3" id="2_crvkx"]
 [ext_resource type="Texture2D" uid="uid://el662e7dqqae" path="res://assets/visual/bg/city/desaturated-layers/c-0.png" id="4_y6gku"]
 [ext_resource type="Texture2D" uid="uid://bf4ci8surcvng" path="res://assets/visual/bg/city/desaturated-layers/c-1.png" id="5_0yaam"]
 [ext_resource type="Texture2D" uid="uid://x6wn8pl3bqi" path="res://assets/visual/bg/city/desaturated-layers/c-2.png" id="6_1kklw"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b1mi2jg3167qe" path="res://scenes/chapters/prologue/throne_room/throne_room.gd" id="1_q2e8l"]
 [ext_resource type="Texture2D" uid="uid://dx3b0bsnjkemr" path="res://assets/visual/bg/castle/throne_room_2.png" id="1_ym15t"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rbw3j"]
-[ext_resource type="AudioStream" uid="uid://7ky2hw58da01" path="res://assets/audio/bgm/Bossbattle.mp3" id="2_s4lif"]
+[ext_resource type="AudioStream" uid="uid://7ky2hw58da01" path="res://assets/audio/bgm/boss_theme.mp3" id="2_s4lif"]
 [ext_resource type="Texture2D" uid="uid://ecvwd682hypb" path="res://assets/visual/bg/castle/glass.png" id="4_q2e8l"]
 [ext_resource type="Texture2D" uid="uid://b8xdeo3ebvmgv" path="res://assets/visual/tilemaps/lamp.png" id="5_ym15t"]
 [ext_resource type="Texture2D" uid="uid://c1xyw1l4oma0a" path="res://assets/visual/tilemaps/door.png" id="6_35vq6"]

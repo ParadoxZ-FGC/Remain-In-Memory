@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://c0idldrfge7b8"]
 
 [ext_resource type="Script" uid="uid://bajwhs5701f4h" path="res://scenes/title_screen/title_screen.gd" id="1_ju3lf"]
-[ext_resource type="AudioStream" uid="uid://b1h8cttteoyit" path="res://assets/audio/bgm/Opening-1.mp3" id="1_lr85p"]
 [ext_resource type="Material" uid="uid://dgu3mqx0lkg25" path="res://scenes/title_screen/title_screen.tres" id="2_88tdx"]
 [ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title_screen/buttons.gd" id="2_aptra"]
+[ext_resource type="AudioStream" uid="uid://ddgr66uf5st4m" path="res://assets/audio/bgm/title_theme.mp3" id="2_xetrx"]
 [ext_resource type="AudioStream" uid="uid://3b2tm1xxdjh4" path="res://assets/audio/sfx/SwordSwing_1.wav" id="2_xoykc"]
 [ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/ui/settings_screen/settings_screen.tscn" id="3_3swuw"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="4_pcs22"]
@@ -33,7 +33,7 @@ texture_filter = 1
 script = ExtResource("1_ju3lf")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=968922825]
-stream = ExtResource("1_lr85p")
+stream = ExtResource("2_xetrx")
 autoplay = true
 bus = &"Music"
 
