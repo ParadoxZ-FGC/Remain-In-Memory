@@ -15,8 +15,13 @@ enum weaponSelect {Sword, Glaive}
 @export var coyote: float = 0.03
 @export var max_walk_speed = 300
 @export var max_run_speed = 500
+@export var max_dash_speed = 1000
+@export var dash_speed = 1000
+@export var dash_duration = 0.075
+@export var dashCoolDownLength: float = 1.5
 @export var stop_force = 8000
 @export var drag_force = 500
+@export var momentum_loss = 1500
 @export var stone: AudioStreamPlayer2D
 @export var knockbackTime: float = 0.05 #Determines how long the player is in knockback, @TODO might move to the knockback function itself
 @export var to_scene_on_death := true
@@ -27,6 +32,8 @@ var coyoteTimer: float = 0
 var movementDirection: bool = true #rightward = true
 var movementIntentionDirection: bool = true
 var movementIntention: float
+var dashing: bool = false
+var dashCoolDown: float = 3
 var scene_transitions
 var currentDialogue : dialogueTypes = dialogueTypes.None
 var current_player_state : player_states = player_states.User_Controlled
@@ -40,6 +47,7 @@ var currentWeapon: weaponSelect = weaponSelect.Sword
 @onready var player_sprite := $AnimatedPlayerSprite
 @onready var hearts := $GUILayer/GUI/HealthDisplay
 @onready var gauge := $GUILayer/GUI/Gauge
+@onready var dashTimer = $DashTimer
 
 
 func _ready():
@@ -78,6 +86,12 @@ func _physics_process(delta):
 	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
 		if not inKnockback:
 			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
+		
+		if Input.is_action_just_pressed("Dash") and dashCoolDown >= dashCoolDownLength:
+			dash(Input.get_axis("move_left", "move_right"), Input.get_axis("look_up", "crouch_look_down"))
+		if dashCoolDown <= dashCoolDownLength:
+			dashCoolDown += delta
+			print(dashCoolDown)
 		
 		if Input.is_action_just_pressed("(TEMP) change_weapon"):
 			if currentWeapon < weaponSelect.size() -1:
@@ -141,22 +155,33 @@ func move(movement_vector, delta):
 	movementDirection = true if velocity.x > 0 else false
 	movementIntentionDirection = true if movementIntention >= 0 else false
 	var walk = speed * movementIntention
-	if abs(walk) < speed * 0.2:
-		if is_on_floor():
-			velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+	if not dashing:
+		if abs(walk) < speed * 0.2:
+			if is_on_floor():
+				velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+			else:
+				velocity.x = move_toward(velocity.x, 0, drag_force * delta)
 		else:
-			velocity.x = move_toward(velocity.x, 0, drag_force * delta)
+			if movementIntentionDirection != movementDirection:
+				velocity.x -= velocity.x / 8 * 7
+		
+		velocity.y += gravity * delta
+		
+		if Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled:
+			if velocity.x < max_run_speed and velocity.x > -max_run_speed:
+				velocity.x += walk * delta
+			else:
+				if velocity.x > max_run_speed:
+					velocity.x = move_toward(velocity.x, max_run_speed, momentum_loss * delta)
+				elif velocity.x < -max_run_speed:
+					velocity.x = move_toward(velocity.x, -max_run_speed, momentum_loss * delta)
+		elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and not dashing:
+			velocity.x += walk * delta
+			velocity.x = clamp(velocity.x, -max_walk_speed, max_walk_speed)
 	else:
-		if movementIntentionDirection != movementDirection:
-			velocity.x -= velocity.x / 8 * 7
+		velocity.x = clamp(velocity.x, -max_dash_speed, max_dash_speed)
 	
-	velocity.x += walk * delta
-	
-	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if (Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled) else clamp(velocity.x, -max_walk_speed, max_walk_speed)
-	
-	
-	velocity.y += gravity * delta
-	
+
 	position = position.clamp(upper, lower)
 	
 	if is_on_floor():
@@ -165,6 +190,19 @@ func move(movement_vector, delta):
 		coyoteTimer += delta
 		clamp(coyoteTimer, 0, coyote)
 
+func dash(lr, ud):
+	dashing = true
+	dashCoolDown = 0
+	dashTimer.start(dash_duration)
+	if(abs(ud) == 0):
+		velocity.x += lr * dash_speed * 2
+	velocity.x += lr * dash_speed
+	velocity.y += ud * dash_speed/2
+
+func dash_stop():
+	print("DASHSTOP")
+	velocity.y = 0
+	dashing = false
 
 func jump():
 	velocity.y = -jump_speed
@@ -187,7 +225,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
 			
-		if (is_on_floor() or coyoteTimer < coyote) and event.is_action_pressed("jump"):
+		if (is_on_floor() or coyoteTimer < coyote) and event.is_action_pressed("jump") and not dashing:
 			jump()
 		
 		if not is_on_floor() and event.is_action_released("jump"):

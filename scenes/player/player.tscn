@@ -135,7 +135,7 @@ animations = [{
 size = Vector2(5, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ugbui"]
-size = Vector2(8.666666, 70.96773)
+size = Vector2(10, 55)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uniwh"]
 atlas = ExtResource("12_ugbui")
@@ -153,7 +153,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gx1jg"]
-size = Vector2(5, 11)
+size = Vector2(7, 9)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcs02"]
 radius = 3.0
@@ -207,10 +207,9 @@ attenuation = 0.39229205
 bus = &"Sound Effects"
 
 [node name="Glaive" parent="." unique_id=1917527795 instance=ExtResource("10_gx1jg")]
-attackCooldown = 0.05
+attackCooldown = 0.75
 
 [node name="hitbox" parent="Glaive/1/Hitbox" parent_id_path=PackedInt32Array(1917527795, 1321753004) index="0" unique_id=1205516835 instance=ExtResource("12_fm80t")]
-visible = false
 position = Vector2(11, 3.0000005)
 scale = Vector2(0.75, 0.155)
 selfKnockback = 350.0
@@ -222,11 +221,13 @@ layers = 582
 visible = false
 position = Vector2(0, 3)
 scale = Vector2(1, 1.0000001)
-target_position = Vector2(19, 0)
+target_position = Vector2(11, 0)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Glaive/1/Hitbox/hitbox" unique_id=14242976]
-position = Vector2(0, -1.9073486e-06)
+visible = false
+position = Vector2(1, 1)
+scale = Vector2(1, 1.0000002)
 shape = SubResource("RectangleShape2D_ugbui")
 
 [node name="Knockback Direction" type="Marker2D" parent="Glaive/1/Hitbox/hitbox" unique_id=1709708105]
@@ -235,36 +236,42 @@ scale = Vector2(1.3333334, 6.4516134)
 
 [node name="sprite" type="AnimatedSprite2D" parent="Glaive/1/Sprite" parent_id_path=PackedInt32Array(1917527795, 1511699853) index="0" unique_id=1503683815]
 visible = false
-position = Vector2(9, 3.0000002)
+position = Vector2(9, 3)
 rotation = 1.5707964
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_ugbui")
 animation = &"attack"
 
 [node name="Sword" parent="." unique_id=2089006884 instance=ExtResource("10_gx1jg")]
-attackCooldown = 2.5
+attackCooldown = 0.5
 comboCooldown = 2.5
 
 [node name="Hitbox" parent="Sword/1/Hitbox" parent_id_path=PackedInt32Array(2089006884, 1321753004) index="0" unique_id=1324773485 instance=ExtResource("12_fm80t")]
-visible = false
-damage = 3
+position = Vector2(6, 4)
+selfKnockback = 350.0
 hitboxType = 1
 layers = 582
 
 [node name="RayCast2D" type="RayCast2D" parent="Sword/1/Hitbox/Hitbox/Environment Raycasts" parent_id_path=PackedInt32Array(1324773485, 1802009989) index="0" unique_id=157164974]
 visible = false
-target_position = Vector2(8, 0)
+position = Vector2(0, 3)
+target_position = Vector2(16, 0)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/1/Hitbox/Hitbox" unique_id=41578892]
-position = Vector2(5.5, 1.5)
+visible = false
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_gx1jg")
+
+[node name="Knockback Direction" type="Marker2D" parent="Sword/1/Hitbox/Hitbox" unique_id=1997556465]
+position = Vector2(-16, -6.4516134)
+scale = Vector2(1.3333334, 6.4516134)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sword/1/Sprite" parent_id_path=PackedInt32Array(2089006884, 1511699853) index="0" unique_id=865966962]
 visible = false
-position = Vector2(5.75, 0.5)
-rotation = 3.1415927
-scale = Vector2(0.21483646, 0.2)
+position = Vector2(7.0000005, 3)
+rotation = 1.5707964
+scale = Vector2(0.10639325, 0.1170231)
 texture = ExtResource("12_fcs02")
 
 [node name="Hurtbox" parent="." unique_id=83353747 instance=ExtResource("12_gx1jg")]
@@ -277,8 +284,14 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_fcs02")
 debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
 
+[node name="DashTimer" type="Timer" parent="." unique_id=274944225]
+process_callback = 0
+wait_time = 0.05
+one_shot = true
+
 [connection signal="health_changed" from="Health" to="GUILayer/GUI/HealthDisplay" method="_on_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
+[connection signal="timeout" from="DashTimer" to="." method="dash_stop"]
 
 [editable path="Glaive"]
 [editable path="Glaive/1/Hitbox/hitbox"]
