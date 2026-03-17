@@ -33,6 +33,10 @@ enum codeAttackList {Stationary = 0, Melee = 1, Projectile = 2}
 ##Stores a raycast2d that collides with the environment.
 var ray
 
+#direction and weight of the attack for knockback purposes (set weight to 0 if it's not an attack). direction will be normalized.
+var direction = Vector2(1,0)
+var weight = 0
+
 #region Setters and Getters
 func set_enabled(x: bool):
 	enabled = x
@@ -94,7 +98,7 @@ func activate(pierce: int):
 			hits.resize(pierce + 1)
 	
 	for x in hits:
-		x.take_damage(damage)
+		x.take_damage(damage,direction,weight)
 		impacted.emit()
 	
 	if hitboxType == codeAttackList.Melee and ray.is_colliding() and hits.size() == 0 and selfKnockback > 0:

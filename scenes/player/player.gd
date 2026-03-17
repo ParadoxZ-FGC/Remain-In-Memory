@@ -220,11 +220,12 @@ func take_knockback(force: float, direction: Vector2):
 	if not inKnockback:
 		inKnockback = true
 		velocity = Vector2(0,0)
-		if $player_sprite.flip_h:
-			velocity.x -= force * direction.x
-		else:
-			velocity.x += force * direction.x
-		velocity.y += force * direction.y
+		#if $player_sprite.flip_h:
+			#velocity.x -= force * direction.x
+		#else:
+			#velocity.x += force * direction.x
+		#velocity.y += force * direction.y
+		velocity+=force*direction
 		await get_tree().create_timer(knockbackTime).timeout
 		velocity = Vector2(0,0)
 		inKnockback = false
