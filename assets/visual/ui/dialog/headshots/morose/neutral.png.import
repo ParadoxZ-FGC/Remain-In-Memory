@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://crlb4amtu3sgm"
-path="res://.godot/imported/neutral.png-45282ca5bfeb176e1739fac8fbd79853.ctex"
+path="res://.godot/imported/neutral.png-5185b7db4d98ccdd856ab06e30bd474c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/UI/dialog/headshots/morose/neutral.png"
-dest_files=["res://.godot/imported/neutral.png-45282ca5bfeb176e1739fac8fbd79853.ctex"]
+source_file="res://assets/visual/ui/dialog/headshots/morose/neutral.png"
+dest_files=["res://.godot/imported/neutral.png-5185b7db4d98ccdd856ab06e30bd474c.ctex"]
 
 [params]
 

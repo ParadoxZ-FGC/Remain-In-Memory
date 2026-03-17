@@ -132,4 +132,4 @@ func attack():
 
 ##Tells the parent to take knockback
 func apply_knockback(force: float):
-	parent.take_knockback(force, $"Knockback Direction".position)
+	parent.take_knockback(force, $"knockback_dir".position)

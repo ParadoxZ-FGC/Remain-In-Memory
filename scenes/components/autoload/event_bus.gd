@@ -13,8 +13,9 @@ signal dialogue_segment_parsed(speaker:String, _emotion:String, side:String, dia
 signal finish_dialogue(finished_cutscene:String)
 signal swap_control_state
 signal player_dies
+signal editBinding
 @warning_ignore_restore("unused_signal")
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		interact.emit()

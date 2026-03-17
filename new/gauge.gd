@@ -4,10 +4,15 @@ extends Node2D
 @export_range(0, 270, 0.1) var needle_angle : float = 0 : set = set_needle_angle
 
 var needle_tween : Tween
+var animate := false
 
 @onready var needle := $Offset/Needle
 @onready var player := $Offset/AnimationPlayer
 
+
+func _ready() -> void:
+	needle_angle = PlayerData.current_gauge_angle
+	animate = true
 
 func enable() -> void:
 	visible = true
@@ -22,7 +27,7 @@ func set_needle_angle(degrees: float):
 	if needle_tween != null:
 		needle_tween.kill()
 		
-	if visible == false:
+	if animate == false:
 		needle.rotation_degrees = needle_angle
 	else:
 		needle_tween = create_tween()
