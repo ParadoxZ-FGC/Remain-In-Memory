@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dvpmfneapc58k"]
 
 [ext_resource type="Script" uid="uid://cja2l5gpqppem" path="res://scenes/ui/settings_screen/input_editor.gd" id="1_cv2gs"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="1_vpw4r"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="1_vpw4r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8ct3"]
 bg_color = Color(0.09411765, 0.09411765, 0.09411765, 0.5019608)
@@ -48,9 +48,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_fonts/normal_font = ExtResource("1_vpw4r")
-theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "[b]Interact[/b]"
+text = "Interact"
 fit_content = true
 autowrap_mode = 0
 

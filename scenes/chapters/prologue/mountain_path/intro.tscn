@@ -263,9 +263,10 @@ lower = Vector2(6300, 2000)
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=464855010]
 zoom = Vector2(1.6, 1.6)
 limit_left = -200
-limit_top = -100
+limit_top = -180
 limit_right = 6208
 limit_bottom = 1900
+limit_smoothed = true
 position_smoothing_speed = 4.0
 
 [node name="Lighting" type="CanvasGroup" parent="." unique_id=1503349506]

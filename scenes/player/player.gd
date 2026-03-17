@@ -17,6 +17,7 @@ enum player_states {User_Controlled, System_Controlled}
 @export var stop_force = 8000
 @export var drag_force = 500
 @export var walking_sfx: AudioStreamPlayer2D
+@export var swing_sfx: AudioStreamPlayer2D
 @export var knockbackTime: float = 0.05 #Determines how long the player is in knockback, @TODO might move to the knockback function itself
 @export var to_scene_on_death := true
 @export var death_scene : String
@@ -77,6 +78,7 @@ func _physics_process(delta):
 			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
 		if Input.is_action_just_pressed("attack"):
 			$sword.attack()
+			swing_sfx.play()
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
 			#[This appears to never be called] print("pressed! #1");
 			currentDialogue = dialogueTypes.Talking
