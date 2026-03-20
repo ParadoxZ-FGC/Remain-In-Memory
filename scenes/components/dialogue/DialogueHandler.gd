@@ -20,10 +20,12 @@ var next_scene : Dictionary
 
 @onready var typingTimer := $typingTimer
 @onready var audio := $AudioStreamPlayer
+@onready var last_focused : Control = %ChoiceOne
 
 
 func _ready():
 	EventBus.dialogue_segment_parsed.connect(designate_dialog)
+	EventBus.released_focus.connect(_on_released_focus)
 	visible = false
 	$LeftSideDialog.visible = false
 	$RightSideDialog.visible = false
@@ -201,3 +203,16 @@ func dirReader(dir_path):
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
+
+
+func _on_released_focus(source:Control) -> void:
+	print(source)
+	if source.name == "PauseScreen":
+		print(last_focused)
+		last_focused.call_deferred("grab_focus")
+
+
+func _on_focus_entered(source: Control) -> void:
+	last_focused = source
+	print(last_focused)
+	print(last_focused.has_focus())

@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="12_fm80t"]
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="12_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://c1clhlum7hmk5" path="res://assets/visual/weapons/glaive.png" id="12_ugbui"]
+[ext_resource type="Texture2D" uid="uid://b0lkky0ao562g" path="res://assets/visual/character/Steam Puff.png" id="14_ugbui"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ugbui"]
 resource_local_to_scene = true
@@ -160,6 +161,30 @@ animations = [{
 radius = 3.0
 height = 10.0
 
+[sub_resource type="Gradient" id="Gradient_ugbui"]
+offsets = PackedFloat32Array(0, 0.95)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fcs02"]
+gradient = SubResource("Gradient_ugbui")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fcs02"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 9, 0)
+emission_shape = 2
+emission_sphere_radius = 2.0
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+angular_velocity_min = 224.99998
+angular_velocity_max = 274.99997
+radial_velocity_min = 9.999977
+radial_velocity_max = 9.999977
+scale_min = 0.19999999
+scale_max = 0.25
+color_ramp = SubResource("GradientTexture1D_fcs02")
+
 [node name="Player" type="CharacterBody2D" unique_id=1143754610 node_paths=PackedStringArray("walking_sfx")]
 collision_layer = 8
 collision_mask = 2
@@ -178,7 +203,6 @@ texture = ExtResource("2_gx1jg")
 centered = false
 
 [node name="Gauge" parent="GUILayer/GUI" unique_id=334908116 instance=ExtResource("7_fcs02")]
-visible = true
 position = Vector2(135, 135)
 
 [node name="HealthDisplay" parent="GUILayer/GUI" unique_id=1851536527 instance=ExtResource("3_fm80t")]
@@ -257,6 +281,15 @@ layers = 8
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_fcs02")
 debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
+
+[node name="SteamJump" type="GPUParticles2D" parent="." unique_id=1708363658]
+emitting = false
+amount = 15
+texture = ExtResource("14_ugbui")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_fcs02")
 
 [connection signal="health_changed" from="Health" to="GUILayer/GUI/HealthDisplay" method="_on_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

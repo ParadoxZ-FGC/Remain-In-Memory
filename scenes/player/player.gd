@@ -11,6 +11,7 @@ enum player_states {User_Controlled, System_Controlled}
 @export var lower = Vector2(2500, 1080)
 @export var speed = 1000
 @export var jump_speed = 800
+@export var jumped = 0
 @export var coyote: float = 0.03
 @export var max_walk_speed = 300
 @export var max_run_speed = 500
@@ -38,6 +39,7 @@ var interact_scene : String #INFO Interactable currently only handles dialogue, 
 @onready var player_sprite := $player_sprite
 @onready var hearts := $GUILayer/GUI/HealthDisplay
 @onready var gauge := $GUILayer/GUI/Gauge
+@onready var steam_jump := $SteamJump
 
 
 func _ready():
@@ -142,13 +144,22 @@ func move(movement_vector, delta):
 	
 	if is_on_floor():
 		coyoteTimer = 0
+		jumped = 0
 	else:
 		coyoteTimer += delta
 		clamp(coyoteTimer, 0, coyote)
 
 
 func jump():
-	velocity.y = -jump_speed
+	if jumped == 0:
+		jumped += 1
+		velocity.y = -jump_speed
+	elif jumped == 1 and gauge.needle_angle >= 90:
+		jumped += 1
+		gauge.needle_angle -= 30
+		velocity.y = -jump_speed * 1.1
+		steam_jump.emitting = true
+		
 
 
 func jump_stop():
@@ -168,7 +179,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
 			
-		if (is_on_floor() or coyoteTimer < coyote) and event.is_action_pressed("jump"):
+		if coyoteTimer >= coyote:
+			jumped = 1
+			
+		if event.is_action_pressed("jump"):
 			jump()
 		
 		if not is_on_floor() and event.is_action_released("jump"):
