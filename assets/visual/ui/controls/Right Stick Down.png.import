@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ercv5noohe6b"
-path="res://.godot/imported/door.png-b2d4f05349e331d341f4da20b3a597d5.ctex"
+uid="uid://bpeehojpes5fv"
+path="res://.godot/imported/Right Stick Down.png-206332ada846c2edc6807d1c59b7bc6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/UI/door.png"
-dest_files=["res://.godot/imported/door.png-b2d4f05349e331d341f4da20b3a597d5.ctex"]
+source_file="res://assets/visual/ui/controls/Right Stick Down.png"
+dest_files=["res://.godot/imported/Right Stick Down.png-206332ada846c2edc6807d1c59b7bc6b.ctex"]
 
 [params]
 
