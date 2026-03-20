@@ -19,9 +19,10 @@ var first_pass = true # Used because player "technically" takes damage when load
 
 
 func _ready() -> void:
-	character_sprite.material.set_shader_parameter("blink_color", damage_blink_color)
-	if PlayerData.current_health == health or get_parent().name != "Player":
-		first_pass = false
+	if character_sprite:
+		character_sprite.material.set_shader_parameter("blink_color", damage_blink_color)
+		if PlayerData.current_health == health or get_parent().name != "Player":
+			first_pass = false
 
 
 func set_max_health(value : int): 
@@ -73,7 +74,6 @@ func resolve_temporary_immortality():
 func set_health(value : int): 
 	if value < health and immortality: 
 		return 
-	
 	var clamped_value = clampi(value, 0, max_health) 
 	if clamped_value != health: 
 		var difference = clamped_value - health 

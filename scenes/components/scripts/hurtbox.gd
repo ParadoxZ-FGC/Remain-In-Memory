@@ -31,5 +31,5 @@ func _ready():
 
 ##Reduces the HP value of the hurtbox's parent
 func take_damage(x : int):
-	var HP = get_parent().find_child("Health")
+	var HP = get_parent().find_child("Health", true, false)
 	HP.set_health(HP.health - x)

@@ -340,9 +340,17 @@ position = Vector2(0, -119)
 shape = SubResource("RectangleShape2D_feath")
 
 [node name="Cannon" parent="." unique_id=1917527795 instance=ExtResource("8_4efjx")]
+position = Vector2(0, -12)
 
 [node name="ProjectileHandler" parent="Cannon/1/Projectile" parent_id_path=PackedInt32Array(1917527795, 1384441368) index="0" unique_id=545258969 instance=ExtResource("9_4efjx")]
+position = Vector2(-11, 0)
 speed = 500
+
+[node name="DirectionRay" parent="Cannon/1/Projectile/ProjectileHandler" index="1" unique_id=35468597]
+target_position = Vector2(-42, 0)
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1987282336]
+position = Vector2(0, -12)
 
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

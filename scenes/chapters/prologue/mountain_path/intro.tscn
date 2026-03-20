@@ -346,4 +346,4 @@ destination = "ToMountain"
 type = 1
 
 [node name="Mob" parent="." unique_id=688607098 instance=ExtResource("11_n633v")]
-position = Vector2(3, 222)
+position = Vector2(446, 224)

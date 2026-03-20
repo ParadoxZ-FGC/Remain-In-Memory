@@ -40,9 +40,8 @@ func _ready() -> void:
 	$AnimatedMobSprite.play("asleep")
 	if facing == 1:
 		$AnimatedMobSprite.flip_h = true
-		if(facing != flipDir):
-			$Cannon.flip_projectiles()
-			flipDir = facing
+		$Cannon.position.x = 13
+		$Cannon.facing = true
 		hurt_particles_process_mat.direction.x = -1
 
 
@@ -58,20 +57,16 @@ func _physics_process(_delta: float) -> void:
 		if (target.position.x - position.x) > 0:
 			facing = 1
 			$AnimatedMobSprite.flip_h = true
+			$Cannon.position.x = 13
+			$Cannon.facing = true
 			hurt_particles_process_mat.direction.x = -1
-			
-			if(facing != flipDir):
-				$Cannon.flip_projectiles()
-				flipDir = facing
 		else:
 			facing = -1
 			$AnimatedMobSprite.flip_h = false
+			$Cannon.position.x = -13
+			$Cannon.facing = false
 			hurt_particles_process_mat.direction.x = 1
-			
-			if(facing != flipDir):
-				$Cannon.flip_projectiles()
-				flipDir = facing
-		
+
 		if (current_state == States.READY):
 			#print("FIRE!!")
 			current_state = States.FIRING

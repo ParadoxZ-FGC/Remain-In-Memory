@@ -30,6 +30,9 @@ enum codeAttackList {Stationary = 0, Moving = 1 }
 ##Number of hurtboxes to deal damage to.
 @export_range(0, 25, 1.0, "or_greater") var pierce: int
 
+##For use with projectiles, deals damage to parent when hitting environment.
+@export var environmentSelfDamage: bool = false
+
 @onready var parent = get_parent().get_parent().get_parent()
 
 var ray = null
@@ -60,6 +63,8 @@ func get_knockback():
 func update_mask():
 	collision_mask = layers
 	print(collision_mask)
+	if environmentSelfDamage:
+		monitorable = true
 
 func _ready():
 	update_mask()
@@ -73,6 +78,13 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if activated:
+		if environmentSelfDamage:
+			var bodyOverlap = get_overlapping_bodies()
+			for x in bodyOverlap:
+				if x is TileMapLayer:
+					var HP = get_parent().find_child("Health", true, false)
+					HP.set_health(HP.health - damage)
+		
 		var overlap = get_overlapping_areas()
 		if overlap.size() > 0:
 			overlap.sort_custom(sort_distance)

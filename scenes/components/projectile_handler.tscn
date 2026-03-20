@@ -4,21 +4,29 @@
 [ext_resource type="Script" uid="uid://4h2dwn1kh5xd" path="res://scenes/components/projectile.gd" id="2_qsk3s"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="3_3rc3g"]
 [ext_resource type="Texture2D" uid="uid://c15in3yd58d2y" path="res://assets/visual/enemies/turret-ball.png" id="4_vueii"]
+[ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="5_3rc3g"]
+[ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="6_vueii"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0a8ii"]
 radius = 7.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yia13"]
+radius = 8.246211
+
 [node name="ProjectileHandler" type="Node2D" unique_id=545258969]
 script = ExtResource("1_xi52l")
-speed = 10
+speed = 250
+gravity = 0.0
 metadata/_edit_group_ = true
 
 [node name="Projectile" type="Node2D" parent="." unique_id=1350014941]
 script = ExtResource("2_qsk3s")
 
 [node name="Hitbox" parent="Projectile" unique_id=1324773485 instance=ExtResource("3_3rc3g")]
+collision_mask = 2
 hitboxType = 1
 layers = 10
+environmentSelfDamage = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile/Hitbox" unique_id=387468788]
 shape = SubResource("CircleShape2D_0a8ii")
@@ -27,8 +35,20 @@ shape = SubResource("CircleShape2D_0a8ii")
 scale = Vector2(2, 2)
 texture = ExtResource("4_vueii")
 
+[node name="Hurtbox" parent="Projectile" unique_id=1297194685 instance=ExtResource("6_vueii")]
+layers = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile/Hurtbox" unique_id=724804087]
+shape = SubResource("CircleShape2D_yia13")
+
+[node name="Health" type="Node" parent="Projectile" unique_id=1499693103]
+script = ExtResource("5_3rc3g")
+max_health = 1
+
 [node name="DirectionRay" type="RayCast2D" parent="." unique_id=35468597]
 target_position = Vector2(-1, 0)
 
+[connection signal="body_entered" from="Projectile/Hitbox" to="Projectile/Hitbox" method="_on_body_entered"]
 [connection signal="impacted" from="Projectile/Hitbox" to="." method="_on_hitbox_impacted"]
 [connection signal="impacted" from="Projectile/Hitbox" to="Projectile" method="_on_hitbox_impacted"]
+[connection signal="health_depleted" from="Projectile/Health" to="Projectile" method="_on_health_health_depleted"]

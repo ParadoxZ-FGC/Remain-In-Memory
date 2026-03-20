@@ -40,6 +40,7 @@ var current_player_state : player_states = player_states.User_Controlled
 var interactable : bool = false #Is there something to interact with
 var interact_scene : String #INFO Interactable currently only handles dialogue, so this would be the file one reads from
 var currentWeapon: weaponSelect = weaponSelect.Sword
+var delayedFlip: Node2D #Used in cases where the player inputs an attack and then changes facing direction. Prevents flicking the weapon back and forth. 
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
@@ -138,9 +139,13 @@ func _physics_process(delta):
 				weaponSelect.Sword:
 					if $Sword.attackCooling == false:
 						$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+					else:
+						delayedFlip = $Sword
 				weaponSelect.Glaive:
 					if $Glaive.attackCooling == false:
 						$Glaive.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+					else:
+						delayedFlip = $Glaive
 	
 	if velocity.x != 0 and Input.is_action_pressed("run"):
 		$AnimatedPlayerSprite.speed_scale = 2
@@ -148,7 +153,9 @@ func _physics_process(delta):
 		$AnimatedPlayerSprite.speed_scale = 1
 		
 	move_and_slide()
-
+	
+	if delayedFlip and not delayedFlip.attackCooling:
+		delayedFlip.scale = Vector2(-1, 1) if $AnimatedPlayerSprite.flip_h else Vector2(1, 1)
 
 func move(movement_vector, delta):
 	movementIntention = movement_vector

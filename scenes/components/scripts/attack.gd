@@ -48,7 +48,7 @@ var attackCount: int
 
 @onready var parent = get_parent()
 
-var firstflip: bool = false
+var facing: bool = false
 
 #func _get_property_list():
 #	if Engine.is_editor_hint():
@@ -68,8 +68,6 @@ func _ready() -> void:
 			c += Vector3i(0,0,1)
 		attackList.append(x)
 		attackDict[x] = c
-		#flip_projectiles(true)
-		firstflip = true
 
 func _physics_process(delta: float) -> void:
 	if withinCombo:
@@ -122,11 +120,3 @@ func attack():
 ##Tells the parent to take knockback
 func apply_knockback(force: float, direction: Vector2):
 	parent.take_knockback(force, direction)
-
-func flip_projectiles(ignore : bool = false):
-	if not firstflip:
-		await get_tree().create_timer(0.05).timeout
-	for x in attackList:
-		var projectileN = x.get_node("Projectile")
-		if  projectileN.get_child_count() > 0:
-			projectileN.get_node("ProjectileHandler").flip()
