@@ -25,7 +25,6 @@ var to_deactive := true
 var to_activate := false
 var can_deactivate := false
 
-@onready var cannonball_loaded := $Cannonball
 @onready var hurt_particles := $HurtParticles
 @onready var hurt_particles_process_mat = $HurtParticles.get("process_material")
 
@@ -39,8 +38,8 @@ func _ready() -> void:
 	$AnimatedMobSprite.play("asleep")
 	if facing == 1:
 		$AnimatedMobSprite.flip_h = true
-		cannonball_loaded.flipped = true
-		cannonball_loaded.position = Vector2(21.0, -13)
+		$Cannon.position.x = 13
+		$Cannon.facing = true
 		hurt_particles_process_mat.direction.x = -1
 
 
@@ -56,16 +55,14 @@ func _physics_process(_delta: float) -> void:
 		if (target.position.x - position.x) > 0:
 			facing = 1
 			$AnimatedMobSprite.flip_h = true
-			if(cannonball_loaded != null):
-				cannonball_loaded.flipped = true
-				cannonball_loaded.position = Vector2(21.0, -13)
+			$Cannon.position.x = 13
+			$Cannon.facing = true
 			hurt_particles_process_mat.direction.x = -1
 		else:
 			facing = -1
 			$AnimatedMobSprite.flip_h = false
-			if(cannonball_loaded != null):
-				cannonball_loaded.flipped = false
-				cannonball_loaded.position = Vector2(-21.0, -13)
+			$Cannon.position.x = -13
+			$Cannon.facing = false
 			hurt_particles_process_mat.direction.x = 1
 		
 		if (current_state == States.READY):
@@ -80,9 +77,7 @@ func fire() -> void:
 	await anim.animation_looped
 	anim.play("shoot")
 	
-	var cannonball_to_fire = cannonball_loaded.duplicate()
-	add_child(cannonball_to_fire)
-	cannonball_to_fire.fire(projectile_speed, facing)
+	$Cannon.attack()
 	
 	await $AnimatedMobSprite.animation_finished
 	$AnimatedMobSprite.play("standby")
@@ -102,6 +97,7 @@ func activate() -> void:
 	$AnimatedMobSprite.stop()
 	$AnimatedMobSprite.play("wake")
 	await $AnimatedMobSprite.animation_finished
+	$Hitbox.activate()
 	$AnimatedMobSprite.play("standby")
 	current_state = States.READY
 	state_changed.emit()
@@ -111,6 +107,7 @@ func deactivate() -> void:
 	current_state = States.DEACTIVATING
 	can_deactivate = false
 	$AnimatedMobSprite.stop()
+	$Hitbox.deactivate()
 	$AnimatedMobSprite.play_backwards("wake")
 	await $AnimatedMobSprite.animation_finished
 	$AnimatedMobSprite.play("asleep")
@@ -131,7 +128,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 func _on_health_health_depleted() -> void:
 	current_state = States.DYING
-	$Hitbox.disable()
+	$Hitbox.deactivate()
 	state_changed.emit()
 	var anim = $AnimatedMobSprite
 	anim.stop()
