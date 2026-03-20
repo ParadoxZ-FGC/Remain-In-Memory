@@ -38,6 +38,7 @@ var interact_scene : String #INFO Interactable currently only handles dialogue, 
 @onready var player_sprite := $player_sprite
 @onready var hearts := $GUILayer/GUI/HealthDisplay
 @onready var gauge := $GUILayer/GUI/Gauge
+@onready var interaction := $InteractDisplay
 
 
 func _ready():
@@ -47,6 +48,7 @@ func _ready():
 	EventBus.start_dialogue.connect(_on_dialogue_start)
 	EventBus.finish_dialogue.connect(_text_over)
 	EventBus.swap_control_state.connect(_swap_player_control_state)
+	EventBus.interactableToggle.connect(interactablePrompt)
 	#EventBus.connect("interaction_available", _on_interactable)
 	#EventBus.connect("interaction_unavailable", _off_interactable)
 	#EventBus.connect("finish_dialogue", _text_over)
@@ -235,3 +237,10 @@ func _on_hitbox_impacted() -> void:
 	if gauge.needle_angle >= 270.0:
 		gauge.needle_angle = 0
 		health.set_health(health.health + 1)
+
+func interactablePrompt(toggle: bool) -> void:
+	if(toggle):
+		interaction.show()
+		interaction.displayInteration()
+	else:
+		interaction.hide()

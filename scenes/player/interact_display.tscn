@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bdymnq4jph2fd"]
+
+[ext_resource type="Texture2D" uid="uid://bmp5oivfck682" path="res://assets/visual/ui/dialog/KeyPopup.png" id="1_1n0m1"]
+[ext_resource type="Script" uid="uid://bphtpnen6l2cf" path="res://scenes/player/interact_display.gd" id="2_th6so"]
+[ext_resource type="Texture2D" uid="uid://iab15li1b1bk" path="res://assets/visual/ui/controls/Back.png" id="3_b7hkw"]
+[ext_resource type="FontFile" uid="uid://dccidyfswk4x8" path="res://assets/visual/ui/fonts/NocturneSerifSemibold.otf" id="3_th6so"]
+
+[node name="InteractDisplay" type="TextureRect" unique_id=1013590109]
+anchors_preset = -1
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("1_1n0m1")
+stretch_mode = 2
+script = ExtResource("2_th6so")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1439925687]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Icon" type="TextureRect" parent="MarginContainer" unique_id=106293065]
+layout_mode = 2
+texture = ExtResource("3_b7hkw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="MarginContainer" unique_id=1527482864]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_th6so")
+theme_override_font_sizes/font_size = 32
+text = "K"
+horizontal_alignment = 1
+vertical_alignment = 1

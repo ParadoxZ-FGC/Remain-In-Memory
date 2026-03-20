@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ercv5noohe6b"
-path="res://.godot/imported/door.png-b2d4f05349e331d341f4da20b3a597d5.ctex"
+uid="uid://bp6qk6sd2ueb8"
+path="res://.godot/imported/Left Shoulder.png-675db0202194e2d1ade0197fb6a58c81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/UI/door.png"
-dest_files=["res://.godot/imported/door.png-b2d4f05349e331d341f4da20b3a597d5.ctex"]
+source_file="res://assets/visual/ui/controls/Left Shoulder.png"
+dest_files=["res://.godot/imported/Left Shoulder.png-675db0202194e2d1ade0197fb6a58c81.ctex"]
 
 [params]
 

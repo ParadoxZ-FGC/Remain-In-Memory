@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dvpmfneapc58k"]
 
 [ext_resource type="Script" uid="uid://cja2l5gpqppem" path="res://scenes/ui/settings_screen/input_editor.gd" id="1_cv2gs"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="1_vpw4r"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="1_vpw4r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8ct3"]
 bg_color = Color(0.09411765, 0.09411765, 0.09411765, 0.5019608)
@@ -62,6 +62,8 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_vpw4r")
 theme_override_font_sizes/font_size = 24
 text = "A"
+icon_alignment = 1
+expand_icon = true
 
 [node name="Con-Choice" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=601548326]
 custom_minimum_size = Vector2(100, 40)
@@ -71,6 +73,8 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_vpw4r")
 theme_override_font_sizes/font_size = 20
 text = "A"
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/KBM-Choice" to="." method="_on_kbm_choice_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Con-Choice" to="." method="_on_con_choice_pressed"]

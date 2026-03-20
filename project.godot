@@ -33,6 +33,7 @@ EventBus="*res://scenes/components/autoload/event_bus.gd"
 DialogueManager="*res://scenes/components/autoload/dialogue_manager.gd"
 EnemyManager="*res://scenes/components/autoload/enemy_manager.gd"
 TransitionScreen="*uid://cl3lvfey1gjhh"
+ControlSwitch="*uid://cpol0o0q6tvf4"
 
 [display]
 
