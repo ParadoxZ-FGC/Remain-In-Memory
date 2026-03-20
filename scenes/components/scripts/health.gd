@@ -21,8 +21,8 @@ var first_pass = true # Used because player "technically" takes damage when load
 func _ready() -> void:
 	if character_sprite:
 		character_sprite.material.set_shader_parameter("blink_color", damage_blink_color)
-		if PlayerData.current_health == health or get_parent().name != "Player":
-			first_pass = false
+	if PlayerData.current_health == health or get_parent().name != "Player":
+		first_pass = false
 
 
 func set_max_health(value : int): 
@@ -34,7 +34,7 @@ func set_max_health(value : int):
 		max_health = value
 		max_health_changed.emit(difference)  
 		 
-		if health > max_health: 
+		if health > max_health:
 			health = max_health
 
 
@@ -50,20 +50,21 @@ func get_immortality() -> bool:
 	return immortality 
  
 
-func set_temporary_immortality(time: float): 
-	if immortality_timer == null: 
-		immortality_timer = Timer.new() 
-		immortality_timer.one_shot = true 
-		add_child(immortality_timer) 
-	
-	if immortality_timer.timeout.is_connected(resolve_temporary_immortality): 
-		immortality_timer.timeout.disconnect(resolve_temporary_immortality) 
-	
-	immortality_timer.set_wait_time(time)
-	immortality_timer.timeout.connect(resolve_temporary_immortality) 
-	immortality = true
-	get_parent().find_child("Hurtbox").set_deferred("monitoring", false)
-	immortality_timer.start()
+func set_temporary_immortality(time: float):
+	if immortalityDuration: 
+		if immortality_timer == null: 
+			immortality_timer = Timer.new() 
+			immortality_timer.one_shot = true 
+			add_child(immortality_timer) 
+		
+		if immortality_timer.timeout.is_connected(resolve_temporary_immortality): 
+			immortality_timer.timeout.disconnect(resolve_temporary_immortality) 
+		
+		immortality_timer.set_wait_time(time)
+		immortality_timer.timeout.connect(resolve_temporary_immortality) 
+		immortality = true
+		get_parent().find_child("Hurtbox").set_deferred("monitoring", false)
+		immortality_timer.start()
 
 
 func resolve_temporary_immortality():
@@ -74,6 +75,7 @@ func resolve_temporary_immortality():
 func set_health(value : int): 
 	if value < health and immortality: 
 		return 
+	
 	var clamped_value = clampi(value, 0, max_health) 
 	if clamped_value != health: 
 		var difference = clamped_value - health 
@@ -97,4 +99,5 @@ func get_health() -> int:
 
 
 func sprite_shader_blink_intensity(new_value: float) -> void:
-	character_sprite.material.set_shader_parameter("blink_intensity", new_value)
+	if character_sprite:
+		character_sprite.material.set_shader_parameter("blink_intensity", new_value)

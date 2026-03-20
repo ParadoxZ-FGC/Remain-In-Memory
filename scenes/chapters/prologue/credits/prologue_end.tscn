@@ -1,16 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://rheabj0dgrdu"]
+[gd_scene format=3 uid="uid://rheabj0dgrdu"]
 
 [ext_resource type="Script" uid="uid://dpqny71vw7km3" path="res://scenes/chapters/prologue/credits/prologue_end.gd" id="1_vpquh"]
+[ext_resource type="Theme" uid="uid://7bon7hlkrhon" path="res://default_font.tres" id="2_c3ujm"]
 
-[node name="PrologueEnd" type="Node"]
+[node name="PrologueEnd" type="Node" unique_id=1721062064]
 script = ExtResource("1_vpquh")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=405893533]
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
-[node name="ToBeContinued" type="RichTextLabel" parent="."]
+[node name="ToBeContinued" type="RichTextLabel" parent="." unique_id=979670999]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,13 +21,14 @@ offset_right = -512.0
 offset_bottom = -504.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_c3ujm")
 theme_override_font_sizes/normal_font_size = 100
 text = "To be continued..."
 horizontal_alignment = 1
 vertical_alignment = 1
 text_direction = 1
 
-[node name="InAct1" type="RichTextLabel" parent="."]
+[node name="InAct1" type="RichTextLabel" parent="." unique_id=1073218383]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,13 +38,14 @@ offset_right = -624.0
 offset_bottom = -376.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_c3ujm")
 theme_override_font_sizes/normal_font_size = 32
 text = "...in Act One"
 horizontal_alignment = 2
 vertical_alignment = 1
 text_direction = 1
 
-[node name="PressK" type="RichTextLabel" parent="."]
+[node name="PressK" type="RichTextLabel" parent="." unique_id=1429049300]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -52,6 +55,7 @@ offset_right = -640.0
 offset_bottom = -344.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_c3ujm")
 theme_override_font_sizes/normal_font_size = 16
 text = "Press K"
 horizontal_alignment = 1

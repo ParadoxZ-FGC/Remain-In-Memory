@@ -1,4 +1,4 @@
-class_name PrologueBoss
+class_name OldPrologueBoss
 extends CharacterBody2D
 
 

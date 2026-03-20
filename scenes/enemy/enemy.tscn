@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="4_feath"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="5_kk3ds"]
 [ext_resource type="PackedScene" uid="uid://vspiyrcuxewo" path="res://scenes/components/attack.tscn" id="8_4efjx"]
-[ext_resource type="PackedScene" uid="uid://k6hl8gup1n50" path="res://scenes/components/projectile_handler.tscn" id="9_4efjx"]
-[ext_resource type="Texture2D" uid="uid://br0g7t0hh5f3q" path="res://assets/visual/enemies/gear-particle.png.png" id="9_q52e7"]
+[ext_resource type="PackedScene" uid="uid://k6hl8gup1n50" path="res://scenes/components/projectile_handler.tscn" id="9_hvxgb"]
+[ext_resource type="Texture2D" uid="uid://br0g7t0hh5f3q" path="res://assets/visual/enemies/gear-particle.png" id="9_q52e7"]
 
 [sub_resource type="Curve" id="Curve_q52e7"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7536232, 0), 0.0, 0.0, 0, 0]
@@ -281,19 +281,19 @@ height = 128.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feath"]
 size = Vector2(1000, 366)
 
-[node name="Mob" type="RigidBody2D" unique_id=1718633449]
+[node name="Mob" type="RigidBody2D" unique_id=1459978177]
 collision_layer = 64
 collision_mask = 2
 gravity_scale = 0.0
 script = ExtResource("1_c2o0r")
 
-[node name="Health" type="Node" parent="." unique_id=933913375 node_paths=PackedStringArray("character_sprite")]
+[node name="Health" type="Node" parent="." unique_id=258128691 node_paths=PackedStringArray("character_sprite")]
 script = ExtResource("2_feath")
 immortalityDuration = 0.01
 character_sprite = NodePath("../AnimatedMobSprite")
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
-[node name="HurtParticles" type="GPUParticles2D" parent="." unique_id=627827382]
+[node name="HurtParticles" type="GPUParticles2D" parent="." unique_id=1559123396]
 emitting = false
 amount = 3
 texture = ExtResource("9_q52e7")
@@ -304,7 +304,7 @@ randomness = 1.0
 visibility_rect = Rect2(-300, -100, 600, 200)
 process_material = SubResource("ParticleProcessMaterial_tyl3q")
 
-[node name="AnimatedMobSprite" type="AnimatedSprite2D" parent="." unique_id=1848405161]
+[node name="AnimatedMobSprite" type="AnimatedSprite2D" parent="." unique_id=1967459188]
 material = SubResource("ShaderMaterial_0a8ii")
 rotation = -6.28319
 scale = Vector2(2, 2)
@@ -312,46 +312,39 @@ sprite_frames = SubResource("SpriteFrames_vldki")
 animation = &"asleep"
 autoplay = "asleep"
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1914052910]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1480015889]
 
-[node name="MobCollisionShape" type="CollisionShape2D" parent="." unique_id=966085749]
+[node name="MobCollisionShape" type="CollisionShape2D" parent="." unique_id=878900432]
 visible = false
 shape = SubResource("CapsuleShape2D_nnm6l")
 
-[node name="Hurtbox" parent="." unique_id=1185818289 instance=ExtResource("4_feath")]
+[node name="Hurtbox" parent="." unique_id=2064219074 instance=ExtResource("4_feath")]
+monitoring = false
 layers = 64
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=55407739]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1228645592]
 shape = SubResource("CapsuleShape2D_fhx6o")
 
-[node name="Hitbox" parent="." unique_id=1735844836 instance=ExtResource("5_kk3ds")]
+[node name="Hitbox" parent="." unique_id=537180115 instance=ExtResource("5_kk3ds")]
+monitorable = false
 layers = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1124564514]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=423958729]
 shape = SubResource("CapsuleShape2D_feath")
 
-[node name="Detectionbox" type="Area2D" parent="." unique_id=1475584738]
+[node name="Detectionbox" type="Area2D" parent="." unique_id=266312662]
 visible = false
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectionbox" unique_id=1243192542]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectionbox" unique_id=1044051699]
 position = Vector2(0, -119)
 shape = SubResource("RectangleShape2D_feath")
 
-[node name="Cannon" parent="." unique_id=1917527795 instance=ExtResource("8_4efjx")]
-position = Vector2(0, -12)
+[node name="Cannon" parent="." unique_id=179725720 instance=ExtResource("8_4efjx")]
 
-[node name="ProjectileHandler" parent="Cannon/1/Projectile" parent_id_path=PackedInt32Array(1917527795, 1384441368) index="0" unique_id=545258969 instance=ExtResource("9_4efjx")]
-position = Vector2(-11, 0)
-speed = 500
-gravity = 9.8
-
-[node name="DirectionRay" parent="Cannon/1/Projectile/ProjectileHandler" index="1" unique_id=35468597]
-target_position = Vector2(-16, -13)
-
-[node name="Muzzle" type="Marker2D" parent="." unique_id=1987282336]
-position = Vector2(0, -12)
+[node name="ProjectileHandler" parent="Cannon/1/Projectile" parent_id_path=PackedInt32Array(179725720, 1613470510) index="0" unique_id=1686428060 instance=ExtResource("9_hvxgb")]
+position = Vector2(0, -7)
 
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
@@ -359,4 +352,3 @@ position = Vector2(0, -12)
 [connection signal="body_exited" from="Detectionbox" to="." method="_on_detectionbox_body_exited"]
 
 [editable path="Cannon"]
-[editable path="Cannon/1/Projectile/ProjectileHandler"]

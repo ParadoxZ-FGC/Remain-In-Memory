@@ -17,10 +17,12 @@ var working_text_length : int
 var working_speaker : TextureRect
 var response_options : Dictionary
 var next_scene : Dictionary
+var lastControlScheme := 0
 
 @onready var typingTimer := $typingTimer
 @onready var audio := $AudioStreamPlayer
-
+@onready var guideContainer := $PanelContainer
+@onready var guide := $PanelContainer/ControlInfo
 
 func _ready():
 	EventBus.dialogue_segment_parsed.connect(designate_dialog)
@@ -47,16 +49,17 @@ func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text
 	if side == "left":
 		working_dialog = $LeftSideDialog
 		working_text = $LeftSideDialog/HBoxContainer/Text
-		working_speaker = $LeftSideDialog/HBoxContainer/Speaker
+		working_speaker = $LeftSideDialog/HBoxContainer/SpeakerBox/Speaker
 	elif side == "right":
 		working_dialog = $RightSideDialog
 		working_text = $RightSideDialog/HBoxContainer/Text
-		working_speaker = $RightSideDialog/HBoxContainer/Speaker
+		working_speaker = $RightSideDialog/HBoxContainer/SpeakerBox/Speaker
 	else:
 		working_dialog = $GenericDialog
 		working_text = $GenericDialog/HBoxContainer/Text
 		working_speaker = null
 	working_dialog.visible = true
+	guideContainer.visible = true
 	
 	if working_speaker != null:
 		headshot_path = headshot_path + speaker + "/" + emotion + ".png"
@@ -75,7 +78,7 @@ func designate_dialog(speaker:String, emotion:String, side:String, dialogue_text
 	var text_without_tags = regex.sub(dialogue_text, "", true)
 	working_text_length = text_without_tags.length()
 	update_message(dialogue_text)
-
+	manageGuide()
 
 func designate_responses() -> void:
 	for i in range(4):
@@ -123,6 +126,7 @@ func _on_typing_timer_timeout() -> void: #Every time_between_characters seconds
 			$GenericDialog.visible = false
 			EventBus.swap_control_state.emit()
 			EventBus.finish_dialogue.emit(DialogueManager.dialogue_scenes.find_key(DialogueManager.current_cutscene))
+		guideContainer.visible = false
 		EventBus.dialogue_segment_finished.emit(next_scene.duplicate())
 		emit_signal("finished") #TODO probably vestigal
 
@@ -136,10 +140,26 @@ func _choice_made(choice: String):
 	EventBus.dialogue_segment_finished.emit(DialogueManager.current_cutscene.get(choice))
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and !typingTimer.is_stopped() and !talking_accelerated:
 		_accelerate_reading_speed()
 
+func _input(_event: InputEvent) -> void:
+	if(!guideContainer.is_visible_in_tree()): return
+	if(lastControlScheme != ControlSwitch.controlType):
+		manageGuide()
+
+func manageGuide() -> void:
+	lastControlScheme = ControlSwitch.controlType
+	var s := ControlSwitch.processInputString(InputMap.action_get_events("interact")[lastControlScheme])
+	var filename := "res://assets/visual/ui/controls/" + s + ".png"
+	guide.clear()
+	guide.add_text("Progress Dialogue : ")
+	if (!ResourceLoader.exists(filename)):
+		guide.push_color("gold")
+		guide.add_text(s)
+		return
+	guide.add_image(load("res://assets/visual/ui/controls/" + s + ".png"),16,16)
 
 #func update_message(_message: String) -> void:
 	#pass

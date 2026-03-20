@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c3c4l6e24f3f5" path="res://scenes/components/scripts/attack.gd" id="1_t6hou"]
 
-[node name="Attacks" type="Node2D" unique_id=1917527795]
+[node name="Attack" type="Node2D" unique_id=179725720]
 script = ExtResource("1_t6hou")
 duration = 0.3
 
-[node name="1" type="Node2D" parent="." unique_id=1505840105]
+[node name="1" type="Node2D" parent="." unique_id=1104772186]
 
-[node name="Hitbox" type="Node2D" parent="1" unique_id=1321753004]
+[node name="Hitbox" type="Node2D" parent="1" unique_id=2095978619]
 
-[node name="Sprite" type="Node2D" parent="1" unique_id=1511699853]
+[node name="Sprite" type="Node2D" parent="1" unique_id=197203486]
 
-[node name="Projectile" type="Node2D" parent="1" unique_id=1384441368]
+[node name="Projectile" type="Node2D" parent="1" unique_id=1613470510]

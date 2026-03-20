@@ -10,7 +10,7 @@ extends Area2D
 @export var enabled: bool = true: set = set_enabled, get = get_enabled
 
 ##What layers the hurtbox belongs to, if one is enabled, any hitbox that hits that layer will deal damage.
-@export_flags("Environment:2", "Breakable:4", "Player:8", "Enemy:64", "Hazard:512") var layers = 0
+@export_flags("Environment:2", "Breakable:4", "Player:8", "Enemy:64", "EnemyAttack:128", "Hazard:512") var layers = 0
 #INFO Hurtboxes get scanned by Hitboxes, so if a Hurtbox is labeled "Player" that means it will be scanned by Hitboxes labeled "HitPlayer"
 #region Setters and Getters
 func set_enabled(x: bool):

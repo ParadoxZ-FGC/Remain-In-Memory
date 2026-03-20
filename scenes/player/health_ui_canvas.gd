@@ -39,7 +39,13 @@ func _on_health_changed(diff) -> void:
 	
 	if health - diff < 0:
 		diff = diff + (hearts - diff)
-		
+	
+	if signer == -1:
+		if (diff == 2):
+			Input.start_joy_vibration(0, 0, 1, 0.4)
+		else:
+			Input.start_joy_vibration(0, 1, 0, 0.2)
+	
 	for i in range(diff):
 		if signer == -1:
 			health -= 1

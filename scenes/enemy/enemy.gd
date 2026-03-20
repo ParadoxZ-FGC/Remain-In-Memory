@@ -24,9 +24,7 @@ var target : Node2D
 var to_deactive := true
 var to_activate := false
 var can_deactivate := false
-var flipDir: int = facing
 
-@onready var cannonball_loaded := $Cannonball
 @onready var hurt_particles := $HurtParticles
 @onready var hurt_particles_process_mat = $HurtParticles.get("process_material")
 
@@ -66,7 +64,7 @@ func _physics_process(_delta: float) -> void:
 			$Cannon.position.x = -13
 			$Cannon.facing = false
 			hurt_particles_process_mat.direction.x = 1
-
+		
 		if (current_state == States.READY):
 			#print("FIRE!!")
 			current_state = States.FIRING
@@ -99,8 +97,8 @@ func activate() -> void:
 	$AnimatedMobSprite.stop()
 	$AnimatedMobSprite.play("wake")
 	await $AnimatedMobSprite.animation_finished
-	$AnimatedMobSprite.play("standby")
 	$Hitbox.activate()
+	$AnimatedMobSprite.play("standby")
 	current_state = States.READY
 	state_changed.emit()
 
@@ -109,6 +107,7 @@ func deactivate() -> void:
 	current_state = States.DEACTIVATING
 	can_deactivate = false
 	$AnimatedMobSprite.stop()
+	$Hitbox.deactivate()
 	$AnimatedMobSprite.play_backwards("wake")
 	await $AnimatedMobSprite.animation_finished
 	$AnimatedMobSprite.play("asleep")

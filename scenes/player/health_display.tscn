@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dd3tdpid7s8u4"]
+[gd_scene format=3 uid="uid://dd3tdpid7s8u4"]
 
 [ext_resource type="Script" uid="uid://0s1vcgyftp20" path="res://scenes/player/health_ui_canvas.gd" id="1_0s7l4"]
-[ext_resource type="Texture2D" uid="uid://2356anoxvhp" path="res://assets/visual/UI/hearts/h-e.png" id="2_bvi1u"]
-[ext_resource type="Texture2D" uid="uid://devcp3wgml0q7" path="res://assets/visual/UI/hearts/h-h.png" id="3_ijv13"]
-[ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/UI/hearts/h-f.png" id="4_pjrse"]
-[ext_resource type="Texture2D" uid="uid://s00rnjw3jpwu" path="res://assets/visual/UI/hearts/h-a.png" id="5_sndvw"]
+[ext_resource type="Texture2D" uid="uid://2356anoxvhp" path="res://assets/visual/ui/hearts/h-e.png" id="2_bvi1u"]
+[ext_resource type="Texture2D" uid="uid://devcp3wgml0q7" path="res://assets/visual/ui/hearts/h-h.png" id="3_ijv13"]
+[ext_resource type="Texture2D" uid="uid://bunfrrpfmt017" path="res://assets/visual/ui/hearts/h-f.png" id="4_pjrse"]
+[ext_resource type="Texture2D" uid="uid://s00rnjw3jpwu" path="res://assets/visual/ui/hearts/h-a.png" id="5_sndvw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_86l2d"]
 animations = [{

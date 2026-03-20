@@ -28,5 +28,6 @@ func calculate_exit_positions() -> void:
 func _trigger_effects() -> void:
 	PlayerData.destination = destination
 	triggered.emit()
-	await get_tree().current_scene.fade_out
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
 	get_tree().call_deferred("change_scene_to_file", level_scene)

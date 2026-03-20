@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://uroe7har1wlw"]
+
+[ext_resource type="Material" uid="uid://du5wbflyubag3" path="res://scenes/chapters/prologue/introduction/introduction.tres" id="2_hh6ji"]
+[ext_resource type="Script" uid="uid://c7in1rjceeavb" path="res://scenes/chapters/prologue/introduction/introduction.gd" id="2_qv453"]
+
+[sub_resource type="Gradient" id="Gradient_j12ko"]
+offsets = PackedFloat32Array(0, 0.55333334, 1)
+colors = PackedColorArray(0, 0.21176471, 0.2509804, 1, 0, 0, 0, 1, 2.466701e-07, 0.21316963, 0.103483565, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h1d3g"]
+gradient = SubResource("Gradient_j12ko")
+width = 1920
+height = 1080
+fill_from = Vector2(0, 1)
+
+[node name="Introduction" type="Node" unique_id=1891499922]
+script = ExtResource("2_qv453")
+scene_to_load = "res://scenes/chapters/prologue/mountain_path/intro.tscn"
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1918896342]
+
+[node name="BackgroundSprite" type="Sprite2D" parent="." unique_id=1031315831]
+position = Vector2(960, 540)
+texture = SubResource("GradientTexture2D_h1d3g")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BackgroundSprite" unique_id=1451143108]
+scale = Vector2(3, 3)
+amount = 200
+lifetime = 6.0
+preprocess = 6.0
+explosiveness = 0.2
+randomness = 0.6
+process_material = ExtResource("2_hh6ji")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1143011852]
+color = Color(0.4390491, 0.43904912, 0.43904912, 1)
+
+[node name="Lighting" type="CanvasGroup" parent="." unique_id=279782437]
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="SceneTransitions" type="Node2D" parent="." unique_id=483800234]
+metadata/_edit_lock_ = true

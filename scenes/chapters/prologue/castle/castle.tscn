@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://wrin7ux4mc07"]
 
 [ext_resource type="Script" uid="uid://7vy54uxqsja1" path="res://scenes/chapters/prologue/castle/castle.gd" id="1_6itxs"]
-[ext_resource type="AudioStream" uid="uid://4lqi0l2p3x7r" path="res://assets/audio/bgm/CastleDreamv2.mp3" id="2_5ieeb"]
+[ext_resource type="AudioStream" uid="uid://4lqi0l2p3x7r" path="res://assets/audio/bgm/d_castle_theme2.mp3" id="2_5ieeb"]
 [ext_resource type="Texture2D" uid="uid://4nf1hfqm8fhw" path="res://assets/visual/bg/castle/castle_background2.png" id="2_fct1m"]
 [ext_resource type="PackedScene" uid="uid://colfn2h16sy1u" path="res://scenes/player/player.tscn" id="2_rocry"]
 [ext_resource type="Texture2D" uid="uid://c1xyw1l4oma0a" path="res://assets/visual/tilemaps/door.png" id="4_4wb8h"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="8_fct1m"]
 [ext_resource type="Material" uid="uid://bjcx6ebxx13kf" path="res://scenes/chapters/prologue/castle/castle_p2.tres" id="9_yuadt"]
 [ext_resource type="PackedScene" uid="uid://mgefkek60rmx" path="res://scenes/enemy/enemy.tscn" id="11_ra2nw"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifTest-Light.otf" id="13_uqdrb"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="13_uqdrb"]
 [ext_resource type="PackedScene" uid="uid://c8umepsy68yck" path="res://scenes/ui/pause_screen/pause_screen.tscn" id="14_uqdrb"]
 [ext_resource type="PackedScene" uid="uid://be6p1ppc6y1gl" path="res://scenes/components/door_interactable.tscn" id="15_3po6j"]
 
@@ -716,6 +716,8 @@ limit_left = 0
 limit_top = -1500
 limit_right = 1920
 limit_bottom = 1140
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
 
 [node name="Enemies" type="CanvasGroup" parent="." unique_id=1635850376]
 metadata/_edit_group_ = true
@@ -938,14 +940,15 @@ metadata/_edit_lock_ = true
 
 [node name="Doors" type="Node2D" parent="." unique_id=203503854]
 
-[node name="ToTown" parent="Doors" unique_id=1564227054 instance=ExtResource("15_3po6j")]
-position = Vector2(76, 992)
-spawn_position = 2
-level_scene = "res://scenes/chapters/prologue/town/town.tscn"
-destination = "ToCastle"
-
 [node name="ToThroneRoom" parent="Doors" unique_id=763532232 instance=ExtResource("15_3po6j")]
 position = Vector2(1780, -1120)
 spawn_position = 1
 level_scene = "res://scenes/chapters/prologue/throne_room/throne_room.tscn"
 destination = "ToCastle"
+
+[node name="ToDream" parent="Doors" unique_id=1818827439 instance=ExtResource("15_3po6j")]
+position = Vector2(1780, -1120)
+spawn_position = 1
+level_scene = "res://scenes/chapters/prologue/dream_town/dream_town.tscn"
+destination = "ToDream"
+enabled = false

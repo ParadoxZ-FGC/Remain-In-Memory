@@ -2,14 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cadh1n1g4w666" path="res://scenes/components/scripts/hitbox.gd" id="1_2otwd"]
 
-[node name="Hitbox" type="Area2D" unique_id=1324773485]
+[node name="Hitbox" type="Area2D" unique_id=1848612265]
 collision_layer = 0
 collision_mask = 0
-monitorable = false
 script = ExtResource("1_2otwd")
-selfKnockback = 0.0
-applyKnockback = 0.0
 
-[node name="Environment Raycasts" type="Node" parent="." unique_id=1802009989]
+[node name="Environment Raycasts" type="Node2D" parent="." unique_id=18784854]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

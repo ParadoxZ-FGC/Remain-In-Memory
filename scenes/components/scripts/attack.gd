@@ -113,10 +113,11 @@ func attack():
 		await get_tree().create_timer(duration).timeout
 		if(sprite):
 			sprite.set_visible(false)
-		
+
 		await get_tree().create_timer(attackCooldown).timeout
+		
 		attackCooling = false
 
 ##Tells the parent to take knockback
-func apply_knockback(force: float, direction: Vector2):
-	parent.take_knockback(force, direction)
+func apply_knockback(force: float):
+	parent.take_knockback(force, $"knockback_dir".position)
