@@ -3,7 +3,7 @@ extends Node2D
 
 enum States {LOADED, FIRED}
 
-const ATTACK_WEIGHT = 100000
+const ATTACK_WEIGHT = 200
 
 var current_state : States = States.LOADED
 var directionVector : Vector2
