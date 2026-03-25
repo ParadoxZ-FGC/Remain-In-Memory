@@ -220,10 +220,10 @@ bus = &"Sound Effects"
 
 [node name="Sword" parent="." unique_id=179725720 instance=ExtResource("10_gx1jg")]
 
-[node name="1" parent="Sword" index="0" unique_id=1104772186]
+[node name="Hitbox" parent="Sword/1" parent_id_path=PackedInt32Array(179725720, 1104772186) index="0" unique_id=2095978619]
 visible = false
 
-[node name="Hitbox" parent="Sword/1/Hitbox" parent_id_path=PackedInt32Array(179725720, 2095978619) index="0" unique_id=1848612265 instance=ExtResource("12_fm80t")]
+[node name="Hitbox" parent="Sword/1/Hitbox" index="0" unique_id=1848612265 instance=ExtResource("12_fm80t")]
 hitboxType = 1
 layers = 710
 
@@ -239,6 +239,7 @@ shape = SubResource("RectangleShape2D_myrg7")
 position = Vector2(-1, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sword/1/Sprite" parent_id_path=PackedInt32Array(179725720, 197203486) index="0" unique_id=1271561363]
+visible = false
 position = Vector2(7, 3)
 rotation = 1.5707964
 scale = Vector2(0.1344952, 0.13409501)
@@ -250,10 +251,10 @@ attackCooldown = 0.1
 comboDuration = 0.5
 comboCooldown = 0.5
 
-[node name="1" parent="Glaive" index="0" unique_id=1104772186]
+[node name="Hitbox" parent="Glaive/1" parent_id_path=PackedInt32Array(1340132541, 1104772186) index="0" unique_id=2095978619]
 visible = false
 
-[node name="hitbox" parent="Glaive/1/Hitbox" parent_id_path=PackedInt32Array(1340132541, 2095978619) index="0" unique_id=1974952317 instance=ExtResource("12_fm80t")]
+[node name="hitbox" parent="Glaive/1/Hitbox" index="0" unique_id=1974952317 instance=ExtResource("12_fm80t")]
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
 hitboxType = 1
@@ -274,6 +275,7 @@ shape = SubResource("RectangleShape2D_ugbui")
 position = Vector2(-16, -6.4516134)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Glaive/1/Sprite" parent_id_path=PackedInt32Array(1340132541, 197203486) index="0" unique_id=629703404]
+visible = false
 position = Vector2(10.342492, 3.0000002)
 rotation = 1.5707964
 scale = Vector2(0.2, 0.24195285)

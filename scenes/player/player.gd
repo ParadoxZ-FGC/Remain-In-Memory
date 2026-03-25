@@ -96,7 +96,7 @@ func _physics_process(delta):
 					$Glaive.attack()
 		
 		if Input.is_action_just_pressed("dash") and dashCoolDown >= dashCoolDownLength:
-			dash(Input.get_axis("move_left", "move_right"), Input.get_axis("look_up", "crouch_look_down"))
+			dash(Input.get_axis("move_left", "move_right"), Input.get_axis("look_up", "look_down"))
 		if dashCoolDown <= dashCoolDownLength:
 			dashCoolDown += delta
 
