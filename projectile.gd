@@ -9,11 +9,13 @@ var speed: float = 0
 
 func _ready():
 	visible = false
+	$Hurtbox.set_enabled(false)
 
 func _physics_process(delta: float) -> void:
 	if moving:
 		global_position.x += velX * delta
 		if grav:
+			print(grav)
 			velY += grav
 		global_position.y += velY * delta
 
@@ -23,9 +25,11 @@ func move():
 	velX = directionVector.x * speed
 	velY = directionVector.y * speed
 	$Hitbox.activate(-1)
+	$Hurtbox.set_enabled(true)
+	var timer = get_tree().create_timer(5, false, true, false)
+	timer.timeout.connect(_end_of_life)
 
 func _end_of_life() -> void:
-	moving = false
 	queue_free()
 
 func _on_hitbox_impacted() -> void:

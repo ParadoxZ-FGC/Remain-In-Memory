@@ -34,7 +34,7 @@ func set_max_health(value : int):
 		max_health = value
 		max_health_changed.emit(difference)  
 		 
-		if health > max_health:
+		if health > max_health: 
 			health = max_health
 
 
@@ -50,8 +50,8 @@ func get_immortality() -> bool:
 	return immortality 
  
 
-func set_temporary_immortality(time: float):
-	if immortalityDuration: 
+func set_temporary_immortality(time: float): 
+	if immortalityDuration:
 		if immortality_timer == null: 
 			immortality_timer = Timer.new() 
 			immortality_timer.one_shot = true 

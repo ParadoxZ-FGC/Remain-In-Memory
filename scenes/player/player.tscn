@@ -220,8 +220,10 @@ bus = &"Sound Effects"
 
 [node name="Sword" parent="." unique_id=179725720 instance=ExtResource("10_gx1jg")]
 
-[node name="Hitbox" parent="Sword/1/Hitbox" parent_id_path=PackedInt32Array(179725720, 2095978619) index="0" unique_id=1848612265 instance=ExtResource("12_fm80t")]
+[node name="Hitbox" parent="Sword/1" parent_id_path=PackedInt32Array(179725720, 1104772186) index="0" unique_id=2095978619]
 visible = false
+
+[node name="Hitbox" parent="Sword/1/Hitbox" index="0" unique_id=1848612265 instance=ExtResource("12_fm80t")]
 hitboxType = 1
 layers = 710
 
@@ -249,8 +251,10 @@ attackCooldown = 0.1
 comboDuration = 0.5
 comboCooldown = 0.5
 
-[node name="hitbox" parent="Glaive/1/Hitbox" parent_id_path=PackedInt32Array(1340132541, 2095978619) index="0" unique_id=1974952317 instance=ExtResource("12_fm80t")]
+[node name="Hitbox" parent="Glaive/1" parent_id_path=PackedInt32Array(1340132541, 1104772186) index="0" unique_id=2095978619]
 visible = false
+
+[node name="hitbox" parent="Glaive/1/Hitbox" index="0" unique_id=1974952317 instance=ExtResource("12_fm80t")]
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
 hitboxType = 1
