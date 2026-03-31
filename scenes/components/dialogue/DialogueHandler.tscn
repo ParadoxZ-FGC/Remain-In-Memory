@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://snpu574qvx7o"]
 
 [ext_resource type="Script" uid="uid://bg7h58hljosm5" path="res://scenes/components/dialogue/DialogueHandler.gd" id="1_tcvru"]
+[ext_resource type="Texture2D" uid="uid://xfxju0fnlid" path="res://assets/visual/ui/dialog/dialog_right.png" id="2_eur8j"]
 [ext_resource type="Texture2D" uid="uid://dcofyjn106o0r" path="res://assets/visual/ui/dialog/dialog_box.png" id="2_uw3ex"]
 [ext_resource type="Texture2D" uid="uid://crlb4amtu3sgm" path="res://assets/visual/ui/dialog/headshots/morose/neutral.png" id="3_tqpex"]
 [ext_resource type="Texture2D" uid="uid://bxucmvamiyob" path="res://assets/visual/ui/dialog/headshots/traveler/neutral.png" id="4_0syfc"]
 [ext_resource type="FontFile" uid="uid://dccidyfswk4x8" path="res://assets/visual/ui/fonts/NocturneSerifSemibold.otf" id="4_s0s55"]
 [ext_resource type="FontFile" uid="uid://dyewccjcoyfg6" path="res://assets/visual/ui/fonts/NocturneSerifMediumItalic.otf" id="5_gjvq8"]
 [ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="5_uw3ex"]
+[ext_resource type="Texture2D" uid="uid://bb043jcselavo" path="res://assets/visual/ui/dialog/dialog_left.png" id="7_drnne"]
 [ext_resource type="Theme" uid="uid://7bon7hlkrhon" path="res://default_font.tres" id="8_2axq6"]
 
 [node name="DialogueHandler" type="CanvasLayer" unique_id=2030627623]
@@ -14,7 +16,6 @@ script = ExtResource("1_tcvru")
 time_between_characters = 0.08
 
 [node name="RightSideDialog" type="TextureRect" parent="." unique_id=238466320]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,23 +25,22 @@ offset_right = -448.0
 offset_bottom = -56.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_uw3ex")
+texture = ExtResource("2_eur8j")
 metadata/_edit_group_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="RightSideDialog" unique_id=199772934]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.01
-anchor_top = 0.03
-anchor_right = 0.99
-anchor_bottom = 0.97
-offset_left = 29.76
-offset_top = 32.32
-offset_right = -29.76001
-offset_bottom = -32.320007
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 8
 alignment = 1
 
 [node name="Text" type="RichTextLabel" parent="RightSideDialog/HBoxContainer" unique_id=2099214322]
@@ -63,11 +63,19 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Speaker" type="TextureRect" parent="RightSideDialog/HBoxContainer" unique_id=728315116]
+[node name="SpeakerBox" type="MarginContainer" parent="RightSideDialog/HBoxContainer" unique_id=142343230]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 36
+
+[node name="Speaker" type="TextureRect" parent="RightSideDialog/HBoxContainer/SpeakerBox" unique_id=728315116]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.2
 texture = ExtResource("3_tqpex")
 stretch_mode = 5
 
@@ -82,26 +90,33 @@ offset_right = -448.0
 offset_bottom = -56.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_uw3ex")
+texture = ExtResource("7_drnne")
 metadata/_edit_group_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LeftSideDialog" unique_id=471318328]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.01
-anchor_top = 0.03
-anchor_right = 0.99
-anchor_bottom = 0.97
-offset_left = 29.760008
-offset_top = 32.320007
-offset_right = -29.76001
-offset_bottom = -32.320007
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Speaker" type="TextureRect" parent="LeftSideDialog/HBoxContainer" unique_id=2054777955]
+[node name="SpeakerBox" type="MarginContainer" parent="LeftSideDialog/HBoxContainer" unique_id=1275433119]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 36
+
+[node name="Speaker" type="TextureRect" parent="LeftSideDialog/HBoxContainer/SpeakerBox" unique_id=2054777955]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -147,14 +162,12 @@ metadata/_edit_group_ = true
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.01
-anchor_top = 0.03
-anchor_right = 0.99
-anchor_bottom = 0.97
-offset_left = 13.76001
-offset_top = 16.320007
-offset_right = -13.76001
-offset_bottom = -16.320007
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -264,6 +277,32 @@ button_mask = 0
 text = "Delta"
 flat = true
 text_direction = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1790822067]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -48.0
+offset_right = 100.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ControlInfo" type="RichTextLabel" parent="PanelContainer" unique_id=1396423736]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_s0s55")
+theme_override_fonts/bold_font = ExtResource("4_s0s55")
+theme_override_fonts/bold_italics_font = ExtResource("5_gjvq8")
+theme_override_fonts/italics_font = ExtResource("5_gjvq8")
+theme_override_fonts/mono_font = ExtResource("5_uw3ex")
+bbcode_enabled = true
+text = "Progress Dialogue : [color=gold]K[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="typingTimer" type="Timer" parent="." unique_id=901371929]
 wait_time = 0.05

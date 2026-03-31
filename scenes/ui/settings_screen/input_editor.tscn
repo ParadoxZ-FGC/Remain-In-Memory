@@ -62,6 +62,8 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_vpw4r")
 theme_override_font_sizes/font_size = 24
 text = "A"
+icon_alignment = 1
+expand_icon = true
 
 [node name="Con-Choice" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=601548326]
 custom_minimum_size = Vector2(100, 40)
@@ -71,6 +73,8 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_vpw4r")
 theme_override_font_sizes/font_size = 20
 text = "A"
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/KBM-Choice" to="." method="_on_kbm_choice_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Con-Choice" to="." method="_on_con_choice_pressed"]
