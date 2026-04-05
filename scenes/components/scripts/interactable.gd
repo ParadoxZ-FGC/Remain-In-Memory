@@ -38,21 +38,25 @@ func _on_interaction() -> void:
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	if type == interaction_type.MANUAL:
-		interactable = true
+		if(enabled): toggleInteractable(true)
 	elif type == interaction_type.AUTOMATIC:
 		_interact()
 
 
 func _on_area_2d_area_exited(_area: Area2D) -> void:
-	interactable = false
+	toggleInteractable(false)
 
 
 func _interact() -> void:
 	interactable = false
 	if oneshot:
 		enabled = false
+		EventBus.interactableToggle.emit(interactable)
 	_trigger_effects()
 
+func toggleInteractable(toggle: bool) -> void:
+	interactable = toggle
+	EventBus.interactableToggle.emit(interactable)
 
 func _trigger_effects() -> void:
 	pass

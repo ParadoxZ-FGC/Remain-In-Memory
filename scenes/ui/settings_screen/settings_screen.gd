@@ -15,7 +15,7 @@ func _ready():
 	get_node("PanelContainer/ControlsTab/settings_container/Esc").configOption("esc", "Exit Menu")
 	get_node("PanelContainer/ControlsTab/settings_container/MoveLeft").configOption("move_left", "Move Left")
 	get_node("PanelContainer/ControlsTab/settings_container/MoveRight").configOption("move_right", "Move Right")
-	get_node("PanelContainer/ControlsTab/settings_container/CrouchDown").configOption("crouch_look_down", "Crouch")
+	get_node("PanelContainer/ControlsTab/settings_container/CrouchDown").configOption("crouch", "Crouch")
 	get_node("PanelContainer/ControlsTab/settings_container/Jump").configOption("jump", "Jump")
 	get_node("PanelContainer/ControlsTab/settings_container/Attack").configOption("attack", "Attack")
 	get_node("PanelContainer/ControlsTab/settings_container/Interact").configOption("interact", "Interact")

@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c0ptkh3ukgj5a" path="res://assets/visual/enemies/turret-Sheet.png" id="2_nnm6l"]
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="4_feath"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="5_kk3ds"]
-[ext_resource type="Script" uid="uid://12fgvi0w1br" path="res://scenes/enemy/turret_cannonball.gd" id="6_0a8ii"]
-[ext_resource type="Texture2D" uid="uid://c15in3yd58d2y" path="res://assets/visual/enemies/turret-ball.png" id="6_kk3ds"]
+[ext_resource type="PackedScene" uid="uid://vspiyrcuxewo" path="res://scenes/components/attack.tscn" id="8_4efjx"]
+[ext_resource type="PackedScene" uid="uid://k6hl8gup1n50" path="res://scenes/components/projectile_handler.tscn" id="9_hvxgb"]
 [ext_resource type="Texture2D" uid="uid://br0g7t0hh5f3q" path="res://assets/visual/enemies/gear-particle.png" id="9_q52e7"]
 
 [sub_resource type="Curve" id="Curve_q52e7"]
@@ -281,9 +281,6 @@ height = 128.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feath"]
 size = Vector2(1000, 366)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0a8ii"]
-radius = 7.0
-
 [node name="Mob" type="RigidBody2D" unique_id=1459978177]
 collision_layer = 64
 collision_mask = 2
@@ -346,24 +343,14 @@ collision_mask = 8
 position = Vector2(0, -119)
 shape = SubResource("RectangleShape2D_feath")
 
-[node name="Cannonball" type="Node2D" parent="." unique_id=340397890]
-position = Vector2(-21, -13)
-script = ExtResource("6_0a8ii")
-metadata/_edit_group_ = true
+[node name="Cannon" parent="." unique_id=179725720 instance=ExtResource("8_4efjx")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Cannonball" unique_id=1565688909]
-scale = Vector2(2, 2)
-texture = ExtResource("6_kk3ds")
-
-[node name="Hitbox" parent="Cannonball" unique_id=1655156808 instance=ExtResource("5_kk3ds")]
-monitoring = false
-layers = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cannonball/Hitbox" unique_id=1304368437]
-shape = SubResource("CircleShape2D_0a8ii")
+[node name="ProjectileHandler" parent="Cannon/1/Projectile" parent_id_path=PackedInt32Array(179725720, 1613470510) index="0" unique_id=1686428060 instance=ExtResource("9_hvxgb")]
+position = Vector2(0, -7)
 
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="body_entered" from="Detectionbox" to="." method="_on_detectionbox_body_entered"]
 [connection signal="body_exited" from="Detectionbox" to="." method="_on_detectionbox_body_exited"]
-[connection signal="impacted" from="Cannonball/Hitbox" to="Cannonball" method="_on_hitbox_impacted"]
+
+[editable path="Cannon"]
