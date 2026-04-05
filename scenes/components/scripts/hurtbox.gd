@@ -31,7 +31,7 @@ func _ready():
 
 ##Reduces the HP value of the hurtbox's parent taking into consideration the direction and weight
 func take_damage(x : int, direction:Vector2=Vector2(0,0), weight:float=0 ):
-	if layers & 8 and weight!=0:
+	if (layers & 8 or layers & 64) and weight!=0:
 		get_parent().take_knockback(weight,direction.normalized())
 	var HP = get_parent().find_child("Health")
 	HP.set_health(HP.health - x)

@@ -18,6 +18,7 @@ enum player_states {User_Controlled, System_Controlled}
 @export var drag_force = 500
 @export var walking_sfx: AudioStreamPlayer2D
 @export var knockbackTime: float = 0.05 #Determines how long the player is in knockback, @TODO might move to the knockback function itself
+var knockedback:bool=false
 @export var to_scene_on_death := true
 @export var death_scene : String
 
@@ -76,6 +77,8 @@ func _physics_process(delta):
 		if not inKnockback:
 			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
 		if Input.is_action_just_pressed("attack"):
+			$sword/hitbox.direction=Vector2(-1 if $player_sprite.flip_h else 1,0)
+			$sword/hitbox.weight=200
 			$sword.attack()
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
 			#[This appears to never be called] print("pressed! #1");
@@ -102,7 +105,7 @@ func _physics_process(delta):
 		walking_sfx.stop()
 		$player_sprite.animation = "idle"
 	
-	if velocity.x != 0 and not inKnockback:
+	if velocity.x != 0 and not knockedback:
 		$player_sprite.animation = "walk"
 		$player_sprite.flip_v = false
 		$player_sprite.flip_h = velocity.x < 0
@@ -118,23 +121,24 @@ func _physics_process(delta):
 
 
 func move(movement_vector, delta):
-	movementIntention = movement_vector
-	movementDirection = true if velocity.x > 0 else false
-	movementIntentionDirection = true if movementIntention >= 0 else false
-	var walk = speed * movementIntention
-	if abs(walk) < speed * 0.2:
-		if is_on_floor():
-			velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+	if not(knockedback):
+		movementIntention = movement_vector
+		movementDirection = true if velocity.x > 0 else false
+		movementIntentionDirection = true if movementIntention >= 0 else false
+		var walk = speed * movementIntention
+		if abs(walk) < speed * 0.2:
+			if is_on_floor():
+				velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+			else:
+				velocity.x = move_toward(velocity.x, 0, drag_force * delta)
 		else:
-			velocity.x = move_toward(velocity.x, 0, drag_force * delta)
-	else:
-		if movementIntentionDirection != movementDirection:
-			velocity.x -= velocity.x / 8 * 7
-	
-	velocity.x += walk * delta
-	
-	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if (Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled) else clamp(velocity.x, -max_walk_speed, max_walk_speed)
-	
+			if movementIntentionDirection != movementDirection:
+				velocity.x -= velocity.x / 8 * 7
+		
+		velocity.x += walk * delta
+		
+		velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if (Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled) and not(knockedback) else clamp(velocity.x, -max_walk_speed, max_walk_speed)
+		
 	
 	velocity.y += gravity * delta
 	
@@ -142,6 +146,7 @@ func move(movement_vector, delta):
 	
 	if is_on_floor():
 		coyoteTimer = 0
+		knockedback=false
 	else:
 		coyoteTimer += delta
 		clamp(coyoteTimer, 0, coyote)
@@ -219,15 +224,10 @@ func _swap_player_control_state() -> void:
 func take_knockback(force: float, direction: Vector2):
 	if not inKnockback:
 		inKnockback = true
-		velocity = Vector2(0,0)
-		#if $player_sprite.flip_h:
-			#velocity.x -= force * direction.x
-		#else:
-			#velocity.x += force * direction.x
-		#velocity.y += force * direction.y
+		knockedback=true
+		direction.y-=0.7
 		velocity+=force*direction
 		await get_tree().create_timer(knockbackTime).timeout
-		velocity = Vector2(0,0)
 		inKnockback = false
 
 

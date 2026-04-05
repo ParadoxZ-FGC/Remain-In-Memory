@@ -67,6 +67,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	move_and_slide()
+
 	if not talking:
 		target_direction = Directions.LEFT if (target.position.x <= position.x) else Directions.RIGHT
 		_update_side()
@@ -75,7 +77,6 @@ func _physics_process(_delta: float) -> void:
 			action_ready = false
 			prepare()
 	
-	move_and_slide()
 
 
 func prepare() -> void:
@@ -185,3 +186,7 @@ func _on_health_health_changed(diff: int) -> void:
 
 func _action_completed() -> void:
 	action_completed.emit()
+
+func take_knockback(force: float, direction: Vector2):
+	direction.y-=0.7
+	velocity+=force*direction

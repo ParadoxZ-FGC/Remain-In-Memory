@@ -42,7 +42,8 @@ func _ready() -> void:
 		cannonball_loaded.flipped = true
 		cannonball_loaded.position = Vector2(21.0, -13)
 		hurt_particles_process_mat.direction.x = -1
-
+	add_constant_central_force(Vector2(0,ProjectSettings.get_setting("physics/2d/default_gravity") * 2))
+	set_lock_rotation_enabled(true)
 
 func _physics_process(_delta: float) -> void:
 	if current_state == States.INACTIVE and to_activate:
@@ -169,3 +170,9 @@ func print_state() -> void:
 func _on_health_health_changed(diff: int) -> void:
 	if (sign(diff) == -1.0):
 		hurt_particles.emitting = true
+
+func take_knockback(force: float, direction: Vector2):
+		direction.y-=1
+		#print(str(force)+"-"+str(direction))
+		apply_central_impulse(force*direction)
+		
