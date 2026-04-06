@@ -104,11 +104,11 @@ func _physics_process(delta: float) -> void:
 					hits.resize(pierce)
 
 				for x in hits:
-					x.take_damage(damage)
+					x.take_damage(damage,direction,weight)
 					impacted.emit()
 
-				if hitboxType == codeAttackList.Melee and ray.is_colliding() and hits.size() == 0 and selfKnockback > 0:
-					parent.apply_knockback(selfKnockback)
+				#if hitboxType == codeAttackList.Melee and ray.is_colliding() and hits.size() == 0 and selfKnockback > 0:
+					#parent.apply_knockback(selfKnockback)
 
 ##Causes the hitbox to scan for overlapping areas. It sorts them by distance and culls any past walls and any past the provided pierce count.
 func activate(duration: int = -1):

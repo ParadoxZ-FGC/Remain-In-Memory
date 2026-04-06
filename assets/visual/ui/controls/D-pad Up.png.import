@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bi6hpxin4yul2"
-path="res://.godot/imported/D-pad Up.png-2b9b23310d10a4a1a557aebdd7bf53e4.ctex"
+path="res://.godot/imported/D-pad Up.png-7d32f469f987d0dfa58a19c10e891203.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/ui/controls/D-pad Up.png"
-dest_files=["res://.godot/imported/D-pad Up.png-2b9b23310d10a4a1a557aebdd7bf53e4.ctex"]
+source_file="res://assets/visual/UI/controls/D-pad Up.png"
+dest_files=["res://.godot/imported/D-pad Up.png-7d32f469f987d0dfa58a19c10e891203.ctex"]
 
 [params]
 

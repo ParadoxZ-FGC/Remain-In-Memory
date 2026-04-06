@@ -24,7 +24,7 @@ enum weaponSelect {Sword, Glaive}
 @export var momentum_loss = 1500
 @export var walking_sfx: AudioStreamPlayer2D
 @export var knockbackTime: float = 0.05 #Determines how long the player is in knockback, @TODO might move to the knockback function itself
-var knockedback:bool=false
+var knockedback:bool=false  # if TRUE: the player has been knocked back and hasn't touched the ground yet
 @export var to_scene_on_death := true
 @export var death_scene : String
 
@@ -87,18 +87,19 @@ func _text_over(_cutscene:String): #Signals when dialogue file is done
 
 func _physics_process(delta):
 	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
-		if not inKnockback:
-			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
+		move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
 		if Input.is_action_just_pressed("attack"):
 			match currentWeapon:
 				weaponSelect.Sword:
+					$"Sword/1/Hitbox/Hitbox".direction=Vector2(-1 if $player_sprite.flip_h else 1,0)
+					$"Sword/1/Hitbox/Hitbox".weight=200
 					$Sword.attack()
-					$Sword/hitbox.direction=Vector2(-1 if $player_sprite.flip_h else 1,0)
-					$Sword/hitbox.weight=200
+					
 				weaponSelect.Glaive:
+					$"Glaive/1/Hitbox/hitbox".direction=Vector2(-1 if $player_sprite.flip_h else 1,0)
+					$"Glaive/1/Hitbox/hitbox".weight=200
 					$Glaive.attack()
-					$Glaive/hitbox.direction=Vector2(-1 if $player_sprite.flip_h else 1,0)
-					$Glaive/hitbox.weight=200
+					
 		
 		if Input.is_action_just_pressed("dash") and dashCoolDown >= dashCoolDownLength:
 			dash(Input.get_axis("move_left", "move_right"), Input.get_axis("look_up", "look_down"))
@@ -179,8 +180,6 @@ func move(movement_vector, delta):
 				if movementIntentionDirection != movementDirection:
 					velocity.x -= velocity.x / 8 * 7
 			
-			velocity.y += gravity * delta
-
 			if Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled:
 				if velocity.x < max_run_speed and velocity.x > -max_run_speed:
 					velocity.x += walk * delta
@@ -196,7 +195,8 @@ func move(movement_vector, delta):
 			velocity.x = clamp(velocity.x, -max_dash_speed, max_dash_speed)
 	
 	position = position.clamp(upper, lower)
-	
+	velocity.y += gravity * delta
+
 	if is_on_floor():
 		coyoteTimer = 0
 		knockedback=false
@@ -287,9 +287,11 @@ func _swap_player_control_state() -> void:
 
 ##Causes the player to take knockback. Direction values are multiplied by force to determine velocity. Disables most movement for knockbackTime seconds.
 func take_knockback(force: float, direction: Vector2):
+	#print("PLAYER KNOCKBACK RECEIVED")
+
 	if not inKnockback:
 		inKnockback = true
-		knockedback=true
+		knockedback=true #the player has been knocked back and hasn't touched the ground yet
 		direction.y-=0.7
 		velocity+=force*direction
 		await get_tree().create_timer(knockbackTime).timeout
