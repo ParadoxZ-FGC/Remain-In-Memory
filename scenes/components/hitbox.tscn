@@ -7,4 +7,6 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_2otwd")
 
+[node name="Environment Raycasts" type="Node2D" parent="." unique_id=18784854]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

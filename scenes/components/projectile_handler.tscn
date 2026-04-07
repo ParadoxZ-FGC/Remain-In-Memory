@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://k6hl8gup1n50"]
+
+[ext_resource type="Script" uid="uid://c57feooetn7ht" path="res://projectile_handler.gd" id="1_fbqpt"]
+[ext_resource type="Script" uid="uid://btijsbbb5kk7b" path="res://projectile.gd" id="2_pwxtl"]
+[ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="3_qsk3s"]
+[ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="4_3rc3g"]
+[ext_resource type="Texture2D" uid="uid://c15in3yd58d2y" path="res://assets/visual/enemies/turret-ball.png" id="5_vueii"]
+[ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="6_3rc3g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vueii"]
+radius = 6.0827627
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yia13"]
+radius = 8.0
+
+[node name="ProjectileHandler" type="Node2D" unique_id=1686428060]
+script = ExtResource("1_fbqpt")
+gravity = 0.0
+
+[node name="Projectile" type="Node2D" parent="." unique_id=473212258]
+script = ExtResource("2_pwxtl")
+
+[node name="Sprite2D" type="Sprite2D" parent="Projectile" unique_id=815721799]
+position = Vector2(-4.7683716e-07, 4.7683716e-07)
+scale = Vector2(2, 2)
+texture = ExtResource("5_vueii")
+
+[node name="Hitbox" parent="Projectile" unique_id=1848612265 instance=ExtResource("3_qsk3s")]
+layers = 10
+environmentSelfDamage = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile/Hitbox" unique_id=919525256]
+shape = SubResource("CircleShape2D_vueii")
+
+[node name="Hurtbox" parent="Projectile" unique_id=295665714 instance=ExtResource("4_3rc3g")]
+layers = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile/Hurtbox" unique_id=30354234]
+shape = SubResource("CircleShape2D_yia13")
+
+[node name="Health" type="Node" parent="Projectile" unique_id=76883221]
+script = ExtResource("6_3rc3g")
+max_health = 1
+immortalityDuration = 0.0
+
+[node name="DirectionRay" type="RayCast2D" parent="." unique_id=911100505]
+target_position = Vector2(-8, 0)
+
+[connection signal="health_depleted" from="Projectile/Health" to="Projectile" method="_on_health_health_depleted"]

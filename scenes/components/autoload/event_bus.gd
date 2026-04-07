@@ -15,6 +15,7 @@ signal swap_control_state
 signal player_dies
 signal editBinding
 signal released_focus(source:Control)
+signal interactableToggle
 @warning_ignore_restore("unused_signal")
 
 func _unhandled_input(event: InputEvent) -> void:

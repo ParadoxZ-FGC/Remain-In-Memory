@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
-[ext_resource type="Texture2D" uid="uid://brumehf86il6p" path="res://assets/visual/ui/hud.png" id="2_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://brumehf86il6p" path="res://assets/visual/UI/hud.png" id="2_gx1jg"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="2_lvxji"]
 [ext_resource type="PackedScene" uid="uid://dd3tdpid7s8u4" path="res://scenes/player/health_display.tscn" id="3_fm80t"]
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="3_gx1jg"]
@@ -10,10 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://567t451bxtoi" path="res://new/gauge.tscn" id="7_fcs02"]
 [ext_resource type="AudioStream" uid="uid://bqdk4tanl10ox" path="res://assets/audio/sfx/PC_Footsteps_Grass1.wav" id="8_fm80t"]
 [ext_resource type="PackedScene" uid="uid://vspiyrcuxewo" path="res://scenes/components/attack.tscn" id="10_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://c1lwelf2mr1i" path="res://assets/visual/placeholders/prologue_boss/Dark Sword Morose V2-1.png.png" id="12_fcs02"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="12_fm80t"]
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="12_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://c1clhlum7hmk5" path="res://assets/visual/weapons/glaive.png" id="12_ugbui"]
-[ext_resource type="Texture2D" uid="uid://b0lkky0ao562g" path="res://assets/visual/character/Steam Puff.png" id="14_ugbui"]
+[ext_resource type="PackedScene" uid="uid://bdymnq4jph2fd" path="res://scenes/player/interact_display.tscn" id="14_ugbui"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ugbui"]
 resource_local_to_scene = true
@@ -135,6 +136,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcs02"]
 size = Vector2(5, 11)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_myrg7"]
+size = Vector2(8.25, 11.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ugbui"]
+size = Vector2(20.666666, 22.903227)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_uniwh"]
 atlas = ExtResource("12_ugbui")
 region = Rect2(0, 0, 64, 64)
@@ -154,8 +161,6 @@ animations = [{
 "name": &"new_animation",
 "speed": 5.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ugbui"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcs02"]
 radius = 3.0
@@ -235,43 +240,71 @@ shape = SubResource("RectangleShape2D_fcs02")
 stream = ExtResource("8_fm80t")
 bus = &"Sound Effects"
 
-[node name="sword" parent="." unique_id=1340132541 instance=ExtResource("10_gx1jg")]
+[node name="swing_sfx" type="AudioStreamPlayer2D" parent="." unique_id=1840176927]
+
+[node name="Sword" parent="." unique_id=179725720 instance=ExtResource("10_gx1jg")]
+
+[node name="Hitbox" parent="Sword/1" parent_id_path=PackedInt32Array(179725720, 1104772186) index="0" unique_id=2095978619]
+visible = false
+
+[node name="Hitbox" parent="Sword/1/Hitbox" index="0" unique_id=1848612265 instance=ExtResource("12_fm80t")]
+hitboxType = 1
+layers = 710
+
+[node name="RayCast2D" type="RayCast2D" parent="Sword/1/Hitbox/Hitbox/Environment Raycasts" parent_id_path=PackedInt32Array(1848612265, 18784854) index="0" unique_id=1212366007]
+position = Vector2(0, 3)
+target_position = Vector2(11, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/1/Hitbox/Hitbox" unique_id=1330167488]
+position = Vector2(6.875, 2)
+shape = SubResource("RectangleShape2D_myrg7")
+
+[node name="Knockback Direction" type="Marker2D" parent="Sword/1/Hitbox/Hitbox" unique_id=1988102158]
+position = Vector2(-1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sword/1/Sprite" parent_id_path=PackedInt32Array(179725720, 197203486) index="0" unique_id=1271561363]
+visible = false
+position = Vector2(7, 3)
+rotation = 1.5707964
+scale = Vector2(0.1344952, 0.13409501)
+texture = ExtResource("12_fcs02")
+
+[node name="Glaive" parent="." unique_id=1340132541 instance=ExtResource("10_gx1jg")]
 duration = 0.07
 attackCooldown = 0.1
-multiattack = 3
 comboDuration = 0.5
 comboCooldown = 0.5
-attackType = 1
 
-[node name="swing_sfx" type="AudioStreamPlayer2D" parent="sword" unique_id=1840176927]
-
-[node name="sprite" type="AnimatedSprite2D" parent="sword" unique_id=629703404]
+[node name="Hitbox" parent="Glaive/1" parent_id_path=PackedInt32Array(1340132541, 1104772186) index="0" unique_id=2095978619]
 visible = false
-position = Vector2(9.000001, 3.0000002)
-rotation = 1.5707964
-scale = Vector2(0.2, 0.2)
-sprite_frames = SubResource("SpriteFrames_ugbui")
-animation = &"attack"
 
-[node name="hitbox" parent="sword" unique_id=1974952317 instance=ExtResource("12_fm80t")]
-visible = false
+[node name="hitbox" parent="Glaive/1/Hitbox" index="0" unique_id=1974952317 instance=ExtResource("12_fm80t")]
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
 hitboxType = 1
-layers = 582
+layers = 710
 
-[node name="collision" type="CollisionShape2D" parent="sword/hitbox" unique_id=83036104]
-shape = SubResource("RectangleShape2D_ugbui")
-
-[node name="RayCast2D" type="RayCast2D" parent="sword/hitbox" unique_id=319138311]
-position = Vector2(-14.666667, 0)
-scale = Vector2(1.3333334, 6.4516134)
-target_position = Vector2(19, 0)
+[node name="RayCast2D" type="RayCast2D" parent="Glaive/1/Hitbox/hitbox/Environment Raycasts" parent_id_path=PackedInt32Array(1974952317, 18784854) index="0" unique_id=319138311]
+position = Vector2(-14.666667, 12.903226)
+scale = Vector2(1.3333334, 6.4516144)
+target_position = Vector2(18, 0)
 collision_mask = 2
 
-[node name="knockback_dir" type="Marker2D" parent="sword" unique_id=1360665999]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Glaive/1/Hitbox/hitbox" unique_id=83036104]
+position = Vector2(-1, 14.354844)
+scale = Vector2(1, 1.0000001)
+shape = SubResource("RectangleShape2D_ugbui")
+
+[node name="Knockback Direction" type="Marker2D" parent="Glaive/1/Hitbox/hitbox" unique_id=2090131337]
+position = Vector2(-16, -6.4516134)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Glaive/1/Sprite" parent_id_path=PackedInt32Array(1340132541, 197203486) index="0" unique_id=629703404]
 visible = false
-position = Vector2(-1, 0)
+position = Vector2(10.342492, 3.0000002)
+rotation = 1.5707964
+scale = Vector2(0.2, 0.24195285)
+sprite_frames = SubResource("SpriteFrames_ugbui")
+animation = &"attack"
 
 [node name="Hurtbox" parent="." unique_id=464460264 instance=ExtResource("12_gx1jg")]
 visible = false
@@ -282,15 +315,27 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_fcs02")
 debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
 
-[node name="SteamJump" type="GPUParticles2D" parent="." unique_id=1708363658]
-emitting = false
-amount = 15
-texture = ExtResource("14_ugbui")
-lifetime = 0.5
+[node name="InteractDisplay" parent="." unique_id=1013590109 instance=ExtResource("14_ugbui")]
+visible = false
+anchors_preset = 0
+offset_left = -4.9999995
+offset_top = -13.999999
+offset_right = 91.0
+offset_bottom = 82.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.104, 0.104)
+
+[node name="DashTimer" type="Timer" parent="." unique_id=1342233090]
+wait_time = 0.05
 one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_fcs02")
 
 [connection signal="health_changed" from="Health" to="GUILayer/GUI/HealthDisplay" method="_on_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
-[connection signal="impacted" from="sword/hitbox" to="." method="_on_hitbox_impacted"]
+[connection signal="impacted" from="Glaive/1/Hitbox/hitbox" to="." method="_on_hitbox_impacted"]
+[connection signal="timeout" from="DashTimer" to="." method="dash_stop"]
+
+[editable path="Sword"]
+[editable path="Sword/1/Hitbox/Hitbox"]
+[editable path="Glaive"]
+[editable path="Glaive/1/Hitbox/hitbox"]
