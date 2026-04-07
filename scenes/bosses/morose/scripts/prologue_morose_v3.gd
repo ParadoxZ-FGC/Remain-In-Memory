@@ -188,5 +188,7 @@ func _action_completed() -> void:
 	action_completed.emit()
 
 func take_knockback(force: float, direction: Vector2):
-	direction.y-=0.7
-	velocity+=force*direction
+	pass
+	#knockback code would work if physics were constantly applied to the boss, but currently they are not.
+	#direction.y-=0.7 
+	#velocity+=force*direction

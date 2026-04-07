@@ -137,10 +137,10 @@ func _physics_process(delta):
 		walking_sfx.stop()
 		$player_sprite.animation = "idle"
 	
-	if velocity.x != 0 and not knockedback:
+	if velocity.x != 0 and not knockedback and not inKnockback:
 		$player_sprite.animation = "walk"
 		$player_sprite.flip_v = false
-		$player_sprite.flip_h = velocity.x < 0
+		
 		match currentWeapon:
 				weaponSelect.Sword:
 					if $Sword.attackCooling == false:
@@ -159,6 +159,9 @@ func _physics_process(delta):
 		$player_sprite.speed_scale = 1
 		
 	move_and_slide()
+	
+	if is_on_floor():
+		knockedback=false
 	
 	if delayedFlip and not delayedFlip.attackCooling:
 		delayedFlip.scale = Vector2(-1, 1) if $player_sprite.flip_h else Vector2(1, 1)
@@ -188,9 +191,11 @@ func move(movement_vector, delta):
 						velocity.x = move_toward(velocity.x, max_run_speed, momentum_loss * delta)
 					elif velocity.x < -max_run_speed:
 						velocity.x = move_toward(velocity.x, -max_run_speed, momentum_loss * delta)
+				$player_sprite.flip_h = velocity.x < 0
 			elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and not dashing:
 				velocity.x += walk * delta
 				velocity.x = clamp(velocity.x, -max_walk_speed, max_walk_speed)
+				$player_sprite.flip_h = velocity.x < 0
 		else:
 			velocity.x = clamp(velocity.x, -max_dash_speed, max_dash_speed)
 	
@@ -199,7 +204,6 @@ func move(movement_vector, delta):
 
 	if is_on_floor():
 		coyoteTimer = 0
-		knockedback=false
 	else:
 		coyoteTimer += delta
 		clamp(coyoteTimer, 0, coyote)
@@ -289,10 +293,10 @@ func _swap_player_control_state() -> void:
 func take_knockback(force: float, direction: Vector2):
 	#print("PLAYER KNOCKBACK RECEIVED")
 
-	if not inKnockback:
+	if not knockedback:
 		inKnockback = true
 		knockedback=true #the player has been knocked back and hasn't touched the ground yet
-		direction.y-=0.7
+		direction.y-=1
 		velocity+=force*direction
 		await get_tree().create_timer(knockbackTime).timeout
 		inKnockback = false
