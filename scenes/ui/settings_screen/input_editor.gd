@@ -51,7 +51,7 @@ func updateButtons() -> void:
 
 # From processInputString, determine if a relevant icon exists
 func processInputDisplay(n: Node, ie: InputEvent):
-	var s := ControlSwitch.processInputString(ie)
+	var s : String = ControlSwitch.processInputString(ie)
 	var filename := "res://assets/visual/ui/controls/" + s + ".png"
 	if (!ResourceLoader.exists(filename)):
 		n.text = s

@@ -154,7 +154,7 @@ func _input(_event: InputEvent) -> void:
 
 func manageGuide() -> void:
 	lastControlScheme = ControlSwitch.controlType
-	var s := ControlSwitch.processInputString(InputMap.action_get_events("interact")[lastControlScheme])
+	var s : String = ControlSwitch.processInputString(InputMap.action_get_events("interact")[lastControlScheme])
 	var filename := "res://assets/visual/ui/controls/" + s + ".png"
 	guide.clear()
 	guide.add_text("Progress Dialogue : ")
