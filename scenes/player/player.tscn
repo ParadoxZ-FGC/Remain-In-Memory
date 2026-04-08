@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
-[ext_resource type="Texture2D" uid="uid://brumehf86il6p" path="res://assets/visual/UI/hud.png" id="2_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://brumehf86il6p" path="res://assets/visual/ui/hud.png" id="2_gx1jg"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="2_lvxji"]
 [ext_resource type="PackedScene" uid="uid://dd3tdpid7s8u4" path="res://scenes/player/health_display.tscn" id="3_fm80t"]
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="3_gx1jg"]
@@ -293,7 +293,6 @@ debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
 
 [node name="InteractDisplay" parent="." unique_id=1013590109 instance=ExtResource("14_ugbui")]
 visible = false
-anchors_preset = 0
 offset_left = -4.9999995
 offset_top = -13.999999
 offset_right = 91.0
