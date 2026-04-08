@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cwmb6oxyo5doq" path="res://assets/visual/placeholders/prologue_boss/morose-idle.png" id="4_mthvp"]
 [ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="5_6s7qk"]
 [ext_resource type="Texture2D" uid="uid://c1lwelf2mr1i" path="res://assets/visual/placeholders/prologue_boss/Dark Sword Morose V2-1.png.png" id="6_2kvep"]
+[ext_resource type="PackedScene" uid="uid://vspiyrcuxewo" path="res://scenes/components/attack.tscn" id="7_lecen"]
 [ext_resource type="PackedScene" uid="uid://b6pwxuklmxqxf" path="res://scenes/components/hitbox.tscn" id="7_r0t0y"]
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="8_qwi65"]
 
@@ -196,6 +197,20 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BossSword/Charge")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_hyuc3"]
 resource_name = "charge_right"
@@ -265,6 +280,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BossSword/Charge")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_8eab7"]
@@ -521,6 +550,20 @@ tracks/4/keys = {
 "method": &"_halt"
 }]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BossSword/Slash")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_6s7qk"]
 resource_name = "slash_right"
@@ -588,6 +631,20 @@ tracks/4/keys = {
 }, {
 "args": [],
 "method": &"_halt"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BossSword/Slash")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
 }]
 }
 
@@ -1007,11 +1064,26 @@ position = Vector2(0, -44)
 scale = Vector2(2, 2)
 texture = ExtResource("6_2kvep")
 
-[node name="Hitbox" parent="BossSword" unique_id=1539786736 instance=ExtResource("7_r0t0y")]
+[node name="Slash" parent="BossSword" unique_id=179725720 instance=ExtResource("7_lecen")]
+duration = 0.5
+
+[node name="Hitbox" parent="BossSword/Slash/1/Hitbox" parent_id_path=PackedInt32Array(179725720, 2095978619) index="0" unique_id=1539786736 instance=ExtResource("7_r0t0y")]
 damage = 2
 layers = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BossSword/Hitbox" unique_id=1112867053]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossSword/Slash/1/Hitbox/Hitbox" unique_id=1112867053]
+visible = false
+position = Vector2(0, -59)
+shape = SubResource("CapsuleShape2D_pg4pn")
+
+[node name="Charge" parent="BossSword" unique_id=1775851964 instance=ExtResource("7_lecen")]
+duration = 0.5
+
+[node name="Hitbox" parent="BossSword/Charge/1/Hitbox" parent_id_path=PackedInt32Array(1775851964, 2095978619) index="0" unique_id=1848612265 instance=ExtResource("7_r0t0y")]
+damage = 2
+layers = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossSword/Charge/1/Hitbox/Hitbox" unique_id=651777799]
 visible = false
 position = Vector2(0, -59)
 shape = SubResource("CapsuleShape2D_pg4pn")
@@ -1043,3 +1115,6 @@ anim_player = NodePath("../Animations")
 
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
+
+[editable path="BossSword/Slash"]
+[editable path="BossSword/Charge"]

@@ -64,6 +64,7 @@ func _ready() -> void:
 	velocity = Vector2(0, gravity)
 	attack = attack_patterns.pick_random()
 	attack = attack.duplicate()
+	$Hitbox.activate(-1)
 
 
 func _physics_process(_delta: float) -> void:
@@ -164,7 +165,6 @@ func _turn_around() -> void:
 
 
 func _on_health_health_depleted() -> void:
-	$BossSword/Hitbox.monitoring = false
 	$Hitbox.monitoring = false
 	anim_manager.active = false
 	sword.visible = false
