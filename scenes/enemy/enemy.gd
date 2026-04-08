@@ -12,7 +12,6 @@ enum States {
 	DYING
 }
 
-@export var boom: AudioStreamPlayer2D
 @export var projectile_speed: int = 500
 @export var fire_recovery_duration: int = 5
 @export var lose_focus_timer: int = 5
@@ -25,6 +24,8 @@ var to_deactive := true
 var to_activate := false
 var can_deactivate := false
 
+@onready var turret_player := $TurretPlayer
+@onready var turret_sprite := $TurretSprite
 @onready var hurt_particles := $HurtParticles
 @onready var hurt_particles_process_mat = $HurtParticles.get("process_material")
 
@@ -35,7 +36,7 @@ func _ready() -> void:
 	#var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
 	#$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
 	current_state = States.INACTIVE
-	$AnimatedMobSprite.play("asleep")
+	turret_player.play("RESET")
 	if facing == 1:
 		$AnimatedMobSprite.flip_h = true
 		$Cannon.position.x = 13
@@ -54,13 +55,13 @@ func _physics_process(_delta: float) -> void:
 	elif target != null:
 		if (target.position.x - position.x) > 0:
 			facing = 1
-			$AnimatedMobSprite.flip_h = true
+			turret_sprite.flip_h = true
 			$Cannon.position.x = 13
 			$Cannon.facing = true
 			hurt_particles_process_mat.direction.x = -1
 		else:
 			facing = -1
-			$AnimatedMobSprite.flip_h = false
+			turret_sprite.flip_h = false
 			$Cannon.position.x = -13
 			$Cannon.facing = false
 			hurt_particles_process_mat.direction.x = 1
@@ -69,18 +70,14 @@ func _physics_process(_delta: float) -> void:
 			#print("FIRE!!")
 			current_state = States.FIRING
 			state_changed.emit()
-			fire()
+			turret_player.play("shoot")
 
 
 func fire() -> void:
-	var anim = $AnimatedMobSprite
-	await anim.animation_looped
-	anim.play("shoot")
-	
 	$Cannon.attack()
 	
-	await $AnimatedMobSprite.animation_finished
-	$AnimatedMobSprite.play("standby")
+	await turret_player.animation_finished
+	turret_player.play("standby")
 	
 	if current_state == States.FIRING:
 		current_state = States.STANDBY
@@ -94,11 +91,11 @@ func fire() -> void:
 
 func activate() -> void:
 	to_activate = false
-	$AnimatedMobSprite.stop()
-	$AnimatedMobSprite.play("wake")
-	await $AnimatedMobSprite.animation_finished
+	turret_player.stop()
+	turret_player.play("wake")
+	await turret_player.animation_finished
 	$Hitbox.activate()
-	$AnimatedMobSprite.play("standby")
+	turret_player.play("standby")
 	current_state = States.READY
 	state_changed.emit()
 
@@ -106,11 +103,11 @@ func activate() -> void:
 func deactivate() -> void:
 	current_state = States.DEACTIVATING
 	can_deactivate = false
-	$AnimatedMobSprite.stop()
+	turret_player.stop()
 	$Hitbox.deactivate()
-	$AnimatedMobSprite.play_backwards("wake")
+	turret_player.play_backwards("wake")
 	await $AnimatedMobSprite.animation_finished
-	$AnimatedMobSprite.play("asleep")
+	turret_player.play("asleep")
 	current_state = States.INACTIVE
 	state_changed.emit()
 
@@ -130,14 +127,9 @@ func _on_health_health_depleted() -> void:
 	current_state = States.DYING
 	$Hitbox.deactivate()
 	state_changed.emit()
-	var anim = $AnimatedMobSprite
-	anim.stop()
-	#boom.play()
-	anim.offset = Vector2(0, -8)
-	anim.sprite_frames.set_animation_loop("die", false)
-	anim.play("die")
-	await anim.animation_finished
-	#boom.stop()
+	turret_player.stop()
+	turret_player.play("die")
+	await turret_player.animation_finished
 	EnemyManager.persistance.set(get_path(), ["nerd"])
 	queue_free()
 

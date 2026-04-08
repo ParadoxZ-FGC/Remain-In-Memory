@@ -12,6 +12,7 @@ enum weaponSelect {Sword, Glaive}
 @export var lower = Vector2(2500, 1080)
 @export var speed = 1000
 @export var jump_speed = 800
+@export var jumped : int = 0
 @export var coyote: float = 0.03
 @export var max_walk_speed = 300
 @export var max_run_speed = 500
@@ -49,6 +50,7 @@ var last_position : Vector2
 @onready var player_sprite := $player_sprite
 @onready var hearts := $GUILayer/GUI/HealthDisplay
 @onready var gauge := $GUILayer/GUI/Gauge
+@onready var steam_jump := $SteamJump
 @onready var interaction := $InteractDisplay
 @onready var dashTimer = $DashTimer
 @onready var lfc := $HazardDetect/LeftFloorCheck
@@ -201,6 +203,7 @@ func move(movement_vector, delta):
 	
 	if is_on_floor():
 		coyoteTimer = 0
+		jumped = 0
 	else:
 		coyoteTimer += delta
 		clamp(coyoteTimer, 0, coyote)
@@ -219,7 +222,14 @@ func dash_stop():
 	dashing = false
 
 func jump():
-	velocity.y = -jump_speed
+	if jumped == 0:
+		jumped += 1
+		velocity.y = -jump_speed
+	elif jumped == 1 and gauge.needle_angle >= 90:
+		jumped += 1
+		gauge.needle_angle -= 30
+		velocity.y = -jump_speed # * 1.1
+		steam_jump.emitting = true
 
 
 func jump_stop():
@@ -238,8 +248,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			$player_sprite.scale = Vector2(0.2, 0.2)
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
-			
-		if (is_on_floor() or coyoteTimer < coyote) and event.is_action_pressed("jump") and not dashing:
+		
+		if coyoteTimer >= coyote and jumped == 0:
+			jumped = 1
+		
+		if event.is_action_pressed("jump") and not dashing:
 			jump()
 		
 		if not is_on_floor() and event.is_action_released("jump"):
