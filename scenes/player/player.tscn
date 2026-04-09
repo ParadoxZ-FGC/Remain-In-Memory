@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
-[ext_resource type="Texture2D" uid="uid://brumehf86il6p" path="res://assets/visual/ui/hud.png" id="2_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://3g2yjnb4sj4f" path="res://assets/visual/ui/PlyrHud.png" id="2_kvlxm"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="2_lvxji"]
 [ext_resource type="PackedScene" uid="uid://dd3tdpid7s8u4" path="res://scenes/player/health_display.tscn" id="3_fm80t"]
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="3_gx1jg"]
@@ -185,11 +185,14 @@ death_scene = "res://scenes/title_screen/title_screen.tscn"
 [node name="GUI" type="Node2D" parent="GUILayer" unique_id=356449287]
 
 [node name="HUDbg" type="Sprite2D" parent="GUILayer/GUI" unique_id=1261072761]
-texture = ExtResource("2_gx1jg")
+position = Vector2(40, 35)
+scale = Vector2(5, 5)
+texture = ExtResource("2_kvlxm")
 centered = false
 
 [node name="Gauge" parent="GUILayer/GUI" unique_id=334908116 instance=ExtResource("7_fcs02")]
 position = Vector2(135, 135)
+scale = Vector2(1, 1)
 
 [node name="HealthDisplay" parent="GUILayer/GUI" unique_id=1851536527 instance=ExtResource("3_fm80t")]
 position = Vector2(280, 90)
@@ -297,6 +300,7 @@ debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
 
 [node name="InteractDisplay" parent="." unique_id=1013590109 instance=ExtResource("14_ugbui")]
 visible = false
+anchors_preset = 0
 offset_left = -4.9999995
 offset_top = -13.999999
 offset_right = 91.0
