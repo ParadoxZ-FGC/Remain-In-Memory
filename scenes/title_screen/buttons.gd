@@ -1,7 +1,7 @@
 extends Button
 
 @export var scene_to_load: String
-@onready var play_sfx = $SFX
+#@onready var play_sfx = $SFX
 #play_sfx.play() play sfx when hit play
 
 func _on_pressed() -> void:
