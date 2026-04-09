@@ -21,11 +21,14 @@ var lastControlScheme := 0
 
 @onready var typingTimer := $typingTimer
 @onready var audio := $AudioStreamPlayer
+@onready var last_focused : Control = %ChoiceOne
+
 @onready var guideContainer := $PanelContainer
 @onready var guide := $PanelContainer/ControlInfo
 
 func _ready():
 	EventBus.dialogue_segment_parsed.connect(designate_dialog)
+	EventBus.released_focus.connect(_on_released_focus)
 	visible = false
 	$LeftSideDialog.visible = false
 	$RightSideDialog.visible = false
@@ -151,7 +154,7 @@ func _input(_event: InputEvent) -> void:
 
 func manageGuide() -> void:
 	lastControlScheme = ControlSwitch.controlType
-	var s := ControlSwitch.processInputString(InputMap.action_get_events("interact")[lastControlScheme])
+	var s : String = ControlSwitch.processInputString(InputMap.action_get_events("interact")[lastControlScheme])
 	var filename := "res://assets/visual/ui/controls/" + s + ".png"
 	guide.clear()
 	guide.add_text("Progress Dialogue : ")
@@ -221,3 +224,16 @@ func dirReader(dir_path):
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
+
+
+func _on_released_focus(source:Control) -> void:
+	print(source)
+	if source.name == "PauseScreen":
+		print(last_focused)
+		last_focused.call_deferred("grab_focus")
+
+
+func _on_focus_entered(source: Control) -> void:
+	last_focused = source
+	print(last_focused)
+	print(last_focused.has_focus())

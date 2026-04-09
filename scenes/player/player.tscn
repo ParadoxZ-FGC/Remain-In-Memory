@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://c2w538difev2l" path="res://scenes/components/hurtbox.tscn" id="12_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://c1clhlum7hmk5" path="res://assets/visual/weapons/glaive.png" id="12_ugbui"]
 [ext_resource type="PackedScene" uid="uid://bdymnq4jph2fd" path="res://scenes/player/interact_display.tscn" id="14_ugbui"]
+[ext_resource type="Texture2D" uid="uid://b0lkky0ao562g" path="res://assets/visual/character/Steam Puff.png" id="16_kvlxm"]
+[ext_resource type="Material" uid="uid://sv8st8qrgmtj" path="res://scenes/player/steam_jump.tres" id="16_myrg7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ugbui"]
 resource_local_to_scene = true
@@ -166,6 +168,9 @@ animations = [{
 radius = 3.0
 height = 10.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvlxm"]
+size = Vector2(5, 1)
+
 [node name="Player" type="CharacterBody2D" unique_id=1143754610 node_paths=PackedStringArray("walking_sfx")]
 collision_layer = 8
 collision_mask = 2
@@ -208,7 +213,6 @@ sprite_frames = SubResource("SpriteFrames_6v243")
 animation = &"walk"
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="." unique_id=1717978168]
-visible = false
 position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_fcs02")
 
@@ -305,10 +309,58 @@ scale = Vector2(0.104, 0.104)
 wait_time = 0.05
 one_shot = true
 
+[node name="SteamJump" type="GPUParticles2D" parent="." unique_id=681566018]
+emitting = false
+amount = 15
+texture = ExtResource("16_kvlxm")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("16_myrg7")
+
+[node name="HazardDetect" type="Area2D" parent="." unique_id=2085180845]
+visible = false
+collision_layer = 8
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardDetect" unique_id=414485227]
+position = Vector2(0.5, 7.5)
+shape = SubResource("RectangleShape2D_kvlxm")
+debug_color = Color(0.7, 0.7, 0.7, 0.41960785)
+
+[node name="LeftFloorCheck" type="RayCast2D" parent="HazardDetect" unique_id=239744542]
+position = Vector2(-1, 7)
+exclude_parent = false
+target_position = Vector2(0, 2)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="RightFloorCheck" type="RayCast2D" parent="HazardDetect" unique_id=989401932]
+position = Vector2(2, 7)
+exclude_parent = false
+target_position = Vector2(0, 2)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="LeftHazardCheck" type="RayCast2D" parent="HazardDetect" unique_id=369895953]
+position = Vector2(-1, 7)
+exclude_parent = false
+target_position = Vector2(-10, 0)
+collision_mask = 512
+collide_with_areas = true
+
+[node name="RightHazardCheck" type="RayCast2D" parent="HazardDetect" unique_id=121642426]
+position = Vector2(2, 7)
+exclude_parent = false
+target_position = Vector2(10, 0)
+collision_mask = 512
+collide_with_areas = true
+
 [connection signal="health_changed" from="Health" to="GUILayer/GUI/HealthDisplay" method="_on_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="impacted" from="Glaive/1/Hitbox/hitbox" to="." method="_on_hitbox_impacted"]
 [connection signal="timeout" from="DashTimer" to="." method="dash_stop"]
+[connection signal="body_entered" from="HazardDetect" to="." method="_on_hazard_detect_body_entered"]
 
 [editable path="Sword"]
 [editable path="Sword/1/Hitbox/Hitbox"]

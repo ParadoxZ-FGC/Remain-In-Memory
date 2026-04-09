@@ -12,6 +12,7 @@ enum weaponSelect {Sword, Glaive}
 @export var lower = Vector2(2500, 1080)
 @export var speed = 1000
 @export var jump_speed = 800
+@export var jumped : int = 0
 @export var coyote: float = 0.03
 @export var max_walk_speed = 300
 @export var max_run_speed = 500
@@ -46,7 +47,8 @@ var current_player_state : player_states = player_states.User_Controlled
 var interactable : bool = false #Is there something to interact with
 var interact_scene : String #INFO Interactable currently only handles dialogue, so this would be the file one reads from
 var currentWeapon: weaponSelect = weaponSelect.Sword
-var delayedFlip: Node2D #Used in cases where the player inputs an attack and then changes facing direction. Prevents flicking the weapon back and forth. 
+var delayedFlip: Node2D #Used in cases where the player inputs an attack and then changes facing direction. Prevents flicking the weapon back and forth.
+var last_position : Vector2
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
@@ -54,8 +56,13 @@ var delayedFlip: Node2D #Used in cases where the player inputs an attack and the
 @onready var player_sprite := $player_sprite
 @onready var hearts := $GUILayer/GUI/HealthDisplay
 @onready var gauge := $GUILayer/GUI/Gauge
+@onready var steam_jump := $SteamJump
 @onready var interaction := $InteractDisplay
 @onready var dashTimer = $DashTimer
+@onready var lfc := $HazardDetect/LeftFloorCheck
+@onready var rfc := $HazardDetect/RightFloorCheck
+@onready var lhc := $HazardDetect/LeftHazardCheck
+@onready var rhc := $HazardDetect/RightHazardCheck
 
 
 func _ready():
@@ -91,6 +98,9 @@ func _text_over(_cutscene:String): #Signals when dialogue file is done
 
 
 func _physics_process(delta):
+	if is_on_floor() and (lfc.get_collider() != null and rfc.get_collider() != null) and (lhc.get_collider() == null and rhc.get_collider() == null):
+		last_position = position
+	
 	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
 		if not inKnockback:
 			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
@@ -108,9 +118,9 @@ func _physics_process(delta):
 
 		if Input.is_action_just_pressed("(TEMP) change_weapon"):
 			if currentWeapon < weaponSelect.size() -1:
-				currentWeapon += 1;
+				currentWeapon = currentWeapon + 1 as weaponSelect
 			else:
-				currentWeapon = 0;	
+				currentWeapon = 0 as weaponSelect 
 		
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
 			#[This appears to never be called] print("pressed! #1");
@@ -260,8 +270,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			$player_sprite.scale = Vector2(0.2, 0.2)
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
-			
-		if (is_on_floor() or coyoteTimer < coyote) and event.is_action_pressed("jump") and not dashing:
+		
+		if coyoteTimer >= coyote and jumped == 0:
+			jumped = 1
+		
+		if event.is_action_pressed("jump") and not dashing:
 			jump()
 		
 		if not is_on_floor() and event.is_action_released("jump"):
@@ -335,3 +348,9 @@ func interactablePrompt(toggle: bool) -> void:
 		interaction.displayInteration()
 	else:
 		interaction.hide()
+
+
+func _on_hazard_detect_body_entered(body: Node2D) -> void:
+	if body is TileMapLayer and body.name == "Hazard":
+		health.set_health(health.health - 1)
+		position = last_position

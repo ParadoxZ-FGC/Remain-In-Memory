@@ -68,7 +68,7 @@ func _ready():
 		ray = rays[0]
 		ray.set_collision_mask_value(2, true)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if activated:
 		if environmentSelfDamage:
 			var bodyOverlap = get_overlapping_bodies()
