@@ -2,23 +2,70 @@
 
 [ext_resource type="Script" uid="uid://dk0covrx4gm74" path="res://new/gauge.gd" id="1_iwwpu"]
 [ext_resource type="Texture2D" uid="uid://m118cd6w5pn8" path="res://new/Steam Gauge.png" id="2_rc423"]
-[ext_resource type="Texture2D" uid="uid://ptxmuyg6fvn4" path="res://assets/visual/ui/PlyrHud-Needle.png" id="3_5j1sr"]
 
 [sub_resource type="Animation" id="Animation_kw8sh"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Needle/Needle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.1415925]
+}
 
 [sub_resource type="Animation" id="Animation_38h6w"]
 resource_name = "Shake"
 length = 0.125
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Needle/Needle:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0313, 0.0625, 0.0938),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [3.141592653589793, 3.2288591161895095, 3.141592653589793, 3.0543261909900767]
+}
 
 [sub_resource type="Animation" id="Animation_dgcor"]
 resource_name = "Still"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Needle/Needle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.1415925]
+}
 
 [sub_resource type="Animation" id="Animation_kdq50"]
 resource_name = "Wiggle"
 length = 0.5
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Needle/Needle:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [3.141592653589793, 3.17649923862968, 3.141592653589793, 3.1066860685499065]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mxtn0"]
 _data = {
@@ -33,11 +80,9 @@ scale = Vector2(2, 2)
 script = ExtResource("1_iwwpu")
 
 [node name="Offset" type="Node2D" parent="." unique_id=2014588443]
-position = Vector2(-15, 15)
 metadata/_edit_group_ = true
 
 [node name="Base" type="Sprite2D" parent="Offset" unique_id=388719511]
-visible = false
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
@@ -45,12 +90,14 @@ vframes = 2
 [node name="Needle" type="Marker2D" parent="Offset" unique_id=365320796]
 metadata/_edit_group_ = true
 
-[node name="Needle" type="Sprite2D" parent="Offset/Needle" unique_id=2006484920]
-scale = Vector2(5, 5)
-texture = ExtResource("3_5j1sr")
+[node name="Needle" type="Sprite2D" parent="Offset/Needle" unique_id=832201627]
+rotation = 3.1415925
+texture = ExtResource("2_rc423")
+hframes = 2
+vframes = 2
+frame = 1
 
 [node name="Cover" type="Sprite2D" parent="Offset" unique_id=1906502025]
-visible = false
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
