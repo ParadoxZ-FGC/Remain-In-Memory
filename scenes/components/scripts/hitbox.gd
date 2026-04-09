@@ -72,7 +72,7 @@ func _ready():
 		ray = rays[0]
 		ray.set_collision_mask_value(2, true)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if activated:
 		if environmentSelfDamage:
 			var bodyOverlap = get_overlapping_bodies()
@@ -111,7 +111,7 @@ func _physics_process(delta: float) -> void:
 					#parent.apply_knockback(selfKnockback)
 
 ##Causes the hitbox to scan for overlapping areas. It sorts them by distance and culls any past walls and any past the provided pierce count.
-func activate(duration: int = -1):
+func activate(duration: float = -1):
 	activated = true
 	print(activated)
 	if duration >= 0:

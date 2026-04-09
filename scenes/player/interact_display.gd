@@ -13,7 +13,7 @@ func _input(_event: InputEvent) -> void:
 # From processInputString, determine if a relevant icon exists
 func displayInteration() -> void:
 	lastControlScheme = ControlSwitch.controlType
-	var s := ControlSwitch.processInputString(InputMap.action_get_events("interact")[lastControlScheme])
+	var s : String = ControlSwitch.processInputString(InputMap.action_get_events("interact")[lastControlScheme])
 	var filename := "res://assets/visual/ui/controls/" + s + ".png"
 	if (!ResourceLoader.exists(filename)):
 		text.add_theme_font_size_override("font_size",32.0 / sqrt(s.length()))

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ch1bdqcaec3cs"]
+[gd_resource type="TileSet" format=3 uid="uid://ch1bdqcaec3cs"]
 
 [ext_resource type="Texture2D" uid="uid://t20u0ghbj5tu" path="res://new/Marble Tileset Extended.png.png" id="1_hmnpo"]
 

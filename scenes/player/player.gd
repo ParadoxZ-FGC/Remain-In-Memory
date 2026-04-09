@@ -12,6 +12,7 @@ enum weaponSelect {Sword, Glaive}
 @export var lower = Vector2(2500, 1080)
 @export var speed = 1000
 @export var jump_speed = 800
+@export var jumped : int = 0
 @export var coyote: float = 0.03
 @export var max_walk_speed = 300
 @export var max_run_speed = 500 #default 500
@@ -19,6 +20,9 @@ enum weaponSelect {Sword, Glaive}
 @export var dash_speed = 1000
 @export var dash_duration = 0.075
 @export var dashCoolDownLength: float = 1.5
+@export var wavedashGroundForgiveness: float = 0.25
+@export var wavedashValidInputDuration: float = 1.0
+@export var wavedashLength: float = 1.0
 @export var stop_force = 8000
 @export var drag_force = 500
 @export var momentum_loss = 1500
@@ -33,7 +37,10 @@ var coyoteTimer: float = 0
 var movementDirection: bool = true #rightward = true
 var movementIntentionDirection: bool = true
 var movementIntention: float
+enum dashState {NOTDASHING = 0, DASHING = 1, AIRDASHING = 2, WAVEDASHING = 3}
 var dashing: bool = false
+var wavedashing: int = dashState.NOTDASHING
+var wavedashForgivenessTimer: float = 0
 var dashCoolDown: float = 3
 var scene_transitions
 var currentDialogue : dialogueTypes = dialogueTypes.None
@@ -41,7 +48,8 @@ var current_player_state : player_states = player_states.User_Controlled
 var interactable : bool = false #Is there something to interact with
 var interact_scene : String #INFO Interactable currently only handles dialogue, so this would be the file one reads from
 var currentWeapon: weaponSelect = weaponSelect.Sword
-var delayedFlip: Node2D #Used in cases where the player inputs an attack and then changes facing direction. Prevents flicking the weapon back and forth. 
+var delayedFlip: Node2D #Used in cases where the player inputs an attack and then changes facing direction. Prevents flicking the weapon back and forth.
+var last_position : Vector2
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
@@ -49,8 +57,13 @@ var delayedFlip: Node2D #Used in cases where the player inputs an attack and the
 @onready var player_sprite := $player_sprite
 @onready var hearts := $GUILayer/GUI/HealthDisplay
 @onready var gauge := $GUILayer/GUI/Gauge
+@onready var steam_jump := $SteamJump
 @onready var interaction := $InteractDisplay
 @onready var dashTimer = $DashTimer
+@onready var lfc := $HazardDetect/LeftFloorCheck
+@onready var rfc := $HazardDetect/RightFloorCheck
+@onready var lhc := $HazardDetect/LeftHazardCheck
+@onready var rhc := $HazardDetect/RightHazardCheck
 
 
 func _ready():
@@ -86,6 +99,9 @@ func _text_over(_cutscene:String): #Signals when dialogue file is done
 
 
 func _physics_process(delta):
+	if is_on_floor() and (lfc.get_collider() != null and rfc.get_collider() != null) and (lhc.get_collider() == null and rhc.get_collider() == null):
+		last_position = position
+	
 	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
 		move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
 		if Input.is_action_just_pressed("attack"):
@@ -102,15 +118,15 @@ func _physics_process(delta):
 					
 		
 		if Input.is_action_just_pressed("dash") and dashCoolDown >= dashCoolDownLength:
-			dash(Input.get_axis("move_left", "move_right"), Input.get_axis("look_up", "look_down"))
+			dash(Input.get_axis("move_left", "move_right"), Input.get_axis("look_up", "crouch"))
 		if dashCoolDown <= dashCoolDownLength:
 			dashCoolDown += delta
 
 		if Input.is_action_just_pressed("(TEMP) change_weapon"):
 			if currentWeapon < weaponSelect.size() -1:
-				currentWeapon += 1;
+				currentWeapon = currentWeapon + 1 as weaponSelect
 			else:
-				currentWeapon = 0;	
+				currentWeapon = 0 as weaponSelect 
 		
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
 			#[This appears to never be called] print("pressed! #1");
@@ -180,10 +196,21 @@ func move(movement_vector, delta):
 				else:
 					velocity.x = move_toward(velocity.x, 0, drag_force * delta)
 			else:
-				if movementIntentionDirection != movementDirection:
-					velocity.x -= velocity.x / 8 * 7
-			
-			if Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled:
+				velocity.x = move_toward(velocity.x, 0, drag_force * delta)
+		else:
+			if movementIntentionDirection != movementDirection:
+				velocity.x -= velocity.x / 8 * 7
+				if wavedashing == dashState.WAVEDASHING:
+					wavedashing = dashState.NOTDASHING
+		
+		velocity.y += gravity * delta
+
+		if Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled:
+			if wavedashing == dashState.WAVEDASHING:
+				if velocity.x < max_dash_speed and velocity.x > -max_dash_speed:
+					velocity.x += walk * delta
+				velocity.x = clamp(velocity.x, -max_dash_speed, max_dash_speed)
+			else:
 				if velocity.x < max_run_speed and velocity.x > -max_run_speed:
 					velocity.x += walk * delta
 				else:
@@ -204,12 +231,22 @@ func move(movement_vector, delta):
 
 	if is_on_floor():
 		coyoteTimer = 0
+		if wavedashForgivenessTimer < wavedashGroundForgiveness:
+			wavedashForgivenessTimer += delta
+		else:
+			wavedashing = dashState.NOTDASHING
 	else:
 		coyoteTimer += delta
 		clamp(coyoteTimer, 0, coyote)
 
 func dash(lr, ud):
+	if is_on_floor():
+		wavedashing = dashState.DASHING
+	else:
+		wavedashForgivenessTimer = 0
+		wavedashing = dashState.AIRDASHING
 	dashing = true
+	
 	dashCoolDown = 0
 	dashTimer.start(dash_duration)
 	if(abs(ud) == 0):
@@ -220,15 +257,22 @@ func dash(lr, ud):
 func dash_stop():
 	velocity.y = 0
 	dashing = false
+	if wavedashing == dashState.AIRDASHING:
+		await get_tree().create_timer(wavedashValidInputDuration).timeout
+		if wavedashing != dashState.WAVEDASHING:
+			wavedashing = dashState.NOTDASHING
 
 func jump():
 	velocity.y = -jump_speed
+	if wavedashForgivenessTimer < wavedashGroundForgiveness and wavedashing == dashState.AIRDASHING:
+		wavedashing = dashState.WAVEDASHING
+		await get_tree().create_timer(wavedashLength).timeout
+		wavedashing = dashState.NOTDASHING
 
 
 func jump_stop():
 	if velocity.y < -100:
 		velocity.y = -100
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (current_player_state == player_states.User_Controlled):
@@ -241,8 +285,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			$player_sprite.scale = Vector2(0.2, 0.2)
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
-			
-		if (is_on_floor() or coyoteTimer < coyote) and event.is_action_pressed("jump") and not dashing:
+		
+		if coyoteTimer >= coyote and jumped == 0:
+			jumped = 1
+		
+		if event.is_action_pressed("jump") and not dashing:
 			jump()
 		
 		if not is_on_floor() and event.is_action_released("jump"):
@@ -314,3 +361,9 @@ func interactablePrompt(toggle: bool) -> void:
 		interaction.displayInteration()
 	else:
 		interaction.hide()
+
+
+func _on_hazard_detect_body_entered(body: Node2D) -> void:
+	if body is TileMapLayer and body.name == "Hazard":
+		health.set_health(health.health - 1)
+		position = last_position

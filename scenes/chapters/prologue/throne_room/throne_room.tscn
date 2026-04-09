@@ -978,7 +978,6 @@ position = Vector2(-45, 892)
 scale = Vector2(8, 8)
 upper = Vector2(-250, 0)
 lower = Vector2(1920, 1080)
-jump_speed = 1000
 to_scene_on_death = false
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1962618587]
@@ -1095,6 +1094,7 @@ offset_left = -256.0
 offset_right = 1984.0
 offset_bottom = 1216.0
 color = Color(0, 0, 0, 0)
+metadata/_edit_lock_ = true
 
 [node name="Doors" type="Node2D" parent="." unique_id=460883793]
 

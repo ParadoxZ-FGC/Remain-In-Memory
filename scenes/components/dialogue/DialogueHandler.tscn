@@ -223,6 +223,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="ChoiceOne" type="Button" parent="ResponseDialog/VBoxContainer" unique_id=1875640793]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../ChoiceFour")
@@ -311,4 +312,8 @@ wait_time = 0.05
 volume_db = 8.0
 pitch_scale = 0.9
 
+[connection signal="focus_entered" from="ResponseDialog/VBoxContainer/ChoiceOne" to="." method="_on_focus_entered" flags=18]
+[connection signal="focus_entered" from="ResponseDialog/VBoxContainer/ChoiceTwo" to="." method="_on_focus_entered" flags=18]
+[connection signal="focus_entered" from="ResponseDialog/VBoxContainer/ChoiceThree" to="." method="_on_focus_entered" flags=18]
+[connection signal="focus_entered" from="ResponseDialog/VBoxContainer/ChoiceFour" to="." method="_on_focus_entered" flags=18]
 [connection signal="timeout" from="typingTimer" to="." method="_on_typing_timer_timeout"]
