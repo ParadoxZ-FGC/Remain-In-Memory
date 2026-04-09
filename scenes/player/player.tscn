@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://colfn2h16sy1u"]
 
 [ext_resource type="Script" uid="uid://dph47j1dqu6w" path="res://scenes/player/player.gd" id="1_c623h"]
-[ext_resource type="Texture2D" uid="uid://3g2yjnb4sj4f" path="res://assets/visual/ui/PlyrHud.png" id="2_kvlxm"]
+[ext_resource type="Texture2D" uid="uid://3g2yjnb4sj4f" path="res://assets/visual/UI/PlyrHud.png" id="2_kvlxm"]
 [ext_resource type="Script" uid="uid://bj2kuesletu0j" path="res://scenes/components/scripts/health.gd" id="2_lvxji"]
 [ext_resource type="PackedScene" uid="uid://dd3tdpid7s8u4" path="res://scenes/player/health_display.tscn" id="3_fm80t"]
 [ext_resource type="Shader" uid="uid://c37e4l7rjuoxh" path="res://assets/visual/hurt_blink.gdshader" id="3_gx1jg"]
@@ -230,9 +230,10 @@ bus = &"Sound Effects"
 [node name="Hitbox" parent="Sword/1" parent_id_path=PackedInt32Array(179725720, 1104772186) index="0" unique_id=2095978619]
 visible = false
 
-[node name="Hitbox" parent="Sword/1/Hitbox" index="0" unique_id=1848612265 instance=ExtResource("12_fm80t")]
+[node name="Hitbox" parent="Sword/1/Hitbox" index="0" unique_id=1848612265 node_paths=PackedStringArray("AttackOwner") instance=ExtResource("12_fm80t")]
 hitboxType = 1
 layers = 710
+AttackOwner = NodePath("../../../..")
 
 [node name="RayCast2D" type="RayCast2D" parent="Sword/1/Hitbox/Hitbox/Environment Raycasts" parent_id_path=PackedInt32Array(1848612265, 18784854) index="0" unique_id=1212366007]
 position = Vector2(0, 3)
@@ -261,11 +262,12 @@ comboCooldown = 0.5
 [node name="Hitbox" parent="Glaive/1" parent_id_path=PackedInt32Array(1340132541, 1104772186) index="0" unique_id=2095978619]
 visible = false
 
-[node name="hitbox" parent="Glaive/1/Hitbox" index="0" unique_id=1974952317 instance=ExtResource("12_fm80t")]
+[node name="hitbox" parent="Glaive/1/Hitbox" index="0" unique_id=1974952317 node_paths=PackedStringArray("AttackOwner") instance=ExtResource("12_fm80t")]
 position = Vector2(11, 1)
 scale = Vector2(0.75, 0.155)
 hitboxType = 1
 layers = 710
+AttackOwner = NodePath("../../../..")
 
 [node name="RayCast2D" type="RayCast2D" parent="Glaive/1/Hitbox/hitbox/Environment Raycasts" parent_id_path=PackedInt32Array(1974952317, 18784854) index="0" unique_id=319138311]
 position = Vector2(-14.666667, 12.903226)
@@ -300,7 +302,6 @@ debug_color = Color(0.32945, 0.612115, 0.343682, 0.42)
 
 [node name="InteractDisplay" parent="." unique_id=1013590109 instance=ExtResource("14_ugbui")]
 visible = false
-anchors_preset = 0
 offset_left = -4.9999995
 offset_top = -13.999999
 offset_right = 91.0
@@ -324,7 +325,7 @@ process_material = ExtResource("16_myrg7")
 
 [node name="HazardDetect" type="Area2D" parent="." unique_id=2085180845]
 visible = false
-collision_layer = 8
+collision_layer = 0
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HazardDetect" unique_id=414485227]

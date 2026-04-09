@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3g2yjnb4sj4f"
-path="res://.godot/imported/PlyrHud.png-b1595dd6daf9bb8bc7465c86f8668c6e.ctex"
+path="res://.godot/imported/PlyrHud.png-467a7d36919ffa8dd8b1b3233a4d91c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/ui/PlyrHud.png"
-dest_files=["res://.godot/imported/PlyrHud.png-b1595dd6daf9bb8bc7465c86f8668c6e.ctex"]
+source_file="res://assets/visual/UI/PlyrHud.png"
+dest_files=["res://.godot/imported/PlyrHud.png-467a7d36919ffa8dd8b1b3233a4d91c8.ctex"]
 
 [params]
 

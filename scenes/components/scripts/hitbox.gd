@@ -33,7 +33,7 @@ enum codeAttackList {Stationary = 0, Moving = 1 }
 ##For use with projectiles, deals damage to parent when hitting environment.
 @export var environmentSelfDamage: bool = false
 
-@onready var AttackOwner = get_parent().get_parent().get_parent()
+@export var AttackOwner: Node2D
 
 var ray = null
 
@@ -83,6 +83,7 @@ func _physics_process(_delta: float) -> void:
 
 		var overlap = get_overlapping_areas()
 		if overlap.size() > 0:
+			print(overlap)
 			overlap.sort_custom(sort_distance)
 
 			var hits = []

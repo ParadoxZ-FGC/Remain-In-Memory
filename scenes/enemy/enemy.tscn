@@ -354,11 +354,11 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.125),
+"times": PackedFloat32Array(0.75),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"fire"
+"method": &"getReady"
 }]
 }
 tracks/2/type = "audio"
@@ -376,6 +376,20 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0.125)
 }
 tracks/2/use_blend = true
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cannon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_dtxhd"]
 resource_name = "standby"
@@ -498,6 +512,9 @@ shape = SubResource("RectangleShape2D_feath")
 [node name="ProjectileHandler" parent="Cannon/1/Projectile" parent_id_path=PackedInt32Array(179725720, 1613470510) index="0" unique_id=1686428060 instance=ExtResource("9_hvxgb")]
 position = Vector2(0, -7)
 
+[node name="Hitbox" parent="Cannon/1/Projectile/ProjectileHandler/Projectile" parent_id_path=PackedInt32Array(1686428060, 473212258) index="1" unique_id=1848612265 node_paths=PackedStringArray("AttackOwner")]
+AttackOwner = NodePath("../../../../../..")
+
 [node name="TurretPlayer" type="AnimationPlayer" parent="." unique_id=913885218]
 libraries/ = SubResource("AnimationLibrary_5woo5")
 
@@ -507,3 +524,4 @@ libraries/ = SubResource("AnimationLibrary_5woo5")
 [connection signal="body_exited" from="Detectionbox" to="." method="_on_detectionbox_body_exited"]
 
 [editable path="Cannon"]
+[editable path="Cannon/1/Projectile/ProjectileHandler"]

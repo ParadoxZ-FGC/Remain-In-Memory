@@ -1067,9 +1067,10 @@ texture = ExtResource("6_2kvep")
 [node name="Slash" parent="BossSword" unique_id=179725720 instance=ExtResource("7_lecen")]
 duration = 0.5
 
-[node name="Hitbox" parent="BossSword/Slash/1/Hitbox" parent_id_path=PackedInt32Array(179725720, 2095978619) index="0" unique_id=1539786736 instance=ExtResource("7_r0t0y")]
+[node name="Hitbox" parent="BossSword/Slash/1/Hitbox" parent_id_path=PackedInt32Array(179725720, 2095978619) index="0" unique_id=1539786736 node_paths=PackedStringArray("AttackOwner") instance=ExtResource("7_r0t0y")]
 damage = 2
 layers = 8
+AttackOwner = NodePath("../../../../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossSword/Slash/1/Hitbox/Hitbox" unique_id=1112867053]
 visible = false
@@ -1079,17 +1080,19 @@ shape = SubResource("CapsuleShape2D_pg4pn")
 [node name="Charge" parent="BossSword" unique_id=1775851964 instance=ExtResource("7_lecen")]
 duration = 0.5
 
-[node name="Hitbox" parent="BossSword/Charge/1/Hitbox" parent_id_path=PackedInt32Array(1775851964, 2095978619) index="0" unique_id=1848612265 instance=ExtResource("7_r0t0y")]
+[node name="Hitbox" parent="BossSword/Charge/1/Hitbox" parent_id_path=PackedInt32Array(1775851964, 2095978619) index="0" unique_id=1848612265 node_paths=PackedStringArray("AttackOwner") instance=ExtResource("7_r0t0y")]
 damage = 2
 layers = 8
+AttackOwner = NodePath("../../../../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossSword/Charge/1/Hitbox/Hitbox" unique_id=651777799]
 visible = false
 position = Vector2(0, -59)
 shape = SubResource("CapsuleShape2D_pg4pn")
 
-[node name="Hitbox" parent="." unique_id=836901987 instance=ExtResource("7_r0t0y")]
+[node name="Hitbox" parent="." unique_id=836901987 node_paths=PackedStringArray("AttackOwner") instance=ExtResource("7_r0t0y")]
 layers = 8
+AttackOwner = NodePath("..")
 
 [node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox" unique_id=930671972]
 visible = false

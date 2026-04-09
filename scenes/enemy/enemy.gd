@@ -28,6 +28,7 @@ var can_deactivate := false
 @onready var turret_sprite := $TurretSprite
 @onready var hurt_particles := $HurtParticles
 @onready var hurt_particles_process_mat = $HurtParticles.get("process_material")
+@onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 
 
 func _ready() -> void:
@@ -46,7 +47,7 @@ func _ready() -> void:
 	set_lock_rotation_enabled(true)
 	$Hitbox.weight=200
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if current_state == States.INACTIVE and to_activate:
 		activate()
 		
@@ -77,20 +78,10 @@ func _physics_process(_delta: float) -> void:
 			turret_player.play("shoot")
 
 
-func fire() -> void:
-	var anim = $AnimatedMobSprite
-	await anim.animation_looped
-	anim.play("shoot")
-	$"Cannon/1/Projectile/ProjectileHandler/Projectile/Hitbox".direction=Vector2(facing,0)
-	$"Cannon/1/Projectile/ProjectileHandler/Projectile/Hitbox".weight=200
-	$Cannon.attack()
-	
-	await turret_player.animation_finished
+func getReady() -> void:
 	turret_player.play("standby")
-	
-	if current_state == States.FIRING:
-		current_state = States.STANDBY
-		state_changed.emit()
+	current_state = States.STANDBY
+	state_changed.emit()
 	var timer = get_tree().create_timer(fire_recovery_duration)
 	await timer.timeout
 	if current_state == States.STANDBY:
@@ -173,5 +164,5 @@ func take_knockback(force: float, direction: Vector2):
 	print("ENEMY ATTACK RECEIVED. WEIGHT: "+str(force))
 	direction.y-=1
 	#print(str(force)+"-"+str(direction))
-	apply_central_impulse(force*direction)
+	#apply_central_impulse(force*direction)
 		
