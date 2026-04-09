@@ -176,7 +176,9 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if is_on_floor():
-		knockedback=false
+		knockedback = false
+		if jumped:
+			jumped = 0
 		if wavedashing == dashState.AIRDASHING:
 			wavedashing = dashState.WAVEDASH_READY
 	
@@ -232,12 +234,14 @@ func move(movement_vector, delta):
 
 	if is_on_floor():
 		coyoteTimer = 0
+		jumped = 0
 		if wavedashForgivenessTimer < wavedashGroundForgiveness:
 			wavedashForgivenessTimer += delta
 		else:
 			wavedashing = dashState.NOTDASHING
 	else:
 		coyoteTimer += delta
+		print(coyoteTimer)
 		clamp(coyoteTimer, 0, coyote)
 
 func dash(lr, ud):
@@ -286,11 +290,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
 		
-		if coyoteTimer >= coyote and jumped == 0:
-			jumped = 1
-		
-		if event.is_action_pressed("jump") and not dashing:
-			jump()
+		if event.is_action_pressed("jump") and not dashing and jumped < 2:
+			if is_on_floor():
+				jumped += 1
+				jump()
+			else:
+				if coyoteTimer < coyote:
+					jumped += 1
+					jump()
+				else:
+					jumped += 2
+					jump()
 		
 		if not is_on_floor() and event.is_action_released("jump"):
 			jump_stop()
