@@ -264,18 +264,18 @@ func dash_stop():
 			wavedashing = dashState.NOTDASHING
 
 func jump():
-	if jumped == 0:
-		jumped += 1
-		velocity.y = -jump_speed
-	elif jumped == 1 and gauge.needle_angle >= 90:
-		jumped += 1
-		gauge.needle_angle -= 30
-		velocity.y = -jump_speed # * 1.1
-		steam_jump.emitting = true
-	if wavedashForgivenessTimer < wavedashGroundForgiveness and wavedashing == dashState.AIRDASHING:
-		wavedashing = dashState.WAVEDASHING
-		await get_tree().create_timer(wavedashLength).timeout
-		wavedashing = dashState.NOTDASHING
+    if jumped == 0:
+        jumped += 1
+        velocity.y = -jump_speed
+    elif jumped == 1 and gauge.needle_angle >= 90:
+        jumped += 1
+        gauge.needle_angle -= 30
+        velocity.y = -jump_speed # * 1.1
+        steam_jump.emitting = true
+    if wavedashForgivenessTimer < wavedashGroundForgiveness and wavedashing == dashState.AIRDASHING:
+        wavedashing = dashState.WAVEDASHING
+        await get_tree().create_timer(wavedashLength).timeout
+        wavedashing = dashState.NOTDASHING
 
 
 func jump_stop():
