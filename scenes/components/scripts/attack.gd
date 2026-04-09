@@ -94,6 +94,7 @@ func attack():
 		if attackInfo.x == 1:
 			hitbox = currentAttack.get_node("Hitbox").get_child(0)
 			hitbox.activate(duration)
+			print("ATTACK WIGHT: "+str(hitbox.weight))
 		if attackInfo.y == 1:
 			sprite = currentAttack.get_node("Sprite").get_child(0)
 			sprite.set_visible(true)

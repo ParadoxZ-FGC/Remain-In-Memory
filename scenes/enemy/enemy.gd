@@ -42,7 +42,9 @@ func _ready() -> void:
 		$Cannon.position.x = 13
 		$Cannon.facing = true
 		hurt_particles_process_mat.direction.x = -1
-
+	add_constant_central_force(Vector2(0,ProjectSettings.get_setting("physics/2d/default_gravity") * 2))
+	set_lock_rotation_enabled(true)
+	$Hitbox.weight=200
 
 func _physics_process(_delta: float) -> void:
 	if current_state == States.INACTIVE and to_activate:
@@ -58,12 +60,14 @@ func _physics_process(_delta: float) -> void:
 			turret_sprite.flip_h = true
 			$Cannon.position.x = 13
 			$Cannon.facing = true
+			$Hitbox.direction=Vector2(facing,0)
 			hurt_particles_process_mat.direction.x = -1
 		else:
 			facing = -1
 			turret_sprite.flip_h = false
 			$Cannon.position.x = -13
 			$Cannon.facing = false
+			$Hitbox.direction=Vector2(facing,0)
 			hurt_particles_process_mat.direction.x = 1
 		
 		if (current_state == States.READY):
@@ -74,6 +78,11 @@ func _physics_process(_delta: float) -> void:
 
 
 func fire() -> void:
+	var anim = $AnimatedMobSprite
+	await anim.animation_looped
+	anim.play("shoot")
+	$"Cannon/1/Projectile/ProjectileHandler/Projectile/Hitbox".direction=Vector2(facing,0)
+	$"Cannon/1/Projectile/ProjectileHandler/Projectile/Hitbox".weight=200
 	$Cannon.attack()
 	
 	await turret_player.animation_finished
@@ -159,3 +168,10 @@ func print_state() -> void:
 func _on_health_health_changed(diff: int) -> void:
 	if (sign(diff) == -1.0):
 		hurt_particles.emitting = true
+
+func take_knockback(force: float, direction: Vector2):
+	print("ENEMY ATTACK RECEIVED. WEIGHT: "+str(force))
+	direction.y-=1
+	#print(str(force)+"-"+str(direction))
+	apply_central_impulse(force*direction)
+		

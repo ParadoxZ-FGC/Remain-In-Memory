@@ -83,7 +83,7 @@ func set_health(value : int):
 			if not first_pass:
 				var tween = create_tween()
 				tween.set_trans(damage_transition)
-				tween.tween_method(sprite_shader_blink_intensity, 1.0, 0, immortalityDuration)
+				tween.tween_method(sprite_shader_blink_intensity, 1.0, 0, 1.0)
 				set_temporary_immortality(immortalityDuration)
 			else:
 				first_pass = false

@@ -46,4 +46,5 @@ immortalityDuration = 0.0
 [node name="DirectionRay" type="RayCast2D" parent="." unique_id=911100505]
 target_position = Vector2(-8, 0)
 
+[connection signal="impacted" from="Projectile/Hitbox" to="Projectile" method="_on_hitbox_impacted"]
 [connection signal="health_depleted" from="Projectile/Health" to="Projectile" method="_on_health_health_depleted"]

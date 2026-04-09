@@ -30,3 +30,5 @@ func fire() -> void:
 	projectileToFire.grav = gravity
 	projectileToFire.move()
 	projectileToFire.get_node("Hitbox").activate(-1)
+	projectileToFire.get_node("Hitbox").direction=$Projectile/Hitbox.direction
+	projectileToFire.get_node("Hitbox").weight=$Projectile/Hitbox.weight

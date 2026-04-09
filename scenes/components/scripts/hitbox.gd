@@ -39,6 +39,10 @@ var ray = null
 
 var activated = false
 
+#direction and weight of the attack for knockback purposes (set weight to 0 if it's not an attack). direction will be normalized.
+var direction = Vector2(1,0)
+var weight = 0
+
 #region Setters and Getters
 func set_damage(value: int):
 	damage = value
@@ -100,11 +104,11 @@ func _physics_process(_delta: float) -> void:
 					hits.resize(pierce)
 
 				for x in hits:
-					x.take_damage(damage)
+					x.take_damage(damage,direction,weight)
 					impacted.emit()
 
-				#if selfKnockback > 0 and (ray.is_colliding() or hits.size() > 0):
-					#get_parent().apply_knockback(selfKnockback, $"Knockback Direction".position)
+				#if hitboxType == codeAttackList.Melee and ray.is_colliding() and hits.size() == 0 and selfKnockback > 0:
+					#parent.apply_knockback(selfKnockback)
 
 ##Causes the hitbox to scan for overlapping areas. It sorts them by distance and culls any past walls and any past the provided pierce count.
 func activate(duration: float = -1):

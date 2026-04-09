@@ -201,7 +201,7 @@ scale = Vector2(5, 5)
 script = ExtResource("2_lvxji")
 max_health = 6
 character_sprite = NodePath("../player_sprite")
-damage_blink_color = Color(0.5924475, 2.201982e-06, 4.3317675e-07, 1)
+damage_blink_color = Color(1, 0, 0, 1)
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
 [node name="DialogueHandler" parent="." unique_id=61666120 instance=ExtResource("3_ugbui")]
