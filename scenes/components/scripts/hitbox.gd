@@ -107,7 +107,7 @@ func _physics_process(_delta: float) -> void:
 					#get_parent().apply_knockback(selfKnockback, $"Knockback Direction".position)
 
 ##Causes the hitbox to scan for overlapping areas. It sorts them by distance and culls any past walls and any past the provided pierce count.
-func activate(duration: int = -1):
+func activate(duration: float = -1):
 	activated = true
 	print(activated)
 	if duration >= 0:
