@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctuiaiadxt8ui"
-path="res://.godot/imported/Right Shoulder.png-2e66665403843a5c3d8284f1771c0d56.ctex"
+path="res://.godot/imported/Right Shoulder.png-ec2e08b32c77e44c6987cd0961e454b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/UI/controls/Right Shoulder.png"
-dest_files=["res://.godot/imported/Right Shoulder.png-2e66665403843a5c3d8284f1771c0d56.ctex"]
+source_file="res://assets/visual/ui/controls/Right Shoulder.png"
+dest_files=["res://.godot/imported/Right Shoulder.png-ec2e08b32c77e44c6987cd0961e454b4.ctex"]
 
 [params]
 

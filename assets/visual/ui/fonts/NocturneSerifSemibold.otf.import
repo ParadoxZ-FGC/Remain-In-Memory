@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dccidyfswk4x8"
-path="res://.godot/imported/NocturneSerifSemibold.otf-544b062a924e63c4e543d3b8097a2222.fontdata"
+path="res://.godot/imported/NocturneSerifSemibold.otf-a1c8c418d0209e3b00e346d112fd6152.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/UI/fonts/NocturneSerifSemibold.otf"
-dest_files=["res://.godot/imported/NocturneSerifSemibold.otf-544b062a924e63c4e543d3b8097a2222.fontdata"]
+source_file="res://assets/visual/ui/fonts/NocturneSerifSemibold.otf"
+dest_files=["res://.godot/imported/NocturneSerifSemibold.otf-a1c8c418d0209e3b00e346d112fd6152.fontdata"]
 
 [params]
 

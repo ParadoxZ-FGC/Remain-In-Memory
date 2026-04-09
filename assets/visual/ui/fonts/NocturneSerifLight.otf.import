@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dbl4wvy4c7130"
-path="res://.godot/imported/NocturneSerifLight.otf-aaeeaeeaed58a6823eed0bd798b54905.fontdata"
+path="res://.godot/imported/NocturneSerifLight.otf-ec4657c945f81b7e15c0b7b9618ed803.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/UI/fonts/NocturneSerifLight.otf"
-dest_files=["res://.godot/imported/NocturneSerifLight.otf-aaeeaeeaed58a6823eed0bd798b54905.fontdata"]
+source_file="res://assets/visual/ui/fonts/NocturneSerifLight.otf"
+dest_files=["res://.godot/imported/NocturneSerifLight.otf-ec4657c945f81b7e15c0b7b9618ed803.fontdata"]
 
 [params]
 
