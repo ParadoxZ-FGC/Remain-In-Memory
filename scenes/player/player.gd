@@ -38,7 +38,7 @@ var coyoteTimer: float = 0
 var movementDirection: bool = true #rightward = true
 var movementIntentionDirection: bool = true
 var movementIntention: float
-enum dashState {NOTDASHING = 0, DASHING = 1, AIRDASHING = 2, WAVEDASHING = 3}
+enum dashState {NOTDASHING = 0, DASHING = 1, AIRDASHING = 2, WAVEDASH_READY = 3, WAVEDASHING = 4}
 var dashing: bool = false
 var wavedashing: int = dashState.NOTDASHING
 var wavedashForgivenessTimer: float = 0
@@ -156,7 +156,6 @@ func _physics_process(delta):
 	
 	if velocity.x != 0 and not knockedback and not inKnockback:
 		$player_sprite.animation = "walk"
-		$player_sprite.flip_v = false
 		
 		match currentWeapon:
 				weaponSelect.Sword:
@@ -179,6 +178,8 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		knockedback=false
+		if wavedashing == dashState.AIRDASHING:
+			wavedashing = dashState.WAVEDASH_READY
 	
 	if delayedFlip and not delayedFlip.attackCooling:
 		delayedFlip.scale = Vector2(-1, 1) if $player_sprite.flip_h else Vector2(1, 1)
@@ -197,16 +198,16 @@ func move(movement_vector, delta):
 				else:
 					velocity.x = move_toward(velocity.x, 0, drag_force * delta)
 			else:
-				velocity.x = move_toward(velocity.x, 0, drag_force * delta)
-		else:
-			if movementIntentionDirection != movementDirection:
-				velocity.x -= velocity.x / 8 * 7
-				if wavedashing == dashState.WAVEDASHING:
-					wavedashing = dashState.NOTDASHING
+				if movementIntentionDirection != movementDirection:
+					velocity.x -= velocity.x / 8 * 7
+					if wavedashing == dashState.WAVEDASHING:
+						wavedashing = dashState.NOTDASHING
 		
 		velocity.y += gravity * delta
 
 		if Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled:
+			if velocity.x != 0:
+				$player_sprite.flip_h = velocity.x < 0
 			if wavedashing == dashState.WAVEDASHING:
 				if velocity.x < max_dash_speed and velocity.x > -max_dash_speed:
 					velocity.x += walk * delta
@@ -219,16 +220,16 @@ func move(movement_vector, delta):
 						velocity.x = move_toward(velocity.x, max_run_speed, momentum_loss * delta)
 					elif velocity.x < -max_run_speed:
 						velocity.x = move_toward(velocity.x, -max_run_speed, momentum_loss * delta)
-				$player_sprite.flip_h = velocity.x < 0
-			elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and not dashing:
-				velocity.x += walk * delta
-				velocity.x = clamp(velocity.x, -max_walk_speed, max_walk_speed)
-				$player_sprite.flip_h = velocity.x < 0
+		elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and not dashing:
+			velocity.x += walk * delta
+			velocity.x = clamp(velocity.x, -max_walk_speed, max_walk_speed)
+			$player_sprite.flip_h = velocity.x < 0
 		else:
 			velocity.x = clamp(velocity.x, -max_dash_speed, max_dash_speed)
+	else:
+		velocity.y += gravity * delta
 	
 	position = position.clamp(upper, lower)
-	velocity.y += gravity * delta
 
 	if is_on_floor():
 		coyoteTimer = 0
@@ -250,32 +251,24 @@ func dash(lr, ud):
 	
 	dashCoolDown = 0
 	dashTimer.start(dash_duration)
-	if(abs(ud) == 0):
-		velocity.x += lr * dash_speed * 2
 	velocity.x += lr * dash_speed
 	velocity.y += ud * dash_speed/2
 
 func dash_stop():
 	velocity.y = 0
 	dashing = false
-	if wavedashing == dashState.AIRDASHING:
+	if wavedashing == dashState.WAVEDASH_READY:
 		await get_tree().create_timer(wavedashValidInputDuration).timeout
 		if wavedashing != dashState.WAVEDASHING:
 			wavedashing = dashState.NOTDASHING
 
 func jump():
-    if jumped == 0:
-        jumped += 1
-        velocity.y = -jump_speed
-    elif jumped == 1 and gauge.needle_angle >= 90:
-        jumped += 1
-        gauge.needle_angle -= 30
-        velocity.y = -jump_speed # * 1.1
-        steam_jump.emitting = true
-    if wavedashForgivenessTimer < wavedashGroundForgiveness and wavedashing == dashState.AIRDASHING:
-        wavedashing = dashState.WAVEDASHING
-        await get_tree().create_timer(wavedashLength).timeout
-        wavedashing = dashState.NOTDASHING
+	velocity.y = -jump_speed
+	if wavedashForgivenessTimer < wavedashGroundForgiveness and wavedashing == dashState.WAVEDASH_READY:
+		print("WAVEDASH")
+		wavedashing = dashState.WAVEDASHING
+		await get_tree().create_timer(wavedashLength).timeout
+		wavedashing = dashState.NOTDASHING
 
 
 func jump_stop():
