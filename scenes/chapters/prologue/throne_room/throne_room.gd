@@ -68,6 +68,7 @@ func _post_cutscene_effects(cutscene:String) -> void:
 		await TransitionScreen.on_transition_finished
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/chapters/prologue/credits/prologue_end.tscn")
 
+
 func _on_player_death():
 	Input.start_joy_vibration(0, 1, 1, 0)
 	EventBus.swap_control_state.emit()

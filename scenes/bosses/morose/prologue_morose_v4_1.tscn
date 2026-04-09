@@ -1,0 +1,520 @@
+[gd_scene format=3 uid="uid://wt6q2aet7bkq"]
+
+[ext_resource type="Script" uid="uid://cib8stoxxmjfs" path="res://scenes/bosses/morose/scripts/prologue_morose_v4_1.gd" id="1_hvg72"]
+[ext_resource type="Texture2D" uid="uid://bxnkdmppg35hb" path="res://assets/visual/enemies/morose_sword_v4.png" id="2_tdejx"]
+[ext_resource type="Texture2D" uid="uid://dqh8g64g1y3qg" path="res://assets/visual/enemies/morose_sword_v4_spin.png" id="3_dw183"]
+[ext_resource type="Texture2D" uid="uid://e8d6udswio1g" path="res://assets/visual/enemies/morose_v4.png" id="4_mtpew"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r26kj"]
+
+[sub_resource type="Animation" id="Animation_hvg72"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MoroseSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -78)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -176)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PompelPivot/SpinPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PompelPivot/SpinPivot/SawSprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PompelPivot:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MoroseSprite:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MoroseSprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tdejx"]
+resource_name = "body_bobbing"
+length = 1.5000042
+loop_mode = 1
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MoroseSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -63), Vector2(0, -78)]
+}
+
+[sub_resource type="Animation" id="Animation_uypat"]
+resource_name = "lunge_lf"
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MoroseSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.5833333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.2617993877991494, -0.2617993877991494, 1.5707963267948966]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PompelPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.33333334, 0.5833333, 0.7083333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(25, -161), Vector2(25, -161), Vector2(186, -36), Vector2(190, -36), Vector2(24, -36)]
+}
+
+[sub_resource type="Animation" id="Animation_mtpew"]
+resource_name = "spin_down_full_lf"
+length = 1.1250042
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PompelPivot/SpinPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04166667, 0.08333334, 0.125, 0.16666669, 0.20833331, 0.25, 0.2916667, 0.375, 0.5, 0.6666667, 0.875, 1.125),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0943951023931953, 4.1887902047863905, 6.283185307179586, 8.377580409572781, 10.471975511965978, 12.566370614359172, 14.660765716752369, 16.755160819145562, 18.84955592153876, 20.943951023931955, 23.03834612632515, 25.132741228718345]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot/SpinPivot/SawSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666669),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kt7ue"]
+resource_name = "spin_down_full_rf"
+length = 1.1250042
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PompelPivot/SpinPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04166667, 0.08333334, 0.125, 0.16666669, 0.20833331, 0.25, 0.2916667, 0.375, 0.5, 0.6666667, 0.875, 1.125),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -2.0943951023931953, -4.1887902047863905, -6.283185307179586, -8.377580409572781, -10.471975511965978, -12.566370614359172, -14.660765716752369, -16.755160819145562, -18.84955592153876, -20.943951023931955, -23.03834612632515, -25.132741228718345]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot/SpinPivot/SawSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666669),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jq6pl"]
+resource_name = "spin_up_full_lf"
+length = 1.1250042
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PompelPivot/SpinPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.45833334, 0.625, 0.75, 0.8333333, 0.875, 0.9166667, 0.9583333, 1, 1.0416666, 1.0833334, 1.125),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0943951023931953, 4.1887902047863905, 6.283185307179586, 8.377580409572781, 10.471975511965978, 12.566370614359172, 14.660765716752369, 16.755160819145562, 18.84955592153876, 20.943951023931955, 23.03834612632515, 25.132741228718345]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot/SpinPivot/SawSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9583333, 1.125),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q73bv"]
+resource_name = "spin_up_full_rf"
+length = 1.1250042
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PompelPivot/SpinPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.45833334, 0.625, 0.75, 0.8333333, 0.875, 0.9166667, 0.9583333, 1, 1.0416666, 1.0833334, 1.125),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -2.0943951023931953, -4.1887902047863905, -6.283185307179586, -8.377580409572781, -10.471975511965978, -12.566370614359172, -14.660765716752369, -16.755160819145562, -18.84955592153876, -20.943951023931955, -23.03834612632515, -25.132741228718345]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot/SpinPivot/SawSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9583333, 1.125),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w337s"]
+resource_name = "spinning_lf"
+length = 0.12500417
+loop_mode = 1
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PompelPivot/SpinPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336, 0.125),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0943951023931953, 4.1887902047863905, 6.283185307179586]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot/SpinPivot/SawSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u1ge3"]
+resource_name = "spinning_rf"
+length = 0.12500417
+loop_mode = 1
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PompelPivot/SpinPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336, 0.125),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -2.0943951023931953, -4.1887902047863905, -6.283185307179586]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot/SpinPivot/SawSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dw183"]
+resource_name = "sword_bobbing_lf"
+length = 2.5000043
+loop_mode = 1
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PompelPivot:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(25, -161), Vector2(35, -181)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.2617993877991494, -0.17453292519943295]
+}
+
+[sub_resource type="Animation" id="Animation_38m10"]
+resource_name = "sword_bobbing_rf"
+length = 2.5000043
+loop_mode = 1
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PompelPivot:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-25, -161), Vector2(-35, -181)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.2617993877991494, 0.17453292519943295]
+}
+
+[sub_resource type="Animation" id="Animation_lviya"]
+resource_name = "to_left_face"
+length = 0.25000417
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MoroseSprite:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-25, -161), Vector2(25, -161)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PompelPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.2617993877991494, -0.2617994]
+}
+
+[sub_resource type="Animation" id="Animation_n3qlx"]
+resource_name = "to_right_face"
+length = 0.25000417
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MoroseSprite:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PompelPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(25, -161), Vector2(-25, -161)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PompelPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.2617994, 0.2617993877991494]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mtpew"]
+_data = {
+&"RESET": SubResource("Animation_hvg72"),
+&"body_bobbing": SubResource("Animation_tdejx"),
+&"lunge_lf": SubResource("Animation_uypat"),
+&"spin_down_full_lf": SubResource("Animation_mtpew"),
+&"spin_down_full_rf": SubResource("Animation_kt7ue"),
+&"spin_up_full_lf": SubResource("Animation_jq6pl"),
+&"spin_up_full_rf": SubResource("Animation_q73bv"),
+&"spinning_lf": SubResource("Animation_w337s"),
+&"spinning_rf": SubResource("Animation_u1ge3"),
+&"sword_bobbing_lf": SubResource("Animation_dw183"),
+&"sword_bobbing_rf": SubResource("Animation_38m10"),
+&"to_left_face": SubResource("Animation_lviya"),
+&"to_right_face": SubResource("Animation_n3qlx")
+}
+
+[node name="Morose" type="CharacterBody2D" unique_id=1140644710]
+script = ExtResource("1_hvg72")
+
+[node name="FloorCollision" type="CollisionShape2D" parent="." unique_id=1052425934]
+position = Vector2(1, -10)
+shape = SubResource("RectangleShape2D_r26kj")
+
+[node name="PompelPivot" type="Marker2D" parent="." unique_id=878986536]
+position = Vector2(0, -176)
+metadata/_edit_group_ = true
+
+[node name="SpinPivot" type="Marker2D" parent="PompelPivot" unique_id=1466236309]
+position = Vector2(0, 80)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="SwordSprite" type="Sprite2D" parent="PompelPivot/SpinPivot" unique_id=259317906]
+rotation = 2.3561945
+texture = ExtResource("2_tdejx")
+metadata/_edit_lock_ = true
+
+[node name="SawSprite" type="Sprite2D" parent="PompelPivot/SpinPivot" unique_id=1243493196]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("3_dw183")
+
+[node name="MoroseSprite" type="Sprite2D" parent="." unique_id=923795650]
+position = Vector2(0, -78)
+texture = ExtResource("4_mtpew")
+hframes = 9
+
+[node name="Actions" type="AnimationPlayer" parent="." unique_id=766745087]
+libraries/ = SubResource("AnimationLibrary_mtpew")

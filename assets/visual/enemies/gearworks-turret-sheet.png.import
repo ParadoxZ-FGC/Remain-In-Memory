@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ercv5noohe6b"
-path="res://.godot/imported/door.png-3be30d62300c45d86dfa1f98a47efec7.ctex"
+uid="uid://cfl8oyhfmnipn"
+path="res://.godot/imported/gearworks-turret-sheet.png-a88c414ca0a5a5ef36283f6836cfcf92.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/ui/door.png"
-dest_files=["res://.godot/imported/door.png-3be30d62300c45d86dfa1f98a47efec7.ctex"]
+source_file="res://assets/visual/enemies/gearworks-turret-sheet.png"
+dest_files=["res://.godot/imported/gearworks-turret-sheet.png-a88c414ca0a5a5ef36283f6836cfcf92.ctex"]
 
 [params]
 

@@ -1,7 +1,5 @@
 extends Control 
 
-signal released_focus
-
 @export var exit_settings: Button
 
 var was_paused = false
@@ -36,7 +34,7 @@ func exit_settings_menu():
 	exit_settings.release_focus()
 	EventBus.emit_signal("editBinding")
 	hide()  # Hide settings menu
-	released_focus.emit()
+	EventBus.released_focus.emit(self)
 	
 	# Unpause only if it was accessed from the title screen
 	if not was_paused:

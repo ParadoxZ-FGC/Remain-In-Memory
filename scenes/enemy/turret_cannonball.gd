@@ -25,10 +25,10 @@ func _physics_process(delta: float) -> void:
 		$Hitbox.activate(-1)
 
 
-func fire(speed : int, direction : int) -> void:
+func fire(direction : Vector2) -> void:
 	timer = get_tree().create_timer(5, false, true, false)
 	timer.timeout.connect(_end_of_life)
-	directionVector = Vector2(speed * direction, 0)
+	directionVector = direction
 	visible = true
 	current_state = States.FIRED
 	$Hitbox.enable()

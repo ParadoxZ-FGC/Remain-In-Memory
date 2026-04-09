@@ -9,5 +9,5 @@ func _ready() -> void:
 	await TransitionScreen.on_transition_finished
 	get_tree().change_scene_to_file(scene_to_load)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

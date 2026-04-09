@@ -6,8 +6,11 @@ extends Control
 @export var vbox: VBoxContainer
 @export var rect: ColorRect
 
+@onready var last_focused : Control = %Resume
+
 
 func _ready():
+	EventBus.released_focus.connect(_on_released_focus)
 	rect.material.set_shader_parameter("lod", 0)
 	visible = true
 	settings.hide()
@@ -27,12 +30,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func resume():  
-	resume_button.release_focus()
+	get_viewport().gui_release_focus()
 	get_tree().paused = false
 	for child in $PanelContainer/MarginContainer/VBoxContainer.get_children():
 		if child is not HSeparator:
 			child.disabled = true
 	$AnimationPlayer.play_backwards("blur")
+	last_focused = $%Resume
+	EventBus.released_focus.emit(self)
 
 
 func pause():
@@ -74,3 +79,11 @@ func _on_alt_f_4_pressed():
 func _on_restart_for_debugging_pressed():
 	resume()
 	get_tree().reload_current_scene()
+
+
+func _on_released_focus(_source:Control) -> void:
+	last_focused.call_deferred("grab_focus")
+
+
+func _on_focus_entered(source: Control) -> void:
+	last_focused = source
