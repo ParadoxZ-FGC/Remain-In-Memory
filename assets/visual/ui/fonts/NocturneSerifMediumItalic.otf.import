@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dyewccjcoyfg6"
-path="res://.godot/imported/NocturneSerifMediumItalic.otf-ad0a17ed48003cd22ef14d112bdf2e96.fontdata"
+path="res://.godot/imported/NocturneSerifMediumItalic.otf-42f92f7f1f44c694329dc5c110443141.fontdata"
 
 [deps]
 
-source_file="res://assets/visual/ui/fonts/NocturneSerifMediumItalic.otf"
-dest_files=["res://.godot/imported/NocturneSerifMediumItalic.otf-ad0a17ed48003cd22ef14d112bdf2e96.fontdata"]
+source_file="res://assets/visual/UI/fonts/NocturneSerifMediumItalic.otf"
+dest_files=["res://.godot/imported/NocturneSerifMediumItalic.otf-42f92f7f1f44c694329dc5c110443141.fontdata"]
 
 [params]
 

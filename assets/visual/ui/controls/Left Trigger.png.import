@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://obadmj0kgeg0"
-path="res://.godot/imported/Left Trigger.png-256ad73c48f41681b5bde95fd63d48d3.ctex"
+path="res://.godot/imported/Left Trigger.png-c7adb47b26b0799874cf32404f595caa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/ui/controls/Left Trigger.png"
-dest_files=["res://.godot/imported/Left Trigger.png-256ad73c48f41681b5bde95fd63d48d3.ctex"]
+source_file="res://assets/visual/UI/controls/Left Trigger.png"
+dest_files=["res://.godot/imported/Left Trigger.png-c7adb47b26b0799874cf32404f595caa.ctex"]
 
 [params]
 

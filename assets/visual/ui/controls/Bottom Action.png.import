@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://doaafs8eh1hfw"
-path="res://.godot/imported/Bottom Action.png-bfb9861263e266abea62fc63396d322a.ctex"
+path="res://.godot/imported/Bottom Action.png-2f318d92a8b83e87701e8f1b9adba499.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/ui/controls/Bottom Action.png"
-dest_files=["res://.godot/imported/Bottom Action.png-bfb9861263e266abea62fc63396d322a.ctex"]
+source_file="res://assets/visual/UI/controls/Bottom Action.png"
+dest_files=["res://.godot/imported/Bottom Action.png-2f318d92a8b83e87701e8f1b9adba499.ctex"]
 
 [params]
 

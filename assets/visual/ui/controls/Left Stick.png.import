@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://blc3sm465suk8"
-path="res://.godot/imported/Left Stick.png-a0f55cc9962eab682704bddd08f16036.ctex"
+path="res://.godot/imported/Left Stick.png-c12443a618312133b84153f7ffc3ca0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/ui/controls/Left Stick.png"
-dest_files=["res://.godot/imported/Left Stick.png-a0f55cc9962eab682704bddd08f16036.ctex"]
+source_file="res://assets/visual/UI/controls/Left Stick.png"
+dest_files=["res://.godot/imported/Left Stick.png-c12443a618312133b84153f7ffc3ca0c.ctex"]
 
 [params]
 
