@@ -15,7 +15,7 @@ enum weaponSelect {Sword, Glaive}
 @export var jumped : int = 0
 @export var coyote: float = 0.03
 @export var max_walk_speed = 300
-@export var max_run_speed = 500
+@export var max_run_speed = 500 #default 500
 @export var max_dash_speed = 1000
 @export var dash_speed = 1000
 @export var dash_duration = 0.075
@@ -28,6 +28,7 @@ enum weaponSelect {Sword, Glaive}
 @export var momentum_loss = 1500
 @export var walking_sfx: AudioStreamPlayer2D
 @export var knockbackTime: float = 0.05 #Determines how long the player is in knockback, @TODO might move to the knockback function itself
+var knockedback:bool=false  # if TRUE: the player has been knocked back and hasn't touched the ground yet
 @export var to_scene_on_death := true
 @export var death_scene : String
 
@@ -102,14 +103,19 @@ func _physics_process(delta):
 		last_position = position
 	
 	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
-		if not inKnockback:
-			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
+		move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
 		if Input.is_action_just_pressed("attack"):
 			match currentWeapon:
 				weaponSelect.Sword:
+					$"Sword/1/Hitbox/Hitbox".direction=Vector2(-1 if $player_sprite.flip_h else 1,0)
+					$"Sword/1/Hitbox/Hitbox".weight=200
 					$Sword.attack()
+					
 				weaponSelect.Glaive:
+					$"Glaive/1/Hitbox/hitbox".direction=Vector2(-1 if $player_sprite.flip_h else 1,0)
+					$"Glaive/1/Hitbox/hitbox".weight=200
 					$Glaive.attack()
+					
 		
 		if Input.is_action_just_pressed("dash") and dashCoolDown >= dashCoolDownLength:
 			dash(Input.get_axis("move_left", "move_right"), Input.get_axis("look_up", "crouch"))
@@ -147,10 +153,10 @@ func _physics_process(delta):
 		walking_sfx.stop()
 		$player_sprite.animation = "idle"
 	
-	if velocity.x != 0 and not inKnockback:
+	if velocity.x != 0 and not knockedback and not inKnockback:
 		$player_sprite.animation = "walk"
 		$player_sprite.flip_v = false
-		$player_sprite.flip_h = velocity.x < 0
+		
 		match currentWeapon:
 				weaponSelect.Sword:
 					if $Sword.attackCooling == false:
@@ -170,19 +176,25 @@ func _physics_process(delta):
 		
 	move_and_slide()
 	
+	if is_on_floor():
+		knockedback=false
+	
 	if delayedFlip and not delayedFlip.attackCooling:
 		delayedFlip.scale = Vector2(-1, 1) if $player_sprite.flip_h else Vector2(1, 1)
 
 
 func move(movement_vector, delta):
-	movementIntention = movement_vector
-	movementDirection = true if velocity.x > 0 else false
-	movementIntentionDirection = true if movementIntention >= 0 else false
-	var walk = speed * movementIntention
-	if not dashing:
-		if abs(walk) < speed * 0.2:
-			if is_on_floor():
-				velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+	if(not(knockedback)):
+		movementIntention = movement_vector
+		movementDirection = true if velocity.x > 0 else false
+		movementIntentionDirection = true if movementIntention >= 0 else false
+		var walk = speed * movementIntention
+		if not dashing:
+			if abs(walk) < speed * 0.2:
+				if is_on_floor():
+					velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+				else:
+					velocity.x = move_toward(velocity.x, 0, drag_force * delta)
 			else:
 				velocity.x = move_toward(velocity.x, 0, drag_force * delta)
 		else:
@@ -206,14 +218,17 @@ func move(movement_vector, delta):
 						velocity.x = move_toward(velocity.x, max_run_speed, momentum_loss * delta)
 					elif velocity.x < -max_run_speed:
 						velocity.x = move_toward(velocity.x, -max_run_speed, momentum_loss * delta)
-		elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and wavedashing != dashState.WAVEDASHING:
-			velocity.x += walk * delta
-			velocity.x = clamp(velocity.x, -max_walk_speed, max_walk_speed)
-	else:
-		velocity.x = clamp(velocity.x, -max_dash_speed, max_dash_speed)
+				$player_sprite.flip_h = velocity.x < 0
+			elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and not dashing:
+				velocity.x += walk * delta
+				velocity.x = clamp(velocity.x, -max_walk_speed, max_walk_speed)
+				$player_sprite.flip_h = velocity.x < 0
+		else:
+			velocity.x = clamp(velocity.x, -max_dash_speed, max_dash_speed)
 	
 	position = position.clamp(upper, lower)
-	
+	velocity.y += gravity * delta
+
 	if is_on_floor():
 		coyoteTimer = 0
 		if wavedashForgivenessTimer < wavedashGroundForgiveness:
@@ -323,16 +338,14 @@ func _swap_player_control_state() -> void:
 
 ##Causes the player to take knockback. Direction values are multiplied by force to determine velocity. Disables most movement for knockbackTime seconds.
 func take_knockback(force: float, direction: Vector2):
-	if not inKnockback:
+	#print("PLAYER KNOCKBACK RECEIVED")
+
+	if not knockedback:
 		inKnockback = true
-		velocity = Vector2(0,0)
-		if $player_sprite.flip_h:
-			velocity.x -= force * direction.x
-		else:
-			velocity.x += force * direction.x
-		velocity.y += force * direction.y
+		knockedback=true #the player has been knocked back and hasn't touched the ground yet
+		direction.y-=1
+		velocity+=force*direction
 		await get_tree().create_timer(knockbackTime).timeout
-		velocity = Vector2(0,0)
 		inKnockback = false
 
 

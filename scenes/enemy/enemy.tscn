@@ -433,6 +433,7 @@ script = ExtResource("1_c2o0r")
 script = ExtResource("2_feath")
 immortalityDuration = 0.01
 character_sprite = NodePath("../AnimatedMobSprite")
+damage_blink_color = Color(1, 0, 0, 1)
 metadata/_custom_type_script = "uid://bj2kuesletu0j"
 
 [node name="HurtParticles" type="GPUParticles2D" parent="." unique_id=1559123396]
@@ -454,6 +455,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vldki")
 animation = &"standby"
 autoplay = "asleep"
+frame_progress = 0.15122859
 
 [node name="TurretSprite" type="Sprite2D" parent="." unique_id=1041275508]
 position = Vector2(0, -32)

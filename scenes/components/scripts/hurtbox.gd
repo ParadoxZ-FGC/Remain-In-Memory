@@ -29,7 +29,11 @@ func _ready():
 	set_enabled(enabled)
 	update_layers()
 
-##Reduces the HP value of the hurtbox's parent
-func take_damage(x : int):
+##Reduces the HP value of the hurtbox's parent taking into consideration the direction and weight
+func take_damage(x : int, direction:Vector2=Vector2(0,0), weight:float=0 ):
+	#print("DAMAGE TAKEN, LAYERS: "+str(layers)+" WEIGHT: "+str(weight))
+	if (layers & 8 or layers & 64) and weight!=0:
+		#print("HURTBOX KNOCKBACK RECEIVED")
+		get_parent().take_knockback(weight,direction.normalized())
 	var HP = get_parent().find_child("Health", true, false)
 	HP.set_health(HP.health - x)
