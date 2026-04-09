@@ -71,7 +71,7 @@ energy = 8.21
 shadow_enabled = true
 texture = ExtResource("4_pcs22")
 
-[node name="PlayButton" type="Button" parent="." unique_id=1076944302]
+[node name="PlayButton" type="Button" parent="." unique_id=1076944302 node_paths=PackedStringArray("play_sfx")]
 texture_filter = 1
 offset_left = 860.0
 offset_top = 600.0
@@ -93,6 +93,7 @@ theme_override_styles/focus = ExtResource("5_yegqs")
 text = "Play"
 script = ExtResource("2_aptra")
 scene_to_load = "res://scenes/chapters/prologue/introduction/introduction.tscn"
+play_sfx = NodePath("../SFX")
 
 [node name="SettingsButton" type="Button" parent="." unique_id=1652903219]
 texture_filter = 1
@@ -113,7 +114,7 @@ theme_override_styles/hover = ExtResource("5_yegqs")
 theme_override_styles/focus = ExtResource("5_yegqs")
 text = "Settings"
 
-[node name="ExitButton" type="Button" parent="." unique_id=716560271]
+[node name="ExitButton" type="Button" parent="." unique_id=716560271 node_paths=PackedStringArray("play_sfx")]
 texture_filter = 1
 offset_left = 860.0
 offset_top = 810.0
@@ -132,6 +133,7 @@ theme_override_styles/hover = ExtResource("5_yegqs")
 theme_override_styles/focus = ExtResource("5_yegqs")
 text = "Exit"
 script = ExtResource("2_aptra")
+play_sfx = NodePath("../SFX")
 
 [node name="Title" type="RichTextLabel" parent="." unique_id=393725227]
 offset_left = 576.0
@@ -175,6 +177,9 @@ visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 
+[connection signal="focus_entered" from="PlayButton" to="." method="_on_button_focus_entered" flags=18]
 [connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_pressed"]
+[connection signal="focus_entered" from="SettingsButton" to="." method="_on_button_focus_entered" flags=18]
 [connection signal="pressed" from="SettingsButton" to="Settings" method="_on_settings_button_pressed"]
+[connection signal="focus_entered" from="ExitButton" to="." method="_on_button_focus_entered" flags=18]
 [connection signal="pressed" from="ExitButton" to="ExitButton" method="_on_pressed"]

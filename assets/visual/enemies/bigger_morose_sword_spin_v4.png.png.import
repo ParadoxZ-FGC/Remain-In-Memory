@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ercv5noohe6b"
-path="res://.godot/imported/door.png-3be30d62300c45d86dfa1f98a47efec7.ctex"
+uid="uid://c42wi4c02lyct"
+path="res://.godot/imported/bigger_morose_sword_spin_v4.png.png-5633a4bc667028f771c0bd81491c22d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/ui/door.png"
-dest_files=["res://.godot/imported/door.png-3be30d62300c45d86dfa1f98a47efec7.ctex"]
+source_file="res://assets/visual/enemies/bigger_morose_sword_spin_v4.png.png"
+dest_files=["res://.godot/imported/bigger_morose_sword_spin_v4.png.png-5633a4bc667028f771c0bd81491c22d0.ctex"]
 
 [params]
 

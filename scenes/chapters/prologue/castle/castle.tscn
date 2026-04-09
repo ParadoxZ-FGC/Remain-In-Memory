@@ -724,17 +724,21 @@ position_smoothing_speed = 4.0
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Mob" parent="Enemies" unique_id=1779379378 instance=ExtResource("11_ra2nw")]
-position = Vector2(1227, 926)
+[node name="SWTurret" parent="Enemies" unique_id=1779379378 instance=ExtResource("11_ra2nw")]
+position = Vector2(1241, 927)
 fire_recovery_duration = 2
 lose_focus_timer = 1
 
-[node name="Mob2" parent="Enemies" unique_id=1967297314 instance=ExtResource("11_ra2nw")]
-position = Vector2(1039, 445)
+[node name="SWTurret2" parent="Enemies" unique_id=1967297314 instance=ExtResource("11_ra2nw")]
+position = Vector2(1005, 447)
 facing = 1
 
-[node name="Mob4" parent="Enemies" unique_id=484515402 instance=ExtResource("11_ra2nw")]
-position = Vector2(1400, -200)
+[node name="SWTurret3" parent="Enemies" unique_id=438741067 instance=ExtResource("11_ra2nw")]
+position = Vector2(344, -35)
+facing = 1
+
+[node name="SWTurret4" parent="Enemies" unique_id=484515402 instance=ExtResource("11_ra2nw")]
+position = Vector2(1400, -192)
 facing = 1
 
 [node name="Lighting" type="CanvasGroup" parent="." unique_id=590934692]

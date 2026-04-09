@@ -234,8 +234,13 @@ libraries/ = SubResource("AnimationLibrary_0enuw")
 visible = false
 layout_mode = 1
 
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_focus_entered" flags=18]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_focus_entered" flags=18]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/Title Screen" to="." method="_on_focus_entered" flags=18]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Title Screen" to="." method="_on_title_screen_pressed"]
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/Alt F4" to="." method="_on_focus_entered" flags=18]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Alt F4" to="." method="_on_alt_f_4_pressed"]
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/Restart(For Debugging)" to="." method="_on_focus_entered" flags=18]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Restart(For Debugging)" to="." method="_on_restart_for_debugging_pressed"]
