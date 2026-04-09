@@ -26,7 +26,7 @@ func _post_cutscene_effects(cutscene:String) -> void:
 		var teenie_timer = get_tree().create_timer(2)
 		await teenie_timer.timeout
 		
-		morose = preload("res://scenes/bosses/morose/prologue_morose_v2.tscn").instantiate()
+		morose = preload("res://scenes/bosses/morose/prologue_morose_v3.tscn").instantiate()
 		morose.modulate = Color(1,1,1,0)
 		morose.target = boss_target
 		morose.left_edge = boss_left_bound
@@ -52,7 +52,7 @@ func _post_cutscene_effects(cutscene:String) -> void:
 	elif cutscene == "prologue_boss_attacks":
 		morose.boss.use_parent_material = false
 		morose.sword.visible = true
-		morose.stab(-1)
+		morose.charge()
 		morose.talking = false
 	elif cutscene == "prologue_boss_wins" or cutscene == "prologue_boss_losses":
 		EventBus.swap_control_state.emit()
@@ -64,18 +64,23 @@ func _post_cutscene_effects(cutscene:String) -> void:
 		var tweenk = create_tween()
 		tweenk.tween_property($ColorRect, "color", Color(0,0,0,1), 5)
 		await tweenk.finished
+		TransitionScreen.transition()
+		await TransitionScreen.on_transition_finished
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/chapters/prologue/credits/prologue_end.tscn")
 
+
 func _on_player_death():
+	Input.start_joy_vibration(0, 1, 1, 0)
 	EventBus.swap_control_state.emit()
 	morose.talking = true
 	morose.sword.visible = false
 	$Player.hearts.disable()
+	$Player.gauge.disable()
 	$Player.player_sprite.use_parent_material = true
 	var tweener = create_tween()
 	tweener.tween_property($Player, "modulate", Color(0,0,0,1), 1.5)
 	tweener.chain().tween_property($Player, "modulate", Color(0,0,0,0), 1.5)
-	$Player/Camera2D.screen_shake(1, 3)
+	if($Player/Camera2D != null): $Player/Camera2D.screen_shake(1, 3)
 	await tweener.finished
 	$Player.visible = false
 	EventBus.swap_control_state.emit()
@@ -83,6 +88,8 @@ func _on_player_death():
 
 
 func _on_boss_death():
+	Input.start_joy_vibration(0, 1, 1, 0)
 	$Player.hearts.disable()
+	$Player.gauge.disable()
 	$Player/Camera2D.screen_shake(2, 0)
 	DialogueManager.load_dialogue_scene("prologue_boss_losses")

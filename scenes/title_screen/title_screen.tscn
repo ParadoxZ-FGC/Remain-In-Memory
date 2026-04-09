@@ -1,137 +1,119 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0idldrfge7b8"]
+[gd_scene format=3 uid="uid://c0idldrfge7b8"]
 
-[ext_resource type="AudioStream" uid="uid://b1h8cttteoyit" path="res://assets/audio/bgm/Opening-1.mp3" id="1_lr85p"]
-[ext_resource type="Material" uid="uid://dgu3mqx0lkg25" path="res://scenes/title_screen/title_screen.tres" id="2_88tdx"]
+[ext_resource type="Script" uid="uid://bajwhs5701f4h" path="res://scenes/title_screen/title_screen.gd" id="1_ju3lf"]
 [ext_resource type="Script" uid="uid://cg231wkcfdva1" path="res://scenes/title_screen/buttons.gd" id="2_aptra"]
+[ext_resource type="AudioStream" uid="uid://ddgr66uf5st4m" path="res://assets/audio/bgm/title_theme.mp3" id="2_xetrx"]
+[ext_resource type="AudioStream" uid="uid://3b2tm1xxdjh4" path="res://assets/audio/sfx/SwordSwing_1.wav" id="2_xoykc"]
 [ext_resource type="PackedScene" uid="uid://b7m4k4q815gv1" path="res://scenes/ui/settings_screen/settings_screen.tscn" id="3_3swuw"]
-[ext_resource type="Texture2D" uid="uid://cxm4ju3jv6xj2" path="res://assets/visual/lighting/light.png" id="4_pcs22"]
-[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/UI/fonts/NocturneSerifTest-Light.otf" id="9_4xtok"]
-[ext_resource type="FontFile" uid="uid://c7dc7sfjmpx8c" path="res://assets/visual/UI/fonts/Silkscreen-Regular.ttf" id="9_q5m6g"]
+[ext_resource type="PackedScene" uid="uid://dexyxiu2o65ec" path="res://scenes/title_screen/title_background.tscn" id="4_yepnq"]
+[ext_resource type="StyleBox" uid="uid://dywh37qrcvaiv" path="res://assets/visual/ui/main_menu_button_pressed.tres" id="5_xoykc"]
+[ext_resource type="StyleBox" uid="uid://bwhnh85kwt0k6" path="res://assets/visual/ui/main_menu_button.tres" id="5_yegqs"]
+[ext_resource type="Texture2D" uid="uid://b3pipk7v6wtlr" path="res://assets/visual/bg/title/PlayButton.png" id="8_v2f8g"]
+[ext_resource type="FontFile" uid="uid://dbl4wvy4c7130" path="res://assets/visual/ui/fonts/NocturneSerifLight.otf" id="9_4xtok"]
+[ext_resource type="Texture2D" uid="uid://327mi28uj8gp" path="res://assets/visual/bg/title/SettingsButton.png" id="10_k2vsc"]
+[ext_resource type="Texture2D" uid="uid://bgjvwqlxurpap" path="res://assets/visual/bg/title/ExitButton.png" id="11_aihkd"]
+[ext_resource type="Texture2D" uid="uid://d1ge5ih5xc2ys" path="res://assets/visual/bg/title/TitleText.png" id="11_v2f8g"]
+[ext_resource type="Texture2D" uid="uid://cpixt5nsb1h5p" path="res://assets/visual/bg/title/SubtitleText.png" id="12_k2vsc"]
 
-[sub_resource type="Gradient" id="Gradient_j12ko"]
-offsets = PackedFloat32Array(0, 0.55333334, 1)
-colors = PackedColorArray(0, 0.21176471, 0.2509804, 1, 0, 0, 0, 1, 2.466701e-07, 0.21316963, 0.103483565, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xetrx"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_yegqs"]
-gradient = SubResource("Gradient_j12ko")
-width = 1920
-height = 1080
-fill_from = Vector2(0, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yepnq"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j12ko"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ju3lf"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yegqs"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xoykc"]
-
-[node name="Title Screen" type="Node2D"]
+[node name="Title Screen" type="Node2D" unique_id=1004999761]
 texture_filter = 1
+script = ExtResource("1_ju3lf")
 
-[node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_lr85p")
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=968922825]
+stream = ExtResource("2_xetrx")
 autoplay = true
 bus = &"Music"
 
-[node name="BG" type="Sprite2D" parent="."]
-position = Vector2(960, 540)
-texture = SubResource("GradientTexture2D_yegqs")
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1695937731]
+stream = ExtResource("2_xoykc")
+pitch_scale = 1.6
+bus = &"Sound Effects"
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="BG"]
-scale = Vector2(3, 3)
-amount = 100
-lifetime = 3.0
-preprocess = 10.0
-explosiveness = 0.4
-randomness = 0.6
-process_material = ExtResource("2_88tdx")
+[node name="TitleBackground" parent="." unique_id=75257699 instance=ExtResource("4_yepnq")]
 
-[node name="Light" type="PointLight2D" parent="."]
-position = Vector2(957.5, 545)
-scale = Vector2(32.71875, 35.062496)
-color = Color(0.106225856, 0.49445403, 0, 1)
-shadow_enabled = true
-texture = ExtResource("4_pcs22")
-
-[node name="PointLight2D9" type="PointLight2D" parent="Light"]
-visible = false
-position = Vector2(-0.180452, -2.39867)
-scale = Vector2(3.60902, 2.07577)
-color = Color(0.393086, 0.393086, 0.393085, 1)
-energy = 8.21
-shadow_enabled = true
-texture = ExtResource("4_pcs22")
-
-[node name="PlayButton" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="." unique_id=1076944302 node_paths=PackedStringArray("play_sfx")]
 texture_filter = 1
-offset_left = 860.0
-offset_top = 600.0
-offset_right = 1060.0
-offset_bottom = 680.0
+offset_top = 350.0
+offset_right = 600.0
+offset_bottom = 500.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ExitButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../ExitButton")
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("9_4xtok")
 theme_override_font_sizes/font_size = 38
-theme_override_styles/focus = SubResource("StyleBoxEmpty_j12ko")
-text = "PLAY"
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xetrx")
+theme_override_styles/pressed = ExtResource("5_xoykc")
+theme_override_styles/hover = ExtResource("5_yegqs")
+theme_override_styles/focus = ExtResource("5_yegqs")
+icon = ExtResource("8_v2f8g")
 script = ExtResource("2_aptra")
+scene_to_load = "res://scenes/chapters/prologue/introduction/introduction.tscn"
+play_sfx = NodePath("../SFX")
 
-[node name="SettingsButton" type="MenuButton" parent="."]
+[node name="SettingsButton" type="Button" parent="." unique_id=1652903219]
 texture_filter = 1
-offset_left = 860.0
-offset_top = 705.0
-offset_right = 1060.0
-offset_bottom = 785.0
+offset_top = 600.0
+offset_right = 600.0
+offset_bottom = 750.0
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../ExitButton")
+focus_next = NodePath("../ExitButton")
+focus_previous = NodePath("../PlayButton")
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("9_4xtok")
 theme_override_font_sizes/font_size = 38
-theme_override_styles/focus = SubResource("StyleBoxEmpty_yegqs")
-toggle_mode = false
-text = "SETTINGS"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yepnq")
+theme_override_styles/pressed = ExtResource("5_xoykc")
+theme_override_styles/hover = ExtResource("5_yegqs")
+theme_override_styles/focus = ExtResource("5_yegqs")
+icon = ExtResource("10_k2vsc")
 
-[node name="ExitButton" type="Button" parent="."]
+[node name="ExitButton" type="Button" parent="." unique_id=716560271 node_paths=PackedStringArray("play_sfx")]
 texture_filter = 1
-offset_left = 860.0
-offset_top = 810.0
-offset_right = 1060.0
-offset_bottom = 890.0
+offset_top = 850.0
+offset_right = 600.0
+offset_bottom = 1000.0
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../PlayButton")
+focus_next = NodePath("../PlayButton")
+focus_previous = NodePath("../SettingsButton")
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("9_4xtok")
 theme_override_font_sizes/font_size = 38
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xoykc")
-text = "EXIT"
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ju3lf")
+theme_override_styles/pressed = ExtResource("5_xoykc")
+theme_override_styles/hover = ExtResource("5_yegqs")
+theme_override_styles/focus = ExtResource("5_yegqs")
+icon = ExtResource("11_aihkd")
 script = ExtResource("2_aptra")
+play_sfx = NodePath("../SFX")
 
-[node name="Title" type="RichTextLabel" parent="."]
-offset_left = 576.0
-offset_top = 35.0
-offset_right = 1315.0
-offset_bottom = 443.0
-theme_override_fonts/normal_font = ExtResource("9_4xtok")
-theme_override_font_sizes/normal_font_size = 160
-text = "Remain in
-Memory"
+[node name="TitleText" type="Sprite2D" parent="." unique_id=262089633]
+position = Vector2(960, 143)
+texture = ExtResource("11_v2f8g")
 
-[node name="SubTitle" type="RichTextLabel" parent="."]
-offset_left = 684.0
-offset_top = 434.0
-offset_right = 1299.0
-offset_bottom = 503.0
-theme_override_colors/default_color = Color(0.1224483, 0.4361574, 0.27436632, 1)
-theme_override_fonts/normal_font = ExtResource("9_q5m6g")
-theme_override_font_sizes/normal_font_size = 50
-text = "~ Manere Memoria"
-horizontal_alignment = 2
-vertical_alignment = 1
+[node name="SubtitleText" type="Sprite2D" parent="." unique_id=583231535]
+position = Vector2(960, 259)
+texture = ExtResource("12_k2vsc")
 
-[node name="Settings" parent="." instance=ExtResource("3_3swuw")]
+[node name="Settings" parent="." unique_id=1814247187 instance=ExtResource("3_3swuw")]
 visible = false
-offset_left = 960.0
-offset_top = 540.0
-offset_right = 960.0
-offset_bottom = 540.0
-size_flags_horizontal = 4
-size_flags_vertical = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
 
+[connection signal="focus_entered" from="PlayButton" to="." method="_on_button_focus_entered" flags=18]
 [connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_pressed"]
+[connection signal="focus_entered" from="SettingsButton" to="." method="_on_button_focus_entered" flags=18]
 [connection signal="pressed" from="SettingsButton" to="Settings" method="_on_settings_button_pressed"]
+[connection signal="focus_entered" from="ExitButton" to="." method="_on_button_focus_entered" flags=18]
 [connection signal="pressed" from="ExitButton" to="ExitButton" method="_on_pressed"]

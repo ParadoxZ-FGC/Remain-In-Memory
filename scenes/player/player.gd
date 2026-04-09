@@ -6,18 +6,29 @@ signal updated
 
 enum dialogueTypes {None, Chatting, Talking} #TODO I have no idea if we want "passive conversation", like npcs saying things without player input, that's what Chatting is for, just in case
 enum player_states {User_Controlled, System_Controlled}
+enum weaponSelect {Sword, Glaive}
 
 @export var upper = Vector2(0, 0)
 @export var lower = Vector2(2500, 1080)
 @export var speed = 1000
 @export var jump_speed = 800
+@export var jumped : int = 0
 @export var coyote: float = 0.03
 @export var max_walk_speed = 300
-@export var max_run_speed = 500
+@export var max_run_speed = 500 #default 500
+@export var max_dash_speed = 1000
+@export var dash_speed = 1000
+@export var dash_duration = 0.075
+@export var dashCoolDownLength: float = 1.5
+@export var wavedashGroundForgiveness: float = 0.25
+@export var wavedashValidInputDuration: float = 1.0
+@export var wavedashLength: float = 1.0
 @export var stop_force = 8000
 @export var drag_force = 500
-@export var stone: AudioStreamPlayer2D
+@export var momentum_loss = 1500
+@export var walking_sfx: AudioStreamPlayer2D
 @export var knockbackTime: float = 0.05 #Determines how long the player is in knockback, @TODO might move to the knockback function itself
+var knockedback:bool=false  # if TRUE: the player has been knocked back and hasn't touched the ground yet
 @export var to_scene_on_death := true
 @export var death_scene : String
 
@@ -26,29 +37,47 @@ var coyoteTimer: float = 0
 var movementDirection: bool = true #rightward = true
 var movementIntentionDirection: bool = true
 var movementIntention: float
+enum dashState {NOTDASHING = 0, DASHING = 1, AIRDASHING = 2, WAVEDASH_READY = 3, WAVEDASHING = 4}
+var dashing: bool = false
+var wavedashing: int = dashState.NOTDASHING
+var wavedashForgivenessTimer: float = 0
+var dashCoolDown: float = 3
 var scene_transitions
 var currentDialogue : dialogueTypes = dialogueTypes.None
 var current_player_state : player_states = player_states.User_Controlled
 var interactable : bool = false #Is there something to interact with
 var interact_scene : String #INFO Interactable currently only handles dialogue, so this would be the file one reads from
+var currentWeapon: weaponSelect = weaponSelect.Sword
+var delayedFlip: Node2D #Used in cases where the player inputs an attack and then changes facing direction. Prevents flicking the weapon back and forth.
+var last_position : Vector2
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 @onready var health : Health = $Health
-@onready var hearts := $"Health UI"
 @onready var dialogueHandler = $DialogueHandler
-@onready var player_sprite := $AnimatedPlayerSprite
+@onready var player_sprite := $player_sprite
+@onready var hearts := $GUILayer/GUI/HealthDisplay
+@onready var gauge := $GUILayer/GUI/Gauge
+@onready var steam_jump := $SteamJump
+@onready var interaction := $InteractDisplay
+@onready var dashTimer = $DashTimer
+@onready var lfc := $HazardDetect/LeftFloorCheck
+@onready var rfc := $HazardDetect/RightFloorCheck
+@onready var lhc := $HazardDetect/LeftHazardCheck
+@onready var rhc := $HazardDetect/RightHazardCheck
 
 
 func _ready():
 	health.max_health = PlayerData.maximum_health
 	health.health = PlayerData.current_health
+	gauge.enable()
 	EventBus.start_dialogue.connect(_on_dialogue_start)
 	EventBus.finish_dialogue.connect(_text_over)
 	EventBus.swap_control_state.connect(_swap_player_control_state)
+	EventBus.interactableToggle.connect(interactablePrompt)
 	#EventBus.connect("interaction_available", _on_interactable)
 	#EventBus.connect("interaction_unavailable", _off_interactable)
 	#EventBus.connect("finish_dialogue", _text_over)
-	$AnimatedPlayerSprite.play()
+	$player_sprite.play()
 
 
 func _on_dialogue_start():
@@ -70,17 +99,43 @@ func _text_over(_cutscene:String): #Signals when dialogue file is done
 
 
 func _physics_process(delta):
+	if is_on_floor() and (lfc.get_collider() != null and rfc.get_collider() != null) and (lhc.get_collider() == null and rhc.get_collider() == null):
+		last_position = position
+	
 	if currentDialogue != dialogueTypes.Talking and current_player_state == player_states.User_Controlled: #If player isnt in dialogue do normal player activities
-		if not inKnockback:
-			move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
+		move(Input.get_axis("move_left", "move_right"), delta) #NOTICE Movement has been move(ment)d to a function
 		if Input.is_action_just_pressed("attack"):
-			$Sword.attack()
+			match currentWeapon:
+				weaponSelect.Sword:
+					$"Sword/1/Hitbox/Hitbox".direction=Vector2(-1 if $player_sprite.flip_h else 1,0)
+					$"Sword/1/Hitbox/Hitbox".weight=200
+					$Sword.attack()
+					
+				weaponSelect.Glaive:
+					$"Glaive/1/Hitbox/hitbox".direction=Vector2(-1 if $player_sprite.flip_h else 1,0)
+					$"Glaive/1/Hitbox/hitbox".weight=200
+					$Glaive.attack()
+					
+		
+		if Input.is_action_just_pressed("dash") and dashCoolDown >= dashCoolDownLength:
+			dash(Input.get_axis("move_left", "move_right"), Input.get_axis("look_up", "crouch"))
+		if dashCoolDown <= dashCoolDownLength:
+			dashCoolDown += delta
+
+		if Input.is_action_just_pressed("(TEMP) change_weapon"):
+			if currentWeapon < weaponSelect.size() -1:
+				currentWeapon = currentWeapon + 1 as weaponSelect
+			else:
+				currentWeapon = 0 as weaponSelect 
+		
 		if interactable and Input.is_action_just_pressed("interact"): #If player can interact (INFO w/ dialogue), and they press the button to, disable normal player activies and engage dialogue.
+			#[This appears to never be called] print("pressed! #1");
 			currentDialogue = dialogueTypes.Talking
 			DialogueManager.load_dialogue_scene(interact_scene)
 	
 	elif currentDialogue == dialogueTypes.Talking: #If player is in dialogue, only allow interact key which advances it.
 		if Input.is_action_just_pressed("interact"):
+			#[This appears to never be called] print("pressed! #2");
 			pass
 			#dialogueHandler.readFile()
 	
@@ -89,90 +144,170 @@ func _physics_process(delta):
 	
 	if velocity.x != 0:
 		if is_on_floor(): 
-			if !stone.playing:
-				stone.play()
+			if !walking_sfx.playing:
+				walking_sfx.play()
 		else: 
-			stone.stop()
+			walking_sfx.stop()
 		
 	else: 
-		stone.stop()
-		$AnimatedPlayerSprite.animation = "idle"
+		walking_sfx.stop()
+		$player_sprite.animation = "idle"
 	
-	if velocity.x != 0 and not inKnockback:
-		$AnimatedPlayerSprite.animation = "walk"
-		$AnimatedPlayerSprite.flip_v = false
-		$AnimatedPlayerSprite.flip_h = velocity.x < 0
-		if $Sword.attacking == false:
-			$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+	if velocity.x != 0 and not knockedback and not inKnockback:
+		$player_sprite.animation = "walk"
+		
+		match currentWeapon:
+				weaponSelect.Sword:
+					if $Sword.attackCooling == false:
+						$Sword.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+					else:
+						delayedFlip = $Sword
+				weaponSelect.Glaive:
+					if $Glaive.attackCooling == false:
+						$Glaive.scale = Vector2(1, 1) if velocity.x > 0 else Vector2(-1, 1)
+					else:
+						delayedFlip = $Glaive
 	
 	if velocity.x != 0 and Input.is_action_pressed("run"):
-		$AnimatedPlayerSprite.speed_scale = 2
+		$player_sprite.speed_scale = 2
 	else:
-		$AnimatedPlayerSprite.speed_scale = 1
+		$player_sprite.speed_scale = 1
 		
 	move_and_slide()
+	
+	if is_on_floor():
+		knockedback = false
+		if jumped:
+			jumped = 0
+		if wavedashing == dashState.AIRDASHING:
+			wavedashing = dashState.WAVEDASH_READY
+	
+	if delayedFlip and not delayedFlip.attackCooling:
+		delayedFlip.scale = Vector2(-1, 1) if $player_sprite.flip_h else Vector2(1, 1)
 
 
 func move(movement_vector, delta):
-	movementIntention = movement_vector
-	movementDirection = true if velocity.x > 0 else false
-	movementIntentionDirection = true if movementIntention >= 0 else false
-	var walk = speed * movementIntention
-	if abs(walk) < speed * 0.2:
-		if is_on_floor():
-			velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+	if(not(knockedback)):
+		movementIntention = movement_vector
+		movementDirection = true if velocity.x > 0 else false
+		movementIntentionDirection = true if movementIntention >= 0 else false
+		var walk = speed * movementIntention
+		if not dashing:
+			if abs(walk) < speed * 0.2:
+				if is_on_floor():
+					velocity.x = move_toward(velocity.x, 0, stop_force * delta)
+				else:
+					velocity.x = move_toward(velocity.x, 0, drag_force * delta)
+			else:
+				if movementIntentionDirection != movementDirection:
+					velocity.x -= velocity.x / 8 * 7
+					if wavedashing == dashState.WAVEDASHING:
+						wavedashing = dashState.NOTDASHING
+		
+		velocity.y += gravity * delta
+
+		if Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled:
+			if velocity.x != 0:
+				$player_sprite.flip_h = velocity.x < 0
+			if wavedashing == dashState.WAVEDASHING:
+				if velocity.x < max_dash_speed and velocity.x > -max_dash_speed:
+					velocity.x += walk * delta
+				velocity.x = clamp(velocity.x, -max_dash_speed, max_dash_speed)
+			else:
+				if velocity.x < max_run_speed and velocity.x > -max_run_speed:
+					velocity.x += walk * delta
+				else:
+					if velocity.x > max_run_speed:
+						velocity.x = move_toward(velocity.x, max_run_speed, momentum_loss * delta)
+					elif velocity.x < -max_run_speed:
+						velocity.x = move_toward(velocity.x, -max_run_speed, momentum_loss * delta)
+		elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") and not dashing:
+			velocity.x += walk * delta
+			velocity.x = clamp(velocity.x, -max_walk_speed, max_walk_speed)
+			$player_sprite.flip_h = velocity.x < 0
 		else:
-			velocity.x = move_toward(velocity.x, 0, drag_force * delta)
+			velocity.x = clamp(velocity.x, -max_dash_speed, max_dash_speed)
 	else:
-		if movementIntentionDirection != movementDirection:
-			velocity.x -= velocity.x / 8 * 7
-	
-	velocity.x += walk * delta
-	
-	velocity.x = clamp(velocity.x, -max_run_speed, max_run_speed) if (Input.is_action_pressed("run") and current_player_state == player_states.User_Controlled) else clamp(velocity.x, -max_walk_speed, max_walk_speed)
-	
-	
-	velocity.y += gravity * delta
+		velocity.y += gravity * delta
 	
 	position = position.clamp(upper, lower)
-	
+
 	if is_on_floor():
 		coyoteTimer = 0
+		jumped = 0
+		if wavedashForgivenessTimer < wavedashGroundForgiveness:
+			wavedashForgivenessTimer += delta
+		else:
+			wavedashing = dashState.NOTDASHING
 	else:
 		coyoteTimer += delta
+		print(coyoteTimer)
 		clamp(coyoteTimer, 0, coyote)
 
+func dash(lr, ud):
+	if is_on_floor():
+		wavedashing = dashState.DASHING
+	else:
+		wavedashForgivenessTimer = 0
+		wavedashing = dashState.AIRDASHING
+	dashing = true
+	
+	dashCoolDown = 0
+	dashTimer.start(dash_duration)
+	velocity.x += lr * dash_speed
+	velocity.y += ud * dash_speed/2
+
+func dash_stop():
+	velocity.y = 0
+	dashing = false
+	if wavedashing == dashState.WAVEDASH_READY:
+		await get_tree().create_timer(wavedashValidInputDuration).timeout
+		if wavedashing != dashState.WAVEDASHING:
+			wavedashing = dashState.NOTDASHING
 
 func jump():
 	velocity.y = -jump_speed
+	if wavedashForgivenessTimer < wavedashGroundForgiveness and wavedashing == dashState.WAVEDASH_READY:
+		print("WAVEDASH")
+		wavedashing = dashState.WAVEDASHING
+		await get_tree().create_timer(wavedashLength).timeout
+		wavedashing = dashState.NOTDASHING
 
 
 func jump_stop():
 	if velocity.y < -100:
 		velocity.y = -100
 
-
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if (current_player_state == player_states.User_Controlled):
-		if (event.is_action_pressed("crouch_look_down")):
-			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.1)
+		if (event.is_action_pressed("crouch")):
+			$player_sprite.scale = Vector2(0.2, 0.1)
 			$PlayerCollisionShape.scale = Vector2(1, 0.5)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 0.5)
 			
-		elif (event.is_action_released("crouch_look_down")):
-			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.2)
+		elif (event.is_action_released("crouch")):
+			$player_sprite.scale = Vector2(0.2, 0.2)
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
-			
-		if (is_on_floor() or coyoteTimer < coyote) and event.is_action_pressed("jump"):
-			jump()
+		
+		if event.is_action_pressed("jump") and not dashing and jumped < 2:
+			if is_on_floor():
+				jumped += 1
+				jump()
+			else:
+				if coyoteTimer < coyote:
+					jumped += 1
+					jump()
+				else:
+					jumped += 2
+					jump()
 		
 		if not is_on_floor() and event.is_action_released("jump"):
 			jump_stop()
 		
 	else:
-		if (event.is_action_released("crouch_look_down")):
-			$AnimatedPlayerSprite.scale = Vector2(0.2, 0.2)
+		if (event.is_action_released("crouch")):
+			$player_sprite.scale = Vector2(0.2, 0.2)
 			$PlayerCollisionShape.scale = Vector2(1, 1)
 			$Hurtbox/CollisionShape2D.scale = Vector2(1, 1)
 
@@ -190,6 +325,7 @@ func _on_health_health_depleted() -> void:
 func on_scene_transitions() -> void:
 	PlayerData.maximum_health = health.max_health
 	PlayerData.current_health = health.health
+	PlayerData.current_gauge_angle = gauge.needle_angle
 	updated.emit()
 
 
@@ -212,14 +348,32 @@ func _swap_player_control_state() -> void:
 
 ##Causes the player to take knockback. Direction values are multiplied by force to determine velocity. Disables most movement for knockbackTime seconds.
 func take_knockback(force: float, direction: Vector2):
-	if not inKnockback:
+	#print("PLAYER KNOCKBACK RECEIVED")
+
+	if not knockedback:
 		inKnockback = true
-		velocity = Vector2(0,0)
-		if $AnimatedPlayerSprite.flip_h:
-			velocity.x -= force * direction.x
-		else:
-			velocity.x += force * direction.x
-		velocity.y += force * direction.y
+		knockedback=true #the player has been knocked back and hasn't touched the ground yet
+		direction.y-=1
+		velocity+=force*direction
 		await get_tree().create_timer(knockbackTime).timeout
-		velocity = Vector2(0,0)
 		inKnockback = false
+
+
+func _on_hitbox_impacted() -> void:
+	gauge.needle_angle = gauge.needle_angle + 15.0
+	if gauge.needle_angle >= 270.0:
+		gauge.needle_angle = 0
+		health.set_health(health.health + 1)
+
+func interactablePrompt(toggle: bool) -> void:
+	if(toggle):
+		interaction.show()
+		interaction.displayInteration()
+	else:
+		interaction.hide()
+
+
+func _on_hazard_detect_body_entered(body: Node2D) -> void:
+	if body is TileMapLayer and body.name == "Hazard":
+		health.set_health(health.health - 1)
+		position = last_position

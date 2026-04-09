@@ -15,7 +15,6 @@ func _ready() -> void:
 	EventBus.dialogue_segment_finished.connect(_on_dialogue_segment_finished)
 	var file = FileAccess.open("res://scenes/components/dialogue/dialogue_scenes.json", FileAccess.READ)
 	var _err = FileAccess.get_open_error()
-	#print("Error: ", error_string(err))
 	var json = JSON.new()
 	json.parse(file.get_as_text())
 	dialogue_scenes = json.data
@@ -26,13 +25,10 @@ func load_dialogue_scene(cutscene_name : String) -> void:
 	current_cutscene.clear()
 	current_cutscene.assign(dialogue_scenes.get(cutscene_name))
 	
-	#print("Cutscene Name: ", cutscene_name)
-	#print(current_cutscene, "\n")
 	dialog_builder(current_cutscene.values()[0])
 
 
 func dialog_builder(scene : Dictionary) -> void:
-	#print("Scene Name: ", current_cutscene.find_key(scene))
 	next_scene.clear()
 	
 	var speaker : Dictionary = scene.get("speaker")
@@ -51,14 +47,6 @@ func dialog_builder(scene : Dictionary) -> void:
 	var next = scene.get("next_scene")
 	if next != "":
 		next_scene.assign(current_cutscene.get(scene.get("next_scene")))
-	
-	#print("Name: ", speaker_name)
-	#print("Emotion: ", speaker_emotion)
-	#print("Side: ", speaker_side)
-	#print("Dialogue: ", scene_dialogue)
-	#print("Next Scene: ", scene.get("next_scene"), "\t", next_scene)
-	#print("Responses: ", responses)
-	#print("\n")
 	
 	EventBus.dialogue_segment_parsed.emit(speaker_name, speaker_emotion, speaker_side, scene_dialogue, responses, next_scene)
 	responses.clear()

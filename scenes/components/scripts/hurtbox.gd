@@ -10,7 +10,7 @@ extends Area2D
 @export var enabled: bool = true: set = set_enabled, get = get_enabled
 
 ##What layers the hurtbox belongs to, if one is enabled, any hitbox that hits that layer will deal damage.
-@export_flags("Environment:2", "Breakable:4", "Player:8", "Enemy:64", "Hazard:512") var layers = 0
+@export_flags("Environment:2", "Breakable:4", "Player:8", "Enemy:64", "EnemyAttack:128", "Hazard:512") var layers = 0
 #INFO Hurtboxes get scanned by Hitboxes, so if a Hurtbox is labeled "Player" that means it will be scanned by Hitboxes labeled "HitPlayer"
 #region Setters and Getters
 func set_enabled(x: bool):
@@ -29,7 +29,11 @@ func _ready():
 	set_enabled(enabled)
 	update_layers()
 
-##Reduces the HP value of the hurtbox's parent
-func take_damage(x : int):
-	var HP = get_parent().find_child("Health")
+##Reduces the HP value of the hurtbox's parent taking into consideration the direction and weight
+func take_damage(x : int, direction:Vector2=Vector2(0,0), weight:float=0 ):
+	#print("DAMAGE TAKEN, LAYERS: "+str(layers)+" WEIGHT: "+str(weight))
+	if (layers & 8 or layers & 64) and weight!=0:
+		#print("HURTBOX KNOCKBACK RECEIVED")
+		get_parent().take_knockback(weight,direction.normalized())
+	var HP = get_parent().find_child("Health", true, false)
 	HP.set_health(HP.health - x)

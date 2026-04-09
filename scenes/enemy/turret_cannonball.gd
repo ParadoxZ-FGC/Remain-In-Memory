@@ -3,6 +3,8 @@ extends Node2D
 
 enum States {LOADED, FIRED}
 
+const ATTACK_WEIGHT = 200
+
 var current_state : States = States.LOADED
 var directionVector : Vector2
 var timer : SceneTreeTimer
@@ -11,6 +13,7 @@ var flipped := false
 
 func _ready() -> void:
 	visible = false
+	$Hitbox.disable()
 
 
 func _process(_delta: float) -> void:
@@ -24,12 +27,15 @@ func _physics_process(delta: float) -> void:
 		$Hitbox.activate(-1)
 
 
-func fire(speed : int, direction : int) -> void:
+func fire(direction : Vector2) -> void:
 	timer = get_tree().create_timer(5, false, true, false)
 	timer.timeout.connect(_end_of_life)
-	directionVector = Vector2(speed * direction, 0)
+	directionVector = direction
 	visible = true
 	current_state = States.FIRED
+	$Hitbox.direction=directionVector
+	$Hitbox.weight=ATTACK_WEIGHT
+
 	$Hitbox.enable()
 
 

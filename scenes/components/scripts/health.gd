@@ -19,7 +19,8 @@ var first_pass = true # Used because player "technically" takes damage when load
 
 
 func _ready() -> void:
-	character_sprite.material.set_shader_parameter("blink_color", damage_blink_color)
+	if character_sprite:
+		character_sprite.material.set_shader_parameter("blink_color", damage_blink_color)
 	if PlayerData.current_health == health or get_parent().name != "Player":
 		first_pass = false
 
@@ -50,19 +51,20 @@ func get_immortality() -> bool:
  
 
 func set_temporary_immortality(time: float): 
-	if immortality_timer == null: 
-		immortality_timer = Timer.new() 
-		immortality_timer.one_shot = true 
-		add_child(immortality_timer) 
-	
-	if immortality_timer.timeout.is_connected(resolve_temporary_immortality): 
-		immortality_timer.timeout.disconnect(resolve_temporary_immortality) 
-	
-	immortality_timer.set_wait_time(time)
-	immortality_timer.timeout.connect(resolve_temporary_immortality) 
-	immortality = true
-	get_parent().find_child("Hurtbox").set_deferred("monitoring", false)
-	immortality_timer.start()
+	if immortalityDuration:
+		if immortality_timer == null: 
+			immortality_timer = Timer.new() 
+			immortality_timer.one_shot = true 
+			add_child(immortality_timer) 
+		
+		if immortality_timer.timeout.is_connected(resolve_temporary_immortality): 
+			immortality_timer.timeout.disconnect(resolve_temporary_immortality) 
+		
+		immortality_timer.set_wait_time(time)
+		immortality_timer.timeout.connect(resolve_temporary_immortality) 
+		immortality = true
+		get_parent().find_child("Hurtbox").set_deferred("monitoring", false)
+		immortality_timer.start()
 
 
 func resolve_temporary_immortality():
@@ -81,7 +83,7 @@ func set_health(value : int):
 			if not first_pass:
 				var tween = create_tween()
 				tween.set_trans(damage_transition)
-				tween.tween_method(sprite_shader_blink_intensity, 1.0, 0, immortalityDuration)
+				tween.tween_method(sprite_shader_blink_intensity, 1.0, 0, 1.0)
 				set_temporary_immortality(immortalityDuration)
 			else:
 				first_pass = false
@@ -97,4 +99,5 @@ func get_health() -> int:
 
 
 func sprite_shader_blink_intensity(new_value: float) -> void:
-	character_sprite.material.set_shader_parameter("blink_intensity", new_value)
+	if character_sprite:
+		character_sprite.material.set_shader_parameter("blink_intensity", new_value)
