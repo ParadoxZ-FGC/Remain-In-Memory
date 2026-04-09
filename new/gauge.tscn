@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dk0covrx4gm74" path="res://new/gauge.gd" id="1_iwwpu"]
 [ext_resource type="Texture2D" uid="uid://m118cd6w5pn8" path="res://new/Steam Gauge.png" id="2_rc423"]
+[ext_resource type="Texture2D" uid="uid://ptxmuyg6fvn4" path="res://assets/visual/ui/PlyrHud-Needle.png" id="3_5j1sr"]
 
 [sub_resource type="Animation" id="Animation_kw8sh"]
 length = 0.001
@@ -83,6 +84,7 @@ script = ExtResource("1_iwwpu")
 metadata/_edit_group_ = true
 
 [node name="Base" type="Sprite2D" parent="Offset" unique_id=388719511]
+visible = false
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
@@ -91,13 +93,20 @@ vframes = 2
 metadata/_edit_group_ = true
 
 [node name="Needle" type="Sprite2D" parent="Offset/Needle" unique_id=832201627]
+visible = false
 rotation = 3.1415925
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
 frame = 1
 
+[node name="Sprite2D" type="Sprite2D" parent="Offset/Needle" unique_id=620059133]
+scale = Vector2(5, 5)
+texture = ExtResource("3_5j1sr")
+offset = Vector2(-3, 3)
+
 [node name="Cover" type="Sprite2D" parent="Offset" unique_id=1906502025]
+visible = false
 texture = ExtResource("2_rc423")
 hframes = 2
 vframes = 2
